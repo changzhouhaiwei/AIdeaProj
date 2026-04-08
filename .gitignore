@@ -1,0 +1,5 @@
+/AIdeadClient/Library
+/AIdeadClient/Temp
+*.csproj
+/AIdeadClient/.vscode
+*.sln
