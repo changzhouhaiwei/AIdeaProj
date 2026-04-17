@@ -852,3 +852,245 @@ Start importing Assets/Scripts using Guid(c7c3946e4d84b574fbec5d96d1841b62) Impo
  -> (artifact id: '928f13321b1059627cd76ddeb63325cc') in 0.013512 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 39.635910 seconds.
+  path: Assets/Scripts/Actor
+  artifactKey: Guid(77871543182d20744bf5325336176ca9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Actor using Guid(77871543182d20744bf5325336176ca9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '4eb4703fb4217237b9983ff273821fda') in 0.000589 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.966991 seconds.
+  path: Assets/Scripts/Actor
+  artifactKey: Guid(77871543182d20744bf5325336176ca9) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/Scripts/Actor using Guid(77871543182d20744bf5325336176ca9) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'c4321fd43b7a28d36a5cf9a432a190d9') in 0.012761 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 6.313044 seconds.
+  path: Assets/Scripts/Common
+  artifactKey: Guid(3c262af67736c604bbb9702f99c8ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Common using Guid(3c262af67736c604bbb9702f99c8ded1) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'ac842a38fd11addd3d9091fb37326eca') in 0.000524 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.966852 seconds.
+  path: Assets/Scripts/Common
+  artifactKey: Guid(3c262af67736c604bbb9702f99c8ded1) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/Scripts/Common using Guid(3c262af67736c604bbb9702f99c8ded1) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '6e9a01af2cbb52789a6798815f9b1be5') in 0.016102 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 1.565214 seconds.
+  path: Assets/Settings
+  artifactKey: Guid(0220aab0833d04faeb927d84ca6cc40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Settings using Guid(0220aab0833d04faeb927d84ca6cc40c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'f22bce1487c94e82f457bbaa0ad56703') in 0.000792 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 105.327348 seconds.
+  path: Assets/GameRes/Prefab/CommonRole 1.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/CommonRole 1.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '7cd9dbdccf95eb7ff80dfa1b69e7e6bc') in 0.019772 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.949117 seconds.
+  path: Assets/GameRes/Prefab/CommonRole 1.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole 1.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'e65f2917489041aba314ee8a9bc953c1') in 0.018846 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 2.629242 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/ArmyRole.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '130fd8e954363ace2c4f2c95315fb68f') in 0.020354 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.927060 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/ArmyRole.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '2c5669355ea07a9958b651fa329f05c0') in 0.018486 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 29.079784 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'f84d575f184223068f0979007dc93db8') in 0.019006 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 16
+========================================================================
+Received Import Request.
+  Time since last request: 2.912426 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '1729054fb2490a796eba419ccaf65cfb') in 0.018041 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 16
+========================================================================
+Received Import Request.
+  Time since last request: 11.484152 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'b025aeb6c3337da75275a825b9f053cb') in 0.017254 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 70.312080 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '53a42e519d8da05abb661f9dfc01e006') in 0.027101 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 6.006005 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '1a55460d173b6205004dc0fc3d077836') in 0.016164 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 18
+========================================================================
+Received Import Request.
+  Time since last request: 12.508640 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole 1.prefab
+  artifactKey: Guid(44c5d1924ac083b4a87ed173722973b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/ArmyRole 1.prefab using Guid(44c5d1924ac083b4a87ed173722973b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'c827842d5e63f7c39c62c92d51bf1cf9') in 0.020393 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 0.947572 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole 1.prefab
+  artifactKey: Guid(44c5d1924ac083b4a87ed173722973b9) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/ArmyRole 1.prefab using Guid(44c5d1924ac083b4a87ed173722973b9) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '307fbd46d96bf1ac2d1b0d1544dd02af') in 0.017969 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 9.967372 seconds.
+  path: Assets/GameRes/Prefab/CommonRole.prefab
+  artifactKey: Guid(652bea85435517c47b31a9448870c1d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/CommonRole.prefab using Guid(652bea85435517c47b31a9448870c1d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'eede835632da84c675e46a1f5fbdb3b0') in 0.021029 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 19
+========================================================================
+Received Import Request.
+  Time since last request: 8.522896 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/ArmyRole.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '621afe6402154f381150dac10f39ef6c') in 0.017359 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 14
+========================================================================
+Received Import Request.
+  Time since last request: 4.812535 seconds.
+  path: Assets/GameRes/Prefab/ArmyRole.prefab
+  artifactKey: Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/ArmyRole.prefab using Guid(7b7ddf9dbf1c11a46a54caf094ba4648) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '37a9b40b6f79c767d65dc7ae8b99b644') in 0.018278 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 15
+========================================================================
+Received Import Request.
+  Time since last request: 16.639736 seconds.
+  path: Assets/Scenes/GameScene.unity
+  artifactKey: Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/Scenes/GameScene.unity using Guid(8c9cfa26abfee488c85f1582747f6a02) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '891a43e1e0df34cb86c2ab98ad52c9a3') in 0.013297 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 3.769117 seconds.
+  path: Assets/GameRes/Prefab/CommonRole Variant.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/CommonRole Variant.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'c6245c97f979e1d60f2541efb4134eef') in 0.021701 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 33
+========================================================================
+Received Import Request.
+  Time since last request: 0.952800 seconds.
+  path: Assets/GameRes/Prefab/CommonRole Variant.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/CommonRole Variant.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '4c960ffea8c6042096be67c10e110da1') in 0.023212 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 32
+========================================================================
+Received Import Request.
+  Time since last request: 0.848064 seconds.
+  path: Assets/GameRes/Prefab/Rol1.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/Rol1.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: 'd4329e59dc0e2bf09e545358325c1b9b') in 0.020818 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 33
+========================================================================
+Received Import Request.
+  Time since last request: 0.926945 seconds.
+  path: Assets/GameRes/Prefab/Rol1.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/Rol1.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '1f5b3326a659730fb5a1a7aff9e63f20') in 0.019338 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 32
+========================================================================
+Received Import Request.
+  Time since last request: 3.949842 seconds.
+  path: Assets/GameRes/Prefab/Role1.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/GameRes/Prefab/Role1.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '9d26530a36027433add28e0811ed8aea') in 0.018482 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 33
+========================================================================
+Received Import Request.
+  Time since last request: 1.419792 seconds.
+  path: Assets/GameRes/Prefab/Role1.prefab
+  artifactKey: Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23)
+Start importing Assets/GameRes/Prefab/Role1.prefab using Guid(5b25677ef74e92240920ba1e6d050108) Importer(2089858483,0ecaa5967403d082aa24f35e1b516d23) [PhysX] Initialized MultithreadedTaskDispatcher with 20 workers.
+ -> (artifact id: '5c63ca7bf99216a48aaca8d202f36e6d') in 0.019599 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 32
