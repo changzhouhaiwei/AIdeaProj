@@ -13,9 +13,13 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     RectTransform _parentRect;
     WaitNode _wait;
     Vector2 _dragGrabOffset;
+    Vector2 _dragBeginScreenPos;
     bool _dragging;
+    bool _expandedBySwipe;
     float _cellSize;
     Vector2 _boundsCenter;
+    float _previewScale = 1f;
+    float _swipeUpExpandThreshold = 70f;
 
     readonly List<MinCell> _parts = new List<MinCell>();
 
@@ -35,17 +39,21 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         _hitGraphic.raycastTarget = true;
     }
 
-    public void Init(ShapeKind kind, int rotation, Color color, RectTransform slotParent, WaitNode wait)
+    public void Init(ShapeKind kind, int rotation, Color color, RectTransform slotParent, WaitNode wait, float previewScale, float swipeUpExpandThreshold)
     {
         _kind = kind;
         _rotation = rotation;
         _color = color;
         _wait = wait;
         _parentRect = slotParent;
+        _previewScale = Mathf.Clamp(previewScale, 0.4f, 1f);
+        _swipeUpExpandThreshold = Mathf.Max(10f, swipeUpExpandThreshold);
         _homeAnchored = _rt.anchoredPosition;
         _cellSize = BlockGameManager.Instance != null && BlockGameManager.Instance.Board != null
             ? BlockGameManager.Instance.Board.CellSize
             : 100f;
+        _expandedBySwipe = false;
+        SetPreviewScale();
         RebuildVisual();
     }
 
@@ -104,6 +112,9 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (BlockGameManager.Instance != null && BlockGameManager.Instance.IsGameOver) return;
         if (_parentRect == null) return;
         _dragging = true;
+        _expandedBySwipe = false;
+        _dragBeginScreenPos = eventData.position;
+        SetPreviewScale();
         transform.SetAsLastSibling();
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_parentRect, eventData.position, eventData.pressEventCamera, out var local))
             _dragGrabOffset = _rt.anchoredPosition - local;
@@ -112,6 +123,13 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnDrag(PointerEventData eventData)
     {
         if (!_dragging || _parentRect == null) return;
+
+        if (!_expandedBySwipe && eventData.position.y - _dragBeginScreenPos.y >= _swipeUpExpandThreshold)
+        {
+            _expandedBySwipe = true;
+            SetNormalScale();
+        }
+
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_parentRect, eventData.position, eventData.pressEventCamera, out var local))
             _rt.anchoredPosition = local + _dragGrabOffset;
     }
@@ -125,6 +143,7 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (board == null)
         {
             _rt.anchoredPosition = _homeAnchored;
+            SetPreviewScale();
             return;
         }
 
@@ -135,6 +154,8 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         }
 
         _rt.anchoredPosition = _homeAnchored;
+        _expandedBySwipe = false;
+        SetPreviewScale();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -144,5 +165,15 @@ public class ShapeNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (eventData.button != PointerEventData.InputButton.Right) return;
         _rotation = (_rotation + 1) & 3;
         RebuildVisual();
+    }
+
+    void SetPreviewScale()
+    {
+        _rt.localScale = Vector3.one * _previewScale;
+    }
+
+    void SetNormalScale()
+    {
+        _rt.localScale = Vector3.one;
     }
 }

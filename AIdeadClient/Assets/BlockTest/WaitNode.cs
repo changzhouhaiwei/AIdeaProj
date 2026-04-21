@@ -6,6 +6,8 @@ public class WaitNode : MonoBehaviour
 {
     [SerializeField] ShapeNode shapePrefab;
     [SerializeField] RectTransform[] slots = new RectTransform[3];
+    [SerializeField, Range(0.4f, 1f)] float waitPreviewScale = 0.7f;
+    [SerializeField] float swipeUpExpandThreshold = 70f;
 
     readonly List<ShapeNode> _active = new List<ShapeNode>();
 
@@ -47,8 +49,8 @@ public class WaitNode : MonoBehaviour
             rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
             rt.pivot = new Vector2(0.5f, 0.5f);
             rt.anchoredPosition = Vector2.zero;
-            rt.localScale = Vector3.one;
-            node.Init(kind, rot, RandomBlockColor(), slot, this);
+            rt.localScale = Vector3.one * waitPreviewScale;
+            node.Init(kind, rot, RandomBlockColor(), slot, this, waitPreviewScale, swipeUpExpandThreshold);
             _active.Add(node);
         }
 
