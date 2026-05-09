@@ -3,3 +3,4 @@
 *.csproj
 /AIdeadClient/.vscode
 *.sln
+/AIdeadClient/Logs
