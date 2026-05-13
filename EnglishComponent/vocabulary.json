@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "text": "commands",
+      "savedAt": "2026-05-13T03:34:17.481Z",
+      "source": "f:\\SelfMaj\\AIdeaProj\\EnglishComponent\\package.json"
+    },
+    {
+      "text": "process",
+      "savedAt": "2026-05-13T03:46:28.296Z",
+      "source": "f:\\SelfMaj\\AIdeaProj\\AIdeaWebSite\\astro.config.mjs"
+    },
+    {
+      "text": "atkinson",
+      "savedAt": "2026-05-13T03:49:40.701Z",
+      "source": "f:\\SelfMaj\\AIdeaProj\\AIdeaWebSite\\astro.config.mjs"
+    }
+  ]
+}

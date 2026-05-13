@@ -1,0 +1,5 @@
+# 自包含 DeployLocal.exe 体积大，默认不提交；需要可本地运行 BuildDeployLocalExe.cmd 生成
+DeployLocal.exe
+
+DeployLocalLauncher/bin/
+DeployLocalLauncher/obj/

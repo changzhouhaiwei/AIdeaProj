@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+	--color-surface: oklch(0.17 0.02 260);
+	--color-surface-2: oklch(0.2 0.025 260);
+	--color-edge: oklch(0.32 0.04 260 / 0.35);
+	--color-accent: oklch(0.78 0.14 75);
+	--color-accent-dim: oklch(0.65 0.12 75);
+	--color-muted: oklch(0.62 0.02 260);
+}
+
+@layer base {
+	html {
+		@apply bg-[#07080c] text-zinc-100;
+		font-family: var(--font-sans);
+		background-image:
+			radial-gradient(ellipse 120% 80% at 50% -20%, oklch(0.28 0.08 260 / 0.45), transparent),
+			radial-gradient(ellipse 80% 50% at 100% 50%, oklch(0.22 0.06 75 / 0.08), transparent);
+		background-attachment: fixed;
+		min-height: 100%;
+	}
+	body {
+		@apply min-h-dvh;
+	}
+	a {
+		@apply text-amber-200/95 underline-offset-2 transition-colors hover:text-amber-100;
+	}
+}

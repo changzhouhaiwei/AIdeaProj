@@ -1,0 +1,42 @@
+# 本地编辑：先在本目录 git init，再另开终端运行 npm run cms，然后打开 /admin/
+# 线上编辑：填好 backend.repo / branch，去掉 local_backend，并按 Decap 文档配置 GitHub OAuth
+local_backend: true
+
+backend:
+  name: github
+  repo: your-github-user/your-repo-name
+  branch: main
+
+media_folder: src/assets
+public_folder: /src/assets
+
+collections:
+  - name: blog
+    label: 博客文章
+    label_singular: 文章
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    summary: "{{title}} — {{pubDate}}"
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 摘要 description, name: description, widget: text }
+      - { label: 发布日期 pubDate, name: pubDate, widget: datetime, picker_utc: false }
+      - {
+          label: 更新日期 updatedDate（可选）,
+          name: updatedDate,
+          widget: datetime,
+          required: false,
+          picker_utc: false,
+        }
+      - {
+          label: 封面图 heroImage（可选）,
+          name: heroImage,
+          widget: string,
+          required: false,
+          hint: "相对文章路径，如 ../../assets/blog-placeholder-1.jpg；不需要请留空",
+        }
+      - { label: 正文, name: body, widget: markdown }

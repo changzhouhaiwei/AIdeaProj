@@ -1,0 +1,129 @@
+{
+  "name": "english-component",
+  "displayName": "不懂的英文词汇收藏",
+  "description": "在编辑器中右键将选中的英文保存到本地词汇表，支持翻译与浏览",
+  "version": "0.3.3",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onCommand:englishComponent.saveSelection",
+    "onCommand:englishComponent.openVocabulary",
+    "onCommand:englishComponent.saveFromClipboard",
+    "onCommand:englishComponent.browseVocabulary",
+    "onView:englishComponent.sidebar"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "englishComponent.saveSelection",
+        "title": "保存不懂的英文",
+        "category": "英文词汇"
+      },
+      {
+        "command": "englishComponent.saveFromClipboard",
+        "title": "从剪贴板保存不懂的英文",
+        "category": "英文词汇"
+      },
+      {
+        "command": "englishComponent.openVocabulary",
+        "title": "打开词汇表（全局 JSON）",
+        "category": "英文词汇"
+      },
+      {
+        "command": "englishComponent.browseVocabulary",
+        "title": "浏览不懂的英文（表格）",
+        "category": "英文词汇"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "englishComponent",
+          "title": "英文词汇",
+          "icon": "media/vocab.svg"
+        }
+      ]
+    },
+    "views": {
+      "englishComponent": [
+        {
+          "id": "englishComponent.sidebar",
+          "name": "快捷入口",
+          "type": "tree"
+        }
+      ]
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "englishComponent.saveSelection",
+          "when": "editorHasSelection",
+          "group": "1_modification@9"
+        },
+        {
+          "command": "englishComponent.saveFromClipboard",
+          "when": "editorTextFocus && !editorHasSelection",
+          "group": "1_modification@10"
+        }
+      ],
+      "webview/context": [
+        {
+          "command": "englishComponent.saveFromClipboard",
+          "when": "webview == 'simpleBrowser.view'",
+          "group": "navigation@99"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "不懂的英文词汇收藏",
+      "properties": {
+        "englishComponent.useWorkspaceStorage": {
+          "type": "boolean",
+          "default": false,
+          "description": "为 true 时词汇保存在当前工作区的 EnglishComponent/vocabulary.json；为 false（默认）时保存在扩展全局目录，所有工程共用。"
+        },
+        "englishComponent.vocabularyFile": {
+          "type": "string",
+          "default": "",
+          "description": "自定义词汇 JSON 路径（绝对路径，或相对工作区根目录的相对路径）。留空则按 useWorkspaceStorage 决定全局或工作区默认位置。"
+        },
+        "englishComponent.translateOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "保存时自动将英文翻译为简体中文（使用免费在线接口，失败时仍会保存英文）。"
+        },
+        "englishComponent.myMemoryContactEmail": {
+          "type": "string",
+          "default": "",
+          "description": "可选：填写邮箱可在 MyMemory 翻译接口上略微提高免费额度（可为空）。"
+        },
+        "englishComponent.lingvaUrl": {
+          "type": "string",
+          "default": "https://lingva.ml",
+          "description": "Lingva 翻译服务根地址（不要末尾斜杠）。国内若无法访问可改为其它 Lingva 镜像，或在下方策略中改用 gtx / mymemory。"
+        },
+        "englishComponent.translateStrategy": {
+          "type": "string",
+          "enum": ["auto", "lingva", "mymemory", "gtx"],
+          "default": "auto",
+          "description": "auto：依次尝试 Lingva → MyMemory → Google(gtx)；长句会分块翻译后拼接。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3"
+  }
+}
