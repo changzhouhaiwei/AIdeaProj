@@ -1,0 +1,21 @@
+{
+  "full": "shop_full.png",
+  "sliceCount": 15,
+  "files": [
+    "01_bg_main.png",
+    "02_header_stripes.png",
+    "03_header_scallop.png",
+    "04_btn_back.png",
+    "05_title_shop.png",
+    "06_hud_pill_coins.png",
+    "07_hud_pill_wands.png",
+    "08_hud_pill_shuffle.png",
+    "09_hud_pill_undo.png",
+    "10_card_bundle_brilliance.png",
+    "11_card_bundle_ultimate.png",
+    "12_card_remove_ads.png",
+    "13_card_coins_240.png",
+    "14_card_coins_720.png",
+    "15_button_price_green.png"
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "商店2 UI 布局与切图说明",
+  "description": "依据 ui整图rule.md：画布 720×1556，与 商店2.png 一致；元素需单独导出并带透明通道。坐标为设计稿像素，若与实图有偏差请在编辑器中对齐校准。",
+  "meta": {
+    "sourceImage": "商店2.png",
+    "canvas": { "width": 720, "height": 1556 },
+    "ruleFile": "ui整图rule.md",
+    "notes": [
+      "全屏底图可与列表区拆分，避免重复绘制。",
+      "绿色购买按钮样式一致时可只切一份九宫格或单图复用。",
+      "货币条四格结构相同可切「槽位底」+「图标」分别拼装。"
+    ]
+  },
+  "layers_z_order_bottom_to_top": [
+    "bg_main_navy",
+    "header_background_stripes",
+    "header_scallop_edge",
+    "list_cards",
+    "header_currency_row",
+    "header_title_shop",
+    "btn_back"
+  ],
+  "regions": {
+    "bg_main_navy": {
+      "name": "主内容区深蓝底",
+      "rect": { "x": 0, "y": 292, "w": 720, "h": 1264 },
+      "slice": { "alpha": true, "optional": true, "note": "若程序用纯色可不切，仅标注高度。" }
+    },
+    "header_background_stripes": {
+      "name": "顶栏紫蓝竖条背景",
+      "rect": { "x": 0, "y": 0, "w": 720, "h": 268 },
+      "slice": { "alpha": true }
+    },
+    "header_scallop_edge": {
+      "name": "顶栏底部浅蓝波浪/扇贝边",
+      "rect": { "x": 0, "y": 248, "w": 720, "h": 56 },
+      "slice": { "alpha": true, "note": "底边与主内容区衔接，可与顶栏合并为一张 header 整图。" }
+    },
+    "btn_back": {
+      "name": "返回按钮",
+      "rect": { "x": 20, "y": 56, "w": 72, "h": 72 },
+      "slice": { "alpha": true }
+    },
+    "title_shop": {
+      "name": "标题 SHOP",
+      "rect": { "x": 200, "y": 64, "w": 320, "h": 64 },
+      "slice": { "alpha": true, "note": "或整段顶栏连同标题一起导出为一张图。" }
+    },
+    "currency_row": {
+      "name": "货币/道具横条容器",
+      "rect": { "x": 24, "y": 152, "w": 672, "h": 112 },
+      "slice": { "alpha": true, "note": "四枚胶囊并排，可再细分为 pill_bg + 各 icon。" }
+    },
+    "currency_pill": {
+      "name": "单枚资源胶囊（复用）",
+      "rect_template": { "w": 156, "h": 44 },
+      "gap": 12,
+      "first_origin": { "x": 28, "y": 168 },
+      "count": 4,
+      "order": ["coins", "wand", "shuffle", "undo"]
+    },
+    "card_brilliance_bundle": {
+      "name": "Brilliance Bundle 大卡",
+      "rect": { "x": 20, "y": 300, "w": 680, "h": 248 },
+      "slice": { "alpha": true },
+      "subparts": {
+        "upper_purple_panel": { "x": 20, "y": 300, "w": 680, "h": 168 },
+        "gift_art_left": { "x": 36, "y": 312, "w": 200, "h": 148 },
+        "rewards_grid_right": { "x": 260, "y": 312, "w": 420, "h": 148 },
+        "lower_cream_bar": { "x": 20, "y": 468, "w": 680, "h": 80 },
+        "price_btn": { "x": 520, "y": 480, "w": 160, "h": 56 }
+      }
+    },
+    "card_ultimate_bundle": {
+      "name": "Ultimate Bundle 大卡",
+      "rect": { "x": 20, "y": 564, "w": 680, "h": 248 },
+      "slice": { "alpha": true },
+      "subparts": {
+        "upper_purple_panel": { "x": 20, "y": 564, "w": 680, "h": 168 },
+        "gift_art_left": { "x": 36, "y": 576, "w": 200, "h": 148 },
+        "rewards_grid_right": { "x": 260, "y": 576, "w": 420, "h": 148 },
+        "lower_cream_bar": { "x": 20, "y": 732, "w": 680, "h": 80 },
+        "price_btn": { "x": 520, "y": 744, "w": 160, "h": 56 }
+      }
+    },
+    "card_remove_ads": {
+      "name": "Remove ADS 卡",
+      "rect": { "x": 20, "y": 828, "w": 680, "h": 132 },
+      "slice": { "alpha": true },
+      "subparts": {
+        "cream_panel": { "x": 20, "y": 828, "w": 680, "h": 132 },
+        "no_ads_icon": { "x": 40, "y": 848, "w": 88, "h": 88 },
+        "price_btn": { "x": 520, "y": 864, "w": 160, "h": 56 }
+      }
+    },
+    "card_coins_pack_240": {
+      "name": "金币包 x240",
+      "rect": { "x": 20, "y": 976, "w": 680, "h": 112 },
+      "slice": { "alpha": true },
+      "subparts": {
+        "coin_illustration": { "x": 40, "y": 988, "w": 100, "h": 88 },
+        "price_btn": { "x": 520, "y": 1004, "w": 160, "h": 56 }
+      }
+    },
+    "card_coins_pack_720": {
+      "name": "金币包 x720",
+      "rect": { "x": 20, "y": 1104, "w": 680, "h": 112 },
+      "slice": { "alpha": true },
+      "subparts": {
+        "coin_illustration": { "x": 40, "y": 1116, "w": 100, "h": 88 },
+        "price_btn": { "x": 520, "y": 1132, "w": 160, "h": 56 }
+      }
+    },
+    "common_price_button_green": {
+      "name": "绿色价格按钮（统一样式可复用）",
+      "rect_reference": { "w": 160, "h": 56, "corner_radius_approx": 18 },
+      "slice": { "alpha": true, "nine_slice_suggested": { "left": 24, "right": 24, "top": 18, "bottom": 18 } }
+    }
+  },
+  "safe_area_hint": {
+    "description": "若需适配刘海屏，可在程序侧对顶栏整体下移或缩放；本文件按整图 720×1556 标注。",
+    "content_margin_lr": 20
+  }
+}

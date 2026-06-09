@@ -103,6 +103,71 @@ async function takeFromFeedChain(urls, limit) {
 	return out;
 }
 
+/** 明显非 NBA/职业篮球议题（仍含 NBA 字样则保留） */
+function shouldDropNonBasketballTitle(title) {
+	const t = title;
+	if (/NBA|nba|美职篮/.test(t)) return false;
+	if (
+		/(足球|世界杯|欧洲杯|美洲杯|亚洲杯|英超|西甲|意甲|德甲|法甲|欧冠|亚冠|中超|中甲|网球|温网|法网|乒乓球|世乒赛|高尔夫|PGA|F1|斯诺克|马拉松|游泳世锦赛|田径世锦赛)/.test(
+			t,
+		)
+	) {
+		return true;
+	}
+	return false;
+}
+
+/** 中文 NBA 相关：队名 / 关键词 / 明确 NBA */
+function isLikelyNbaCnTopic(title) {
+	const t = title;
+	if (/NBA|nba|美职篮/.test(t)) return true;
+	const team =
+		/(湖人|勇士|凯尔特人|快船|掘金|雄鹿|太阳|热火|独行侠|马刺|灰熊|雷霆|森林狼|爵士|国王|开拓者|鹈鹕|猛龙|尼克斯|篮网|公牛|骑士|步行者|老鹰|黄蜂|活塞|奇才|魔术|76人|费城|火箭)(?:队)?/;
+	if (team.test(t)) return true;
+	if (/篮球/.test(t) && team.test(t)) return true;
+	if (/(季后赛|总决赛|全明星|乐透|选秀|交易|续约|伤病).{0,24}(NBA|nba|美职篮|湖人|勇士|凯尔特人|掘金|雄鹿|独行侠|快船|热火|尼克斯)/.test(t)) {
+		return true;
+	}
+	return false;
+}
+
+/**
+ * 与 takeFromFeedChain 相同，但只保留通过 keepTitle 的条目（用于去掉泛体育 RSS 里的足球等）。
+ * @param {string[]} urls
+ * @param {number} limit
+ * @param {(title: string) => boolean} keepTitle
+ */
+async function takeFromFeedChainFiltered(urls, limit, keepTitle) {
+	/** @type {FeedItem[]} */
+	const out = [];
+	const seen = new Set();
+	for (const url of urls) {
+		if (out.length >= limit) break;
+		const batch = await takeFromFeed(url, limit - out.length + 40);
+		for (const item of batch) {
+			if (out.length >= limit) break;
+			if (!keepTitle(item.title)) continue;
+			let key = item.url.trim();
+			try {
+				const u = new URL(key);
+				u.hash = '';
+				key = u.toString();
+			} catch {
+				key = key.slice(0, 200);
+			}
+			if (seen.has(key)) continue;
+			seen.add(key);
+			out.push(item);
+		}
+	}
+	return out;
+}
+
+function keepNbaCnTitle(title) {
+	if (shouldDropNonBasketballTitle(title)) return false;
+	return isLikelyNbaCnTopic(title);
+}
+
 /**
  * 多源兜底；栏目与仓库 `1.md` 对齐：NBA / Play / 国际形势 均为「国内 10 + 国外 10」。
  * @type {Record<string, { urls: string[], limit: number }>}
@@ -110,9 +175,10 @@ async function takeFromFeedChain(urls, limit) {
 const SOURCES = {
 	nbaCn: {
 		urls: [
-			'https://www.chinanews.com.cn/rss/sports.xml',
-			'https://rss.sina.com.cn/roll/sports/hot_roll.xml',
-			'https://news.google.com/rss/search?q=NBA&hl=zh-CN&gl=CN&ceid=CN:zh-Hans',
+			'https://news.google.com/rss/search?q=NBA+%E7%AF%AE%E7%90%83&hl=zh-CN&gl=CN&ceid=CN:zh-Hans',
+			'https://news.google.com/rss/search?q=NBA%E5%AD%A3%E5%90%8E%E8%B5%9B&hl=zh-CN&gl=CN&ceid=CN:zh-Hans',
+			'https://news.google.com/rss/search?q=NBA+%E6%80%BB%E5%86%A0%E5%86%9B&hl=zh-CN&gl=CN&ceid=CN:zh-Hans',
+			'https://news.google.com/rss/search?q=NBA+%E5%85%A8%E6%98%8E%E6%98%9F&hl=zh-CN&gl=CN&ceid=CN:zh-Hans',
 		],
 		limit: 10,
 	},
@@ -248,7 +314,7 @@ async function main() {
 		worldCn,
 		worldIntl,
 	] = await Promise.all([
-		takeFromFeedChain(SOURCES.nbaCn.urls, SOURCES.nbaCn.limit),
+		takeFromFeedChainFiltered(SOURCES.nbaCn.urls, SOURCES.nbaCn.limit, keepNbaCnTitle),
 		takeFromFeedChain(SOURCES.nbaIntl.urls, SOURCES.nbaIntl.limit),
 		takeFromFeedChain(SOURCES.stocksCn.urls, SOURCES.stocksCn.limit),
 		takeFromFeedChain(SOURCES.stocksIntl.urls, SOURCES.stocksIntl.limit),

@@ -1,0 +1,43 @@
+{
+  "source": "商店2.png",
+  "layout": "商店2_layout.json",
+  "canvas": [
+    720,
+    1556
+  ],
+  "outputDir": "商店2_切图",
+  "files": [
+    "bg_main_navy.png",
+    "btn_back.png",
+    "card_brilliance_bundle.png",
+    "card_brilliance_bundle__gift_art_left.png",
+    "card_brilliance_bundle__lower_cream_bar.png",
+    "card_brilliance_bundle__price_btn.png",
+    "card_brilliance_bundle__rewards_grid_right.png",
+    "card_brilliance_bundle__upper_purple_panel.png",
+    "card_coins_pack_240.png",
+    "card_coins_pack_240__coin_illustration.png",
+    "card_coins_pack_240__price_btn.png",
+    "card_coins_pack_720.png",
+    "card_coins_pack_720__coin_illustration.png",
+    "card_coins_pack_720__price_btn.png",
+    "card_remove_ads.png",
+    "card_remove_ads__no_ads_icon.png",
+    "card_remove_ads__price_btn.png",
+    "card_ultimate_bundle.png",
+    "card_ultimate_bundle__gift_art_left.png",
+    "card_ultimate_bundle__lower_cream_bar.png",
+    "card_ultimate_bundle__price_btn.png",
+    "card_ultimate_bundle__rewards_grid_right.png",
+    "card_ultimate_bundle__upper_purple_panel.png",
+    "currency_pill_coins.png",
+    "currency_pill_shuffle.png",
+    "currency_pill_undo.png",
+    "currency_pill_wand.png",
+    "currency_row.png",
+    "header_background_stripes.png",
+    "header_scallop_edge.png",
+    "price_button_green.png",
+    "title_shop.png"
+  ]
+}
