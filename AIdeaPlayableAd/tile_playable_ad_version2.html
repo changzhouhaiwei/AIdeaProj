@@ -835,10 +835,12 @@
                 
                 // 数字统计放在图标左上内边距，确保始终在棋子内
                 const countPadding = Math.max(4, Math.floor(iconSize * 0.08));
+                const countOffsetX = Math.max(2, Math.floor(iconSize * 0.05)); // 微调向右，避免过于贴左
+                const countOffsetY = Math.max(1, Math.floor(iconSize * 0.03)); // 微调向上，避免位置偏低
                 const countFontSize = Math.max(14, Math.floor(iconSize * 0.28));
                 const countText = scene.add.text(
-                    x - iconSize / 2 + countPadding, 
-                    statsY - iconSize / 2 + countPadding, 
+                    x - iconSize / 2 + countPadding + countOffsetX, 
+                    statsY - iconSize / 2 + countPadding - countOffsetY, 
                     '0', 
                     {
                         fontSize: `${countFontSize}px`,
@@ -1260,7 +1262,7 @@
             popupContainer.add(buttonBg);
             
             // 按钮文字
-            const buttonText = scene.add.text(0, buttonY, '前往下载', {
+            const buttonText = scene.add.text(0, buttonY, 'try again', {
                 fontSize: buttonFontSize,
                 fill: '#ffffff',
                 fontFamily: 'Arial',
