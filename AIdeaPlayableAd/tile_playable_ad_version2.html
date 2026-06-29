@@ -90,8 +90,9 @@
         let isDrawing = false;
         let graphics;
         let statsDisplay = [];
-        let eliminateCount = 0; // 消除成功次数
         let popupContainer = null; // 弹窗容器
+        let hasCollectionPopupShown = false; // 收集目标达成后仅弹一次窗
+        let hasTimeoutPopupShown = false; // 超时后仅弹一次窗
         let bgSprite = null; // 全屏背景图（start_bg）
         
         // 提示功能相关变量
@@ -104,7 +105,8 @@
         let pausedActionTime = 0; // 暂停时的操作时间（用于恢复时计算）
         const HINT_MIN_PATH_LENGTH = 3; // 提示最短路径
         const HINT_MAX_PATH_LENGTH = 6; // 提示最长路径（优先寻找）
-        const IDLE_POPUP_DELAY = 10000; // 无操作自动弹窗阈值（毫秒）
+        const HINT_ARROW_SCALE = 0.42; // 引导手势图标缩放（原0.25，适当放大）
+        const IDLE_POPUP_DELAY = 30000; // 无操作自动弹窗阈值（30s，毫秒）
         let lastInteractionTime = 0; // 最后一次交互时间（用于自动弹窗）
         const STATS_SHAKE_ANGLE = 12; // 暂存区抖动角度（沿Z轴）
         const STATS_SHAKE_DURATION = 70; // 每段旋转耗时
@@ -120,13 +122,15 @@
         let STATS_AREA_HEIGHT; // 上方暂存区高度（竖屏更紧凑）
         let BOARD_AREA_HEIGHT; // 棋盘区域高度（竖屏尽量铺满）
         const TILE_TYPES = 6; // 6种方块类型
+        const COLLECTION_TARGETS = [8, 6, 9, 7, 8, 12]; // 顶部收集目标初始值
         const BOARD_MARGIN = 20; // 棋盘两边留的空间
         const STATS_AREA_RATIO_PORTRAIT = 0.16; // 竖屏暂存区占比（更贴近参考图）
-        const STATS_AREA_RATIO_LANDSCAPE = 0.2; // 横屏暂存区占比
+        const STATS_AREA_RATIO_LANDSCAPE = 0.28; // 横屏暂存区占比（进一步放大顶部区域）
+        const LANDSCAPE_BOARD_TOP_GAP = 20; // 横屏棋盘与顶部暂存区的额外留白
         const GRID_GAP_X_PORTRAIT = -8; // 竖屏列间距：几乎相邻
         const GRID_GAP_Y_PORTRAIT = -6; // 竖屏行间距：几乎相邻
-        const GRID_GAP_X_LANDSCAPE = 0; // 横屏列间距
-        const GRID_GAP_Y_LANDSCAPE = 0; // 横屏行间距
+        const GRID_GAP_X_LANDSCAPE = -4; // 横屏列间距：略收紧，减少空隙
+        const GRID_GAP_Y_LANDSCAPE = -4; // 横屏行间距：略收紧，减少空隙
         const MIN_ROWS_PORTRAIT = 11; // 竖屏最少行数，随后按高度动态补充
         const BOARD_TILE_DEPTH_BASE = 10; // 棋盘基础层级（高于背景图，低于连线/弹窗）
         
@@ -162,8 +166,8 @@
                 COLS = 7;
                 ROWS = MIN_ROWS_PORTRAIT;
             } else {
-                // 横屏：11列7行
-                COLS = 11;
+                // 横屏：13列7行，提升铺满感
+                COLS = 13;
                 ROWS = 7;
             }
         }
@@ -196,7 +200,7 @@
             BOARD_AREA_HEIGHT = gameHeight - STATS_AREA_HEIGHT;
             
             // 竖屏：棋盘顶部贴近暂存区，底部尽量铺满
-            const topGap = isPortrait ? 4 : 0;
+            const topGap = isPortrait ? 4 : LANDSCAPE_BOARD_TOP_GAP;
             const reserveRows = 0;
             const availableWidth = gameWidth - BOARD_MARGIN * 2; // 减去两边的空间
             const availableHeight = Math.max(0, BOARD_AREA_HEIGHT - topGap);
@@ -245,7 +249,7 @@
             if (isPortrait) {
                 BOARD_Y = STATS_AREA_HEIGHT + topGap;
             } else {
-                BOARD_Y = STATS_AREA_HEIGHT + Math.max(0, (BOARD_AREA_HEIGHT - boardHeight) / 2);
+                BOARD_Y = STATS_AREA_HEIGHT + topGap + Math.max(0, (BOARD_AREA_HEIGHT - topGap - boardHeight) / 2);
             }
         }
         const TILE_IMAGES = ['1', '2', '3', '4', '5', '6']; // 图片资源key
@@ -449,6 +453,9 @@
             createTiles();
 
             // 创建统计显示区域
+            hasCollectionPopupShown = false;
+            hasTimeoutPopupShown = false;
+            lastInteractionTime = Date.now();
             createStatsDisplay();
 
             // 创建绘制线条的图形对象，设置最高深度确保在最上层
@@ -665,11 +672,11 @@
             
             if (isLandscape) {
                 // 横屏：使用较小的尺寸，不要撑满
-                minIconSize = 30;
-                maxIconSize = 45;
+                minIconSize = 64;
+                maxIconSize = 92;
                 // 间距要明显大于图标大小，确保有间隔
-                minSpacing = 50;  // 图标30px时，间隔约20px
-                maxSpacing = 70;  // 图标45px时，间隔约25px
+                minSpacing = 86;  // 图标64px时，间隔约22px
+                maxSpacing = 126; // 图标92px时，间隔约34px
             } else {
                 // 竖屏：图标更大、间隔更小，靠近参考图的紧凑感
                 minIconSize = 64;
@@ -691,7 +698,7 @@
                 iconSize = Math.max(minIconSize, Math.min(iconSize, maxIconSize));
                 
                 // 确保间距明显大于图标大小，保持间隔
-                const idealGap = Math.max(20, Math.min(25, (maxSpacing - minSpacing) / 2));
+                const idealGap = Math.max(14, Math.min(20, (maxSpacing - minSpacing) / 2));
                 const idealSpacing = iconSize + idealGap;
                 
                 // 验证总宽度
@@ -790,7 +797,8 @@
             }
             
             // 纵向约束：图标不得撑出暂存区（1/5），按区域高度二次 clamp
-            const maxIconByArea = Math.floor(STATS_AREA_HEIGHT * 0.65);
+            const maxIconByAreaRatio = isLandscape ? 0.85 : 0.65;
+            const maxIconByArea = Math.floor(STATS_AREA_HEIGHT * maxIconByAreaRatio);
             if (maxIconByArea > 0 && iconSize > maxIconByArea) {
                 const scale = maxIconByArea / iconSize;
                 iconSize = maxIconByArea;
@@ -801,14 +809,14 @@
             // 计算总宽度：6个图标 + 5个间隔
             const totalWidth = iconSize + (TILE_TYPES - 1) * spacing;
             // 暂存区垂直居中：所有元素围绕 1/5 区域中心排布
-            const statsY = STATS_AREA_HEIGHT / 2;
+            const statsY = isLandscape ? STATS_AREA_HEIGHT * 0.62 : STATS_AREA_HEIGHT / 2;
             // 计算起始位置：屏幕中心 - 总宽度的一半 + 第一个图标半径（这样第一个图标中心在正确位置）
             const startX = gameWidth / 2 - totalWidth / 2 + iconSize / 2;
             
             // 创建背景图（底部）
-            const bgWidth = totalWidth + 40; // 背景宽度稍大于图标总宽度
+            const bgWidth = totalWidth + (isLandscape ? 60 : 40); // 横屏额外加宽背景，增强“图标区域”存在感
             // 背景高度不超过暂存区，留少量上下边距
-            const bgHeight = Math.min(iconSize + 30, STATS_AREA_HEIGHT - 8);
+            const bgHeight = Math.min(iconSize + (isLandscape ? 66 : 30), STATS_AREA_HEIGHT - (isLandscape ? 2 : 8));
             const bgY = statsY;
             
             let statsBackground;
@@ -846,10 +854,11 @@
                 const countOffsetX = Math.max(2, Math.floor(iconSize * 0.05)); // 微调向右，避免过于贴左
                 const countOffsetY = Math.max(1, Math.floor(iconSize * 0.03)); // 微调向上，避免位置偏低
                 const countFontSize = Math.max(14, Math.floor(iconSize * 0.28));
+                const initialTarget = COLLECTION_TARGETS[i] ?? 0;
                 const countText = scene.add.text(
                     x - iconSize / 2 + countPadding + countOffsetX, 
                     statsY - iconSize / 2 + countPadding - countOffsetY, 
-                    '0', 
+                    initialTarget.toString(), 
                     {
                         fontSize: `${countFontSize}px`,
                         fill: '#fff',
@@ -866,7 +875,7 @@
                 
                 statsDisplay[i] = {
                     tile: statTile,
-                    count: 0,
+                    count: initialTarget,
                     text: countText,
                     background: statsBackground, // 保存背景引用
                     baseTileX: statTile.x,
@@ -1139,9 +1148,17 @@
                         flyingSprite.destroy();
                         // 下方棋子飞到上方时，再触发对应暂存区的旋转 shake
                         playStatShake(tile.type);
-                        // 更新统计
-                        targetStat.count++;
-                        targetStat.text.setText(targetStat.count.toString());
+                        // 收集算法：顶部显示剩余目标，收集到一个就递减
+                        if (targetStat.count > 0) {
+                            targetStat.count--;
+                            targetStat.text.setText(targetStat.count.toString());
+
+                            // 完成任一类型收集，立即弹窗（仅一次）
+                            if (targetStat.count === 0 && !hasCollectionPopupShown) {
+                                hasCollectionPopupShown = true;
+                                showPopup('complete');
+                            }
+                        }
                     }
                 });
 
@@ -1155,16 +1172,6 @@
             scene.time.delayedCall(500, () => {
                 dropTiles();
                 fillEmptyTiles();
-                
-                // 增加消除次数
-                eliminateCount++;
-                
-                // 如果消除成功2次，显示弹窗
-                if (eliminateCount === 4) {
-                    scene.time.delayedCall(300, () => {
-                        showPopup();
-                    });
-                }
             });
         }
 
@@ -1273,10 +1280,11 @@
         }
 
         // 显示弹窗
-        function showPopup() {
+        function showPopup(popupType = 'timeout') {
             const scene = game.scene.scenes[0];
             const gameWidth = scene.cameras.main.width;
             const gameHeight = scene.cameras.main.height;
+            const normalizedPopupType = popupType === 'complete' ? 'complete' : 'timeout';
             
             // 检测是否为横屏
             const isLandscape = gameWidth > gameHeight;
@@ -1302,7 +1310,7 @@
             popupWidth = Math.max(300, popupWidth);
             
             const buttonHeight = isLandscape ? 45 : 50;
-            const buttonWidth = Math.min(popupWidth * 0.76, isLandscape ? 330 : 320);
+            const buttonWidth = Math.min(popupWidth * 0.66, isLandscape ? 290 : 280);
             const iconToTitleSpacing = isLandscape ? 10 : 12;
             const titleToButtonSpacing = isLandscape ? 18 : 22;
             const topPadding = isLandscape ? 26 : 30;
@@ -1363,19 +1371,33 @@
             // 根据屏幕方向调整按钮字体大小
             const buttonFontSize = isLandscape ? '20px' : '24px';
             const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-            const tryAgainTextByLang = {
-                'en': 'Try Again',
-                'zh': '再试一次',
-                'es': 'Intentar de nuevo',
-                'hi': 'फिर से कोशिश करें',
-                'ar': 'حاول مرة أخرى',
-                'pt': 'Tentar novamente',
-                'fr': 'Réessayer',
-                'de': 'Erneut versuchen',
-                'ru': 'Попробовать снова',
-                'ja': 'もう一度試す'
+            const buttonTextByPopupType = {
+                timeout: {
+                    'en': 'Try Again',
+                    'zh': '再试一次',
+                    'es': 'Intentar de nuevo',
+                    'hi': 'फिर से कोशिश करें',
+                    'ar': 'حاول مرة أخرى',
+                    'pt': 'Tentar novamente',
+                    'fr': 'Réessayer',
+                    'de': 'Erneut versuchen',
+                    'ru': 'Попробовать снова',
+                    'ja': 'もう一度試す'
+                },
+                complete: {
+                    'en': 'Play Free',
+                    'zh': '免费玩',
+                    'es': 'Jugar gratis',
+                    'hi': 'मुफ्त खेलें',
+                    'ar': 'العب مجانا',
+                    'pt': 'Jogar grátis',
+                    'fr': 'Jouer gratuitement',
+                    'de': 'Kostenlos spielen',
+                    'ru': 'Играть бесплатно',
+                    'ja': '無料でプレイ'
+                }
             };
-            const tryAgainLangAlias = {
+            const popupLangAlias = {
                 'zh-cn': 'zh',
                 'zh-sg': 'zh',
                 'zh-tw': 'zh',
@@ -1383,8 +1405,9 @@
                 'pt-br': 'pt',
                 'pt-pt': 'pt'
             };
-            const normalizedTryAgainLang = tryAgainLangAlias[browserLang] || browserLang.split('-')[0];
-            const tryAgainLabel = tryAgainTextByLang[normalizedTryAgainLang] || tryAgainTextByLang.en;
+            const normalizedPopupLang = popupLangAlias[browserLang] || browserLang.split('-')[0];
+            const popupButtonTextByLang = buttonTextByPopupType[normalizedPopupType] || buttonTextByPopupType.timeout;
+            const popupButtonLabel = popupButtonTextByLang[normalizedPopupLang] || popupButtonTextByLang.en;
             
             const buttonBg = scene.add.rectangle(0, buttonY, buttonWidth, buttonHeight, 0x2ecc71);
             buttonBg.setStrokeStyle(2, 0xffffff);
@@ -1403,14 +1426,40 @@
             });
             popupContainer.add(buttonBg);
             
-            // 按钮文字
-            const buttonText = scene.add.text(0, buttonY, tryAgainLabel, {
+            // 按钮仅保留文字
+            const buttonText = scene.add.text(0, buttonY, popupButtonLabel, {
                 fontSize: buttonFontSize,
                 fill: '#ffffff',
                 fontFamily: 'Arial',
                 fontWeight: 'bold'
             }).setOrigin(0.5);
             popupContainer.add(buttonText);
+            
+            // 按钮呼吸动画：背景和文字同步变大变小
+            const buttonBaseScaleX = buttonBg.scaleX;
+            const buttonBaseScaleY = buttonBg.scaleY;
+            scene.tweens.add({
+                targets: [buttonBg, buttonText],
+                scaleX: buttonBaseScaleX * 1.08,
+                scaleY: buttonBaseScaleY * 1.08,
+                duration: 620,
+                yoyo: true,
+                repeat: -1,
+                ease: 'Sine.easeInOut'
+            });
+            
+            // 上方游戏图标呼吸动画：幅度加大
+            const iconBaseScaleX = popupIcon.scaleX;
+            const iconBaseScaleY = popupIcon.scaleY;
+            scene.tweens.add({
+                targets: popupIcon,
+                scaleX: iconBaseScaleX * 1.2,
+                scaleY: iconBaseScaleY * 1.2,
+                duration: 620,
+                yoyo: true,
+                repeat: -1,
+                ease: 'Sine.easeInOut'
+            });
             
             // 添加全屏遮罩层（半透明黑色背景）
             // 使用游戏窗口的完整尺寸，确保全屏覆盖
@@ -1534,14 +1583,17 @@
         
         // 检查并显示无操作自动下载弹窗
         function checkAndShowIdlePopup(scene) {
-            if (popupContainer) return;
-            if (isDrawing || isHintPaused) return;
-            if (lastInteractionTime === 0) return;
-            
-            const idleDuration = Date.now() - lastInteractionTime;
-            if (idleDuration >= IDLE_POPUP_DELAY) {
-                showPopup();
-                updateLastInteractionTime();
+            if (popupContainer || hasTimeoutPopupShown) return;
+
+            const currentTime = Date.now();
+            if (lastInteractionTime === 0) {
+                lastInteractionTime = currentTime;
+                return;
+            }
+
+            if (currentTime - lastInteractionTime >= IDLE_POPUP_DELAY) {
+                hasTimeoutPopupShown = true;
+                showPopup('timeout');
             }
         }
         
@@ -1669,7 +1721,7 @@
             }
             hintArrow.setDepth(10000); // 箭头在最上层
             hintArrow.setOrigin(0, 0); // 锚点在左上角
-            hintArrow.setScale(0.25); // 缩小到0.25倍
+            hintArrow.setScale(HINT_ARROW_SCALE); // 使用统一缩放，避免引导手势过小
             
             // 绘制路径线段（亮色）
             hintGraphics.clear();
