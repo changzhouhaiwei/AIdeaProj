@@ -155,19 +155,21 @@
         function calculateBoardPosition() {
             const gameWidth = game.scale.width;
             const gameHeight = game.scale.height;
+            const isPortrait = gameHeight > gameWidth;
             
             // 纵向分区：暂存区占 1/5，棋盘区占 4/5，互不重叠
             STATS_AREA_HEIGHT = Math.floor(gameHeight * STATS_AREA_RATIO);
             BOARD_AREA_HEIGHT = gameHeight - STATS_AREA_HEIGHT;
             
-            // 计算可用的棋盘区域（限定在 4/5 区域内，底部留少量边距）
-            const bottomMargin = 8;
+            // 竖屏：棋盘顶部尽量贴近暂存区，底部预留约1个棋子高度
+            const topGap = isPortrait ? 6 : 0;
+            const reserveRows = isPortrait ? 1 : 0;
             const availableWidth = gameWidth - BOARD_MARGIN * 2; // 减去两边的空间
-            const availableHeight = BOARD_AREA_HEIGHT - bottomMargin;
+            const availableHeight = Math.max(0, BOARD_AREA_HEIGHT - topGap);
             
             // 根据可用空间动态计算方块大小
             const maxTileSizeByWidth = availableWidth / COLS;
-            const maxTileSizeByHeight = availableHeight / ROWS;
+            const maxTileSizeByHeight = availableHeight / (ROWS + reserveRows);
             
             // 取较小的值，确保棋盘能完整显示
             TILE_SIZE = Math.floor(Math.min(maxTileSizeByWidth, maxTileSizeByHeight));
@@ -177,7 +179,7 @@
                 TILE_SIZE = 30;
             }
             // 二次 clamp：极矮屏下也不让棋盘溢出 4/5 区域
-            const maxTileByArea = Math.floor(availableHeight / ROWS);
+            const maxTileByArea = Math.floor(availableHeight / (ROWS + reserveRows));
             if (maxTileByArea > 0 && TILE_SIZE > maxTileByArea) {
                 TILE_SIZE = maxTileByArea;
             }
@@ -187,8 +189,12 @@
             
             // 棋盘水平居中
             BOARD_X = (gameWidth - boardWidth) / 2;
-            // 棋盘在 4/5 区域内垂直居中，顶边不越过分区线
-            BOARD_Y = STATS_AREA_HEIGHT + Math.max(0, (BOARD_AREA_HEIGHT - bottomMargin - boardHeight) / 2);
+            // 竖屏优先贴近暂存区；横屏保持居中
+            if (isPortrait) {
+                BOARD_Y = STATS_AREA_HEIGHT + topGap;
+            } else {
+                BOARD_Y = STATS_AREA_HEIGHT + Math.max(0, (BOARD_AREA_HEIGHT - boardHeight) / 2);
+            }
         }
         const TILE_IMAGES = ['1', '2', '3', '4', '5', '6']; // 图片资源key
         const COLORS = [
@@ -551,7 +557,7 @@
                     
                     // 检查图片是否存在，如果不存在则使用占位符
                     let sprite;
-                    const squareSize = TILE_SIZE - 4; // 方形尺寸
+                    const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
                     if (scene.textures.exists(imageKey)) {
                         const texture = scene.textures.get(imageKey);
                         const sourceWidth = texture.source[0].width;
@@ -933,7 +939,7 @@
                 
                 // 创建飞行精灵
                 let flyingSprite;
-                const squareSize = TILE_SIZE - 4; // 方形尺寸
+                const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
                 if (scene.textures.exists(imageKey)) {
                     const texture = scene.textures.get(imageKey);
                     const sourceWidth = texture.source[0].width;
@@ -1048,7 +1054,7 @@
 
                     const imageKey = TILE_IMAGES[tileType];
                     let sprite;
-                    const squareSize = TILE_SIZE - 4; // 方形尺寸
+                    const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
                     if (scene.textures.exists(imageKey)) {
                         const texture = scene.textures.get(imageKey);
                         const sourceWidth = texture.source[0].width;
