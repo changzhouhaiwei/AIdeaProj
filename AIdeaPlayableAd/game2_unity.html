@@ -102,6 +102,8 @@
         let hintGraphics = null; // 提示线条图形
         let isHintPaused = false; // 提示检查是否暂停
         let pausedActionTime = 0; // 暂停时的操作时间（用于恢复时计算）
+        const IDLE_POPUP_DELAY = 5000; // 无操作自动弹窗阈值（毫秒）
+        let lastInteractionTime = 0; // 最后一次交互时间（用于自动弹窗）
         
         // 游戏配置常量
         let ROWS, COLS; // 动态行列数
@@ -185,9 +187,9 @@
             STATS_AREA_HEIGHT = Math.floor(gameHeight * statsAreaRatio);
             BOARD_AREA_HEIGHT = gameHeight - STATS_AREA_HEIGHT;
             
-            // 竖屏：棋盘顶部尽量贴近暂存区，底部预留约1个棋子高度
+            // 竖屏：棋盘顶部贴近暂存区，底部尽量铺满
             const topGap = isPortrait ? 4 : 0;
-            const reserveRows = isPortrait ? 1 : 0;
+            const reserveRows = 0;
             const availableWidth = gameWidth - BOARD_MARGIN * 2; // 减去两边的空间
             const availableHeight = Math.max(0, BOARD_AREA_HEIGHT - topGap);
             
@@ -221,7 +223,7 @@
             
             // 棋盘水平居中
             BOARD_X = (gameWidth - boardWidth) / 2;
-            // 竖屏优先贴近暂存区；横屏保持居中
+            // 竖屏保持贴近暂存区，避免棋盘整体被下移；横屏保持居中
             if (isPortrait) {
                 BOARD_Y = STATS_AREA_HEIGHT + topGap;
             } else {
@@ -439,6 +441,7 @@
             scene.input.on('pointerdown', startDrawing, scene);
             scene.input.on('pointermove', drawLine, scene);
             scene.input.on('pointerup', stopDrawing, scene);
+            updateLastInteractionTime();
             
             // 初始化提示功能：初始化后0.5s显示提示
             scene.time.delayedCall(500, () => {
@@ -853,6 +856,7 @@
         function startDrawing(pointer) {
             // 如果弹窗显示中，禁止操作
             if (popupContainer) return;
+            updateLastInteractionTime();
             
             // 暂停提示检查计时器
             if (!isHintPaused) {
@@ -906,6 +910,7 @@
         function stopDrawing() {
             // 如果弹窗显示中，禁止操作
             if (popupContainer) return;
+            updateLastInteractionTime();
             if (!isDrawing) return;
             isDrawing = false;
             
@@ -1358,16 +1363,36 @@
         // ========== 提示功能 ==========
         
         // 更新最后操作时间
+        function updateLastInteractionTime() {
+            lastInteractionTime = Date.now();
+        }
+        
+        // 更新最后操作时间
         function updateLastActionTime() {
             lastActionTime = Date.now();
+            updateLastInteractionTime();
             // 如果正在显示提示，清除提示
             if (isShowingHint) {
                 clearHint();
             }
         }
         
+        // 检查并显示无操作自动下载弹窗
+        function checkAndShowIdlePopup(scene) {
+            if (popupContainer) return;
+            if (isDrawing || isHintPaused) return;
+            if (lastInteractionTime === 0) return;
+            
+            const idleDuration = Date.now() - lastInteractionTime;
+            if (idleDuration >= IDLE_POPUP_DELAY) {
+                showPopup();
+                updateLastInteractionTime();
+            }
+        }
+        
         // 检查并显示提示
         function checkAndShowHint(scene) {
+            checkAndShowIdlePopup(scene);
             // 如果弹窗显示中，不显示提示
             if (popupContainer) return;
             // 如果提示检查被暂停，不显示提示
