@@ -102,8 +102,15 @@
         let hintGraphics = null; // 提示线条图形
         let isHintPaused = false; // 提示检查是否暂停
         let pausedActionTime = 0; // 暂停时的操作时间（用于恢复时计算）
+        const HINT_MIN_PATH_LENGTH = 3; // 提示最短路径
+        const HINT_MAX_PATH_LENGTH = 6; // 提示最长路径（优先寻找）
         const IDLE_POPUP_DELAY = 10000; // 无操作自动弹窗阈值（毫秒）
         let lastInteractionTime = 0; // 最后一次交互时间（用于自动弹窗）
+        const STATS_SHAKE_ANGLE = 12; // 暂存区抖动角度（沿Z轴）
+        const STATS_SHAKE_DURATION = 70; // 每段旋转耗时
+        const STATS_SHAKE_REPEAT = 2; // 左右往返次数
+        const STATS_PULSE_SCALE = 1.15; // 选中时上方图标放大倍数
+        const STATS_PULSE_DURATION = 90; // 放大缩小单段时长
         
         // 游戏配置常量
         let ROWS, COLS; // 动态行列数
@@ -503,6 +510,7 @@
                 if (graphics) {
                     graphics.destroy();
                 }
+                resetAllStatAnimations();
                 statsDisplay.forEach(stat => {
                     if (stat.tile) stat.tile.destroy();
                     if (stat.text) stat.text.destroy();
@@ -860,9 +868,112 @@
                     tile: statTile,
                     count: 0,
                     text: countText,
-                    background: statsBackground // 保存背景引用
+                    background: statsBackground, // 保存背景引用
+                    baseTileX: statTile.x,
+                    baseTileY: statTile.y,
+                    baseTileAngle: statTile.angle,
+                    baseTileScaleX: statTile.scaleX,
+                    baseTileScaleY: statTile.scaleY,
+                    baseTextX: countText.x,
+                    baseTextY: countText.y,
+                    shakeTween: null,
+                    pulseTween: null,
+                    isShaking: false,
+                    isPulsing: false
                 };
             }
+        }
+
+        // 将单个暂存区元素复位到初始位置
+        function restoreStatDisplayPosition(stat) {
+            if (!stat) return;
+            if (stat.tile) {
+                stat.tile.x = stat.baseTileX;
+                stat.tile.y = stat.baseTileY;
+                stat.tile.angle = stat.baseTileAngle || 0;
+                stat.tile.setScale(stat.baseTileScaleX || 1, stat.baseTileScaleY || 1);
+            }
+            if (stat.text) {
+                stat.text.x = stat.baseTextX;
+                stat.text.y = stat.baseTextY;
+            }
+        }
+        
+        // 重置单个暂存区动画状态（用于取消选中/消除后强制回位）
+        function resetStatAnimation(stat) {
+            if (!stat) return;
+            if (stat.shakeTween) {
+                stat.shakeTween.stop();
+                stat.shakeTween = null;
+            }
+            if (stat.pulseTween) {
+                stat.pulseTween.stop();
+                stat.pulseTween = null;
+            }
+            stat.isShaking = false;
+            stat.isPulsing = false;
+            restoreStatDisplayPosition(stat);
+        }
+        
+        // 重置所有暂存区动画状态
+        function resetAllStatAnimations() {
+            statsDisplay.forEach(resetStatAnimation);
+        }
+        
+        // 选中时播放放大缩小；若上次未播完则不重复触发
+        function playStatPulse(tileType) {
+            const stat = statsDisplay[tileType];
+            if (!stat || !stat.tile) return;
+            if (stat.isPulsing) return;
+            
+            const scene = game && game.scene && game.scene.scenes[0];
+            if (!scene || !scene.tweens) return;
+            
+            stat.isPulsing = true;
+            const baseScaleX = stat.baseTileScaleX || 1;
+            const baseScaleY = stat.baseTileScaleY || 1;
+            stat.pulseTween = scene.tweens.add({
+                targets: stat.tile,
+                scaleX: baseScaleX * STATS_PULSE_SCALE,
+                scaleY: baseScaleY * STATS_PULSE_SCALE,
+                duration: STATS_PULSE_DURATION,
+                yoyo: true,
+                repeat: 0,
+                ease: 'Sine.easeInOut',
+                onComplete: () => {
+                    stat.pulseTween = null;
+                    stat.isPulsing = false;
+                    restoreStatDisplayPosition(stat);
+                }
+            });
+        }
+        
+        // 播放对应类型暂存区抖动；若上次未播完则不重复触发
+        function playStatShake(tileType) {
+            const stat = statsDisplay[tileType];
+            if (!stat || !stat.tile || !stat.text) return;
+            if (stat.isShaking) return;
+            
+            const scene = game && game.scene && game.scene.scenes[0];
+            if (!scene || !scene.tweens) return;
+            
+            stat.isShaking = true;
+            const baseAngle = stat.baseTileAngle || 0;
+            // 从逆时针起摆，Tween 在顺/逆时针之间往返，形成明显的 Z 轴抖动
+            stat.tile.angle = baseAngle - STATS_SHAKE_ANGLE;
+            stat.shakeTween = scene.tweens.add({
+                targets: stat.tile,
+                angle: baseAngle + STATS_SHAKE_ANGLE,
+                duration: STATS_SHAKE_DURATION,
+                yoyo: true,
+                repeat: STATS_SHAKE_REPEAT,
+                ease: 'Sine.easeInOut',
+                onComplete: () => {
+                    stat.shakeTween = null;
+                    stat.isShaking = false;
+                    restoreStatDisplayPosition(stat);
+                }
+            });
         }
 
         // 开始绘制
@@ -889,6 +1000,8 @@
                 if (tile.sprite) {
                     showChosenOverlay(tile.sprite);
                 }
+                // 平时选中时：上方对应图标播放放大缩小
+                playStatPulse(tile.type);
                 graphics.clear();
             }
         }
@@ -912,6 +1025,8 @@
                     if (tile.sprite) {
                         showChosenOverlay(tile.sprite);
                     }
+                    // 连续选中同类型时，若上次动画未结束则跳过本次触发
+                    playStatPulse(tile.type);
                 }
             }
             
@@ -926,6 +1041,8 @@
             updateLastInteractionTime();
             if (!isDrawing) return;
             isDrawing = false;
+            // 取消选中或消除后，暂存区元素统一回归原位
+            resetAllStatAnimations();
             
             // 恢复提示检查计时器
             if (isHintPaused) {
@@ -1020,6 +1137,8 @@
                     delay: index * 50,
                     onComplete: () => {
                         flyingSprite.destroy();
+                        // 下方棋子飞到上方时，再触发对应暂存区的旋转 shake
+                        playStatShake(tile.type);
                         // 更新统计
                         targetStat.count++;
                         targetStat.text.setText(targetStat.count.toString());
@@ -1243,6 +1362,29 @@
             
             // 根据屏幕方向调整按钮字体大小
             const buttonFontSize = isLandscape ? '20px' : '24px';
+            const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+            const tryAgainTextByLang = {
+                'en': 'Try Again',
+                'zh': '再试一次',
+                'es': 'Intentar de nuevo',
+                'hi': 'फिर से कोशिश करें',
+                'ar': 'حاول مرة أخرى',
+                'pt': 'Tentar novamente',
+                'fr': 'Réessayer',
+                'de': 'Erneut versuchen',
+                'ru': 'Попробовать снова',
+                'ja': 'もう一度試す'
+            };
+            const tryAgainLangAlias = {
+                'zh-cn': 'zh',
+                'zh-sg': 'zh',
+                'zh-tw': 'zh',
+                'zh-hk': 'zh',
+                'pt-br': 'pt',
+                'pt-pt': 'pt'
+            };
+            const normalizedTryAgainLang = tryAgainLangAlias[browserLang] || browserLang.split('-')[0];
+            const tryAgainLabel = tryAgainTextByLang[normalizedTryAgainLang] || tryAgainTextByLang.en;
             
             const buttonBg = scene.add.rectangle(0, buttonY, buttonWidth, buttonHeight, 0x2ecc71);
             buttonBg.setStrokeStyle(2, 0xffffff);
@@ -1262,7 +1404,7 @@
             popupContainer.add(buttonBg);
             
             // 按钮文字
-            const buttonText = scene.add.text(0, buttonY, 'try again', {
+            const buttonText = scene.add.text(0, buttonY, tryAgainLabel, {
                 fontSize: buttonFontSize,
                 fill: '#ffffff',
                 fontFamily: 'Arial',
@@ -1422,70 +1564,66 @@
             
             if (shouldShowHint) {
                 const hintPath = findHintPath();
-                if (hintPath && hintPath.length >= 3 && hintPath.length <= 4) {
+                if (hintPath && hintPath.length >= HINT_MIN_PATH_LENGTH && hintPath.length <= HINT_MAX_PATH_LENGTH) {
                     showHintAnimation(scene, hintPath);
                 }
             }
         }
         
-        // 查找可消除的路径（3-4个棋子）
+        // 查找可消除的路径（优先6个，其次递减到3个）
         function findHintPath() {
-            // 遍历所有格子，尝试找到一条3-4个相同类型的路径
-            for (let row = 0; row < ROWS; row++) {
-                for (let col = 0; col < COLS; col++) {
-                    if (board[row][col].type === -1) continue;
-                    
-                    const type = board[row][col].type;
-                    
-                    // 使用DFS查找路径
-                    function dfs(r, c, currentPath, visited) {
-                        const key = `${r},${c}`;
-                        if (visited.has(key)) return null;
-                        if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return null;
-                        if (board[r][c].type !== type) return null;
-                        
-                        visited.add(key);
-                        currentPath.push({ row: r, col: c });
-                        
-                        // 找到3-4个棋子的路径
-                        if (currentPath.length >= 3 && currentPath.length <= 4) {
-                            return [...currentPath];
-                        }
-                        
-                        // 如果已经4个了，不再继续
-                        if (currentPath.length >= 4) {
+            // 检查8个相邻方向（包括斜角）
+            const directions = [
+                [-1, -1], [-1, 0], [-1, 1],
+                [0, -1],           [0, 1],
+                [1, -1],  [1, 0],  [1, 1]
+            ];
+
+            // 从最长目标开始，优先寻找更长引导线
+            for (let targetLength = HINT_MAX_PATH_LENGTH; targetLength >= HINT_MIN_PATH_LENGTH; targetLength--) {
+                // 遍历所有格子，尝试找到指定长度的同类型路径
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        if (board[row][col].type === -1) continue;
+
+                        const type = board[row][col].type;
+
+                        // 使用DFS查找固定长度路径，避免在3个时提前返回
+                        function dfs(r, c, currentPath, visited) {
+                            if (r < 0 || r >= ROWS || c < 0 || c >= COLS) return null;
+                            if (board[r][c].type !== type) return null;
+
+                            const key = `${r},${c}`;
+                            if (visited.has(key)) return null;
+
+                            visited.add(key);
+                            currentPath.push({ row: r, col: c });
+
+                            // 到达目标长度后返回
+                            if (currentPath.length === targetLength) {
+                                return [...currentPath];
+                            }
+
+                            for (const [dr, dc] of directions) {
+                                const result = dfs(r + dr, c + dc, currentPath, visited);
+                                if (result) {
+                                    return result;
+                                }
+                            }
+
                             currentPath.pop();
                             visited.delete(key);
                             return null;
                         }
-                        
-                        // 检查8个相邻方向（包括斜角）
-                        const directions = [
-                            [-1, -1], [-1, 0], [-1, 1],
-                            [0, -1],           [0, 1],
-                            [1, -1],  [1, 0],  [1, 1]
-                        ];
-                        
-                        for (const [dr, dc] of directions) {
-                            const newRow = r + dr;
-                            const newCol = c + dc;
-                            const result = dfs(newRow, newCol, currentPath, visited);
-                            if (result && result.length >= 3 && result.length <= 4) {
-                                return result;
-                            }
+
+                        const path = dfs(row, col, [], new Set());
+                        if (path) {
+                            return path;
                         }
-                        
-                        currentPath.pop();
-                        visited.delete(key);
-                        return null;
-                    }
-                    
-                    const path = dfs(row, col, [], new Set());
-                    if (path && path.length >= 3 && path.length <= 4) {
-                        return path;
                     }
                 }
             }
+
             return null;
         }
         
