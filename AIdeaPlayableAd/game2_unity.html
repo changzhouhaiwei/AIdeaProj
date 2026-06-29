@@ -106,12 +106,19 @@
         // 游戏配置常量
         let ROWS, COLS; // 动态行列数
         let TILE_SIZE; // 动态方块大小
+        let TILE_STEP_X, TILE_STEP_Y; // 方块在X/Y方向的步长（可独立控制间距）
         let BOARD_X, BOARD_Y; // 动态棋盘位置
-        let STATS_AREA_HEIGHT; // 上方暂存区高度（占纵向 1/5）
-        let BOARD_AREA_HEIGHT; // 棋盘区域高度（占纵向 4/5）
+        let STATS_AREA_HEIGHT; // 上方暂存区高度（竖屏更紧凑）
+        let BOARD_AREA_HEIGHT; // 棋盘区域高度（竖屏尽量铺满）
         const TILE_TYPES = 6; // 6种方块类型
         const BOARD_MARGIN = 20; // 棋盘两边留的空间
-        const STATS_AREA_RATIO = 0.2; // 暂存区占屏幕纵向比例（1/5）
+        const STATS_AREA_RATIO_PORTRAIT = 0.16; // 竖屏暂存区占比（更贴近参考图）
+        const STATS_AREA_RATIO_LANDSCAPE = 0.2; // 横屏暂存区占比
+        const GRID_GAP_X_PORTRAIT = -8; // 竖屏列间距：几乎相邻
+        const GRID_GAP_Y_PORTRAIT = -6; // 竖屏行间距：几乎相邻
+        const GRID_GAP_X_LANDSCAPE = 0; // 横屏列间距
+        const GRID_GAP_Y_LANDSCAPE = 0; // 横屏行间距
+        const BOARD_TILE_DEPTH_BASE = 10; // 棋盘基础层级（高于背景图，低于连线/弹窗）
         
         // Base64图片数据（用于可玩广告）
         // const BASE64_IMAGES = {
@@ -151,25 +158,47 @@
             }
         }
         
+        function getTileDepthByRow(row) {
+            // 行号越大（越靠下）层级越高
+            return BOARD_TILE_DEPTH_BASE + row;
+        }
+
+        function applyTileDepth(sprite, row) {
+            if (!sprite) return;
+            const depth = getTileDepthByRow(row);
+            sprite.setDepth(depth);
+            // 如果该棋子有选中遮罩，同步保持在棋子上方
+            const overlay = sprite.getData ? sprite.getData('chosenOverlay') : null;
+            if (overlay) {
+                overlay.setDepth(depth + 1);
+            }
+        }
+        
         // 计算棋盘位置和大小
         function calculateBoardPosition() {
             const gameWidth = game.scale.width;
             const gameHeight = game.scale.height;
             const isPortrait = gameHeight > gameWidth;
             
-            // 纵向分区：暂存区占 1/5，棋盘区占 4/5，互不重叠
-            STATS_AREA_HEIGHT = Math.floor(gameHeight * STATS_AREA_RATIO);
+            // 纵向分区：竖屏压缩暂存区，让棋盘更接近并更铺满
+            const statsAreaRatio = isPortrait ? STATS_AREA_RATIO_PORTRAIT : STATS_AREA_RATIO_LANDSCAPE;
+            STATS_AREA_HEIGHT = Math.floor(gameHeight * statsAreaRatio);
             BOARD_AREA_HEIGHT = gameHeight - STATS_AREA_HEIGHT;
             
             // 竖屏：棋盘顶部尽量贴近暂存区，底部预留约1个棋子高度
-            const topGap = isPortrait ? 6 : 0;
+            const topGap = isPortrait ? 4 : 0;
             const reserveRows = isPortrait ? 1 : 0;
             const availableWidth = gameWidth - BOARD_MARGIN * 2; // 减去两边的空间
             const availableHeight = Math.max(0, BOARD_AREA_HEIGHT - topGap);
             
-            // 根据可用空间动态计算方块大小
-            const maxTileSizeByWidth = availableWidth / COLS;
-            const maxTileSizeByHeight = availableHeight / (ROWS + reserveRows);
+            // 行/列间距拆开计算：X、Y可独立调节
+            const gapX = isPortrait ? GRID_GAP_X_PORTRAIT : GRID_GAP_X_LANDSCAPE;
+            const gapY = isPortrait ? GRID_GAP_Y_PORTRAIT : GRID_GAP_Y_LANDSCAPE;
+            const totalRowsForFit = ROWS + reserveRows;
+            
+            // 根据可用空间动态计算方块大小（同时考虑X/Y间距）
+            const maxTileSizeByWidth = (availableWidth - (COLS - 1) * gapX) / COLS;
+            const maxTileSizeByHeight = (availableHeight - (totalRowsForFit - 1) * gapY) / totalRowsForFit;
             
             // 取较小的值，确保棋盘能完整显示
             TILE_SIZE = Math.floor(Math.min(maxTileSizeByWidth, maxTileSizeByHeight));
@@ -179,13 +208,16 @@
                 TILE_SIZE = 30;
             }
             // 二次 clamp：极矮屏下也不让棋盘溢出 4/5 区域
-            const maxTileByArea = Math.floor(availableHeight / (ROWS + reserveRows));
+            const maxTileByArea = Math.floor((availableHeight - (totalRowsForFit - 1) * gapY) / totalRowsForFit);
             if (maxTileByArea > 0 && TILE_SIZE > maxTileByArea) {
                 TILE_SIZE = maxTileByArea;
             }
             
-            const boardWidth = COLS * TILE_SIZE;
-            const boardHeight = ROWS * TILE_SIZE;
+            TILE_STEP_X = TILE_SIZE + gapX;
+            TILE_STEP_Y = TILE_SIZE + gapY;
+            
+            const boardWidth = TILE_SIZE + (COLS - 1) * TILE_STEP_X;
+            const boardHeight = TILE_SIZE + (ROWS - 1) * TILE_STEP_Y;
             
             // 棋盘水平居中
             BOARD_X = (gameWidth - boardWidth) / 2;
@@ -384,8 +416,8 @@
                     board[row][col] = {
                         type: tileType,
                         sprite: null,
-                        x: BOARD_X + col * TILE_SIZE,
-                        y: BOARD_Y + row * TILE_SIZE
+                        x: BOARD_X + col * TILE_STEP_X,
+                        y: BOARD_Y + row * TILE_STEP_Y
                     };
                 }
             }
@@ -491,11 +523,12 @@
             for (let row = 0; row < ROWS; row++) {
                 for (let col = 0; col < COLS; col++) {
                     if (board[row] && board[row][col]) {
-                        board[row][col].x = BOARD_X + col * TILE_SIZE;
-                        board[row][col].y = BOARD_Y + row * TILE_SIZE;
+                        board[row][col].x = BOARD_X + col * TILE_STEP_X;
+                        board[row][col].y = BOARD_Y + row * TILE_STEP_Y;
                         if (board[row][col].sprite) {
                             board[row][col].sprite.x = board[row][col].x + TILE_SIZE / 2;
                             board[row][col].sprite.y = board[row][col].y + TILE_SIZE / 2;
+                            applyTileDepth(board[row][col].sprite, row);
                         }
                     }
                 }
@@ -557,7 +590,7 @@
                     
                     // 检查图片是否存在，如果不存在则使用占位符
                     let sprite;
-                    const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
+                    const squareSize = TILE_SIZE; // 方形尺寸（保持现有大小，不再额外放大）
                     if (scene.textures.exists(imageKey)) {
                         const texture = scene.textures.get(imageKey);
                         const sourceWidth = texture.source[0].width;
@@ -583,8 +616,8 @@
                         );
                     }
                     
-                    // 设置方块精灵的深度为较低值，确保线条能显示在上层
-                    sprite.setDepth(0);
+                    // 下方棋子层级更高，重叠时压在上方棋子之上
+                    applyTileDepth(sprite, row);
                     sprite.setInteractive();
                     sprite.setData('row', row);
                     sprite.setData('col', col);
@@ -616,12 +649,11 @@
                 minSpacing = 50;  // 图标30px时，间隔约20px
                 maxSpacing = 70;  // 图标45px时，间隔约25px
             } else {
-                // 竖屏：恢复到更大的尺寸
-                minIconSize = 60;
-                maxIconSize = 80;
-                // 间距要明显大于图标大小，确保有间隔
-                minSpacing = 85;  // 图标60px时，间隔约25px
-                maxSpacing = 110; // 图标80px时，间隔约30px
+                // 竖屏：图标更大、间隔更小，靠近参考图的紧凑感
+                minIconSize = 64;
+                maxIconSize = 88;
+                minSpacing = 70;  // 图标64px时，间隔约6px
+                maxSpacing = 96;  // 图标88px时，间隔约8px
             }
             
             // 计算合适的图标大小和间距
@@ -671,8 +703,8 @@
                 //      maxTotalWidth >= iconSize + (TILE_TYPES - 1) * iconSize + (TILE_TYPES - 1) * gap
                 //      maxTotalWidth >= TILE_TYPES * iconSize + (TILE_TYPES - 1) * gap
                 
-                // 假设最小间隔为15px，计算最大图标大小
-                const minGap = 15;
+                // 假设最小间隔为6px，计算最大图标大小
+                const minGap = 6;
                 const maxIconSizeByWidth = Math.floor((maxTotalWidth - (TILE_TYPES - 1) * minGap) / TILE_TYPES);
                 
                 if (maxIconSizeByWidth < minIconSize) {
@@ -681,14 +713,14 @@
                     iconSize = minIconSize;
                     const availableForGaps = maxTotalWidth - TILE_TYPES * iconSize;
                     const gap = Math.floor(availableForGaps / (TILE_TYPES - 1));
-                    spacing = iconSize + Math.max(10, gap); // 至少保持10px间隔
+                    spacing = iconSize + Math.max(6, gap); // 至少保持6px间隔
                 } else {
                     // 屏幕足够宽，在合理范围内选择图标大小
                     iconSize = Math.min(maxIconSizeByWidth, maxIconSize);
                     iconSize = Math.max(minIconSize, iconSize);
                     
-                    // 计算理想的间隔（20-30px）
-                    const idealGap = Math.max(20, Math.min(30, (maxSpacing - minSpacing) / 2));
+                    // 计算理想的间隔（6-10px）
+                    const idealGap = Math.max(6, Math.min(10, (maxSpacing - minSpacing) / 2));
                     const idealSpacing = iconSize + idealGap;
                     
                     // 验证总宽度
@@ -701,7 +733,7 @@
                         // 如果超出，计算最大可用间距
                         const availableForGaps = maxTotalWidth - TILE_TYPES * iconSize;
                         const maxGap = Math.floor(availableForGaps / (TILE_TYPES - 1));
-                        spacing = iconSize + Math.max(15, maxGap); // 至少保持15px间隔
+                        spacing = iconSize + Math.max(6, maxGap); // 至少保持6px间隔
                     }
                 }
                 
@@ -714,11 +746,11 @@
                         // 如果图标本身都太大，减小图标
                         iconSize = Math.floor(maxTotalWidth / TILE_TYPES);
                         iconSize = Math.max(40, iconSize); // 最小40px
-                        spacing = iconSize + 10; // 最小间隔10px
+                        spacing = iconSize + 6; // 最小间隔6px
                     } else {
                         // 调整间距
                         const gap = Math.floor(availableForGaps / (TILE_TYPES - 1));
-                        spacing = iconSize + Math.max(10, gap);
+                        spacing = iconSize + Math.max(6, gap);
                     }
                 }
                 
@@ -741,7 +773,7 @@
                 const scale = maxIconByArea / iconSize;
                 iconSize = maxIconByArea;
                 // 间距同步收缩，避免图标缩小后间隔显得过大
-                spacing = Math.max(iconSize + 10, Math.floor(spacing * scale));
+                spacing = Math.max(iconSize + 6, Math.floor(spacing * scale));
             }
             
             // 计算总宽度：6个图标 + 5个间隔
@@ -787,18 +819,20 @@
                     statTile.setOrigin(0.5, 0.5); // 确保占位符也居中
                 }
                 
-                // 数字统计在图标左上角
+                // 数字统计放在图标左上内边距，确保始终在棋子内
+                const countPadding = Math.max(4, Math.floor(iconSize * 0.08));
+                const countFontSize = Math.max(14, Math.floor(iconSize * 0.28));
                 const countText = scene.add.text(
-                    x - iconSize / 2, 
-                    statsY - iconSize / 2, 
+                    x - iconSize / 2 + countPadding, 
+                    statsY - iconSize / 2 + countPadding, 
                     '0', 
                     {
-                        fontSize: '18px',
+                        fontSize: `${countFontSize}px`,
                         fill: '#fff',
                         fontFamily: 'Arial',
                         fontWeight: 'bold',
                         stroke: '#000000',
-                        strokeThickness: 3
+                        strokeThickness: 2
                     }
                 ).setOrigin(0, 0); // 左上角对齐
                 
@@ -939,7 +973,7 @@
                 
                 // 创建飞行精灵
                 let flyingSprite;
-                const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
+                const squareSize = TILE_SIZE; // 方形尺寸（保持现有大小，不再额外放大）
                 if (scene.textures.exists(imageKey)) {
                     const texture = scene.textures.get(imageKey);
                     const sourceWidth = texture.source[0].width;
@@ -1012,7 +1046,9 @@
                             // 更新精灵位置
                             const sprite = board[writeIndex][col].sprite;
                             if (sprite) {
-                                const targetY = BOARD_Y + writeIndex * TILE_SIZE + TILE_SIZE / 2;
+                                sprite.setData('row', writeIndex);
+                                applyTileDepth(sprite, writeIndex);
+                                const targetY = BOARD_Y + writeIndex * TILE_STEP_Y + TILE_SIZE / 2;
                                 game.scene.scenes[0].tweens.add({
                                     targets: sprite,
                                     y: targetY,
@@ -1048,13 +1084,13 @@
                     board[row][col] = {
                         type: tileType,
                         sprite: null,
-                        x: BOARD_X + col * TILE_SIZE,
-                        y: BOARD_Y - (i + 1) * TILE_SIZE
+                        x: BOARD_X + col * TILE_STEP_X,
+                        y: BOARD_Y - (i + 1) * TILE_STEP_Y
                     };
 
                     const imageKey = TILE_IMAGES[tileType];
                     let sprite;
-                    const squareSize = TILE_SIZE - 2; // 方形尺寸（适当放大，减少棋子间视觉空隙）
+                    const squareSize = TILE_SIZE; // 方形尺寸（保持现有大小，不再额外放大）
                     if (scene.textures.exists(imageKey)) {
                         const texture = scene.textures.get(imageKey);
                         const sourceWidth = texture.source[0].width;
@@ -1078,8 +1114,8 @@
                         );
                     }
                     
-                    // 设置新方块精灵的深度为较低值，确保线条能显示在上层
-                    sprite.setDepth(0);
+                    // 下方棋子层级更高，重叠时压在上方棋子之上
+                    applyTileDepth(sprite, row);
                     sprite.setInteractive();
                     sprite.setData('row', row);
                     sprite.setData('col', col);
@@ -1088,7 +1124,7 @@
                     board[row][col].sprite = sprite;
 
                     // 掉落动画
-                    const targetY = BOARD_Y + row * TILE_SIZE + TILE_SIZE / 2;
+                    const targetY = BOARD_Y + row * TILE_STEP_Y + TILE_SIZE / 2;
                     scene.tweens.add({
                         targets: sprite,
                         y: targetY,
@@ -1117,77 +1153,54 @@
             popupContainer = scene.add.container(gameWidth / 2, gameHeight / 2);
             popupContainer.setDepth(20000); // 设置最高深度，确保在最上层
             
-            // 弹窗尺寸 - 根据屏幕方向自适应
-            let popupWidth, popupHeight;
-            if (isLandscape) {
-                // 横屏：确保弹窗适配，不超出屏幕
-                // 留出边距，确保背景图不超框
-                const margin = 40; // 左右各20px，上下各20px
-                const maxWidth = gameWidth - margin;
-                const maxHeight = gameHeight - margin;
-                
-                // 计算合适的弹窗尺寸
-                popupWidth = Math.min(500, maxWidth * 0.85);
-                popupHeight = Math.min(400, maxHeight * 0.85);
-                
-                // 确保不超出屏幕
-                popupWidth = Math.min(popupWidth, maxWidth);
-                popupHeight = Math.min(popupHeight, maxHeight);
-                
-                // 确保最小尺寸
-                popupWidth = Math.max(300, popupWidth);
-                popupHeight = Math.max(300, popupHeight);
-            } else {
-                // 竖屏：保持原有逻辑不变
-                popupWidth = Math.min(400, gameWidth * 0.8);
-                popupHeight = Math.min(500, gameHeight * 0.7);
-                
-                // 确保最小尺寸
-                popupWidth = Math.max(300, popupWidth);
-                popupHeight = Math.max(350, popupHeight);
-            }
+            // 弹窗尺寸 - 按内容自适应，并保留合理边距
+            const horizontalMargin = isLandscape ? 70 : 28;
+            const verticalMargin = isLandscape ? 36 : 30;
+            const maxPopupWidth = gameWidth - horizontalMargin * 2;
+            const maxPopupHeight = gameHeight - verticalMargin * 2;
             
-            // 最终验证：确保弹窗不超出屏幕（留出边距）
-            const finalMargin = 20;
-            popupWidth = Math.min(popupWidth, gameWidth - finalMargin * 2);
-            popupHeight = Math.min(popupHeight, gameHeight - finalMargin * 2);
+            let popupWidth = isLandscape
+                ? Math.min(460, maxPopupWidth)
+                : Math.min(420, maxPopupWidth);
+            popupWidth = Math.max(300, popupWidth);
+            
+            const buttonHeight = isLandscape ? 45 : 50;
+            const buttonWidth = Math.min(popupWidth * 0.76, isLandscape ? 330 : 320);
+            const iconToTitleSpacing = isLandscape ? 10 : 12;
+            const titleToButtonSpacing = isLandscape ? 18 : 22;
+            const topPadding = isLandscape ? 26 : 30;
+            const bottomPadding = isLandscape ? 24 : 28;
+            
+            const nameFontSize = isLandscape ? '24px' : '28px';
+            const estimatedTitleHeight = parseInt(nameFontSize, 10) * 1.2;
+            
+            const desiredIconSize = isLandscape
+                ? Math.min(135, popupWidth * 0.34)
+                : Math.min(145, popupWidth * 0.38);
+            const iconMaxByHeight = maxPopupHeight
+                - (topPadding + bottomPadding + iconToTitleSpacing + titleToButtonSpacing + buttonHeight + estimatedTitleHeight);
+            const iconSize = Math.max(70, Math.min(desiredIconSize, iconMaxByHeight));
+            
+            const contentHeight = iconSize + iconToTitleSpacing + estimatedTitleHeight + titleToButtonSpacing + buttonHeight;
+            let popupHeight = contentHeight + topPadding + bottomPadding;
+            popupHeight = Math.max(260, Math.min(popupHeight, maxPopupHeight));
+            
+            // 按内容顺序布局：图标 -> 标题 -> 按钮
+            const contentTopY = -popupHeight / 2 + topPadding;
+            const iconY = contentTopY + iconSize / 2;
+            const nameY = iconY + iconSize / 2 + iconToTitleSpacing;
+            const buttonY = nameY + estimatedTitleHeight + titleToButtonSpacing + buttonHeight / 2;
             
             // 创建弹窗背景
             let popupBg;
             if (scene.textures.exists('popupBg')) {
                 popupBg = scene.add.image(0, 0, 'popupBg');
-                // 确保背景图不超出屏幕
                 popupBg.setDisplaySize(popupWidth, popupHeight);
             } else {
-                // 使用纯色背景
                 popupBg = scene.add.rectangle(0, 0, popupWidth, popupHeight, 0x2c3e50, 0.85);
                 popupBg.setStrokeStyle(4, 0xffffff);
             }
             popupContainer.add(popupBg);
-            
-            // 创建按钮（下方）- 位置保持不变
-            const buttonWidth = popupWidth * 0.7;
-            const buttonHeight = isLandscape ? 45 : 50;
-            const buttonY = popupHeight / 2 - buttonHeight / 2 - 30;
-            
-            // 计算图标和标题的居中位置
-            // 图标和标题的总高度（图标 + 间距 + 标题）
-            const iconSize = isLandscape 
-                ? Math.min(100, popupWidth * 0.25, popupHeight * 0.3)
-                : Math.min(120, popupWidth * 0.3);
-            const titleSpacing = 15; // 图标和标题之间的间距
-            const nameFontSize = isLandscape ? '24px' : '28px';
-            // 估算标题高度
-            const estimatedTitleHeight = parseInt(nameFontSize) * 1.2;
-            const totalContentHeight = iconSize + titleSpacing + estimatedTitleHeight;
-            
-            // 计算居中位置：从弹窗顶部到按钮之间的中心
-            // 按钮顶部位置
-            const buttonTop = buttonY - buttonHeight / 2;
-            // 可用空间的中心点
-            const centerY = (-popupHeight / 2 + buttonTop) / 2;
-            // 图标中心位置（让整个内容块居中）
-            const iconY = centerY - totalContentHeight / 2 + iconSize / 2;
             
             // 创建图标
             let popupIcon;
@@ -1202,7 +1215,7 @@
             popupContainer.add(popupIcon);
             
             // 创建名字文本（图标下方）
-            const nameText = scene.add.text(0, iconY + iconSize / 2 + titleSpacing, 'Tile Puzzle Classic', {
+            const nameText = scene.add.text(0, nameY, 'Tile Puzzle Classic', {
                 fontSize: nameFontSize,
                 fill: '#ffffff',
                 fontFamily: 'Arial',
@@ -1484,7 +1497,7 @@
             
             // 绘制路径线段（亮色）
             hintGraphics.clear();
-            hintGraphics.lineStyle(6, 0xffff00, 0.8); // 亮黄色
+            hintGraphics.lineStyle(6, 0xff0000, 0.8); // 亮红色
             hintGraphics.beginPath();
             hintGraphics.moveTo(startX, startY);
             
