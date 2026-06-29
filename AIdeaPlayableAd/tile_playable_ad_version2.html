@@ -102,7 +102,7 @@
         let hintGraphics = null; // 提示线条图形
         let isHintPaused = false; // 提示检查是否暂停
         let pausedActionTime = 0; // 暂停时的操作时间（用于恢复时计算）
-        const IDLE_POPUP_DELAY = 5000; // 无操作自动弹窗阈值（毫秒）
+        const IDLE_POPUP_DELAY = 10000; // 无操作自动弹窗阈值（毫秒）
         let lastInteractionTime = 0; // 最后一次交互时间（用于自动弹窗）
         
         // 游戏配置常量
@@ -120,6 +120,7 @@
         const GRID_GAP_Y_PORTRAIT = -6; // 竖屏行间距：几乎相邻
         const GRID_GAP_X_LANDSCAPE = 0; // 横屏列间距
         const GRID_GAP_Y_LANDSCAPE = 0; // 横屏行间距
+        const MIN_ROWS_PORTRAIT = 11; // 竖屏最少行数，随后按高度动态补充
         const BOARD_TILE_DEPTH_BASE = 10; // 棋盘基础层级（高于背景图，低于连线/弹窗）
         
         // Base64图片数据（用于可玩广告）
@@ -150,9 +151,9 @@
         function updateOrientation() {
             const isPortrait = window.innerHeight > window.innerWidth;
             if (isPortrait) {
-                // 竖屏：7列11行
+                // 竖屏：固定7列，行数在布局阶段按高度动态补充
                 COLS = 7;
-                ROWS = 11;
+                ROWS = MIN_ROWS_PORTRAIT;
             } else {
                 // 横屏：11列7行
                 COLS = 11;
@@ -196,6 +197,16 @@
             // 行/列间距拆开计算：X、Y可独立调节
             const gapX = isPortrait ? GRID_GAP_X_PORTRAIT : GRID_GAP_X_LANDSCAPE;
             const gapY = isPortrait ? GRID_GAP_Y_PORTRAIT : GRID_GAP_Y_LANDSCAPE;
+            
+            // 竖屏固定7列后，按可用高度动态补充行数（保底11行）
+            if (isPortrait) {
+                const tileSizeByWidth = Math.floor((availableWidth - (COLS - 1) * gapX) / COLS);
+                const baseTileForRows = Math.max(30, tileSizeByWidth);
+                const rowStep = Math.max(1, baseTileForRows + gapY);
+                const dynamicRows = Math.floor((availableHeight + gapY) / rowStep);
+                ROWS = Math.max(MIN_ROWS_PORTRAIT, dynamicRows);
+            }
+            
             const totalRowsForFit = ROWS + reserveRows;
             
             // 根据可用空间动态计算方块大小（同时考虑X/Y间距）
@@ -435,7 +446,7 @@
 
             // 创建绘制线条的图形对象，设置最高深度确保在最上层
             graphics = scene.add.graphics();
-            graphics.setDepth(10000); // 设置很高的深度值，确保线条始终在最上层
+            graphics.setDepth(15000); // 设置很高的深度值，确保线条始终在最上层
 
             // 添加输入事件
             scene.input.on('pointerdown', startDrawing, scene);
