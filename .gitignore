@@ -4,3 +4,5 @@
 /AIdeadClient/.vscode
 *.sln
 /AIdeadClient/Logs
+/AIdeadClient/Packages
+/AIdeadClient/_ExternalArt/Kenney_Topdown

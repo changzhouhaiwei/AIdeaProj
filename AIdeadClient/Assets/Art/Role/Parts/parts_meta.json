@@ -1,0 +1,158 @@
+{
+  "canvas": {
+    "w": 808,
+    "h": 731
+  },
+  "body": {
+    "x": 119,
+    "y": 4,
+    "w": 566,
+    "h": 723,
+    "pivot_local": [
+      281.6980647206598,
+      402.81849010745145
+    ],
+    "pivot_canvas": [
+      400.6980647206598,
+      406.81849010745145
+    ]
+  },
+  "eyes": {
+    "left_canvas": [
+      351.43201607501675,
+      381.38513060951107
+    ],
+    "right_canvas": [
+      446.98664886515354,
+      381.3991989319092
+    ]
+  },
+  "left": {
+    "hand_pivot_canvas": [
+      148,
+      378
+    ],
+    "hand_radius": 18.0,
+    "arm_attach_canvas": [
+      194,
+      394
+    ]
+  },
+  "right": {
+    "hand_pivot_canvas": [
+      657,
+      379
+    ],
+    "hand_radius": 18.0,
+    "arm_attach_canvas": [
+      611,
+      400
+    ]
+  },
+  "gun_l": {
+    "x": 8,
+    "y": 221,
+    "w": 183,
+    "h": 267,
+    "pivot_local": [
+      140,
+      157
+    ],
+    "pivot_canvas": [
+      148,
+      378
+    ],
+    "note": "Rotate around hand pivot"
+  },
+  "gun_r": {
+    "x": 615,
+    "y": 229,
+    "w": 185,
+    "h": 263,
+    "pivot_local": [
+      42,
+      150
+    ],
+    "pivot_canvas": [
+      657,
+      379
+    ],
+    "note": "Rotate around hand pivot"
+  },
+  "hand_l": {
+    "x": 126,
+    "y": 356,
+    "w": 45,
+    "h": 45,
+    "pivot_local": [
+      22,
+      22
+    ],
+    "pivot_canvas": [
+      148.0,
+      378.0
+    ]
+  },
+  "hand_r": {
+    "x": 635,
+    "y": 357,
+    "w": 45,
+    "h": 45,
+    "pivot_local": [
+      22,
+      22
+    ],
+    "pivot_canvas": [
+      657.0,
+      379.0
+    ]
+  },
+  "arm_l": {
+    "x": 159,
+    "y": 374,
+    "w": 42,
+    "h": 30,
+    "pivot_local": [
+      35,
+      20
+    ],
+    "pivot_canvas": [
+      194,
+      394
+    ]
+  },
+  "arm_r": {
+    "x": 605,
+    "y": 378,
+    "w": 43,
+    "h": 32,
+    "pivot_local": [
+      6,
+      22
+    ],
+    "pivot_canvas": [
+      611,
+      400
+    ]
+  },
+  "usage": {
+    "layer_order": [
+      "body",
+      "arm_l",
+      "arm_r",
+      "gun_l",
+      "gun_r",
+      "hand_l",
+      "hand_r",
+      "eye_l",
+      "eye_r"
+    ],
+    "aim": {
+      "eyes": "Offset both eyes slightly toward aim direction from rest positions in eyes.*_canvas",
+      "guns": "Rotate gun_l/gun_r around hand pivot; optional flip when aim crosses behind",
+      "hands": "Keep at hand_pivot; rotate with gun or stay as joint",
+      "simple_mode": "Use role_potato_limb_l/r as single rotating piece around hand pivot"
+    },
+    "alignment": "Use *_full.png stacked on same canvas, or cropped sprites with parts_meta pivots"
+  }
+}
