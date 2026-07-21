@@ -8,7 +8,8 @@ namespace Art.Role
         public float speed = 14f;
         public float damage = 10f;
         public float life = 2.2f;
-        public float arenaHalf = 10f;
+        public float mapHalfX = 10f;
+        public float mapHalfY = 6f;
 
         Vector2 _vel;
         float _age;
@@ -45,7 +46,7 @@ namespace Art.Role
 
             transform.position += (Vector3)(_vel * Time.deltaTime);
             var p = transform.position;
-            if (Mathf.Abs(p.x) > arenaHalf || Mathf.Abs(p.y) > arenaHalf)
+            if (Mathf.Abs(p.x) > mapHalfX || Mathf.Abs(p.y) > mapHalfY)
                 Destroy(gameObject);
         }
 

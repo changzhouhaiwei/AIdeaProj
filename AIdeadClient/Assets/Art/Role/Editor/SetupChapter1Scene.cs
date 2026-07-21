@@ -9,7 +9,7 @@ using Art.Role;
 namespace Art.Role.Editor
 {
     /// <summary>
-    /// Builds cucumber enemy prefab + Chapter1 farm combat scene.
+    /// Builds cucumber enemy prefab + Chapter1 open farm combat scene.
     /// Menu: Art/Role/Setup Chapter1 Farm Scene
     /// </summary>
     public static class SetupChapter1Scene
@@ -23,6 +23,9 @@ namespace Art.Role.Editor
         const string PotatoPrefabPath = PrefabDir + "/Role_Potato.prefab";
         const string BgPath = "Assets/Art/Bg/bg_battle_farm.png";
         const float Ppu = 100f;
+        // 1920x1080 @ 100 ppu → 19.2 x 10.8 world; inset slightly for playable half-extents
+        const float MapHalfX = 9.2f;
+        const float MapHalfY = 5.1f;
 
         [MenuItem("Art/Role/Setup Chapter1 Farm Scene")]
         public static void Setup()
@@ -82,7 +85,7 @@ namespace Art.Role.Editor
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
             var col = root.AddComponent<CircleCollider2D>();
-            col.radius = 1.6f; // in prefab local space before scale ~0.45 world
+            col.radius = 1.6f;
 
             var chase = root.AddComponent<BadgeEnemyChase>();
             chase.maxHp = 24f;
@@ -98,8 +101,10 @@ namespace Art.Role.Editor
         {
             string path = AssetDatabase.GetAssetPath(potatoPrefab);
             var root = PrefabUtility.LoadPrefabContents(path);
-            if (root.GetComponent<BadgePlayerController>() == null)
-                root.AddComponent<BadgePlayerController>();
+            var ctrl = root.GetComponent<BadgePlayerController>();
+            if (ctrl == null) ctrl = root.AddComponent<BadgePlayerController>();
+            ctrl.mapHalfX = MapHalfX;
+            ctrl.mapHalfY = MapHalfY;
             PrefabUtility.SaveAsPrefabAsset(root, path);
             PrefabUtility.UnloadPrefabContents(root);
         }
@@ -108,7 +113,6 @@ namespace Art.Role.Editor
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
 
-            // Camera
             var cam = Object.FindObjectOfType<Camera>();
             if (cam == null)
             {
@@ -118,16 +122,15 @@ namespace Art.Role.Editor
                 camGo.AddComponent<AudioListener>();
             }
             cam.orthographic = true;
-            cam.orthographicSize = 7.2f;
+            // Viewport smaller than map so player can roam all four directions
+            cam.orthographicSize = 4.8f;
             cam.backgroundColor = new Color(0.12f, 0.14f, 0.16f, 1f);
             cam.transform.position = new Vector3(0f, 0f, -10f);
             cam.clearFlags = CameraClearFlags.SolidColor;
 
-            // Remove default light if any (2D)
             foreach (var light in Object.FindObjectsOfType<Light>())
                 Object.DestroyImmediate(light.gameObject);
 
-            // Background
             var bgSprite = AssetDatabase.LoadAssetAtPath<Sprite>(BgPath);
             if (bgSprite == null)
             {
@@ -138,37 +141,30 @@ namespace Art.Role.Editor
             var bgSr = bg.AddComponent<SpriteRenderer>();
             bgSr.sprite = bgSprite;
             bgSr.sortingOrder = -50;
-            // Fit roughly to arena view
-            if (bgSprite != null)
-            {
-                float worldH = cam.orthographicSize * 2f;
-                float worldW = worldH * cam.aspect;
-                float sw = bgSprite.bounds.size.x;
-                float sh = bgSprite.bounds.size.y;
-                float scale = Mathf.Max(worldW / Mathf.Max(0.01f, sw), worldH / Mathf.Max(0.01f, sh)) * 1.05f;
-                bg.transform.localScale = Vector3.one * scale;
-            }
+            bg.transform.localScale = Vector3.one; // 1920x1080 @ 100ppu native world size
 
-            // Player
             var player = (GameObject)PrefabUtility.InstantiatePrefab(potatoPrefab);
             player.name = "Player_Potato";
             player.transform.position = Vector3.zero;
             var playerCtrl = player.GetComponent<BadgePlayerController>();
             if (playerCtrl == null) playerCtrl = player.AddComponent<BadgePlayerController>();
-            playerCtrl.arenaHalf = 7.5f;
+            playerCtrl.mapHalfX = MapHalfX;
+            playerCtrl.mapHalfY = MapHalfY;
 
-            // Spawner
+            var follow = cam.GetComponent<BadgeCameraFollow>();
+            if (follow == null) follow = cam.gameObject.AddComponent<BadgeCameraFollow>();
+            follow.target = player.transform;
+            follow.mapHalfX = MapHalfX;
+            follow.mapHalfY = MapHalfY;
+
             var spawnerGo = new GameObject("EnemySpawner");
             var spawner = spawnerGo.AddComponent<BadgeEnemySpawner>();
             spawner.enemyPrefab = cucumberPrefab.GetComponent<BadgeEnemyChase>();
             spawner.player = player.transform;
-            spawner.arenaHalf = 7.5f;
+            spawner.mapHalfX = MapHalfX;
+            spawner.mapHalfY = MapHalfY;
             spawner.intervalStart = 1.2f;
             spawner.maxAlive = 24;
-
-            // Bounds helper (invisible)
-            var bounds = new GameObject("ArenaBounds");
-            bounds.transform.position = Vector3.zero;
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             AssetDatabase.SaveAssets();
@@ -181,7 +177,6 @@ namespace Art.Role.Editor
         {
             if (!File.Exists(path) && !File.Exists(Path.GetFullPath(path)))
             {
-                // Unity asset path
                 if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), path)))
                     return;
             }

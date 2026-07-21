@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  arenaHalf: 7.5
+  mapHalfX: 9.2
+  mapHalfY: 5.1
   fireInterval: 0.22
   bulletDamage: 12
   eyeAimOffset: 0.08

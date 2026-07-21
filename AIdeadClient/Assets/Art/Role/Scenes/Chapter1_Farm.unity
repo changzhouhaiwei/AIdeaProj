@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 100001}
   - component: {fileID: 100002}
   - component: {fileID: 100003}
+  - component: {fileID: 100004}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -183,7 +184,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.2
+  orthographic size: 4.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -207,6 +208,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
+--- !u!114 &100004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c4e91a2f8d4e6a9c1d3e5f708192a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 400002}
+  mapHalfX: 9.2
+  mapHalfY: 5.1
+  smooth: 12
 --- !u!1 &200000
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +251,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.15, y: 1.15, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -337,7 +354,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 100005, guid: c7c0a1b2d3e4f5069789abcdef012345, type: 3}
   player: {fileID: 400002}
-  arenaHalf: 7.5
+  mapHalfX: 9.2
+  mapHalfY: 5.1
   spawnPadding: 0.8
   intervalStart: 1.2
   intervalMin: 0.55

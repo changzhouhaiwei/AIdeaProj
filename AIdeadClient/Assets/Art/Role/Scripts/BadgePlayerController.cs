@@ -5,11 +5,15 @@ namespace Art.Role
     /// <summary>
     /// Chapter1 player on Role_Potato prefab: WASD move, mouse aim, auto/manual fire.
     /// Rotates Aim_L / Aim_R and nudges eyes toward aim.
+    /// Open farm map — rectangular bounds, not a closed arena.
     /// </summary>
     public class BadgePlayerController : MonoBehaviour
     {
         public float moveSpeed = 5f;
-        public float arenaHalf = 8.5f;
+        [Tooltip("Half-width of playable farm (world units).")]
+        public float mapHalfX = 9.2f;
+        [Tooltip("Half-height of playable farm (world units).")]
+        public float mapHalfY = 5.1f;
         public float fireInterval = 0.22f;
         public float bulletDamage = 12f;
         public float eyeAimOffset = 0.08f;
@@ -77,8 +81,8 @@ namespace Art.Role
 
             transform.position += (Vector3)(input * moveSpeed * Time.deltaTime);
             var p = transform.position;
-            p.x = Mathf.Clamp(p.x, -arenaHalf, arenaHalf);
-            p.y = Mathf.Clamp(p.y, -arenaHalf, arenaHalf);
+            p.x = Mathf.Clamp(p.x, -mapHalfX, mapHalfX);
+            p.y = Mathf.Clamp(p.y, -mapHalfY, mapHalfY);
             transform.position = p;
         }
 
@@ -105,7 +109,6 @@ namespace Art.Role
         void ApplyAimVisual(Vector2 aim)
         {
             float ang = Mathf.Atan2(aim.y, aim.x) * Mathf.Rad2Deg;
-            // Rest pose guns point roughly up-out; rotate pivots so barrels follow aim.
             if (_aimL != null) _aimL.localRotation = Quaternion.Euler(0f, 0f, ang - 135f);
             if (_aimR != null) _aimR.localRotation = Quaternion.Euler(0f, 0f, ang - 45f);
 

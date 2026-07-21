@@ -2,12 +2,13 @@ using UnityEngine;
 
 namespace Art.Role
 {
-    /// <summary>Spawns cucumber enemies from arena edges to chase the player.</summary>
+    /// <summary>Spawns cucumber enemies from open farm map edges to chase the player.</summary>
     public class BadgeEnemySpawner : MonoBehaviour
     {
         public BadgeEnemyChase enemyPrefab;
         public Transform player;
-        public float arenaHalf = 8.5f;
+        public float mapHalfX = 9.2f;
+        public float mapHalfY = 5.1f;
         public float spawnPadding = 0.8f;
         public float intervalStart = 1.4f;
         public float intervalMin = 0.55f;
@@ -55,14 +56,15 @@ namespace Art.Role
 
         Vector3 EdgePosition()
         {
-            float a = arenaHalf + spawnPadding;
+            float ax = mapHalfX + spawnPadding;
+            float ay = mapHalfY + spawnPadding;
             int side = Random.Range(0, 4);
             switch (side)
             {
-                case 0: return new Vector3(Random.Range(-a, a), a, 0f);   // top
-                case 1: return new Vector3(Random.Range(-a, a), -a, 0f);  // bottom
-                case 2: return new Vector3(-a, Random.Range(-a, a), 0f);  // left
-                default: return new Vector3(a, Random.Range(-a, a), 0f); // right
+                case 0: return new Vector3(Random.Range(-ax, ax), ay, 0f);   // top
+                case 1: return new Vector3(Random.Range(-ax, ax), -ay, 0f);  // bottom
+                case 2: return new Vector3(-ax, Random.Range(-ay, ay), 0f);  // left
+                default: return new Vector3(ax, Random.Range(-ay, ay), 0f); // right
             }
         }
     }
