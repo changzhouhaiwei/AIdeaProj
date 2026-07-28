@@ -1,0 +1,12 @@
+{
+  "name": "aidea-playable-ad",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pack:tileAd1": "node framework/build/pack.mjs --ad ads/tileAd1 --warn-only",
+    "pack:tileAd2": "node framework/build/pack.mjs --ad ads/tileAd2 --warn-only",
+    "pack:all": "npm run pack:tileAd1 && npm run pack:tileAd2",
+    "size:tileAd1": "node framework/build/size-check.js ads/tileAd1/dist/playable.html --warn-only",
+    "embed:tileAd1": "python ads/tileAd1/embed_resources.py"
+  }
+}

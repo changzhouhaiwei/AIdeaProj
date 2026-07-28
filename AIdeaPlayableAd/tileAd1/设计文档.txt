@@ -1,4 +1,6 @@
 
 1.可玩儿广告,默认上架unityads 
-2.制作链接F:\SelfMaj\AIdeaProj\AIdeaPlayableAd\game2_unity.html
+2.制作链接（旧）F:\SelfMaj\AIdeaProj\AIdeaPlayableAd\game2_unity.html
+3.框架化交付：ads/tileAd1/dist/playable.html（node framework/build/pack.mjs --ad ads/tileAd1）
+4.源码目录：ads/tileAd1/（本目录为迁移前副本，可能因 IDE 占用未删除）
 

@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="mraid.js"></script>
+<script>/*playable-platform-shims*/
+/* playable-framework: platform shims (WindVane / MRAID preview / b64 img / query utils) */
+(function () {
+  var W = (window.WindVane = window.WindVane || {});
+  W.call = function (svc, name, params, succ) {
+    try {
+      if (typeof succ === 'function') succ({});
+    } catch (e) {}
+  };
+  W.callMethod = function () {};
+  W.useIframe = function () {};
+})();
+
+(function () {
+  if (window.mraid) return;
+  window.mraid = {
+    open: function (u) {
+      try {
+        window.open(u, '_blank');
+      } catch (e) {}
+    },
+    addEventListener: function () {},
+    removeEventListener: function () {},
+    getState: function () {
+      return 'default';
+    },
+    getVersion: function () {
+      return '2.0';
+    },
+    isViewable: function () {
+      return true;
+    },
+    useCustomClose: function () {},
+    close: function () {}
+  };
+})();
+
+(function () {
+  var BLANK =
+    'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+  function normalize(u) {
+    if (typeof u !== 'string' || u.indexOf('data:') !== 0) return u;
+    var b = u.indexOf(';base64,');
+    if (b < 0) return u;
+    var m = u.slice(5, b);
+    var s = u.slice(b + 8);
+    var i = s.length;
+    while (i > 0 && s.charCodeAt(i - 1) === 61) i--;
+    var d = s.slice(0, i);
+    while (d.length % 4 === 1) d = d.slice(0, -1);
+    var p = (4 - (d.length % 4)) % 4;
+    return 'data:' + m + ';base64,' + d + (p ? new Array(p + 1).join('=') : '');
+  }
+  var FILE = location.protocol === 'file:';
+  var C = typeof Map === 'function' ? new Map() : null;
+  function blobize(u) {
+    if (!FILE || typeof u !== 'string' || u.indexOf('data:image/') !== 0) return u;
+    if (C && C.has(u)) return C.get(u);
+    var b = u.indexOf(';base64,');
+    if (b < 0) return u;
+    try {
+      var mime = u.slice(5, b).split(';')[0];
+      var s = u.slice(b + 8);
+      var bin = atob(s);
+      var L = bin.length;
+      var a = new Uint8Array(L);
+      for (var i = 0; i < L; i++) a[i] = bin.charCodeAt(i);
+      var bu = URL.createObjectURL(new Blob([a], { type: mime }));
+      if (C) C.set(u, bu);
+      return bu;
+    } catch (e) {
+      return u;
+    }
+  }
+  function fix(v) {
+    if (typeof v !== 'string') return v;
+    if (v === '') return BLANK;
+    return blobize(normalize(v));
+  }
+  try {
+    var P = HTMLImageElement.prototype;
+    var D = Object.getOwnPropertyDescriptor(P, 'src');
+    if (D && D.set) {
+      Object.defineProperty(P, 'src', {
+        set: function (v) {
+          D.set.call(this, fix(v));
+        },
+        get: D.get,
+        configurable: true,
+        enumerable: true
+      });
+    }
+    var O = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (a, v) {
+      if (this.tagName === 'IMG' && a && String(a).toLowerCase() === 'src' && typeof v === 'string') {
+        v = fix(v);
+      }
+      return O.call(this, a, v);
+    };
+  } catch (e) {}
+})();
+
+(function () {
+  if (typeof window.getError !== 'function') {
+    window.getError = function (c, s) {
+      return 'Error ' + c + ': ' + s;
+    };
+  }
+  function q(k) {
+    try {
+      var p = new URLSearchParams(location.search);
+      var v = p.get(k);
+      return v == null ? '' : v;
+    } catch (e) {
+      return '';
+    }
+  }
+  var U = window.mv_utils || {};
+  U.getQueryString = U.getQueryString || q;
+  window.mv_utils = U;
+  var M = window.m_util || {};
+  M.getQueryString = M.getQueryString || q;
+  window.m_util = M;
+})();
+
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<title>tileAd2 Playable Scaffold</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #102a43;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+html,
+body {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+</style>
+<script>/*playable-config*/
+window.__PLAYABLE_CONFIG__ = {
+  "title": "tileAd2 Playable Scaffold",
+  "outputName": "playable.html",
+  "iosStoreUrl": "",
+  "androidStoreUrl": "https://play.google.com/store/apps/details?id=com.example.game",
+  "timeoutMs": 30000,
+  "waitForViewable": true,
+  "maxSizeBytes": 5242880,
+  "sizeWarnOnly": true,
+  "theme": {
+    "background": "#102a43"
+  },
+  "endcard": {
+    "closable": false
+  }
+};
+</script>
+<script>/*playable-runtime*/
+/* playable-framework: merge config + expose Playable namespace */
+(function () {
+  var injected = window.__PLAYABLE_CONFIG__ || {};
+  var P = (window.Playable = window.Playable || {});
+  P.config = Object.assign(
+    {
+      title: 'Playable',
+      iosStoreUrl: '',
+      androidStoreUrl: '',
+      timeoutMs: 30000,
+      waitForViewable: true,
+      maxSizeBytes: 5 * 1024 * 1024,
+      endcard: {
+        closable: false
+      }
+    },
+    injected,
+    P.config || {}
+  );
+  window.__PLAYABLE_CONFIG__ = P.config;
+  P.version = '1.0.0';
+})();
+
+/* playable-framework: analytics hooks (no-op by default; override Playable.onTrack) */
+(function (P) {
+  var events = [];
+
+  function track(name, payload) {
+    var row = { name: name, payload: payload || {}, t: Date.now() };
+    events.push(row);
+    try {
+      if (typeof P.onTrack === 'function') P.onTrack(name, row.payload);
+    } catch (e) {}
+    try {
+      if (typeof window.__PLAYABLE_ANALYTICS__ === 'function') {
+        window.__PLAYABLE_ANALYTICS__(name, row.payload);
+      }
+    } catch (e) {}
+  }
+
+  P.track = track;
+  P.getAnalyticsLog = function () {
+    return events.slice();
+  };
+})(window.Playable || (window.Playable = {}));
+
+/* playable-framework: optional audio unlock / mute gate */
+(function (P) {
+  var unlocked = false;
+  var muted = false;
+  var waiters = [];
+
+  function unlock() {
+    if (unlocked) return;
+    unlocked = true;
+    for (var i = 0; i < waiters.length; i++) {
+      try {
+        waiters[i]();
+      } catch (e) {}
+    }
+    waiters.length = 0;
+    if (P.track) P.track('audio_unlocked');
+  }
+
+  function onFirstPointer() {
+    unlock();
+    document.removeEventListener('pointerdown', onFirstPointer, true);
+    document.removeEventListener('touchstart', onFirstPointer, true);
+  }
+
+  document.addEventListener('pointerdown', onFirstPointer, true);
+  document.addEventListener('touchstart', onFirstPointer, true);
+
+  P.audio = {
+    isUnlocked: function () {
+      return unlocked;
+    },
+    isMuted: function () {
+      return muted;
+    },
+    setMuted: function (v) {
+      muted = !!v;
+      if (P.track) P.track('audio_mute', { muted: muted });
+    },
+    whenUnlocked: function (fn) {
+      if (typeof fn !== 'function') return;
+      if (unlocked) fn();
+      else waiters.push(fn);
+    }
+  };
+})(window.Playable || (window.Playable = {}));
+
+/* playable-framework: unified CTA / openStore */
+(function (P) {
+  function storeUrl() {
+    var c = P.config || {};
+    var ios = c.iosStoreUrl || '';
+    var and = c.androidStoreUrl || '';
+    var ua = navigator.userAgent || '';
+    if (/android/i.test(ua)) return and || ios;
+    return ios || and;
+  }
+
+  function openStore() {
+    if (P.track) P.track('cta_click', { state: P.state });
+    var url = storeUrl();
+
+    try {
+      if (typeof window.install === 'function') {
+        window.install();
+        return true;
+      }
+    } catch (e) {}
+
+    try {
+      if (window.mraid && typeof window.mraid.open === 'function') {
+        window.mraid.open(url || '');
+        return true;
+      }
+    } catch (e) {}
+
+    try {
+      if (url) {
+        window.open(url, '_blank');
+        return true;
+      }
+    } catch (e) {}
+
+    return false;
+  }
+
+  P.openStore = openStore;
+  P.getStoreUrl = storeUrl;
+})(window.Playable || (window.Playable = {}));
+
+/* playable-framework: EndCard show/hide contract (UI owned by game or host) */
+(function (P) {
+  var visible = false;
+  var reason = null;
+  var handlers = { show: [], hide: [] };
+
+  function on(type, fn) {
+    if (!handlers[type] || typeof fn !== 'function') return function () {};
+    handlers[type].push(fn);
+    return function () {
+      var i = handlers[type].indexOf(fn);
+      if (i >= 0) handlers[type].splice(i, 1);
+    };
+  }
+
+  function emit(type, data) {
+    var list = handlers[type] || [];
+    for (var i = 0; i < list.length; i++) {
+      try {
+        list[i](data);
+      } catch (e) {}
+    }
+  }
+
+  function showEndCard(r, payload) {
+    visible = true;
+    reason = r || 'complete';
+    emit('show', { reason: reason, payload: payload || {} });
+    if (P.track) P.track('endcard_show', { reason: reason });
+  }
+
+  function hideEndCard() {
+    if (!visible) return;
+    visible = false;
+    emit('hide', { reason: reason });
+    reason = null;
+  }
+
+  P.onEndCard = on;
+  P.showEndCard = showEndCard;
+  P.hideEndCard = hideEndCard;
+  P.isEndCardVisible = function () {
+    return visible;
+  };
+  P.getEndCardReason = function () {
+    return reason;
+  };
+})(window.Playable || (window.Playable = {}));
+
+/* playable-framework: LOADING | PLAY | ENDCARD (+ MRAID viewable gate) */
+(function (P) {
+  var STATES = { LOADING: 'LOADING', PLAY: 'PLAY', ENDCARD: 'ENDCARD' };
+  var state = STATES.LOADING;
+  var assetsReady = false;
+  var viewable = false;
+  var ended = false;
+  var playWaiters = [];
+  var listeners = {};
+
+  function cfg() {
+    return P.config || window.__PLAYABLE_CONFIG__ || {};
+  }
+
+  function emit(name, data) {
+    var list = listeners[name] || [];
+    for (var i = 0; i < list.length; i++) {
+      try {
+        list[i](data);
+      } catch (e) {}
+    }
+  }
+
+  function on(name, fn) {
+    if (typeof fn !== 'function') return function () {};
+    if (!listeners[name]) listeners[name] = [];
+    listeners[name].push(fn);
+    return function () {
+      var i = listeners[name].indexOf(fn);
+      if (i >= 0) listeners[name].splice(i, 1);
+    };
+  }
+
+  function setState(next) {
+    if (state === next) return;
+    var prev = state;
+    state = next;
+    P.state = state;
+    if (P.track) P.track('state_change', { from: prev, to: next });
+    emit('state', { from: prev, to: next });
+    emit(next.toLowerCase(), { from: prev });
+  }
+
+  function tryEnterPlay() {
+    if (ended || state !== STATES.LOADING) return;
+    if (!assetsReady) return;
+    var needViewable = cfg().waitForViewable !== false;
+    if (needViewable && !viewable) return;
+    setState(STATES.PLAY);
+    if (P.track) P.track('playable_start');
+    var q = playWaiters.slice();
+    playWaiters.length = 0;
+    for (var i = 0; i < q.length; i++) {
+      try {
+        q[i]();
+      } catch (e) {}
+    }
+    emit('play', {});
+  }
+
+  function ready() {
+    assetsReady = true;
+    if (P.track) P.track('assets_ready');
+    tryEnterPlay();
+  }
+
+  function end(reason) {
+    if (ended) return;
+    ended = true;
+    reason = reason || 'complete';
+    setState(STATES.ENDCARD);
+    if (typeof P.showEndCard === 'function') P.showEndCard(reason);
+    if (P.track) P.track('playable_end', { reason: reason });
+    // SDK gameEnd is fired on CTA via sdk-bridge / openStore, not here.
+    emit('end', { reason: reason });
+  }
+
+  function whenPlayable(fn) {
+    if (typeof fn !== 'function') return;
+    if (state === STATES.PLAY) fn();
+    else playWaiters.push(fn);
+  }
+
+  function setViewable(v) {
+    viewable = !!v;
+    if (viewable) tryEnterPlay();
+    emit('viewable', { viewable: viewable });
+  }
+
+  function bindMraid() {
+    var M = window.mraid;
+    if (!M) {
+      setViewable(true);
+      return;
+    }
+    try {
+      if (typeof M.isViewable === 'function' && M.isViewable()) setViewable(true);
+      else if (typeof M.getState === 'function' && M.getState() === 'default') setViewable(true);
+    } catch (e) {
+      setViewable(true);
+    }
+    try {
+      if (typeof M.addEventListener === 'function') {
+        M.addEventListener('viewableChange', function (v) {
+          setViewable(!!v);
+          if (!v) emit('pause', {});
+          else emit('resume', {});
+        });
+      }
+    } catch (e) {}
+    // Preview shim / missing events: fail-open after short delay
+    setTimeout(function () {
+      if (!viewable) setViewable(true);
+    }, 800);
+  }
+
+  P.STATES = STATES;
+  P.state = state;
+  P.ready = ready;
+  P.end = end;
+  P.whenPlayable = whenPlayable;
+  P.on = on;
+  P.setViewable = setViewable;
+  P.isPlayable = function () {
+    return state === STATES.PLAY;
+  };
+
+  // Host callbacks for games that want explicit hooks
+  P.on('viewable', function (d) {
+    if (typeof P.onViewable === 'function' && d.viewable) P.onViewable();
+  });
+  P.on('pause', function () {
+    if (typeof P.onPause === 'function') P.onPause();
+  });
+  P.on('resume', function () {
+    if (typeof P.onResume === 'function') P.onResume();
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindMraid);
+  } else {
+    bindMraid();
+  }
+})(window.Playable || (window.Playable = {}));
+
+</script>
+<script>/*playable-store-redirect*/
+/* playable-framework: store URL redirect (reads Playable.config / __PLAYABLE_CONFIG__) */
+(function () {
+  function cfg() {
+    return (window.Playable && window.Playable.config) || window.__PLAYABLE_CONFIG__ || {};
+  }
+  function target() {
+    var c = cfg();
+    var ios = c.iosStoreUrl || c.appstore_url || '';
+    var and = c.androidStoreUrl || c.google_play_url || '';
+    var ua = navigator.userAgent || '';
+    if (/android/i.test(ua)) return and || ios;
+    return ios || and;
+  }
+  window.__playable_tool_redirect__ = true;
+  window.__playable_store_target__ = target;
+
+  var S = window.super_html;
+  if (typeof S === 'object' && S !== null) {
+    var t0 = target();
+    var c = cfg();
+    if (c.iosStoreUrl) S.appstore_url = c.iosStoreUrl;
+    if (c.androidStoreUrl) S.google_play_url = c.androidStoreUrl;
+    if (!S.appstore_url && t0) S.appstore_url = t0;
+    if (!S.google_play_url && t0) S.google_play_url = t0;
+  }
+
+  try {
+    var _open = window.open;
+    window.open = function (u, n, f) {
+      if (typeof u === 'string' && u && !/^(javascript|data|blob):/i.test(u)) {
+        var t = target();
+        if (t) u = t;
+      }
+      return _open.call(window, u, n, f);
+    };
+  } catch (e) {}
+
+  try {
+    if (window.mraid) {
+      var _mo = window.mraid.open;
+      window.mraid.open = function (u) {
+        u = target() || u;
+        if (typeof _mo === 'function') return _mo.call(window.mraid, u);
+        try {
+          window.open(u, '_blank');
+        } catch (e) {}
+      };
+    }
+  } catch (e) {}
+
+  try {
+    var _la = window.location.assign;
+    if (typeof _la === 'function') {
+      window.location.assign = function (u) {
+        if (typeof u === 'string' && /\.apple\.com|play\.google\.com|market:\/\//i.test(u)) {
+          var t = target();
+          if (t) u = t;
+        }
+        return _la.call(window.location, u);
+      };
+    }
+  } catch (e) {}
+})();
+
+</script>
+</head>
+<body>
+    <div id="game-container"></div>
+<script>/*phaser*/
+/* Minimal Phaser stub for tileAd2 scaffold packing — replace with real Phaser for production. */
+window.Phaser = window.Phaser || {
+  AUTO: 0,
+  Scale: { RESIZE: 3, CENTER_BOTH: 1 },
+  Game: function (config) {
+    this.config = config;
+    this.scale = {
+      resize: function () {}
+    };
+    var scene = config && config.scene;
+    var self = this;
+    this.scene = { scenes: [{ cameras: { main: { width: window.innerWidth, height: window.innerHeight } }, add: {}, textures: { exists: function () { return false; } }, input: {} }] };
+    setTimeout(function () {
+      if (scene && typeof scene.preload === 'function') scene.preload.call(self.scene.scenes[0]);
+      if (scene && typeof scene.create === 'function') scene.create.call(self.scene.scenes[0]);
+    }, 0);
+  }
+};
+
+</script>
+<script>/*game*/
+/* tileAd2 scaffold — validates Playable framework contract without real gameplay. */
+(function () {
+  var ended = false;
+  var statusEl;
+
+  function paint(msg) {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+  }
+
+  function buildUi() {
+    var root = document.getElementById('game-container');
+    root.innerHTML = '';
+    root.style.cssText =
+      'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#fff;font-family:Arial,sans-serif;';
+
+    var title = document.createElement('div');
+    title.textContent = (Playable.config && Playable.config.title) || 'tileAd2';
+    title.style.fontSize = '22px';
+    root.appendChild(title);
+
+    statusEl = document.createElement('div');
+    statusEl.style.opacity = '0.85';
+    root.appendChild(statusEl);
+
+    var playBtn = document.createElement('button');
+    playBtn.textContent = 'Simulate Clear';
+    playBtn.style.cssText =
+      'padding:12px 20px;font-size:16px;border:0;border-radius:8px;background:#2ecc71;color:#fff;cursor:pointer;';
+    playBtn.onclick = function () {
+      if (ended) return;
+      ended = true;
+      paint('EndCard: complete');
+      endcard.style.display = 'flex';
+      Playable.end('complete');
+    };
+    root.appendChild(playBtn);
+
+    var endcard = document.createElement('div');
+    endcard.style.cssText =
+      'display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);align-items:center;justify-content:center;flex-direction:column;gap:12px;';
+    var cta = document.createElement('button');
+    cta.textContent = 'Install';
+    cta.style.cssText =
+      'padding:14px 28px;font-size:18px;border:0;border-radius:8px;background:#3498db;color:#fff;cursor:pointer;';
+    cta.onclick = function () {
+      Playable.openStore();
+    };
+    endcard.appendChild(cta);
+    document.body.appendChild(endcard);
+
+    var timeoutMs = (Playable.config && Playable.config.timeoutMs) || 30000;
+    setTimeout(function () {
+      if (ended) return;
+      ended = true;
+      paint('EndCard: timeout');
+      endcard.style.display = 'flex';
+      Playable.end('timeout');
+    }, timeoutMs);
+
+    paint('PLAY — state=' + Playable.state);
+    Playable.track && Playable.track('tileAd2_scaffold_play');
+  }
+
+  Playable.whenPlayable(function () {
+    buildUi();
+  });
+  Playable.ready();
+})();
+
+</script>
+<script>/*playable-sdk-bridge*/
+/* playable-framework: multi-SDK CTA bridge (Mindworks / Mintegral / Luna / ExitApi) */
+(function () {
+  if (typeof window.gameStart !== 'function') window.gameStart = function () {};
+  if (typeof window.gameClose !== 'function') window.gameClose = function () {};
+  if (typeof window.gameEnd !== 'function') window.gameEnd = function () {};
+
+  function _callEnd() {
+    try {
+      if (typeof window.gameEnd === 'function') window.gameEnd();
+    } catch (e) {}
+  }
+  function _callInstall() {
+    try {
+      if (typeof window.install === 'function') {
+        window.install();
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  var _origExit = (window.ExitApi && window.ExitApi.exit) || null;
+  window.ExitApi = window.ExitApi || {};
+  window.ExitApi.exit = function () {
+    _callEnd();
+    if (_callInstall()) return;
+    if (typeof _origExit === 'function')
+      try {
+        _origExit();
+      } catch (e) {}
+  };
+
+  function _bridgeSuperHtml() {
+    var S = window.super_html;
+    if (!S) return;
+    var _d = S.download;
+    if (typeof _d === 'function' && !_d.__mtg_bridged) {
+      S.download = function () {
+        _callEnd();
+        if (_callInstall()) return;
+        if (typeof _d === 'function')
+          try {
+            return _d.apply(this, arguments);
+          } catch (e) {}
+      };
+      S.download.__mtg_bridged = true;
+    }
+    var _ge = S.game_end;
+    if (typeof _ge === 'function' && !_ge.__mtg_bridged) {
+      S.game_end = function () {
+        _callEnd();
+        if (typeof _ge === 'function')
+          try {
+            return _ge.apply(this, arguments);
+          } catch (e) {}
+      };
+      S.game_end.__mtg_bridged = true;
+    }
+  }
+  _bridgeSuperHtml();
+
+  var _rbN = 0;
+  var _rbIv = setInterval(function () {
+    _rbN++;
+    _bridgeSuperHtml();
+    var x = window.ExitApi && window.ExitApi.exit;
+    if (typeof x === 'function' && !x.__mtg_bridged) {
+      var ox = x;
+      window.ExitApi = window.ExitApi || {};
+      window.ExitApi.exit = function () {
+        _callEnd();
+        if (_callInstall()) return;
+        if (typeof ox === 'function')
+          try {
+            ox.apply(window.ExitApi, arguments);
+          } catch (e) {}
+      };
+      window.ExitApi.exit.__mtg_bridged = true;
+    }
+    var Mr = window.mraid;
+    if (Mr && typeof Mr.open === 'function' && !Mr.open.__mtg_bridged) {
+      var mo = Mr.open;
+      Mr.open = function (u) {
+        _callEnd();
+        if (_callInstall()) return;
+        if (typeof mo === 'function') return mo.call(Mr, u);
+      };
+      Mr.open.__mtg_bridged = true;
+    }
+    if (typeof window.open === 'function' && !window.open.__mtg_bridged) {
+      var wn = window.open;
+      window.open = function (u, n, f) {
+        if (typeof u === 'string' && u && !/^(javascript|data|blob):/i.test(u)) {
+          _callEnd();
+          if (_callInstall()) return;
+        }
+        return wn.call(window, u, n, f);
+      };
+      window.open.__mtg_bridged = true;
+    }
+    if (_rbN >= 100) clearInterval(_rbIv);
+  }, 100);
+
+  function _wrapFn(obj, name, handler) {
+    if (!obj) return false;
+    var cur = obj[name];
+    if (cur && cur.__mtg_bridged) return true;
+    obj[name] = handler(cur);
+    obj[name].__mtg_bridged = true;
+    return true;
+  }
+  function _bridgeLunaUnity() {
+    var L = window.Luna && window.Luna.Unity;
+    var ok = false;
+    if (L && L.Playable) {
+      ok =
+        _wrapFn(L.Playable, 'InstallFullGame', function (orig) {
+          return function () {
+            _callEnd();
+            if (_callInstall()) return;
+            if (typeof orig === 'function')
+              try {
+                return orig.apply(this, arguments);
+              } catch (e) {}
+            try {
+              return window.ExitApi && window.ExitApi.exit && window.ExitApi.exit();
+            } catch (e) {}
+          };
+        }) || ok;
+    }
+    if (L && L.LifeCycle) {
+      ok =
+        _wrapFn(L.LifeCycle, 'GameEnded', function (orig) {
+          return function () {
+            _callEnd();
+            if (typeof orig === 'function')
+              try {
+                return orig.apply(this, arguments);
+              } catch (e) {}
+          };
+        }) || ok;
+    }
+    return ok;
+  }
+  _bridgeLunaUnity();
+  window.addEventListener &&
+    window.addEventListener('luna:ended', function () {
+      _callEnd();
+    });
+  var _lunaRetry = 0;
+  var _lunaTid = setInterval(function () {
+    _lunaRetry++;
+    _bridgeLunaUnity();
+    if (_lunaRetry > 100) clearInterval(_lunaTid);
+  }, 100);
+
+  var _grTries = 0;
+  var _grMax = 60;
+  var _grIv = setInterval(function () {
+    _grTries++;
+    try {
+      if (typeof window.gameReady === 'function') window.gameReady();
+    } catch (e) {}
+    if (_grTries >= _grMax) clearInterval(_grIv);
+  }, 500);
+
+  var M = window.mraid;
+  if (M && typeof M.open === 'function' && !M.open.__mtg_bridged) {
+    var _mo = M.open;
+    M.open = function (u) {
+      _callEnd();
+      if (_callInstall()) return;
+      if (typeof _mo === 'function') return _mo.call(M, u);
+    };
+    M.open.__mtg_bridged = true;
+  }
+  var _wo = window.open;
+  window.open = function (u, n, f) {
+    if (typeof u === 'string' && u && !/^(javascript|data|blob):/i.test(u)) {
+      _callEnd();
+      if (_callInstall()) return;
+    }
+    return _wo.call(window, u, n, f);
+  };
+  window.open.__mtg_bridged = true;
+
+  function _fallbackStoreUrl() {
+    try {
+      var f = window.__force_store_redirect__;
+      if (typeof f === 'string' && f) return f;
+      if (typeof window.__playable_store_target__ === 'function') {
+        var t = window.__playable_store_target__();
+        if (t) return t;
+      }
+      var c = (window.Playable && window.Playable.config) || window.__PLAYABLE_CONFIG__ || {};
+      var ios = c.iosStoreUrl || '';
+      var and = c.androidStoreUrl || '';
+      var ua = navigator.userAgent || '';
+      if (/android/i.test(ua)) return and || ios || '';
+      return ios || and || '';
+    } catch (e) {}
+    return '';
+  }
+
+  if (typeof window.install !== 'function') {
+    window.install = function () {
+      _callEnd();
+      try {
+        var u = _fallbackStoreUrl();
+        if (u) _wo.call(window, u, '_blank');
+        else _wo.call(window, '__playable_install__://store', '_blank');
+      } catch (e) {}
+    };
+    window.install.__mtg_bridged = true;
+  }
+})();
+
+</script>
+<script>/*playable-gamestart-fallback*/
+/* playable-framework: offline gameStart / webviewshow fallback */
+(function () {
+  var fired = false;
+  function fire() {
+    if (fired) return;
+    fired = true;
+    if (window.MUTIL_ONLINE || window.MW_INIT) return;
+    try {
+      document.dispatchEvent(new Event('webviewshow'));
+    } catch (e) {}
+  }
+  window.addEventListener(
+    'luna:started',
+    function () {
+      setTimeout(fire, 50);
+    },
+    false
+  );
+  setTimeout(fire, 5000);
+})();
+
+</script>
+<script>/*playable-fetch-embed*/
+/* playable-framework: optional Cocos/Luna fetch/XHR embed trap (no-op without __PLAYABLE_FETCH_EMBED__) */
+(function () {
+  function k(u) {
+    if (typeof u !== 'string') {
+      try {
+        u = String((u && u.href) || u);
+      } catch (e) {
+        return null;
+      }
+    }
+    var i = u.indexOf('cocos-js/');
+    return i < 0 ? null : u.slice(i).split(/[?#]/)[0];
+  }
+  function lk(s) {
+    var M = window.__PLAYABLE_FETCH_EMBED__;
+    if (!M) return null;
+    if (M[s]) return s;
+    for (var a in M) if (s === a || s.slice(-a.length) === a) return a;
+    var b = s.split('/').pop();
+    if (b) for (var a in M) if (a.split('/').pop() === b) return a;
+    return null;
+  }
+  function buf(b64) {
+    var t = atob(b64);
+    if (t.indexOf('data:') === 0) {
+      var b = t.indexOf(';base64,');
+      if (b >= 0) {
+        var s = t.slice(b + 8),
+          bin = atob(s),
+          n = bin.length,
+          u = new Uint8Array(n);
+        for (var i = 0; i < n; i++) u[i] = bin.charCodeAt(i);
+        return u.buffer;
+      }
+    }
+    var n = t.length,
+      u = new Uint8Array(n);
+    for (var i = 0; i < n; i++) u[i] = t.charCodeAt(i);
+    return u.buffer;
+  }
+  function rsp(b64, ek) {
+    var ct = 'application/octet-stream';
+    if (/\.wasm$/i.test(ek)) ct = 'application/wasm';
+    return new Response(buf(b64), { status: 200, headers: { 'Content-Type': ct } });
+  }
+  function urlOf(inp) {
+    if (typeof inp === 'string') return inp;
+    if (inp && typeof Request !== 'undefined' && inp instanceof Request) return inp.url;
+    if (inp && inp.url) return inp.url;
+    return null;
+  }
+  function hit(u) {
+    if (typeof u !== 'string') return null;
+    var sk = k(u),
+      ek = sk && lk(sk);
+    return ek ? { ek: ek, b64: window.__PLAYABLE_FETCH_EMBED__[ek] } : null;
+  }
+  function rememberUrl(x, u) {
+    if (typeof u !== 'string') return;
+    x.__pu = u;
+    try {
+      x._url = u;
+    } catch (e) {}
+    try {
+      x._requestURL = u;
+    } catch (e) {}
+  }
+  function urlOfXHR(x) {
+    var u = x.__pu || x._url || x._requestURL;
+    if (typeof u === 'string') return u;
+    try {
+      if (typeof x.responseURL === 'string' && x.responseURL) return x.responseURL;
+    } catch (e) {}
+    return null;
+  }
+  function deliverXHR(x, h) {
+    var ab = buf(h.b64),
+      url = urlOfXHR(x) || '';
+    function done() {
+      try {
+        x.readyState = 4;
+        x.status = 200;
+        x.response = ab;
+        x.responseText = '';
+        x.responseURL = url;
+      } catch (e) {}
+      if (x.onreadystatechange)
+        try {
+          x.onreadystatechange();
+        } catch (e) {}
+      if (x.onload)
+        try {
+          x.onload();
+        } catch (e) {}
+      if (x.onloadend)
+        try {
+          x.onloadend();
+        } catch (e) {}
+    }
+    setTimeout(done, 0);
+  }
+  function wrapInstance(x) {
+    if (x.__playableInst) return;
+    x.__playableInst = 1;
+    var oo = x.open,
+      os = x.send;
+    x.open = function (m, u) {
+      if (arguments.length >= 2) rememberUrl(x, u);
+      else if (typeof m === 'string') rememberUrl(x, m);
+      return oo.apply(x, arguments);
+    };
+    x.send = function (b) {
+      var u = urlOfXHR(x);
+      if (!u) rememberUrl(x, '');
+      else rememberUrl(x, u);
+      var h = u && hit(u);
+      if (h) {
+        deliverXHR(x, h);
+        return;
+      }
+      return os.apply(x, arguments);
+    };
+  }
+  function wrapFetch(inner) {
+    return function (inp, init) {
+      var u = urlOf(inp),
+        h = u && hit(u);
+      if (h) return Promise.resolve(rsp(h.b64, h.ek));
+      return inner.apply(this, arguments);
+    };
+  }
+  function patchXHR() {
+    var X = window['XMLHttp' + 'Request'];
+    if (!X || !X.prototype) return;
+    var oo = X.prototype.open,
+      os = X.prototype.send;
+    if (typeof os !== 'function' || os.__playableOuter === 2) return;
+    function openWrap(m, u) {
+      if (arguments.length >= 2) rememberUrl(this, u);
+      else if (typeof m === 'string') rememberUrl(this, m);
+      return oo.apply(this, arguments);
+    }
+    function sendWrap(b) {
+      var u = urlOfXHR(this);
+      if (!u) rememberUrl(this, '');
+      else rememberUrl(this, u);
+      var h = u && hit(u);
+      if (h) {
+        deliverXHR(this, h);
+        return;
+      }
+      return os.apply(this, arguments);
+    }
+    openWrap.__playableOuter = 1;
+    sendWrap.__playableOuter = 2;
+    X.prototype.open = openWrap;
+    X.prototype.send = sendWrap;
+    if (!X.__playableCtorHook) {
+      X.__playableCtorHook = 1;
+      var Native = X;
+      function Hooked() {
+        var x = new Native();
+        wrapInstance(x);
+        return x;
+      }
+      Hooked.prototype = Native.prototype;
+      window['XMLHttp' + 'Request'] = Hooked;
+    }
+  }
+  function install() {
+    if (!window.__PLAYABLE_FETCH_EMBED__) return;
+    patchXHR();
+    if (typeof fetch !== 'function') return;
+    var inner = fetch.bind(window),
+      w = wrapFetch(inner);
+    w.__playableWrap = 1;
+    try {
+      if (!window.__PLAYABLE_FETCH_TRAP__) {
+        window.__PLAYABLE_FETCH_TRAP__ = 1;
+        Object.defineProperty(window, 'fetch', {
+          get: function () {
+            return w;
+          },
+          set: function (fn) {
+            inner = typeof fn === 'function' ? fn.bind(window) : fn;
+            w = wrapFetch(inner);
+            w.__playableWrap = 1;
+          },
+          configurable: true
+        });
+      } else {
+        window.fetch = w;
+      }
+    } catch (e) {
+      window.fetch = w;
+    }
+  }
+  function hookGameReady() {
+    if (window.__PLAYABLE_GR_HOOK__) return;
+    window.__PLAYABLE_GR_HOOK__ = 1;
+    var L = console.log;
+    console.log = function () {
+      try {
+        if (arguments.length && String(arguments[0]).indexOf('game ready') >= 0) {
+          install();
+          setTimeout(install, 0);
+          setTimeout(install, 100);
+          setTimeout(install, 500);
+        }
+      } catch (e) {}
+      return L.apply(console, arguments);
+    };
+  }
+  install();
+  hookGameReady();
+  setInterval(install, 50);
+  [15000, 30000, 60000, 120000].forEach(function (ms) {
+    setTimeout(install, ms);
+  });
+})();
+
+</script>
+<script>/*playable-openstore-shim*/
+/* playable-framework: Unity Ads mraid.openStoreURL shim */
+(function () {
+  var M = window.mraid;
+  if (M && !M.__unityOpenStoreShim) {
+    M.__unityOpenStoreShim = true;
+    if (!M.openStoreURL) {
+      M.openStoreURL = function (u) {
+        return M.open(u || '');
+      };
+    }
+  }
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "title": "tileAd2 Playable Scaffold",
+  "outputName": "playable.html",
+  "iosStoreUrl": "",
+  "androidStoreUrl": "https://play.google.com/store/apps/details?id=com.example.game",
+  "timeoutMs": 30000,
+  "waitForViewable": true,
+  "maxSizeBytes": 5242880,
+  "sizeWarnOnly": true,
+  "theme": {
+    "background": "#102a43"
+  },
+  "endcard": {
+    "closable": false
+  }
+}

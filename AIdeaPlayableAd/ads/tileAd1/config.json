@@ -1,0 +1,20 @@
+{
+  "title": "方块连线游戏 - Phaser版",
+  "outputName": "playable.html",
+  "iosStoreUrl": "",
+  "androidStoreUrl": "https://play.google.com/store/apps/details?id=com.sofish.tilepuzzle.gp",
+  "packageAndroid": "com.sofish.tilepuzzle.gp",
+  "timeoutMs": 30000,
+  "waitForViewable": true,
+  "maxSizeBytes": 5242880,
+  "sizeWarnOnly": true,
+  "theme": {
+    "background": "#1a1a2e"
+  },
+  "endcard": {
+    "closable": false,
+    "completeTitleKey": "complete",
+    "timeoutTitleKey": "timeout"
+  },
+  "collectionTargets": [8, 6, 9, 7, 8, 12]
+}
