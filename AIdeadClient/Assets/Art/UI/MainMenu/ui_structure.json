@@ -1,0 +1,61 @@
+{
+  "screenId": "MainMenu",
+  "canvas": { "width": 1080, "height": 1920 },
+  "nodes": [
+    {
+      "id": "root",
+      "type": "Root",
+      "parent": null,
+      "hint": { "x": 0, "y": 0, "w": 1080, "h": 1920 }
+    },
+    {
+      "id": "panel_bg",
+      "type": "Panel",
+      "parent": "root",
+      "spriteHint": "panel_bg.png",
+      "nineSliceHint": true,
+      "hint": { "x": 90, "y": 280, "w": 900, "h": 1360 }
+    },
+    {
+      "id": "logo",
+      "type": "Icon",
+      "parent": "panel_bg",
+      "spriteHint": "logo_potato.png",
+      "hint": { "x": 390, "y": 360, "w": 300, "h": 300 }
+    },
+    {
+      "id": "title",
+      "type": "Text",
+      "parent": "panel_bg",
+      "text": "土豆围城",
+      "hint": { "x": 240, "y": 700, "w": 600, "h": 100 }
+    },
+    {
+      "id": "btn_start",
+      "type": "Button",
+      "parent": "panel_bg",
+      "text": "开始",
+      "spriteHint": "btn_primary.png",
+      "nineSliceHint": true,
+      "hint": { "x": 290, "y": 900, "w": 500, "h": 130 }
+    },
+    {
+      "id": "btn_settings",
+      "type": "Button",
+      "parent": "panel_bg",
+      "text": "设置",
+      "spriteHint": "btn_secondary.png",
+      "nineSliceHint": true,
+      "hint": { "x": 290, "y": 1080, "w": 500, "h": 120 }
+    },
+    {
+      "id": "btn_quit",
+      "type": "Button",
+      "parent": "panel_bg",
+      "text": "退出",
+      "spriteHint": "btn_secondary.png",
+      "nineSliceHint": true,
+      "hint": { "x": 290, "y": 1250, "w": 500, "h": 120 }
+    }
+  ]
+}

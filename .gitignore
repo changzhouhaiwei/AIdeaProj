@@ -6,3 +6,15 @@
 /AIdeadClient/Logs
 /AIdeadClient/Packages
 /AIdeadClient/_ExternalArt/Kenney_Topdown
+
+# DesktopGame (Unity 2022.3) — migrated from SkillPoint/IdeaProj/AIdeaDesktop22
+# Full Unity ignores also live in DesktopGame/.gitignore
+/DesktopGame/Library
+/DesktopGame/Temp
+/DesktopGame/Obj
+/DesktopGame/Logs
+/DesktopGame/Builds
+/DesktopGame/Build
+/DesktopGame/.vs
+/DesktopGame/.vscode
+/DesktopGame/UserSettings

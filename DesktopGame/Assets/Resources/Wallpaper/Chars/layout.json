@@ -1,0 +1,68 @@
+{
+  "fade_in": 1.4,
+  "hold": 30.0,
+  "fade_out": 1.4,
+  "gap": 0.6,
+  "characters": [
+    {
+      "file": "stand_a.png",
+      "scale": 0.48,
+      "anchor": [768, 980],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_b.png",
+      "scale": 0.46,
+      "anchor": [768, 980],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_c.png",
+      "scale": 0.48,
+      "anchor": [768, 978],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_d.png",
+      "scale": 0.46,
+      "anchor": [768, 980],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_e.png",
+      "scale": 0.48,
+      "anchor": [770, 978],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_f.png",
+      "scale": 0.46,
+      "anchor": [766, 980],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_g.png",
+      "scale": 0.48,
+      "anchor": [768, 982],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_h.png",
+      "scale": 0.46,
+      "anchor": [768, 978],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_i.png",
+      "scale": 0.48,
+      "anchor": [770, 980],
+      "hip": [0.50, 0.92]
+    },
+    {
+      "file": "stand_j.png",
+      "scale": 0.46,
+      "anchor": [766, 978],
+      "hip": [0.50, 0.92]
+    }
+  ]
+}
