@@ -1,0 +1,27 @@
+{
+  "screenId": "Wheel",
+  "canvas": { "width": 1080, "height": 1920 },
+  "notes": "Wood style lucky wheel. Reuses Common/btn_close, Common/title_banner.",
+  "nodes": [
+    { "id": "root", "type": "Root", "parent": null },
+    { "id": "panel_bg", "type": "Panel", "parent": "root", "spriteHint": "panel_bg.png", "nineSliceHint": true },
+    { "id": "title_banner", "type": "Image", "parent": "panel_bg", "spriteHint": "Common/title_banner.png" },
+    { "id": "title", "type": "Text", "parent": "title_banner", "text": "幸运转盘" },
+    { "id": "btn_close", "type": "Button", "parent": "panel_bg", "spriteHint": "Common/btn_close.png" },
+    { "id": "bar_coin", "type": "Image", "parent": "panel_bg", "spriteHint": "bar_currency.png" },
+    { "id": "icon_coin", "type": "Icon", "parent": "bar_coin", "spriteHint": "icon_coin.png" },
+    { "id": "txt_coin", "type": "Text", "parent": "bar_coin", "text": "1250" },
+    { "id": "btn_plus_coin", "type": "Button", "parent": "bar_coin", "spriteHint": "btn_plus.png" },
+    { "id": "bar_ticket", "type": "Image", "parent": "panel_bg", "spriteHint": "bar_currency.png" },
+    { "id": "icon_ticket", "type": "Icon", "parent": "bar_ticket", "spriteHint": "icon_ticket.png" },
+    { "id": "txt_ticket", "type": "Text", "parent": "bar_ticket", "text": "3" },
+    { "id": "btn_plus_ticket", "type": "Button", "parent": "bar_ticket", "spriteHint": "btn_plus.png" },
+    { "id": "bar_progress", "type": "Image", "parent": "panel_bg", "spriteHint": "bar_currency.png" },
+    { "id": "icon_gift", "type": "Icon", "parent": "bar_progress", "spriteHint": "icon_gift.png" },
+    { "id": "txt_progress", "type": "Text", "parent": "bar_progress", "text": "0/10" },
+    { "id": "wheel", "type": "Image", "parent": "panel_bg", "spriteHint": "wheel_disk.png" },
+    { "id": "pointer", "type": "Image", "parent": "panel_bg", "spriteHint": "wheel_pointer.png" },
+    { "id": "btn_spin", "type": "Button", "parent": "panel_bg", "spriteHint": "btn_spin.png", "text": "抽奖" },
+    { "id": "btn_help", "type": "Button", "parent": "panel_bg", "spriteHint": "btn_help.png" }
+  ]
+}

@@ -74,6 +74,8 @@ def main() -> int:
 
     layout_path = args.layout.resolve()
     parts_dir = (args.parts or (layout_path.parent / "Parts")).resolve()
+    # repo Assets/Art/UI/Common/Parts
+    common_dir = (layout_path.parent.parent / "Common" / "Parts").resolve()
     layout = load_layout(layout_path)
     sizes = collect_sprite_sizes(layout)
     if not sizes:
@@ -81,7 +83,10 @@ def main() -> int:
         return 1
 
     for sprite, (tw, th) in sorted(sizes.items()):
-        src = parts_dir / sprite
+        if sprite.replace("\\", "/").startswith("Common/"):
+            src = common_dir / sprite.split("/", 1)[1]
+        else:
+            src = parts_dir / sprite
         if not src.is_file():
             print(f"missing {src}")
             continue

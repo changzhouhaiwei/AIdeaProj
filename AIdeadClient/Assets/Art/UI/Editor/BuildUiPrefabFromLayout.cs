@@ -18,6 +18,8 @@ namespace Art.UI.Editor
     {
         const float DefaultPpu = 100f;
         const string BuildAllRequestPath = "Assets/Art/UI/Editor/.build_all_request";
+        const string CommonPartsDir = "Assets/Art/UI/Common/Parts";
+        const string CommonSpritePrefix = "Common/";
 
         [InitializeOnLoadMethod]
         static void AutoBuildOnRequest()
@@ -35,7 +37,7 @@ namespace Art.UI.Editor
                     // ignore
                 }
 
-                Debug.Log("[UI] Detected .build_all_request �?building all UI prefabs�?);
+                Debug.Log("[UI] Detected .build_all_request ï¿½?building all UI prefabsï¿½?);
                 BuildAll(logErrorsAsDialog: false);
             };
         }
@@ -230,7 +232,9 @@ namespace Art.UI.Editor
             var prefabPath = prefabDir + "/UI_" + screenId + ".prefab";
 
             EnsureFolder(prefabDir);
+            EnsureFolder(CommonPartsDir);
             ConfigurePartImports(partsDir, layout.nodes);
+            ConfigurePartImports(CommonPartsDir, layout.nodes);
 
             int canvasW = layout.canvas != null && layout.canvas.width > 0 ? layout.canvas.width : 1080;
             int canvasH = layout.canvas != null && layout.canvas.height > 0 ? layout.canvas.height : 1920;
@@ -351,7 +355,7 @@ namespace Art.UI.Editor
                             else
                             {
                                 Debug.LogWarning("[UI] Missing sprite: " + partsDir + "/" + node.sprite);
-                                // Opaque solid fallback — never leave semi-transparent empty Image.
+                                // Opaque solid fallback â never leave semi-transparent empty Image.
                                 image.sprite = null;
                                 image.color = new Color(0.92f, 0.86f, 0.72f, 1f);
                             }
@@ -525,10 +529,15 @@ namespace Art.UI.Editor
                 }
 
                 var fileName = Path.GetFileName(path);
+                // layout may reference Common/btn_close.png — match either form
+                Vector4 border;
+                bool hasBorder = borders.TryGetValue(fileName, out border)
+                    || borders.TryGetValue(CommonSpritePrefix + fileName, out border);
+
                 var settings = new TextureImporterSettings();
                 importer.ReadTextureSettings(settings);
                 // 9-slice needs FullRect; icons/buttons use Tight to cut transparent overdraw.
-                var meshType = borders.ContainsKey(fileName)
+                var meshType = hasBorder
                     ? SpriteMeshType.FullRect
                     : SpriteMeshType.Tight;
                 if (settings.spriteMeshType != meshType)
@@ -538,7 +547,7 @@ namespace Art.UI.Editor
                     dirty = true;
                 }
 
-                if (borders.TryGetValue(fileName, out var border))
+                if (hasBorder)
                 {
                     importer.spriteBorder = border;
                     dirty = true;
@@ -549,15 +558,67 @@ namespace Art.UI.Editor
             }
         }
 
+        static string ResolveSpritePath(string partsDir, string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return null;
+            fileName = fileName.Replace('\\', '/');
+            if (fileName.StartsWith(CommonSpritePrefix, StringComparison.OrdinalIgnoreCase))
+                return CommonPartsDir + "/" + fileName.Substring(CommonSpritePrefix.Length);
+            return partsDir + "/" + fileName;
+        }
+
         static Sprite LoadSprite(string partsDir, string fileName)
         {
-            var path = partsDir + "/" + fileName;
+            var path = ResolveSpritePath(partsDir, fileName);
+            if (string.IsNullOrEmpty(path))
+                return null;
+
             var sp = AssetDatabase.LoadAssetAtPath<Sprite>(path);
-            if (sp == null && File.Exists(path))
+            if (sp != null)
+                return sp;
+
+            // Fallback: ensure importer is Sprite then reimport.
+            var importer = AssetImporter.GetAtPath(path) as TextureImporter;
+            if (importer != null)
             {
-                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+                bool dirty = false;
+                if (importer.textureType != TextureImporterType.Sprite)
+                {
+                    importer.textureType = TextureImporterType.Sprite;
+                    dirty = true;
+                }
+                if (importer.spriteImportMode != SpriteImportMode.Single)
+                {
+                    importer.spriteImportMode = SpriteImportMode.Single;
+                    dirty = true;
+                }
+                if (dirty || sp == null)
+                    importer.SaveAndReimport();
                 sp = AssetDatabase.LoadAssetAtPath<Sprite>(path);
             }
+
+            if (sp == null)
+            {
+                // Last resort: copy Common → local Parts under the same filename.
+                if (fileName.StartsWith(CommonSpritePrefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    var localName = fileName.Substring(CommonSpritePrefix.Length);
+                    var localPath = partsDir + "/" + localName;
+                    var absCommon = Path.GetFullPath(path);
+                    var absLocal = Path.GetFullPath(localPath);
+                    if (File.Exists(absCommon))
+                    {
+                        EnsureFolder(partsDir);
+                        File.Copy(absCommon, absLocal, true);
+                        AssetDatabase.ImportAsset(localPath, ImportAssetOptions.ForceUpdate);
+                        sp = AssetDatabase.LoadAssetAtPath<Sprite>(localPath);
+                    }
+                }
+            }
+
+            if (sp == null)
+                Debug.LogWarning("[UI] Missing sprite: field='" + fileName + "' path='" + path + "'");
             return sp;
         }
 

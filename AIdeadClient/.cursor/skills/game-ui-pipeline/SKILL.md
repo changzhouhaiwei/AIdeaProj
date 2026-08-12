@@ -63,25 +63,51 @@ blocky geometric UI panels and buttons readable at small size.
 - 以 `ui_structure.json` 为真源复制节点 id/父子
 - `Read` `mockup.png` 校对各控件大致位置，填 `rect`（左上原点）
 - 字段必须符合 `SCHEMA_layout.md`（`JsonUtility` 友好：平面 `anchorMinX` 等，勿用嵌套数组）
-- 为每个有图节点填 `sprite`；九宫格设 `useNineSlice: 1` 与 border
+- 为每个有图节点填 `sprite`
+- **九宫格默认关闭**：一律 `useNineSlice: 0`；**禁止擅自开启**。仅当用户明确要求「九宫格 / nine-slice」时才设 `1` 并填 border
 - Text 节点可不挂 sprite
 
-### 4. 出 Parts
+### 4. 出 Parts（色幕抠图）
 
-**优先绿幕生图再 chroma**（比假透明白底/棋盘格可靠）：
+**优先色幕生图再 chroma**（比假透明白底/棋盘格可靠）。入口：`Tools/UI/chroma_key.py`（旧名 `chroma_green.py` 仍可用，默认 green）。
 
-1. 生到 `Raw_Green/`，背景写死 `solid flat pure chroma-key green #00FF00`（禁止棋盘格/白底）  
-2. 若零件本身是绿色（如绿开关），改用 **品红幕 `#FF00FF`**，避免抠掉本体  
-3. `python Tools/UI/chroma_green.py <raw.png> --out Parts/<name>.png --key green|magenta`  
-4. **按 layout 缩到设计像素**（否则 Unity `SetNativeSize` 会按贴图像素暴大）：  
+#### 选幕规则（先判颜色）
+
+| 幕 | Hex | 何时用 |
+|----|-----|--------|
+| **绿幕** `green` | `#00FF00` | 零件本身**不是**大面积绿（金框、木纹、蓝/棕按钮） |
+| **品红幕** `magenta` | `#FF00FF` | 零件含**绿色填充**（绿按钮、绿开关）——绿幕会挖空本体 |
+| **红幕** `red` | `#FF0000` | 绿/品红都与主体冲突时；或截图背景偏红 |
+| **蓝幕** `blue` | `#0000FF` | 暖色主体（金/木/橙）且绿幕易脏边 |
+| **青幕** `cyan` | `#00FFFF` | 备用 |
+| **auto** | 四角采样 | **截图直切**、不确定幕色：采四角多数色，再分类/custom |
+| **custom** | 四角采样色 | 羊皮纸/米色底等非纯色幕，用距离抠 |
+
+```bash
+# 生图零件（推荐）
+python Tools/UI/chroma_key.py Raw_Chroma/gs_xxx.png --out Parts/xxx.png --key magenta
+
+# 截图直切（羊皮纸/未知底）
+python Tools/UI/chroma_key.py shot.png --out Parts/xxx.png --key auto
+
+# 旧入口（默认 green）
+python Tools/UI/chroma_green.py Raw_Green/gs_xxx.png --out Parts/xxx.png
+```
+
+流程：
+
+1. 生到 `Raw_Chroma/`（或 `Raw_Green/`），背景写死对应纯色幕（禁止棋盘格/白底）  
+2. 主体含绿 → **必须品红幕**，且中心必须是**实心填充**（禁止空心框，品红会变成透明洞）  
+3. `chroma_key.py --key …` → `Parts/<name>.png`  
+4. **按 layout 缩到设计像素**（否则 Unity `SetNativeSize` 暴大）：  
    `python Tools/UI/resize_parts_to_layout.py Assets/Art/UI/<ScreenId>/layout.json`  
-5. 列表行尽量不挂 `row_bg` 贴图，减少透明层叠
+5. 列表行尽量不挂 `row_bg`；通用件放 `Common/Parts/`，layout 写 `"sprite": "Common/btn_close.png"`
 
 也可按槽位单独 GenerateImage；文件名与 `layout.sprite` 一致，写入 `Parts/`：
 
 | 槽位示例 | 提示要点 |
 |----------|----------|
-| `panel_bg.png` | 圆角卡牌底板，九宫格友好，透明底，无文字 |
+| `panel_bg.png` | 圆角卡牌底板，透明底，无文字（勿默认九宫格） |
 | `btn_primary.png` | 主按钮空壳，粗黑描边，透明底，无文字 |
 | `btn_secondary.png` | 次按钮空壳 |
 | `logo_potato.png` | 小徽章土豆 Logo，透明底 |
@@ -91,7 +117,7 @@ UI 组件 style lock：
 ```text
 Style lock: flat badge UI chrome, thick uniform pure-black single outline,
 flat 3-5 colors, transparent background, no text, no cream fringe on edges,
-nine-slice friendly margins, centered, game UI sprite.
+centered, game UI sprite. Do not assume nine-slice.
 ```
 
 占位裁切（可选）：
@@ -121,5 +147,5 @@ Agent **不**依赖 Unity MCP。保证 JSON/PNG 齐套后提示用户：
 - [ ] structure / layout 节点 id 对齐
 - [ ] Parts 透明底干净，文件名匹配 layout
 - [ ] Prefab Hierarchy 与 structure 一致
-- [ ] 九宫格节点在拉大后四角不糊
+- [ ] 未擅自开九宫格（仅用户点名的节点可为 Sliced）
 - [ ] 文案来自 TMP，不烙在 PNG 上
