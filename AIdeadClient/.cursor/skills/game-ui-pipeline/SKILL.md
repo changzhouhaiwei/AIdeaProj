@@ -68,7 +68,16 @@ blocky geometric UI panels and buttons readable at small size.
 
 ### 4. 出 Parts
 
-**优先按槽位单独 GenerateImage**（透明底），文件名与 `layout.sprite` 一致，写入 `Parts/`：
+**优先绿幕生图再 chroma**（比假透明白底/棋盘格可靠）：
+
+1. 生到 `Raw_Green/`，背景写死 `solid flat pure chroma-key green #00FF00`（禁止棋盘格/白底）  
+2. 若零件本身是绿色（如绿开关），改用 **品红幕 `#FF00FF`**，避免抠掉本体  
+3. `python Tools/UI/chroma_green.py <raw.png> --out Parts/<name>.png --key green|magenta`  
+4. **按 layout 缩到设计像素**（否则 Unity `SetNativeSize` 会按贴图像素暴大）：  
+   `python Tools/UI/resize_parts_to_layout.py Assets/Art/UI/<ScreenId>/layout.json`  
+5. 列表行尽量不挂 `row_bg` 贴图，减少透明层叠
+
+也可按槽位单独 GenerateImage；文件名与 `layout.sprite` 一致，写入 `Parts/`：
 
 | 槽位示例 | 提示要点 |
 |----------|----------|
