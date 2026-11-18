@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212fe9b33c54bfb459f427926b948b7e, type: 3}
+  m_Name: 3
+  m_EditorClassIdentifier: 
+  tilebaseId: 3
+  theme: bubble
+  tileBase: {fileID: 21300000, guid: e3e0353896228814dafefa0f62be8b8d, type: 3}
+  unknown: {fileID: 21300000, guid: 28dfb1ad44b43b84a9ed1f2f68b00d13, type: 3}
+  collectSound: {fileID: 8300000, guid: 62ae9bffefa5d2a44999a167b774a819, type: 3}
+  trail: {fileID: 6299939010940368805, guid: 8301c851da2199c449e2deaca681ec5e, type: 3}
+  brokenMat: {fileID: 2100000, guid: 46aacdeea789d8648bfca2ab2a386a8c, type: 2}
+  brokenEffect: {fileID: 8306180905272072840, guid: 3565dc0faee7d5a4d8e5e6d0dbcc67b9,
+    type: 3}
+  brokenSound: {fileID: 8300000, guid: f5422a26f05570049b118fcc8be4e858, type: 3}
+  combo5Effect: {fileID: 6095675341134302652, guid: a65465426ef37d54c934dd865f91d280,
+    type: 3}
+  combo5Sound: {fileID: 8300000, guid: 6b38d9184111e2d4996571a50538e9db, type: 3}
+  column: {fileID: 21300000, guid: e2cf9b9fa26645c419cb3a452c235b57, type: 3}
+  columnBoxCover: {fileID: 21300000, guid: 719029a12197e584d82c8a60c154bba2, type: 3}
+  slot: {fileID: 21300000, guid: eba175a3b2b2710498f0a8e5cff393a1, type: 3}
+  winEffect: {fileID: 4562474462877185918, guid: 3030c3e1b3f046a4e8424cd8fa17f101,
+    type: 3}
+  winTitle: {fileID: 0}
+  winGift: {fileID: 0}
+  winCelebrateEffect: {fileID: 8090901233495750454, guid: 7164b1a0f0ac527479ab6e1ac55ec123,
+    type: 3}
+  failEffect: {fileID: 8043712176670985748, guid: f1111e32f6d7228459670c2434718b1d,
+    type: 3}
+  failClock: {fileID: 11400000, guid: 3fdb996ec5a2ad74da949226c12a365d, type: 2}
+  failSound: {fileID: 8300000, guid: 9a18c0210c04bc64789f92ed752c5dd9, type: 3}
+  mainBg: {fileID: 21300000, guid: a65843886353ddd4b8c4814e0405d494, type: 3}
+  levelBg: {fileID: 21300000, guid: 7a393764a8528424f8f55e512fd8aa48, type: 3}
+  button: {fileID: 21300000, guid: 016fc725ac7c68b489d1c96ab5377a89, type: 3}
+  buttonAppearMaterial: {fileID: 2100000, guid: 9a1e5dba49478c94694780960bf63005,
+    type: 2}
+  buttonClickVfx: {fileID: 3534261089660796610, guid: 7a2f450fec0671e469d74d70abf7e37d,
+    type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 7373520b19d9eae45b2820e1d616611a, type: 3}

@@ -1,0 +1,12 @@
+Pool_ZZ.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+images/SH/Smoke013R
+bounds:2,2,225,252
+offsets:24,4,256,256
+images/bw01
+bounds:2,256,492,247
+offsets:0,117,500,500
+images/taizi
+bounds:496,204,326,299

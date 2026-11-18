@@ -1,0 +1,13 @@
+miaobiao.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+base
+bounds:0,138,309,370
+offsets:2,1,312,372
+hong
+bounds:309,254,254,254
+hong1
+bounds:563,254,254,254
+lan1
+bounds:309,0,254,254

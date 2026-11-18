@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f66be003df073974f91ad43bc08974b3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - mobileSsdShader
+  - {fileID: 4800000, guid: c8d12adcee749c344b8117cf7c7eb912, type: 3}
+  - ssdShader
+  - {fileID: 4800000, guid: 14eb328de4b8eb245bb7cea29e4ac00b, type: 3}
+  - distanceFieldShader
+  - {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

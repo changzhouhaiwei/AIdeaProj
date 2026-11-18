@@ -1,0 +1,173 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using FishFramework;
+using SuperScrollView;
+
+public class MainUIBase : UIWidget
+{
+    public override PanelLayer Layer { set; get; }
+    protected override string PrefabPath => "Assets/CABRes/Prefabs/Home/Main/MainUI.prefab";
+    
+	protected RectTransform safeAreaBg;
+	protected TButton headBg;
+	protected Image headIcon;
+	protected TextMeshProUGUI lvText;
+	protected RectTransform playerHeadBg;
+	protected TextMeshProUGUI playerName;
+	protected Image expImageBar;
+	protected TextMeshProUGUI powerText;
+	protected TButton taskButton;
+	protected RedDotUI taskRedDotUI;
+	protected TButton bagButton;
+	protected TButton rankButton;
+	protected RectTransform menuBg;
+	protected TButton mailButton;
+	protected TButton noticeButton;
+	protected TButton menuButton;
+	protected RectTransform stageBg;
+	protected Image stageImage;
+	protected TextMeshProUGUI stageText;
+	protected TextMeshProUGUI maxDayText;
+	protected TButton leftButton;
+	protected TButton rightButton;
+	protected Image sxImage;
+	protected Image dayImageBar;
+	protected UIWidgetBehaviour stageBoxUI_1;
+	protected UIWidgetBehaviour stageBoxUI_2;
+	protected UIWidgetBehaviour stageBoxUI_3;
+	protected TButton offlineRewardButton;
+	protected TButton fightButton;
+	protected TextMeshProUGUI staminaText;
+	protected TButton lotteryButton;
+	protected TButton warOrderBtn;
+	protected RedDotUI warOrderRedDotUI;
+	protected RedDotUI mailRedDotUI;
+	protected RedDotUI menuBgDotUI;
+	protected TButton activityButton;
+	protected TButton discountsButton;
+	protected TButton fristTopUpButton;
+	protected TButton topUpButton;
+
+    protected override void OnBindCompsAndEvents() 
+    {
+		safeAreaBg = viewBehaviour.GetComponentByIndexs<RectTransform>(0, 0);
+		headBg = viewBehaviour.GetComponentByIndexs<TButton>(1, 0);
+		headIcon = viewBehaviour.GetComponentByIndexs<Image>(2, 0);
+		lvText = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(3, 0);
+		playerHeadBg = viewBehaviour.GetComponentByIndexs<RectTransform>(4, 0);
+		playerName = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(5, 0);
+		expImageBar = viewBehaviour.GetComponentByIndexs<Image>(6, 0);
+		powerText = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(7, 0);
+		taskButton = viewBehaviour.GetComponentByIndexs<TButton>(8, 0);
+		taskRedDotUI = viewBehaviour.GetComponentByIndexs<RedDotUI>(9, 0);
+		bagButton = viewBehaviour.GetComponentByIndexs<TButton>(10, 0);
+		rankButton = viewBehaviour.GetComponentByIndexs<TButton>(11, 0);
+		menuBg = viewBehaviour.GetComponentByIndexs<RectTransform>(12, 0);
+		mailButton = viewBehaviour.GetComponentByIndexs<TButton>(13, 0);
+		noticeButton = viewBehaviour.GetComponentByIndexs<TButton>(14, 0);
+		menuButton = viewBehaviour.GetComponentByIndexs<TButton>(15, 0);
+		stageBg = viewBehaviour.GetComponentByIndexs<RectTransform>(16, 0);
+		stageImage = viewBehaviour.GetComponentByIndexs<Image>(17, 0);
+		stageText = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(18, 0);
+		maxDayText = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(19, 0);
+		leftButton = viewBehaviour.GetComponentByIndexs<TButton>(20, 0);
+		rightButton = viewBehaviour.GetComponentByIndexs<TButton>(21, 0);
+		sxImage = viewBehaviour.GetComponentByIndexs<Image>(22, 0);
+		dayImageBar = viewBehaviour.GetComponentByIndexs<Image>(23, 0);
+		stageBoxUI_1 = viewBehaviour.GetComponentByIndexs<UIWidgetBehaviour>(24, 0);
+		stageBoxUI_2 = viewBehaviour.GetComponentByIndexs<UIWidgetBehaviour>(25, 0);
+		stageBoxUI_3 = viewBehaviour.GetComponentByIndexs<UIWidgetBehaviour>(26, 0);
+		offlineRewardButton = viewBehaviour.GetComponentByIndexs<TButton>(27, 0);
+		fightButton = viewBehaviour.GetComponentByIndexs<TButton>(28, 0);
+		staminaText = viewBehaviour.GetComponentByIndexs<TextMeshProUGUI>(29, 0);
+		lotteryButton = viewBehaviour.GetComponentByIndexs<TButton>(30, 0);
+		warOrderBtn = viewBehaviour.GetComponentByIndexs<TButton>(31, 0);
+		warOrderRedDotUI = viewBehaviour.GetComponentByIndexs<RedDotUI>(32, 0);
+		mailRedDotUI = viewBehaviour.GetComponentByIndexs<RedDotUI>(33, 0);
+		menuBgDotUI = viewBehaviour.GetComponentByIndexs<RedDotUI>(34, 0);
+		activityButton = viewBehaviour.GetComponentByIndexs<TButton>(35, 0);
+		discountsButton = viewBehaviour.GetComponentByIndexs<TButton>(36, 0);
+		fristTopUpButton = viewBehaviour.GetComponentByIndexs<TButton>(37, 0);
+		topUpButton = viewBehaviour.GetComponentByIndexs<TButton>(38, 0);
+
+		BindEvent(headBg);
+		BindEvent(taskButton);
+		BindEvent(bagButton);
+		BindEvent(rankButton);
+		BindEvent(mailButton);
+		BindEvent(noticeButton);
+		BindEvent(menuButton);
+		BindEvent(leftButton);
+		BindEvent(rightButton);
+		BindEvent(offlineRewardButton);
+		BindEvent(fightButton);
+		BindEvent(lotteryButton);
+		BindEvent(warOrderBtn);
+		BindEvent(activityButton);
+		BindEvent(discountsButton);
+		BindEvent(fristTopUpButton);
+		BindEvent(topUpButton);
+	}
+
+    protected override void OnUnbindCompsAndEvents() 
+    {
+		UnbindEvent(headBg);
+		UnbindEvent(taskButton);
+		UnbindEvent(bagButton);
+		UnbindEvent(rankButton);
+		UnbindEvent(mailButton);
+		UnbindEvent(noticeButton);
+		UnbindEvent(menuButton);
+		UnbindEvent(leftButton);
+		UnbindEvent(rightButton);
+		UnbindEvent(offlineRewardButton);
+		UnbindEvent(fightButton);
+		UnbindEvent(lotteryButton);
+		UnbindEvent(warOrderBtn);
+		UnbindEvent(activityButton);
+		UnbindEvent(discountsButton);
+		UnbindEvent(fristTopUpButton);
+		UnbindEvent(topUpButton);
+
+		safeAreaBg = null;
+		headBg = null;
+		headIcon = null;
+		lvText = null;
+		playerHeadBg = null;
+		playerName = null;
+		expImageBar = null;
+		powerText = null;
+		taskButton = null;
+		taskRedDotUI = null;
+		bagButton = null;
+		rankButton = null;
+		menuBg = null;
+		mailButton = null;
+		noticeButton = null;
+		menuButton = null;
+		stageBg = null;
+		stageImage = null;
+		stageText = null;
+		maxDayText = null;
+		leftButton = null;
+		rightButton = null;
+		sxImage = null;
+		dayImageBar = null;
+		stageBoxUI_1 = null;
+		stageBoxUI_2 = null;
+		stageBoxUI_3 = null;
+		offlineRewardButton = null;
+		fightButton = null;
+		staminaText = null;
+		lotteryButton = null;
+		warOrderBtn = null;
+		warOrderRedDotUI = null;
+		mailRedDotUI = null;
+		menuBgDotUI = null;
+		activityButton = null;
+		discountsButton = null;
+		fristTopUpButton = null;
+		topUpButton = null;
+	}
+}

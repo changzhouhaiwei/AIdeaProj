@@ -1,0 +1,7020 @@
+{
+  "entries": [
+    {
+      "key": "GP201/02_01_02_01_01/94490314",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 94490314,
+      "difficulty": 57.0,
+      "raw": "5;6:.;5.61;6.6650.1,1;2.25520;0.00250;1.1116.2,1;7.77725;6.77261.1,1.3,1;4.44446;8.88886;3.33364.3,1;.83366",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/38954316",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 38954316,
+      "difficulty": 57.0,
+      "raw": "5;6:.;4.06;0.0042.1,1;3.34432;2.22342;6.6660.2,1;8.88834;0.88306.1,1.3,1;1.11110;5.55550;7.77701.3,1;.57700",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/24643523",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 24643523,
+      "difficulty": 56.0,
+      "raw": "5;6:.;6.48;4.4463.1,1;1.16613;3.33163;8.8884.2,1;2.22216;4.22148.1,1.3,1;7.77774;0.00004;5.55547.3,1;.05544",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/16513460",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 16513460,
+      "difficulty": 59.0,
+      "raw": "5;6:.;3.34;8.0380.1,1;7.78870;0.00783;4.4443.2,1;5.55578;3.55734.1,1.3,1;1.11113;6.66663;2.22231.3,1;.62233",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/95607573",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 95607573,
+      "difficulty": 56.0,
+      "raw": "5;6:.;7.34;1.17661;3.3316.1,1;6.66717;4.4443.2,1;0.00071;3.00734.1,1.3,1;5.55553;8.88883;2.22235.3,1;.82233",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/81475664",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 81475664,
+      "difficulty": 53.0,
+      "raw": "5;6:.20;7.75;5.5523.1,1;2.273;3.33723;0.0005.2,1;6.66672;5.66750.1,1.3,1;1.11115;8.88885;4.44451.3,1;.84455",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/75822845",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 75822845,
+      "difficulty": 55.0,
+      "raw": "5;6:.;0.015;3.0305.1,1;1.1338;5.55105;8.8883.2,1;4.44410;3.44138.1,1.3,1;6.66663;7.77773;2.22236.3,1;.72233",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/12581575",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 12581575,
+      "difficulty": 57.0,
+      "raw": "5;6:.;1.24;2.2215.1,1;8.81185;5.55815;4.4442.2,1;3.33381;2.33824.1,1.3,1;6.66662;7.77772;0.00026.3,1;.70022",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/65507458",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 65507458,
+      "difficulty": 56.0,
+      "raw": "5;6:.;6.38;3.3346.1,1;4.46774;7.77647;8.8883.2,1;0.00064;3.00638.1,1.3,1;5.55553;2.22223;1.11135.3,1;.21133",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/33995548",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 33995548,
+      "difficulty": 59.0,
+      "raw": "5;6:.;3.64;6.6637.1,1;1.13317;7.77137;4.4446.2,1;8.88813;6.88164.1,1.3,1;5.55556;2.22226;0.00065.3,1;.20066",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/56519141",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 56519141,
+      "difficulty": 57.0,
+      "raw": "5;6:.;3.54;5.5538.1,1;8.88738;7.73378;4.4445.2,1;6.66673;5.66754.1,1.3,1;2.22225;1.11115;0.00052.3,1;.10055",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/20923909",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 20923909,
+      "difficulty": 56.0,
+      "raw": "5;6:.;6.43;4.4468.1,1;7.76678;8.88768;3.3334.2,1;5.55576;4.55743.1,1.3,1;1.11114;2.22224;0.00041.3,1;.20044",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/9364969",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 9364969,
+      "difficulty": 55.0,
+      "raw": "5;6:.05;2.23;0.0034.1,1;3.423;4.44234;5.5550.2,1;6.66623;0.66205.1,1.3,1;1.11110;7.77770;8.88801.3,1;.78800",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/21030315",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 21030315,
+      "difficulty": 55.0,
+      "raw": "5;6:.;7.13;5.57752;1.1171.1,1;2.22572;3.3332.2,1;8.88857;1.88513.1,1.3,1;4.44441;6.66661;0.00014.3,1;.60011",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/1899162",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 1899162,
+      "difficulty": 59.0,
+      "raw": "5;6:.;4.01;0.0045.1,1;6.64465;5.55645;1.0111.2,1;8.88864;0.88601.1,1.3,1;2.22220;7.77770;3.33302.3,1;.73300",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/90459870",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 90459870,
+      "difficulty": 55.0,
+      "raw": "5;6:.;0.63;6.6602.1,1;4.40042;2.22402;3.3336.2,1;7.77740;6.77463.1,1.3,1;8.88886;1.11116;5.55568.3,1;.15566",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/8169905",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 8169905,
+      "difficulty": 56.0,
+      "raw": "5;6:.;2.34;3.3381.1,1;8.82118;1.11282;4.4443.2,1;0.00028;3.00234.1,1.3,1;6.66663;7.77773;5.55536.3,1;.75533",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/23327860",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 23327860,
+      "difficulty": 57.0,
+      "raw": "5;6:.;3.16;1.1138.1,1;0.03308;8.88038;6.6661.2,1;5.55503;1.55016.1,1.3,1;7.77771;2.22221;4.44417.3,1;.24411",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/20513052",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 20513052,
+      "difficulty": 52.0,
+      "raw": "5;6:.;4.462;6.11556.1,1;5.5542.1,1;2.22642;1.114;3.33364;5.33651.1,1.3,1;7.77775;0.00005;8.88857.3,1;.08855",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/55231697",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 55231697,
+      "difficulty": 56.0,
+      "raw": "5;6:.;6.05;0.0063.1,1;1.16613;3.33163;5.5550.2,1;2.22216;0.22105.1,1.3,1;8.88880;4.44440;7.77708.3,1;.47700",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": true
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 5,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": true
+            },
+            {
+              "color": 8,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    },
+    {
+      "key": "GP201/02_01_02_01_01/25290970",
+      "group": "GP201",
+      "pool": "02_01_02_01_01",
+      "entryId": 25290970,
+      "difficulty": 39.0,
+      "raw": "5;6:.;7.773.1,1;1.117;4.4733.0,1;7.73744.0,1;3.34411.2,1;0.00007;5.55577;2.27550;8.82222;6.68661;.88866",
+      "capacity": 5,
+      "boardCount": 6,
+      "groupsTotal": 10,
+      "initial": [
+        {
+          "targetColor": -1,
+          "beads": [],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 1,
+          "beads": [
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 4,
+          "beads": [
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 3,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 7,
+          "beads": [
+            {
+              "color": 7,
+              "hidden": true
+            },
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 3,
+          "beads": [
+            {
+              "color": 3,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": false
+            },
+            {
+              "color": 4,
+              "hidden": true
+            },
+            {
+              "color": 1,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ],
+      "incoming": [
+        {
+          "targetColor": 0,
+          "beads": [
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 5,
+          "beads": [
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 2,
+          "beads": [
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 7,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 5,
+              "hidden": false
+            },
+            {
+              "color": 0,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 8,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            },
+            {
+              "color": 2,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": 6,
+          "beads": [
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 1,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        },
+        {
+          "targetColor": -1,
+          "beads": [
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 8,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            },
+            {
+              "color": 6,
+              "hidden": false
+            }
+          ],
+          "lock": {
+            "kind": "none",
+            "count": 0,
+            "color": -1
+          }
+        }
+      ]
+    }
+  ]
+}

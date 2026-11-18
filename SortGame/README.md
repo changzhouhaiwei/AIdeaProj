@@ -9,7 +9,7 @@
 | `SortAndroid` | Android 工程壳，没有 iOS |
 | `docs` | 目录和框架说明 |
 
-玩法目录是空的，不包含 Tile 的关卡和棋盘。业务模块在 `SortClient/Assets/Features`：
+编辑器从 `SortClient/Assets/CABRes/ScenesInBuild/StartScene.unity` 播放，会进登录再进 `GameScene`。关卡块数据没有迁。业务模块在 `SortClient/Assets/Features`：
 
 1. 连胜活动
 2. 七日签到

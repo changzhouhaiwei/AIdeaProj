@@ -1,0 +1,9 @@
+dj_1.png
+size:256,128
+filter:Linear,Linear
+pma:true
+eff_circle2
+bounds:89,34,47,47
+lightBall_y2
+bounds:2,2,85,79
+offsets:6,7,95,94

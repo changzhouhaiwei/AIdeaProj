@@ -1,0 +1,82 @@
+[
+  {
+    "tilebaseId": 0,
+    "TileBase": "TileBase_Jade",
+    "Unknown": "TileBase_Jade_unknown",
+    "Photo": "TileBase_Jade",
+    "mat": "TilePar_Marble03",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 1,
+    "TileBase": "TileBase_fritillaria",
+    "Unknown": "TileBase_fritillaria_unknown",
+    "Photo": "TileBase_fritillaria",
+    "mat": "TilePar_Marble02",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 2,
+    "TileBase": "TileBase_IceCrystals",
+    "Unknown": "TileBase_IceCrystals_unknown",
+    "Photo": "TileBase_IceCrystals",
+    "mat": "TilePar_Marble04",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 3,
+    "TileBase": "TileBase_Marble",
+    "Unknown": "TileBase_Marble_unknown",
+    "Photo": "TileBase_Marble",
+    "mat": "TilePar_Marble01",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 4,
+    "TileBase": "TileBase_PineWood",
+    "Unknown": "TileBase_PineWood_unknown",
+    "Photo": "TileBase_PineWood",
+    "mat": "TilePar_wood01",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 5,
+    "TileBase": "TileBase_Mithril",
+    "Unknown": "TileBase_Mithril_unknow",
+    "Photo": "TileBase_Mithril",
+    "mat": "TilePar_Mithril01",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 6,
+    "TileBase": "TileBase_Rock",
+    "Unknown": "TileBase_Rock_unknow",
+    "Photo": "TileBase_Rock",
+    "mat": "TilePar_Rock01",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  },
+  {
+    "tilebaseId": 7,
+    "TileBase": "TileBase_Cookie",
+    "Unknown": "TileBase_Cookie_unknow",
+    "Photo": "TileBase_Cookie",
+    "mat": "TilePar_Cookie01",
+    "effect_prefab": "",
+    "Effect": "",
+    "Effect_collect": ""
+  }
+]

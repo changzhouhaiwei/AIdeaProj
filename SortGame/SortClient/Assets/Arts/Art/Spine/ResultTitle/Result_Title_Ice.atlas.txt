@@ -1,0 +1,10 @@
+Result_Title_Ice.png
+size:1024,256
+filter:Linear,Linear
+pma:true
+Juan
+bounds:571,68,110,222
+rotate:90
+win_title_ice
+bounds:2,2,567,176
+offsets:0,1,567,183

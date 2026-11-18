@@ -1,0 +1,161 @@
+[
+  {
+    "id": 1,
+    "shopCellType": 1,
+    "name": "UIBundleTitle1",
+    "shopIcon": "",
+    "award": [
+      "4,1250",
+      "3,3",
+      "1,3",
+      "2,3",
+      "5,3"
+    ],
+    "discount": 45,
+    "bSpreadShow": 0,
+    "payDicIdGP": 11001,
+    "payDicIdIOS": 11001
+  },
+  {
+    "id": 2,
+    "shopCellType": 1,
+    "name": "UIBundleTitle2",
+    "shopIcon": "",
+    "award": [
+      "4,3500",
+      "3,5",
+      "1,5",
+      "2,5",
+      "5,5"
+    ],
+    "discount": 55,
+    "bSpreadShow": 0,
+    "payDicIdGP": 11002,
+    "payDicIdIOS": 11002
+  },
+  {
+    "id": 3,
+    "shopCellType": 1,
+    "name": "UIBundleTitle3",
+    "shopIcon": "",
+    "award": [
+      "4,7500",
+      "3,10",
+      "1,10",
+      "2,10",
+      "5,10"
+    ],
+    "discount": 55,
+    "bSpreadShow": 0,
+    "payDicIdGP": 11003,
+    "payDicIdIOS": 11003
+  },
+  {
+    "id": 4,
+    "shopCellType": 1,
+    "name": "UIBundleTitle4",
+    "shopIcon": "",
+    "award": [
+      "4,15000",
+      "3,25",
+      "1,25",
+      "2,25",
+      "5,25"
+    ],
+    "discount": 65,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11004,
+    "payDicIdIOS": 11004
+  },
+  {
+    "id": 5,
+    "shopCellType": 2,
+    "name": "UIBundleDesc5",
+    "shopIcon": "shop_1001",
+    "award": [
+      "4,300"
+    ],
+    "discount": 0,
+    "bSpreadShow": 0,
+    "payDicIdGP": 11005,
+    "payDicIdIOS": 11005
+  },
+  {
+    "id": 6,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_1",
+    "award": [
+      "4,250"
+    ],
+    "discount": 0,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11011,
+    "payDicIdIOS": 11011
+  },
+  {
+    "id": 7,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_2",
+    "award": [
+      "4,750"
+    ],
+    "discount": 0,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11010,
+    "payDicIdIOS": 11010
+  },
+  {
+    "id": 8,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_3",
+    "award": [
+      "4,1500"
+    ],
+    "discount": 0,
+    "bSpreadShow": 0,
+    "payDicIdGP": 11009,
+    "payDicIdIOS": 11009
+  },
+  {
+    "id": 9,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_4",
+    "award": [
+      "4,3500"
+    ],
+    "discount": 0,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11008,
+    "payDicIdIOS": 11008
+  },
+  {
+    "id": 10,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_5",
+    "award": [
+      "4,7000"
+    ],
+    "discount": 0,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11007,
+    "payDicIdIOS": 11007
+  },
+  {
+    "id": 11,
+    "shopCellType": 3,
+    "name": "",
+    "shopIcon": "shop_jb_5",
+    "award": [
+      "4,15000"
+    ],
+    "discount": 0,
+    "bSpreadShow": 1,
+    "payDicIdGP": 11006,
+    "payDicIdIOS": 11006
+  }
+]

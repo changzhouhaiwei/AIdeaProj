@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "ranking": "1_5",
+    "FollowRate": "",
+    "IdleRate": ""
+  },
+  {
+    "id": 2,
+    "ranking": "6_15",
+    "FollowRate": "1,2,3",
+    "IdleRate": "0.10"
+  },
+  {
+    "id": 3,
+    "ranking": "16_49",
+    "FollowRate": "0",
+    "IdleRate": "0"
+  }
+]

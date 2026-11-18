@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FishTilePlay;
 using UnityEngine;
 
 namespace FishFramework
@@ -65,15 +66,17 @@ namespace FishFramework
             }
         }
 
-        // 系统通知内存偏紧。同一次前台只卸一次，避免来回切后台反复扫资源。
+        // 系统通知内存偏紧。局内不卸，避免扫资源卡住正在进行的对局。同一次前台只做一次。
         private void OnLowMemory()
         {
-            if (_lowMemoryReleased)
+            if (_lowMemoryReleased || LevelDirector.IsLevelLoaded)
             {
                 return;
             }
 
             _lowMemoryReleased = true;
+            TileSkinCatalog.ReleaseCachedAssets();
+            ThemeUiApplier.ReleaseCachedPacks();
             ResourceModule.ReleaseAllReleasableMemory();
         }
     }

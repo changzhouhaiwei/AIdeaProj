@@ -1,0 +1,52 @@
+{
+  "GP101": {
+    "records": 50529,
+    "difficultyMin": 18.0,
+    "difficultyMax": 1656.0,
+    "capacities": {
+      "4": 20667,
+      "5": 17040,
+      "6": 12822
+    },
+    "boardCounts": {
+      "6": 28567,
+      "7": 21962
+    },
+    "withMystery": 23782,
+    "withLocks": 30412
+  },
+  "GP201": {
+    "records": 50525,
+    "difficultyMin": 18.0,
+    "difficultyMax": 1688.0,
+    "capacities": {
+      "4": 20666,
+      "5": 17037,
+      "6": 12822
+    },
+    "boardCounts": {
+      "6": 28564,
+      "7": 21961
+    },
+    "withMystery": 23779,
+    "withLocks": 30411
+  },
+  "MF1": {
+    "records": 649,
+    "difficultyMin": 2.0,
+    "difficultyMax": 650.0,
+    "capacities": {
+      "3": 1,
+      "4": 229,
+      "5": 319,
+      "6": 100
+    },
+    "boardCounts": {
+      "6": 335,
+      "7": 314
+    },
+    "withMystery": 447,
+    "withLocks": 266
+  },
+  "uniqueRawLayouts": 51178
+}

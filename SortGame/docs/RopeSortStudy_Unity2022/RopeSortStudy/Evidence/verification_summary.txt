@@ -1,0 +1,3 @@
+Pool layouts: Validated=101703 Invalid=0 MoveUndoChecks=11361
+Fixed layouts: Validated=16 Invalid=0 MoveUndoChecks=3
+Unity 2022.3.62f3: compile and scene generation OK; six pool-boundary load tests OK.

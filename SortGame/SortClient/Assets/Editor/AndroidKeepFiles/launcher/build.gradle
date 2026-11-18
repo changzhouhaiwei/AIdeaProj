@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+dependencies {
+    implementation project(':unityLibrary')
+}
+
+// 对齐 GameSdk BoM 5.8.1 / GMA 25.2.0，避免 mediation 拉飞版本
+configurations.configureEach {
+    resolutionStrategy {
+        force "com.google.android.gms:play-services-ads:25.2.0"
+        force "com.google.android.gms:play-services-ads-api:25.2.0"
+    }
+}
+
+android {
+    namespace "com.sofish.soeasytile.gp"
+    ndkPath "C:/Program Files/Unity/Hub/Editor/2022.3.62f3/Editor/Data/PlaybackEngines/AndroidPlayer/NDK"
+
+    compileSdk 36
+    buildToolsVersion '36.1.0'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 36
+        applicationId 'com.sofish.soeasytile.gp'
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        versionCode = ((project.findProperty('VERSION_CODE') ?: '39') as String).toInteger()
+        versionName = (project.findProperty('VERSION_NAME') ?: '1.0.38') as String
+    }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', '.bundle', '.unityexp'] + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    def releaseStoreFile = project.findProperty('RELEASE_STORE_FILE') as String
+    def releaseStorePassword = project.findProperty('RELEASE_STORE_PASSWORD') as String
+    def releaseKeyAlias = project.findProperty('RELEASE_KEY_ALIAS') as String
+    def releaseKeyPassword = project.findProperty('RELEASE_KEY_PASSWORD') as String
+    def useReleaseSigning = ((project.findProperty('USE_RELEASE_SIGNING') ?: 'false') as String).toBoolean()
+    def uploadCrashlyticsMapping = ((project.findProperty('UPLOAD_CRASHLYTICS_MAPPING') ?: 'false') as String).toBoolean()
+    def hasReleaseSigning = releaseStoreFile && releaseStorePassword && releaseKeyAlias && releaseKeyPassword && file(releaseStoreFile).exists()
+
+    signingConfigs {
+        release {
+            if (hasReleaseSigning) {
+                storeFile file(releaseStoreFile)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.debug
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled true
+            // Unity 按名字查找 game_view_content_description，shrinkResources 会把它裁掉，启动时 getString(0) 崩溃
+            shrinkResources false
+            // proguard-android.txt 包含 -dontoptimize，会导致 Google Play 显示优化率 0%
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig useReleaseSigning && hasReleaseSigning ? signingConfigs.release : signingConfigs.debug
+            firebaseCrashlytics {
+                mappingFileUploadEnabled uploadCrashlyticsMapping
+            }
+        }
+    }
+
+    packagingOptions {
+        doNotStrip '*/armeabi-v7a/*.so'
+        doNotStrip '*/arm64-v8a/*.so'
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+}

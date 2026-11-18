@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "config": 1,
+    "colorPick": 1,
+    "colorAllocate": "1"
+  },
+  {
+    "id": 2,
+    "config": 2,
+    "colorPick": 2,
+    "colorAllocate": "1,1"
+  },
+  {
+    "id": 3,
+    "config": 3,
+    "colorPick": 3,
+    "colorAllocate": "1,1,1"
+  },
+  {
+    "id": 4,
+    "config": 4,
+    "colorPick": 4,
+    "colorAllocate": "1,1,1,1"
+  },
+  {
+    "id": 5,
+    "config": 5,
+    "colorPick": 5,
+    "colorAllocate": "1,1,1,1,1"
+  },
+  {
+    "id": 6,
+    "config": 6,
+    "colorPick": 6,
+    "colorAllocate": "1,1,1,1,1,1"
+  },
+  {
+    "id": 7,
+    "config": 7,
+    "colorPick": 7,
+    "colorAllocate": "1,1,1,1,1,1,1"
+  },
+  {
+    "id": 8,
+    "config": 8,
+    "colorPick": 8,
+    "colorAllocate": "1,1,1,1,1,1,1,1"
+  },
+  {
+    "id": 9,
+    "config": 9,
+    "colorPick": 8,
+    "colorAllocate": "1,1,1,1,1,1,1,2"
+  },
+  {
+    "id": 10,
+    "config": 10,
+    "colorPick": 8,
+    "colorAllocate": "1,1,1,1,1,1,2,2"
+  },
+  {
+    "id": 11,
+    "config": 11,
+    "colorPick": 9,
+    "colorAllocate": "1,1,1,1,2,2,1,1,1"
+  },
+  {
+    "id": 12,
+    "config": 12,
+    "colorPick": 9,
+    "colorAllocate": "1,1,1,1,1,2,2,1,2"
+  },
+  {
+    "id": 13,
+    "config": 13,
+    "colorPick": 9,
+    "colorAllocate": "1,1,1,1,2,1,3,2,1"
+  },
+  {
+    "id": 14,
+    "config": 14,
+    "colorPick": 9,
+    "colorAllocate": "1,1,1,2,2,2,2,2,1"
+  },
+  {
+    "id": 15,
+    "config": 15,
+    "colorPick": 9,
+    "colorAllocate": "1,1,2,2,2,2,2,2,1"
+  },
+  {
+    "id": 16,
+    "config": 16,
+    "colorPick": 9,
+    "colorAllocate": "1,1,2,2,2,2,2,3,1"
+  },
+  {
+    "id": 17,
+    "config": 17,
+    "colorPick": 9,
+    "colorAllocate": "1,1,2,2,2,2,3,3,1"
+  },
+  {
+    "id": 18,
+    "config": 18,
+    "colorPick": 9,
+    "colorAllocate": "1,2,2,2,2,2,3,3,1"
+  },
+  {
+    "id": 19,
+    "config": 19,
+    "colorPick": 10,
+    "colorAllocate": "1,2,1,1,2,2,3,3,3,1"
+  },
+  {
+    "id": 20,
+    "config": 20,
+    "colorPick": 10,
+    "colorAllocate": "1,2,1,2,2,2,3,3,3,1"
+  },
+  {
+    "id": 21,
+    "config": 21,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,1,3,2,2,3,3,1"
+  },
+  {
+    "id": 22,
+    "config": 22,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,1,3,2,3,3,3,1"
+  },
+  {
+    "id": 23,
+    "config": 23,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,2,3,3,3,1"
+  },
+  {
+    "id": 24,
+    "config": 24,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,2,3,3,4,1"
+  },
+  {
+    "id": 25,
+    "config": 25,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,2,3,4,4,1"
+  },
+  {
+    "id": 26,
+    "config": 26,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,3,3,4,4,1"
+  },
+  {
+    "id": 27,
+    "config": 27,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,4,3,4,4,1"
+  },
+  {
+    "id": 28,
+    "config": 28,
+    "colorPick": 10,
+    "colorAllocate": "2,2,2,2,3,4,4,4,4,1"
+  },
+  {
+    "id": 29,
+    "config": 29,
+    "colorPick": 11,
+    "colorAllocate": "2,2,2,2,3,4,4,5,3,1,1"
+  },
+  {
+    "id": 30,
+    "config": 30,
+    "colorPick": 11,
+    "colorAllocate": "2,2,2,2,4,3,3,5,5,1,1"
+  }
+]

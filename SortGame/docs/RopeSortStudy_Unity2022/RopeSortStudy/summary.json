@@ -1,0 +1,14 @@
+{
+  "GP101": {
+    "pools": 416,
+    "layouts": 50529
+  },
+  "GP201": {
+    "pools": 425,
+    "layouts": 50525
+  },
+  "MF1": {
+    "pools": 1,
+    "layouts": 649
+  }
+}

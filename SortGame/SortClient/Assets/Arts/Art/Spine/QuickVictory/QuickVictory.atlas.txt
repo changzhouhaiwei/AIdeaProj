@@ -1,0 +1,42 @@
+QuickVictory.png
+	size: 1024, 1024
+	filter: Linear, Linear
+	pma: true
+d
+	bounds: 2, 2, 469, 313
+	offsets: 29, 3, 528, 319
+d_blur01
+	bounds: 2, 631, 489, 311
+	offsets: 19, 4, 528, 319
+d_blur02
+	bounds: 2, 317, 478, 312
+	offsets: 24, 4, 528, 319
+quick
+	bounds: 584, 354, 225, 100
+	offsets: 27, 19, 279, 137
+quick_blur01
+	bounds: 482, 374, 255, 100
+	offsets: 12, 19, 279, 137
+	rotate: 90
+quick_blur02
+	bounds: 473, 75, 240, 100
+	offsets: 19, 19, 279, 137
+	rotate: 90
+vic
+	bounds: 493, 638, 394, 100
+	offsets: 54, 14, 502, 128
+vic_blur01
+	bounds: 493, 842, 424, 100
+	offsets: 39, 14, 502, 128
+vic_blur02
+	bounds: 493, 740, 409, 100
+	offsets: 46, 14, 502, 128
+xm
+	bounds: 798, 456, 191, 180
+	offsets: 10, 30, 212, 239
+xm_blur01
+	bounds: 584, 456, 212, 180
+	offsets: 0, 30, 212, 239
+xm_blur02
+	bounds: 811, 274, 206, 180
+	offsets: 2, 30, 212, 239

@@ -1,0 +1,13 @@
+wood_miaobiao_wood.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+base_flower
+bounds:0,127,358,381
+offsets:17,3,400,400
+hong
+bounds:358,254,254,254
+hong1
+bounds:612,254,254,254
+lan1
+bounds:358,0,254,254

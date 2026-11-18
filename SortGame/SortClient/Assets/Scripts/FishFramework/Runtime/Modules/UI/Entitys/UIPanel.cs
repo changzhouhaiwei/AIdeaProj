@@ -158,6 +158,8 @@ namespace FishFramework
 
         protected void CloseSelf(Action onFinish = null, bool willExcuteExtraAct = true)
         {
+            if (TileGameCore.AudioController.AudioClips != null)
+                TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.buttonSound);
             GameModule.UI.ClosePanel(panelId, onFinish);
 
             if (willExcuteExtraAct)
@@ -204,6 +206,8 @@ namespace FishFramework
 
         protected virtual void PlayOpenSound()
         {
+            if (!TileGameCore.AudioController.AudioClips.IsNull())
+                TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.buttonSound);
         }
 
         protected virtual void PlayCloseAnim(Action onFinish = null)

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "Rank": "Bronze",
+    "Robot": "R0_8|R1_34| R2_7"
+  },
+  {
+    "id": 2,
+    "Rank": "Silver",
+    "Robot": "R0_6|R1_33| R2_10"
+  },
+  {
+    "id": 3,
+    "Rank": "Gold",
+    "Robot": "R0_3|R2_18|R3_17|R4_11"
+  },
+  {
+    "id": 4,
+    "Rank": "Platinum",
+    "Robot": "R0_1|R2_20|R3_15|R4_13"
+  },
+  {
+    "id": 5,
+    "Rank": "Topaz",
+    "Robot": "R3_15| R4_11|R5_19| R6_4"
+  },
+  {
+    "id": 6,
+    "Rank": "Diamond",
+    "Robot": "R3_15| R4_10|R5_16| R6_8"
+  },
+  {
+    "id": 7,
+    "Rank": "Emerald",
+    "Robot": "R4_15| R5_15| R5_10| R7_5| R8_4"
+  },
+  {
+    "id": 8,
+    "Rank": "Challenger",
+    "Robot": "R4_14| R5_11| R6_15| R7_6| R8_4"
+  }
+]

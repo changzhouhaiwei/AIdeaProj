@@ -1,0 +1,13 @@
+bubble_miaobiao_bubble.png
+size:1024,512
+filter:Linear,Linear
+pma:true
+base_bubble
+bounds:0,138,340,370
+offsets:29,15,400,400
+hong
+bounds:340,254,254,254
+hong1
+bounds:594,254,254,254
+lan1
+bounds:340,0,254,254

@@ -1,0 +1,11 @@
+Pass_unlock.png
+size:256,64
+filter:Linear,Linear
+pma:true
+lock01
+bounds:134,32,51,29
+lock02
+bounds:73,13,59,48
+pass_lock_01
+bounds:2,2,59,69
+rotate:90

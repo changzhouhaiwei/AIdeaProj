@@ -1,0 +1,9 @@
+Result_TitleIn.png
+size:1024,256
+filter:Linear,Linear
+pma:true
+Juan
+bounds:575,53,110,222
+rotate:90
+win_title
+bounds:4,4,567,159

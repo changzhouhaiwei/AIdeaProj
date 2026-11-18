@@ -1,0 +1,181 @@
+[
+  {
+    "id": 1,
+    "priority": 100,
+    "rankMin": 11,
+    "rankMax": 9999,
+    "needRankImprove": -1,
+    "minImprove": 0,
+    "maxImprove": 1,
+    "compareTargetRank": 0,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "none",
+    "value1": "none",
+    "texts": [
+      "RankResultDes1",
+      "RankResultDes3_1",
+      "RankResultDes3_2",
+      "RankResultDes3_3"
+    ]
+  },
+  {
+    "id": 2,
+    "priority": 95,
+    "rankMin": 11,
+    "rankMax": 9999,
+    "needRankImprove": -1,
+    "minImprove": 2,
+    "maxImprove": 3,
+    "compareTargetRank": 0,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "none",
+    "value1": "none",
+    "texts": [
+      "RankResultDes3_1",
+      "RankResultDes3_2",
+      "RankResultDes3_3"
+    ]
+  },
+  {
+    "id": 3,
+    "priority": 90,
+    "rankMin": 11,
+    "rankMax": 9999,
+    "needRankImprove": -1,
+    "minImprove": 4,
+    "maxImprove": 999999,
+    "compareTargetRank": 0,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "lastRank",
+    "value1": "currentRank",
+    "texts": [
+      "RankResultDes2",
+      "RankResultDes3_1",
+      "RankResultDes3_2",
+      "RankResultDes3_3"
+    ]
+  },
+  {
+    "id": 4,
+    "priority": 80,
+    "rankMin": 4,
+    "rankMax": 5,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 3,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes4_1",
+      "RankResultDes4_2",
+      "RankResultDes4_3",
+      "RankResultDes4_5",
+      "RankResultDes4_6"
+    ]
+  },
+  {
+    "id": 5,
+    "priority": 79,
+    "rankMin": 6,
+    "rankMax": 6,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 3,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes4_1",
+      "RankResultDes4_2",
+      "RankResultDes4_3",
+      "RankResultDes4_5",
+      "RankResultDes4_6"
+    ]
+  },
+  {
+    "id": 6,
+    "priority": 78,
+    "rankMin": 7,
+    "rankMax": 10,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 6,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes4_1",
+      "RankResultDes4_2",
+      "RankResultDes4_3",
+      "RankResultDes4_4",
+      "RankResultDes4_5",
+      "RankResultDes4_6"
+    ]
+  },
+  {
+    "id": 7,
+    "priority": 70,
+    "rankMin": 2,
+    "rankMax": 3,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 1,
+    "minGapToTarget": -1,
+    "maxGapToTarget": -1,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes5_1",
+      "RankResultDes5_2",
+      "RankResultDes5_3"
+    ]
+  },
+  {
+    "id": 8,
+    "priority": 60,
+    "rankMin": 1,
+    "rankMax": 1,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 2,
+    "minGapToTarget": -1,
+    "maxGapToTarget": 10,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes6_1",
+      "RankResultDes6_2",
+      "RankResultDes7_1"
+    ]
+  },
+  {
+    "id": 9,
+    "priority": 50,
+    "rankMin": 1,
+    "rankMax": 1,
+    "needRankImprove": -1,
+    "minImprove": -1,
+    "maxImprove": -1,
+    "compareTargetRank": 2,
+    "minGapToTarget": 11,
+    "maxGapToTarget": -1,
+    "value0": "targetRankGap",
+    "value1": "none",
+    "texts": [
+      "RankResultDes7_2",
+      "RankResultDes7_3"
+    ]
+  }
+]

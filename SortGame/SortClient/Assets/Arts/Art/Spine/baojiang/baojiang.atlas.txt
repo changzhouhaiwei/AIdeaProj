@@ -1,0 +1,16 @@
+baojiang.png
+size:512,512
+filter:Linear,Linear
+pma:true
+BGL_1
+bounds:2,221,269,269
+offsets:11,12,293,293
+BGL_2
+bounds:2,2,207,217
+offsets:9,3,225,225
+BGL_p
+bounds:273,370,118,120
+offsets:4,4,128,128
+lightPoint_0
+bounds:211,181,34,38
+offsets:7,1,43,41

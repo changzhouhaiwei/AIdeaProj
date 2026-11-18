@@ -1,0 +1,34 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+include ':launcher', ':unityLibrary'
+
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        // 新 SDK（如 Bigo 5.9.x）镜像可能未同步 AAR，优先走官方源
+        google()
+        mavenCentral()
+
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven {
+            credentials {
+                username '68b54c3beed4a5bfee80b1fb'
+                password ']mo([alLjj)S'
+            }
+            url 'https://packages.aliyun.com/maven/repository/2098332-release-EeT20f'
+        }
+        maven { url 'https://artifact.bytedance.com/repository/pangle/' }
+        maven { url 'https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea' }
+        maven { url 'https://artifactory.bidmachine.io/bidmachine' } // BidMachine
+        flatDir {
+            dirs "${project(':unityLibrary').projectDir}/libs"
+        }
+    }
+}

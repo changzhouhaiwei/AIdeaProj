@@ -1,0 +1,562 @@
+[
+  {
+    "id": 1,
+    "progressValue": 4,
+    "addValue": 1,
+    "award": [
+      "4,25"
+    ]
+  },
+  {
+    "id": 2,
+    "progressValue": 4,
+    "addValue": 1,
+    "award": [
+      "4,25"
+    ]
+  },
+  {
+    "id": 3,
+    "progressValue": 4,
+    "addValue": 1,
+    "award": [
+      "4,25"
+    ]
+  },
+  {
+    "id": 4,
+    "progressValue": 8,
+    "addValue": 1,
+    "award": [
+      "4,30"
+    ]
+  },
+  {
+    "id": 5,
+    "progressValue": 12,
+    "addValue": 1,
+    "award": [
+      "4,35"
+    ]
+  },
+  {
+    "id": 6,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 7,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 8,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 9,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 10,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 11,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 12,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 13,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 14,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 15,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 16,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 17,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 18,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 19,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 20,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 21,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 22,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 23,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 24,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 25,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 26,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 27,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 28,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 29,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 30,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 31,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 32,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 33,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 34,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 35,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 36,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 37,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 38,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 39,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 40,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 41,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 42,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 43,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 44,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 45,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 46,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 47,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 48,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 49,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 50,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 51,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 52,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 53,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 54,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 55,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 56,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 57,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 58,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 59,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 60,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 61,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 62,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 63,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 64,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 65,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 66,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 67,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 68,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 69,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  },
+  {
+    "id": 70,
+    "progressValue": 15,
+    "addValue": 1,
+    "award": [
+      "4,40"
+    ]
+  }
+]

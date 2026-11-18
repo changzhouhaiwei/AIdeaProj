@@ -1,0 +1,7 @@
+Pool_ChrFall.png
+size:256,256
+filter:Linear,Linear
+pma:true
+images/SH/Smoke013R
+bounds:2,2,225,252
+offsets:24,4,256,256

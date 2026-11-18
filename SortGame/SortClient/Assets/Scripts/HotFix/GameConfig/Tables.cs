@@ -14,6 +14,43 @@ namespace cfg
    
 public sealed partial class Tables
 {
+    public Game.TbGameLeveConfigAndroid TbGameLeveConfigAndroid {get; }
+    public Game.TbGameLeveConfigIOS TbGameLeveConfigIOS {get; }
+    public Game.TbGameLevelTilesCfgAndroid TbGameLevelTilesCfgAndroid {get; }
+    public Game.TbGameLevelTilesCfgIOS TbGameLevelTilesCfgIOS {get; }
+    public Game.TbGameTileBaseControlCfg TbGameTileBaseControlCfg {get; }
+    public Game.TbTileBaseStyleCfg TbTileBaseStyleCfg {get; }
+    public Game.TbPayProductCfg TbPayProductCfg {get; }
+    public Game.TbGameBgShow TbGameBgShow {get; }
+    public Game.TbGameBgShowStyleCfg TbGameBgShowStyleCfg {get; }
+    public Game.TbLevelPassCfg TbLevelPassCfg {get; }
+    public Game.TbShopCfg TbShopCfg {get; }
+    public Game.TbShopCoinShowCfg TbShopCoinShowCfg {get; }
+    public Game.TbActivityCircleAwardCfg TbActivityCircleAwardCfg {get; }
+    public Game.TbCSVActivityCircleInfoCfg TbCSVActivityCircleInfoCfg {get; }
+    public Game.TbGoldTreeRankAwardCfg TbGoldTreeRankAwardCfg {get; }
+    public Game.TbCSVGoldTreeLeagueRankCfg TbCSVGoldTreeLeagueRankCfg {get; }
+    public Game.TbGoldTreeRobotCfg TbGoldTreeRobotCfg {get; }
+    public Game.TbCSVRobotNameCfg TbCSVRobotNameCfg {get; }
+    public Game.TbLevelAdRewardAndroid TbLevelAdRewardAndroid {get; }
+    public Game.TbLevelAdRewardIOS TbLevelAdRewardIOS {get; }
+    public Game.TbDailyVictoryRewardCfg TbDailyVictoryRewardCfg {get; }
+    public Game.TbAvatarFrameCfg TbAvatarFrameCfg {get; }
+    public Game.TbRandomRankTextCfg TbRandomRankTextCfg {get; }
+    public Game.TbGameTileOpenLevelCfg TbGameTileOpenLevelCfg {get; }
+    public Game.TbGameColorAllocateLevelCfg TbGameColorAllocateLevelCfg {get; }
+    public Game.TbGoldTreeRobotScoreRuleCfg TbGoldTreeRobotScoreRuleCfg {get; }
+    public Game.TbCSVGoldTreeLeagueRobotpoolCfg TbCSVGoldTreeLeagueRobotpoolCfg {get; }
+    public Game.TbCSVGoldTreeLeagueRobotEndGameRoCfg TbCSVGoldTreeLeagueRobotEndGameRoCfg {get; }
+    public Game.TbCSVGoldTreeLeagueRobotFullConfiCfg TbCSVGoldTreeLeagueRobotFullConfiCfg {get; }
+    public Game.TbGoldTreeRobotRankRewardCfg TbGoldTreeRobotRankRewardCfg {get; }
+    public Game.TbGameColorPriorityCfg TbGameColorPriorityCfg {get; }
+    public Game.TbPuppyAdventureStageCfg TbPuppyAdventureStageCfg {get; }
+    public Game.TbPuppyAdventureTimeCfg TbPuppyAdventureTimeCfg {get; }
+    public Game.TbPuppyAdventureEliminateCfg TbPuppyAdventureEliminateCfg {get; }
+    public Game.TbPiggyRewardCfg TbPiggyRewardCfg {get; }
+    public Game.TbCSVColorEggReward TbCSVColorEggReward {get; }
+    public Game.TbCSVColorEggLevel TbCSVColorEggLevel {get; }
     /// <summary>
     /// 连胜活动
     /// </summary>
@@ -34,29 +71,177 @@ public sealed partial class Tables
     public Tables(System.Func<string, JSONNode> loader)
     {
         var tables = new System.Collections.Generic.Dictionary<string, object>();
-        TbWinStreak = new Activity.TbWinStreak(loader("activity_tbwinstreak")); 
+        TbGameLeveConfigAndroid = new Game.TbGameLeveConfigAndroid(loader("game_tbgameleveconfigandroid")); 
+        tables.Add("Game.TbGameLeveConfigAndroid", TbGameLeveConfigAndroid);
+        TbGameLeveConfigIOS = new Game.TbGameLeveConfigIOS(loader("game_tbgameleveconfigios")); 
+        tables.Add("Game.TbGameLeveConfigIOS", TbGameLeveConfigIOS);
+        TbGameLevelTilesCfgAndroid = new Game.TbGameLevelTilesCfgAndroid(loader("game_tbgameleveltilescfgandroid")); 
+        tables.Add("Game.TbGameLevelTilesCfgAndroid", TbGameLevelTilesCfgAndroid);
+        TbGameLevelTilesCfgIOS = new Game.TbGameLevelTilesCfgIOS(loader("game_tbgameleveltilescfgios")); 
+        tables.Add("Game.TbGameLevelTilesCfgIOS", TbGameLevelTilesCfgIOS);
+        TbGameTileBaseControlCfg = new Game.TbGameTileBaseControlCfg(loader("game_tbgametilebasecontrolcfg")); 
+        tables.Add("Game.TbGameTileBaseControlCfg", TbGameTileBaseControlCfg);
+        TbTileBaseStyleCfg = new Game.TbTileBaseStyleCfg(loader("game_tbtilebasestylecfg")); 
+        tables.Add("Game.TbTileBaseStyleCfg", TbTileBaseStyleCfg);
+        TbPayProductCfg = new Game.TbPayProductCfg(loader("game_tbpayproductcfg")); 
+        tables.Add("Game.TbPayProductCfg", TbPayProductCfg);
+        TbGameBgShow = new Game.TbGameBgShow(loader("game_tbgamebgshow")); 
+        tables.Add("Game.TbGameBgShow", TbGameBgShow);
+        TbGameBgShowStyleCfg = new Game.TbGameBgShowStyleCfg(loader("game_tbgamebgshowstylecfg")); 
+        tables.Add("Game.TbGameBgShowStyleCfg", TbGameBgShowStyleCfg);
+        TbLevelPassCfg = new Game.TbLevelPassCfg(loader("game_tblevelpasscfg")); 
+        tables.Add("Game.TbLevelPassCfg", TbLevelPassCfg);
+        TbShopCfg = new Game.TbShopCfg(loader("game_tbshopcfg")); 
+        tables.Add("Game.TbShopCfg", TbShopCfg);
+        TbShopCoinShowCfg = new Game.TbShopCoinShowCfg(loader("game_tbshopcoinshowcfg")); 
+        tables.Add("Game.TbShopCoinShowCfg", TbShopCoinShowCfg);
+        TbActivityCircleAwardCfg = new Game.TbActivityCircleAwardCfg(loader("game_tbactivitycircleawardcfg")); 
+        tables.Add("Game.TbActivityCircleAwardCfg", TbActivityCircleAwardCfg);
+        TbCSVActivityCircleInfoCfg = new Game.TbCSVActivityCircleInfoCfg(loader("game_tbcsvactivitycircleinfocfg")); 
+        tables.Add("Game.TbCSVActivityCircleInfoCfg", TbCSVActivityCircleInfoCfg);
+        TbGoldTreeRankAwardCfg = new Game.TbGoldTreeRankAwardCfg(loader("game_tbgoldtreerankawardcfg")); 
+        tables.Add("Game.TbGoldTreeRankAwardCfg", TbGoldTreeRankAwardCfg);
+        TbCSVGoldTreeLeagueRankCfg = new Game.TbCSVGoldTreeLeagueRankCfg(loader("game_tbcsvgoldtreeleaguerankcfg")); 
+        tables.Add("Game.TbCSVGoldTreeLeagueRankCfg", TbCSVGoldTreeLeagueRankCfg);
+        TbGoldTreeRobotCfg = new Game.TbGoldTreeRobotCfg(loader("game_tbgoldtreerobotcfg")); 
+        tables.Add("Game.TbGoldTreeRobotCfg", TbGoldTreeRobotCfg);
+        TbCSVRobotNameCfg = new Game.TbCSVRobotNameCfg(loader("game_tbcsvrobotnamecfg")); 
+        tables.Add("Game.TbCSVRobotNameCfg", TbCSVRobotNameCfg);
+        TbLevelAdRewardAndroid = new Game.TbLevelAdRewardAndroid(loader("game_tbleveladrewardandroid")); 
+        tables.Add("Game.TbLevelAdRewardAndroid", TbLevelAdRewardAndroid);
+        TbLevelAdRewardIOS = new Game.TbLevelAdRewardIOS(loader("game_tbleveladrewardios")); 
+        tables.Add("Game.TbLevelAdRewardIOS", TbLevelAdRewardIOS);
+        TbDailyVictoryRewardCfg = new Game.TbDailyVictoryRewardCfg(loader("game_tbdailyvictoryrewardcfg")); 
+        tables.Add("Game.TbDailyVictoryRewardCfg", TbDailyVictoryRewardCfg);
+        TbAvatarFrameCfg = new Game.TbAvatarFrameCfg(loader("game_tbavatarframecfg")); 
+        tables.Add("Game.TbAvatarFrameCfg", TbAvatarFrameCfg);
+        TbRandomRankTextCfg = new Game.TbRandomRankTextCfg(loader("game_tbrandomranktextcfg")); 
+        tables.Add("Game.TbRandomRankTextCfg", TbRandomRankTextCfg);
+        TbGameTileOpenLevelCfg = new Game.TbGameTileOpenLevelCfg(loader("game_tbgametileopenlevelcfg")); 
+        tables.Add("Game.TbGameTileOpenLevelCfg", TbGameTileOpenLevelCfg);
+        TbGameColorAllocateLevelCfg = new Game.TbGameColorAllocateLevelCfg(loader("game_tbgamecolorallocatelevelcfg")); 
+        tables.Add("Game.TbGameColorAllocateLevelCfg", TbGameColorAllocateLevelCfg);
+        TbGoldTreeRobotScoreRuleCfg = new Game.TbGoldTreeRobotScoreRuleCfg(loader("game_tbgoldtreerobotscorerulecfg")); 
+        tables.Add("Game.TbGoldTreeRobotScoreRuleCfg", TbGoldTreeRobotScoreRuleCfg);
+        TbCSVGoldTreeLeagueRobotpoolCfg = new Game.TbCSVGoldTreeLeagueRobotpoolCfg(loader("game_tbcsvgoldtreeleaguerobotpoolcfg")); 
+        tables.Add("Game.TbCSVGoldTreeLeagueRobotpoolCfg", TbCSVGoldTreeLeagueRobotpoolCfg);
+        TbCSVGoldTreeLeagueRobotEndGameRoCfg = new Game.TbCSVGoldTreeLeagueRobotEndGameRoCfg(loader("game_tbcsvgoldtreeleaguerobotendgamerocfg")); 
+        tables.Add("Game.TbCSVGoldTreeLeagueRobotEndGameRoCfg", TbCSVGoldTreeLeagueRobotEndGameRoCfg);
+        TbCSVGoldTreeLeagueRobotFullConfiCfg = new Game.TbCSVGoldTreeLeagueRobotFullConfiCfg(loader("game_tbcsvgoldtreeleaguerobotfullconficfg")); 
+        tables.Add("Game.TbCSVGoldTreeLeagueRobotFullConfiCfg", TbCSVGoldTreeLeagueRobotFullConfiCfg);
+        TbGoldTreeRobotRankRewardCfg = new Game.TbGoldTreeRobotRankRewardCfg(loader("game_tbgoldtreerobotrankrewardcfg")); 
+        tables.Add("Game.TbGoldTreeRobotRankRewardCfg", TbGoldTreeRobotRankRewardCfg);
+        TbGameColorPriorityCfg = new Game.TbGameColorPriorityCfg(loader("game_tbgamecolorprioritycfg")); 
+        tables.Add("Game.TbGameColorPriorityCfg", TbGameColorPriorityCfg);
+        TbPuppyAdventureStageCfg = new Game.TbPuppyAdventureStageCfg(loader("game_tbpuppyadventurestagecfg")); 
+        tables.Add("Game.TbPuppyAdventureStageCfg", TbPuppyAdventureStageCfg);
+        TbPuppyAdventureTimeCfg = new Game.TbPuppyAdventureTimeCfg(loader("game_tbpuppyadventuretimecfg")); 
+        tables.Add("Game.TbPuppyAdventureTimeCfg", TbPuppyAdventureTimeCfg);
+        TbPuppyAdventureEliminateCfg = new Game.TbPuppyAdventureEliminateCfg(loader("game_tbpuppyadventureeliminatecfg")); 
+        tables.Add("Game.TbPuppyAdventureEliminateCfg", TbPuppyAdventureEliminateCfg);
+        TbPiggyRewardCfg = new Game.TbPiggyRewardCfg(loader("game_tbpiggyrewardcfg")); 
+        tables.Add("Game.TbPiggyRewardCfg", TbPiggyRewardCfg);
+        TbCSVColorEggReward = new Game.TbCSVColorEggReward(loader("game_tbcsvcoloreggreward")); 
+        tables.Add("Game.TbCSVColorEggReward", TbCSVColorEggReward);
+        TbCSVColorEggLevel = new Game.TbCSVColorEggLevel(loader("game_tbcsvcoloregglevel")); 
+        tables.Add("Game.TbCSVColorEggLevel", TbCSVColorEggLevel);
+        TbWinStreak = new Activity.TbWinStreak(loader("activity_tbwinstreak"));
         tables.Add("Activity.TbWinStreak", TbWinStreak);
-        TbSevenDaySign = new Activity.TbSevenDaySign(loader("activity_tbsevendaysign")); 
+        TbSevenDaySign = new Activity.TbSevenDaySign(loader("activity_tbsevendaysign"));
         tables.Add("Activity.TbSevenDaySign", TbSevenDaySign);
-        TbSetting = new Setting.TbSetting(loader("setting_tbsetting")); 
+        TbSetting = new Setting.TbSetting(loader("setting_tbsetting"));
         tables.Add("Setting.TbSetting", TbSetting);
-        TbUserInfo = new User.TbUserInfo(loader("user_tbuserinfo")); 
+        TbUserInfo = new User.TbUserInfo(loader("user_tbuserinfo"));
         tables.Add("User.TbUserInfo", TbUserInfo);
         PostInit();
 
-        TbWinStreak.Resolve(tables); 
-        TbSevenDaySign.Resolve(tables); 
-        TbSetting.Resolve(tables); 
-        TbUserInfo.Resolve(tables); 
+        TbGameLeveConfigAndroid.Resolve(tables); 
+        TbGameLeveConfigIOS.Resolve(tables); 
+        TbGameLevelTilesCfgAndroid.Resolve(tables); 
+        TbGameLevelTilesCfgIOS.Resolve(tables); 
+        TbGameTileBaseControlCfg.Resolve(tables); 
+        TbTileBaseStyleCfg.Resolve(tables); 
+        TbPayProductCfg.Resolve(tables); 
+        TbGameBgShow.Resolve(tables); 
+        TbGameBgShowStyleCfg.Resolve(tables); 
+        TbLevelPassCfg.Resolve(tables); 
+        TbShopCfg.Resolve(tables); 
+        TbShopCoinShowCfg.Resolve(tables); 
+        TbActivityCircleAwardCfg.Resolve(tables); 
+        TbCSVActivityCircleInfoCfg.Resolve(tables); 
+        TbGoldTreeRankAwardCfg.Resolve(tables); 
+        TbCSVGoldTreeLeagueRankCfg.Resolve(tables); 
+        TbGoldTreeRobotCfg.Resolve(tables); 
+        TbCSVRobotNameCfg.Resolve(tables); 
+        TbLevelAdRewardAndroid.Resolve(tables); 
+        TbLevelAdRewardIOS.Resolve(tables); 
+        TbDailyVictoryRewardCfg.Resolve(tables); 
+        TbAvatarFrameCfg.Resolve(tables); 
+        TbRandomRankTextCfg.Resolve(tables); 
+        TbGameTileOpenLevelCfg.Resolve(tables); 
+        TbGameColorAllocateLevelCfg.Resolve(tables); 
+        TbGoldTreeRobotScoreRuleCfg.Resolve(tables); 
+        TbCSVGoldTreeLeagueRobotpoolCfg.Resolve(tables); 
+        TbCSVGoldTreeLeagueRobotEndGameRoCfg.Resolve(tables); 
+        TbCSVGoldTreeLeagueRobotFullConfiCfg.Resolve(tables); 
+        TbGoldTreeRobotRankRewardCfg.Resolve(tables); 
+        TbGameColorPriorityCfg.Resolve(tables); 
+        TbPuppyAdventureStageCfg.Resolve(tables); 
+        TbPuppyAdventureTimeCfg.Resolve(tables); 
+        TbPuppyAdventureEliminateCfg.Resolve(tables); 
+        TbPiggyRewardCfg.Resolve(tables); 
+        TbCSVColorEggReward.Resolve(tables); 
+        TbCSVColorEggLevel.Resolve(tables); 
+        TbWinStreak.Resolve(tables);
+        TbSevenDaySign.Resolve(tables);
+        TbSetting.Resolve(tables);
+        TbUserInfo.Resolve(tables);
         PostResolve();
     }
 
     public void TranslateText(System.Func<string, string, string> translator)
     {
-        TbWinStreak.TranslateText(translator); 
-        TbSevenDaySign.TranslateText(translator); 
-        TbSetting.TranslateText(translator); 
-        TbUserInfo.TranslateText(translator); 
+        TbGameLeveConfigAndroid.TranslateText(translator); 
+        TbGameLeveConfigIOS.TranslateText(translator); 
+        TbGameLevelTilesCfgAndroid.TranslateText(translator); 
+        TbGameLevelTilesCfgIOS.TranslateText(translator); 
+        TbGameTileBaseControlCfg.TranslateText(translator); 
+        TbTileBaseStyleCfg.TranslateText(translator); 
+        TbPayProductCfg.TranslateText(translator); 
+        TbGameBgShow.TranslateText(translator); 
+        TbGameBgShowStyleCfg.TranslateText(translator); 
+        TbLevelPassCfg.TranslateText(translator); 
+        TbShopCfg.TranslateText(translator); 
+        TbShopCoinShowCfg.TranslateText(translator); 
+        TbActivityCircleAwardCfg.TranslateText(translator); 
+        TbCSVActivityCircleInfoCfg.TranslateText(translator); 
+        TbGoldTreeRankAwardCfg.TranslateText(translator); 
+        TbCSVGoldTreeLeagueRankCfg.TranslateText(translator); 
+        TbGoldTreeRobotCfg.TranslateText(translator); 
+        TbCSVRobotNameCfg.TranslateText(translator); 
+        TbLevelAdRewardAndroid.TranslateText(translator); 
+        TbLevelAdRewardIOS.TranslateText(translator); 
+        TbDailyVictoryRewardCfg.TranslateText(translator); 
+        TbAvatarFrameCfg.TranslateText(translator); 
+        TbRandomRankTextCfg.TranslateText(translator); 
+        TbGameTileOpenLevelCfg.TranslateText(translator); 
+        TbGameColorAllocateLevelCfg.TranslateText(translator); 
+        TbGoldTreeRobotScoreRuleCfg.TranslateText(translator); 
+        TbCSVGoldTreeLeagueRobotpoolCfg.TranslateText(translator); 
+        TbCSVGoldTreeLeagueRobotEndGameRoCfg.TranslateText(translator); 
+        TbCSVGoldTreeLeagueRobotFullConfiCfg.TranslateText(translator); 
+        TbGoldTreeRobotRankRewardCfg.TranslateText(translator); 
+        TbGameColorPriorityCfg.TranslateText(translator); 
+        TbPuppyAdventureStageCfg.TranslateText(translator); 
+        TbPuppyAdventureTimeCfg.TranslateText(translator); 
+        TbPuppyAdventureEliminateCfg.TranslateText(translator); 
+        TbPiggyRewardCfg.TranslateText(translator); 
+        TbCSVColorEggReward.TranslateText(translator); 
+        TbCSVColorEggLevel.TranslateText(translator);
+        TbWinStreak.TranslateText(translator);
+        TbSevenDaySign.TranslateText(translator);
+        TbSetting.TranslateText(translator);
+        TbUserInfo.TranslateText(translator);
     }
     
     partial void PostInit();

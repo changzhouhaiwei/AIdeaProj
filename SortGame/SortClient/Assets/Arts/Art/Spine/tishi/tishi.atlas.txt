@@ -1,0 +1,7 @@
+tishi.png
+size:256,256
+filter:Linear,Linear
+pma:true
+33
+bounds:2,2,134,134
+offsets:0,18,134,154

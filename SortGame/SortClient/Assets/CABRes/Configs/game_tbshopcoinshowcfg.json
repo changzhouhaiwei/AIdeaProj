@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "startNum": 1,
+    "endNum": 99,
+    "icon": "shop_jb_1"
+  },
+  {
+    "id": 2,
+    "startNum": 100,
+    "endNum": 999,
+    "icon": "shop_jb_1"
+  },
+  {
+    "id": 3,
+    "startNum": 1000,
+    "endNum": 2999,
+    "icon": "shop_jb_2"
+  },
+  {
+    "id": 4,
+    "startNum": 3000,
+    "endNum": 9999,
+    "icon": "shop_jb_3"
+  },
+  {
+    "id": 5,
+    "startNum": 10000,
+    "endNum": 9999999,
+    "icon": "shop_jb_4"
+  }
+]
