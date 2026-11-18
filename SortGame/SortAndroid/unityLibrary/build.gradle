@@ -1,0 +1,167 @@
+apply plugin: 'com.android.library'
+
+ext.unityBundledNdkPath = "C:/Program Files/Unity/Hub/Editor/2022.3.62f3/Editor/Data/PlaybackEngines/AndroidPlayer/NDK"
+
+dependencies {
+    implementation fileTree(dir: 'libs')
+    implementation platform("com.zzxz.gamesdk:gamesdk-bom:5.8.1")
+
+    implementation "com.zzxz.gamesdk:gamesdk-core"
+    implementation "com.zzxz.gamesdk:gamesdk-ads-admobwaterfalladapter"
+    implementation "com.zzxz.gamesdk:gamesdk-cmp-admobadapter"
+    implementation "com.zzxz.gamesdk:gamesdk-attribution-appsflyeradapter"
+    implementation "com.zzxz.gamesdk:gamesdk-unityadapter"
+    implementation "com.zzxz.gamesdk:gamesdk-billing"
+    implementation "com.zzxz.gamesdk:gamesdk-login"
+    implementation "com.zzxz.gamesdk:gamesdk-data-remote"
+    implementation 'com.zzxz.gamesdk:gamesdk-thinkingdataadapter'
+
+    // 广告源版本对齐 GameSdk BoM 5.8.1 / GMA 25.2.0（同步自 Tile Mahjong）
+    implementation 'com.google.ads.mediation:facebook:6.21.0.3'     // Facebook
+    implementation 'com.unity3d.ads:unity-ads:4.18.0'               // Unity
+    implementation 'com.google.ads.mediation:unity:4.18.0.0'        // Unity
+    implementation 'com.google.ads.mediation:applovin:13.6.2.0'     // AppLovin
+    // 禁止接入: Amazon / Chartboost / IronSource / Verve / Smaato / Yandex / Vungle(Liftoff)
+    implementation 'com.google.ads.mediation:mintegral:17.1.61.0'   // Mintegral
+    implementation 'com.google.ads.mediation:pangle:8.0.0.5.0'      // Pangle
+    implementation 'com.google.ads.mediation:inmobi:11.3.0.0'       // InMobi
+    implementation 'com.google.ads.mediation:fyber:8.4.5.0'         // DTExchange
+    implementation 'com.google.ads.mediation:moloco:4.8.1.0'        // Moloco
+    implementation 'com.google.ads.mediation:bigo:5.9.0.0'          // Bigo Ads
+    implementation 'com.google.ads.mediation:bidmachine:3.7.0.0'    // BidMachine
+    implementation("com.adsurge.sdk:adapter-for-admob:1.9.0.0")     // AdSurge
+
+    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+    implementation("com.google.firebase:firebase-crashlytics")
+    // GameSDK TraceManager / FirebaseSdk.startTrace 依赖 Performance；仅 Crashlytics 时老机型 Release 可能出现 NoClassDefFoundError
+    implementation("com.google.firebase:firebase-perf")
+
+    // 统一 WorkManager 版本，减轻多 SDK 传递依赖版本分裂导致的 JobScheduler 异常
+    implementation("androidx.work:work-runtime:2.10.0")
+
+    implementation "com.android.billingclient:billing:7.1.1"
+
+}
+
+// 禁止接入：Amazon / Chartboost / IconSource(IronSource) / Verve / Smaato / Yandex / Vungle(Liftoff)
+configurations.configureEach {
+    resolutionStrategy {
+        force "com.android.billingclient:billing:7.1.1"
+        force "com.google.android.gms:play-services-ads:25.2.0"
+    }
+    exclude group: 'com.google.ads.mediation', module: 'amazon-tam'
+    exclude group: 'com.google.ads.mediation', module: 'chartboost'
+    exclude group: 'com.google.ads.mediation', module: 'ironsource'
+    exclude group: 'com.google.ads.mediation', module: 'verve'
+    exclude group: 'com.google.ads.mediation', module: 'smaato'
+    exclude group: 'com.google.ads.mediation', module: 'yandex'
+    exclude group: 'com.google.ads.mediation', module: 'pubnative'
+    exclude group: 'com.google.ads.mediation', module: 'vungle'
+}
+
+android {
+    ndkVersion "23.1.7779620"
+
+    namespace "com.unity3d.player"
+    ndkPath project.ext.unityBundledNdkPath
+    compileSdkVersion 36
+    buildToolsVersion '36.1.0'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 36
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+
+        versionCode 7
+        versionName '1.0.7'
+
+        consumerProguardFiles 'proguard-unity.txt', 'proguard-adsurge.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', '.bundle', '.unityexp'] + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    packagingOptions {
+        doNotStrip '*/armeabi-v7a/*.so'
+        doNotStrip '*/arm64-v8a/*.so'
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+}
+
+def getSdkDir() {
+    Properties local = new Properties()
+    local.load(new FileInputStream("${rootDir}/local.properties"))
+    return local.getProperty('sdk.dir')
+}
+
+
+def BuildIl2Cpp(String workingDir, String configuration, String architecture, String abi, String[] staticLibraries) {
+    def commandLineArgs = []
+    commandLineArgs.add("--compile-cpp")
+    commandLineArgs.add("--platform=Android")
+    commandLineArgs.add("--architecture=" + architecture)
+    commandLineArgs.add("--outputpath=" + workingDir + "/src/main/jniLibs/" + abi + "/libil2cpp.so")
+    commandLineArgs.add("--baselib-directory=" + workingDir + "/src/main/jniStaticLibs/" + abi)
+    commandLineArgs.add("--incremental-g-c-time-slice=3")
+    commandLineArgs.add("--configuration=" + configuration)
+    commandLineArgs.add("--dotnetprofile=unityaot-linux")
+    commandLineArgs.add("--profiler-report")
+    commandLineArgs.add("--profiler-output-file=" + workingDir + "/build/il2cpp_"+ abi + "_" + configuration + "/il2cpp_conv.traceevents")
+    commandLineArgs.add("--print-command-line")
+    commandLineArgs.add("--data-folder=" + workingDir + "/src/main/Il2CppOutputProject/Source/il2cppOutput/data")
+    commandLineArgs.add("--generatedcppdir=" + workingDir + "/src/main/Il2CppOutputProject/Source/il2cppOutput")
+    commandLineArgs.add("--cachedirectory=" + workingDir + "/build/il2cpp_"+ abi + "_" + configuration + "/il2cpp_cache")
+    commandLineArgs.add("--tool-chain-path=" + project.ext.unityBundledNdkPath)
+    staticLibraries.eachWithIndex {fileName, i->
+        commandLineArgs.add("--additional-libraries=" + workingDir + "/src/main/jniStaticLibs/" + abi + "/" + fileName)
+    }
+    def executableExtension = ""
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        executableExtension = ".exe"
+        commandLineArgs = commandLineArgs*.replace('\"', '\\\"')
+    }
+    exec {
+        executable workingDir + "/src/main/Il2CppOutputProject/IL2CPP/build/deploy/il2cpp" + executableExtension
+        args commandLineArgs
+        environment "ANDROID_SDK_ROOT", getSdkDir()
+    }
+    delete workingDir + "/src/main/jniLibs/" + abi + "/libil2cpp.sym.so"
+    ant.move(file: workingDir + "/src/main/jniLibs/" + abi + "/libil2cpp.dbg.so", tofile: workingDir + "/symbols/" + abi + "/libil2cpp.so")
+}
+
+android {
+    task BuildIl2CppTask {
+        doLast {
+            BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'armv7', 'armeabi-v7a', [  ] as String[]);
+            BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'arm64', 'arm64-v8a', [  ] as String[]);
+        }
+    }
+    afterEvaluate {
+        if (project(':unityLibrary').tasks.findByName('mergeDebugJniLibFolders'))
+            project(':unityLibrary').mergeDebugJniLibFolders.dependsOn BuildIl2CppTask
+        if (project(':unityLibrary').tasks.findByName('mergeReleaseJniLibFolders'))
+            project(':unityLibrary').mergeReleaseJniLibFolders.dependsOn BuildIl2CppTask
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = ["src/main/Il2CppOutputProject"]
+        }
+    }
+}
+
+

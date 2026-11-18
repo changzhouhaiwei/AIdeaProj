@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="button_init">Init Sdk</string>
+    <string name="button_login">Sign In</string>
+    <string name="button_role_upload">Role Upload</string>
+    <string name="button_level_up">Level Up</string>
+    <string name="button_create_role">Create Role</string>
+    <string name="button_enter_game">Enter Game</string>
+    <string name="button_exit_game">Exit Game</string>
+    <string name="button_pay">Payment</string>
+    <string name="button_refund_warning">Refund warning</string>
+    <string name="button_refund_orders">Refund orders</string>
+    <string name="button_pre_registration">Pre-Registration</string>
+    <string name="button_service_center">Service Center</string>
+    <string name="button_user_profile">User Profile</string>
+    <string name="button_write_snapshot">Write Snapshot</string>
+    <string name="button_read_snapshot">Read Snapshot</string>
+    <string name="button_query_leaderboard">Query Leaderboard</string>
+    <string name="button_update_score">Update Score</string>
+    <string name="button_game_review">Game Review</string>
+    <string name="button_web_url">Web Url</string>
+    <string name="button_native_share">Native Share</string>
+    <string name="button_platform_share">Platform Share</string>
+    <string name="button_locale_currency">Locale Currency</string>
+    <string name="button_firebase_token">Firebase Token</string>
+    <string name="button_deep_link">Deep Link</string>
+    <string name="button_ad_impression">Ad Impression</string>
+    <string name="button_track_event">Track event</string>
+    <string name="button_logout">Sign Out</string>
+    <string name="button_open_community">Open Community</string>
+    <string name="button_test_crash">Test Crash</string>
+    <string name="button_delete_account">Account Cancellation</string>
+    <string name="button_ads">Ads</string>
+    <string name="button_safety">Safety</string>
+    <string name="button_save_value">Save Value</string>
+    <string name="button_read_value">Read Value</string>
+    <string name="button_write_archive">Write Archive</string>
+    <string name="button_read_archive">Read Archive</string>
+    <string name="button_copyright">Copyright</string>
+    <string name="init_success">Init successful</string>
+    <string name="init_failed">Init failed</string>
+    <string name="login_success">Login successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="link_success">Link successful</string>
+    <string name="link_failed">Link failed</string>
+    <string name="payment_success">Payment successful</string>
+    <string name="payment_failed">Payment failed</string>
+    <string name="logout_success">Logout successful</string>
+    <string name="submit_success">Submitted successfully</string>
+    <string name="share_success">Share successfully</string>
+    <string name="share_failed">Share failed</string>
+    <string name="delete_success">Your account has been deleted</string>
+    <string name="custom">Custom</string>
+    <string name="in_app_review">In-App Review</string>
+
+    <string name="short_curt2">Keep on Puzzling! 🧩</string>
+
+    <string name="shortcut_toggle_game">Don\'t go</string>
+    <string name="shortcut_toggle_game_long">Continue the puzzle!</string>
+    <string name="notify_desc_1">Come back and enjoy a game!</string>
+    <string name="notify_desc_2">Your energy is full! Time to play another round.</string>
+    <string name="notify_channel_id" translatable="false">com.sort.game.remind</string>
+    <string name="notify_channel_name" translatable="false">Sort Remind</string>
+    <string name="SystemPush_Title1">Puzzle time!</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+  <entry>
+    <key>WaterFallAdIdsBannerNew4</key>
+    <value></value>
+  </entry>
+  <entry>
+    <key>BannerDisplayIntervalMs</key>
+    <value>30000</value>
+  </entry>
+  <entry>
+    <key>WaterFallAdIdsInterstitial4</key>
+    <value></value>
+  </entry>
+  <entry>
+    <key>native_ad_style</key>
+    <value>new</value>
+  </entry>
+  <entry>
+    <key>native_ad_mask_time</key>
+    <value>0</value>
+  </entry>
+  <entry>
+    <key>waterfall_executor_pool_size</key>
+    <value>2</value>
+  </entry>
+  <entry>
+    <key>native_ad_close_mask_size</key>
+    <value>24</value>
+  </entry>
+  <entry>
+    <key>WaterFallAdIdsBanner4</key>
+    <value></value>
+  </entry>
+  <entry>
+    <key>WaterFallAdIdsRewarded4</key>
+    <value></value>
+  </entry>
+  <entry>
+    <key>AppUpdateConfig</key>
+    <value>{"enabled":false,"store_url":"market://details?id=com.sort.game","fallback_url":"https://play.google.com/store/apps/details?id=com.sort.game","latest_version":"1.0.0","min_required_version":"1.0.0","force_update_versions":[],"min_show_level":0,"title":"","message":""}</value>
+  </entry>
+</defaults>
