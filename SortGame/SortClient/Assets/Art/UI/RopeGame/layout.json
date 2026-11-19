@@ -1,0 +1,94 @@
+{
+  "screenId": "RopeGame",
+  "canvas": { "width": 720, "height": 1560 },
+  "nodes": [
+    {
+      "id": "root", "type": "Panel", "parent": "",
+      "rect": { "x": 0, "y": 0, "w": 720, "h": 1560 },
+      "anchorMinX": 0, "anchorMinY": 0, "anchorMaxX": 1, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 0
+    },
+    {
+      "id": "playfield", "type": "Panel", "parent": "root",
+      "rect": { "x": 8, "y": 170, "w": 704, "h": 1160 },
+      "anchorMinX": 0, "anchorMinY": 0, "anchorMaxX": 1, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 1
+    },
+    {
+      "id": "safe_area", "type": "Panel", "parent": "root",
+      "rect": { "x": 0, "y": 0, "w": 720, "h": 1560 },
+      "anchorMinX": 0, "anchorMinY": 0, "anchorMaxX": 1, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 2
+    },
+    {
+      "id": "coin", "type": "Image", "parent": "safe_area",
+      "rect": { "x": 24, "y": 24, "w": 168, "h": 64 },
+      "anchorMinX": 0, "anchorMinY": 1, "anchorMaxX": 0, "anchorMaxY": 1,
+      "pivotX": 0, "pivotY": 1,
+      "sprite": "pill.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 28, "sortingOrder": 3
+    },
+    {
+      "id": "level", "type": "Text", "parent": "safe_area",
+      "rect": { "x": 250, "y": 20, "w": 220, "h": 70 },
+      "anchorMinX": 0.5, "anchorMinY": 1, "anchorMaxX": 0.5, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 1,
+      "sprite": "", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "第1关", "fontSize": 34, "sortingOrder": 4
+    },
+    {
+      "id": "progress", "type": "Image", "parent": "safe_area",
+      "rect": { "x": 400, "y": 24, "w": 150, "h": 64 },
+      "anchorMinX": 1, "anchorMinY": 1, "anchorMaxX": 1, "anchorMaxY": 1,
+      "pivotX": 1, "pivotY": 1,
+      "sprite": "pill.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 28, "sortingOrder": 5
+    },
+    {
+      "id": "settings", "type": "Button", "parent": "safe_area",
+      "rect": { "x": 624, "y": 24, "w": 72, "h": 72 },
+      "anchorMinX": 1, "anchorMinY": 1, "anchorMaxX": 1, "anchorMaxY": 1,
+      "pivotX": 1, "pivotY": 1,
+      "sprite": "gear.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 6
+    },
+    {
+      "id": "bottom_bar", "type": "Panel", "parent": "root",
+      "rect": { "x": 0, "y": 1350, "w": 720, "h": 210 },
+      "anchorMinX": 0, "anchorMinY": 0, "anchorMaxX": 1, "anchorMaxY": 0,
+      "pivotX": 0.5, "pivotY": 0,
+      "sprite": "", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 7
+    },
+    {
+      "id": "btn_undo", "type": "Button", "parent": "bottom_bar",
+      "rect": { "x": 80, "y": 24, "w": 132, "h": 132 },
+      "anchorMinX": 0.5, "anchorMinY": 1, "anchorMaxX": 0.5, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "btn_undo.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 8
+    },
+    {
+      "id": "btn_hint", "type": "Button", "parent": "bottom_bar",
+      "rect": { "x": 294, "y": 24, "w": 132, "h": 132 },
+      "anchorMinX": 0.5, "anchorMinY": 1, "anchorMaxX": 0.5, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "btn_hint.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 9
+    },
+    {
+      "id": "btn_rope", "type": "Button", "parent": "bottom_bar",
+      "rect": { "x": 508, "y": 24, "w": 132, "h": 132 },
+      "anchorMinX": 0.5, "anchorMinY": 1, "anchorMaxX": 0.5, "anchorMaxY": 1,
+      "pivotX": 0.5, "pivotY": 0.5,
+      "sprite": "btn_rope.png", "nineSliceL": 0, "nineSliceR": 0, "nineSliceT": 0, "nineSliceB": 0, "useNineSlice": 0,
+      "text": "", "fontSize": 0, "sortingOrder": 10
+    }
+  ]
+}

@@ -147,10 +147,15 @@ namespace FishTilePlay
             else
 #endif
             {
-                var currentLevel = GPUserDataManager.Instance.GetFinalLevelNum();
-                // 新手默认进第一关；iOS 提审中（IsUnderReviewIOS=true）则留在主界面。
-                // GameScene 已不再放 Tile 棋盘时，直接留在主界面。
-                if (levelController != null && currentLevel == 0 && !GPSDKMgr.Instance.IsUnderReviewIOS)
+                int currentLevel = 0;
+                if (GPUserDataManager.HasInit())
+                    currentLevel = GPUserDataManager.Instance.GetFinalLevelNum();
+                // 没有 Tile 棋盘时，直接打开绳子玩法并铺当前关。
+                if (levelController == null)
+                {
+                    LoadLevel(currentLevel);
+                }
+                else if (currentLevel == 0 && !GPSDKMgr.Instance.IsUnderReviewIOS)
                 {
                     LoadLevel(currentLevel);
                 }
@@ -180,9 +185,12 @@ namespace FishTilePlay
         {
             if (levelController == null)
             {
-                Debug.LogWarning("[GameDirector] GameScene 没有 Tile 关卡，留在主界面。");
-                PlayMenuMusic();
-                UIController.ShowPage<UIMainMenu>();
+                UIBottomNav.Hide();
+                UIController.HidePage<UIMainMenu>();
+                PlayLevelMusic();
+                isGameActive = true;
+                RopeSort.RopeGameController.Enter(index);
+                onLevelLoaded?.Invoke();
                 return;
             }
 
@@ -609,6 +617,15 @@ namespace FishTilePlay
 
         public static void LoadNextLevel(SimpleCallback onLevelLoaded = null)
         {
+            if (levelController == null)
+            {
+                int index = RopeSort.RopeGameController.DisplayedLevelIndex;
+                if (GameData.BFromStartScene && GPUserDataManager.HasInit())
+                    index = Mathf.Min(GPUserDataManager.Instance.GetLevelNum(), RopeSort.RopeLevelCatalog.Last);
+                LoadLevel(index, onLevelLoaded);
+                return;
+            }
+
             if (GameData.BFromStartScene)
             {
                 int levelNum = GPUserDataManager.Instance.GetFinalLevelNum();
@@ -622,6 +639,13 @@ namespace FishTilePlay
 
         public static void ReplayLevel(int baLoadState = 0)
         {
+            if (levelController == null)
+            {
+                isGameActive = false;
+                LoadLevel(RopeSort.RopeGameController.DisplayedLevelIndex, baLoadState: baLoadState);
+                return;
+            }
+
             isGameActive = false;
             if (GPUserDataManager.HasInit())
                 GPUserDataManager.Instance.TryCaptureSdkCountryCode("重开出关");

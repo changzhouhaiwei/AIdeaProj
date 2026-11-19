@@ -81,6 +81,11 @@ public class GPUserData
     [SerializeField] private int _inGameItemShuffleCnt;
     [SerializeField] private int _inGameItemUndoCnt;
     [SerializeField] private int _inGameItemHighLightCnt;
+    [SerializeField] private int _ropeUndoCnt;
+    [SerializeField] private int _ropeHintCnt;
+    [SerializeField] private int _ropeExtraCnt;
+    /// <summary>1 表示绳子道具已经按新档补过。老存档缺字段时是 0，读档后补成各 3。</summary>
+    [SerializeField] private int _ropeItemsInited;
 
     [SerializeField] private int _continusWinCnt;
     [SerializeField] private int _continusFailCnt;
@@ -864,6 +869,58 @@ public class GPUserData
                 _changedFields.Add(nameof(inGameItemHighLightCnt));
             }
         }
+    }
+
+    public int ropeUndoCnt
+    {
+        get => _ropeUndoCnt;
+        set
+        {
+            if (_ropeUndoCnt != value)
+            {
+                _ropeUndoCnt = value;
+                _changedFields.Add(nameof(ropeUndoCnt));
+            }
+        }
+    }
+
+    public int ropeHintCnt
+    {
+        get => _ropeHintCnt;
+        set
+        {
+            if (_ropeHintCnt != value)
+            {
+                _ropeHintCnt = value;
+                _changedFields.Add(nameof(ropeHintCnt));
+            }
+        }
+    }
+
+    public int ropeExtraCnt
+    {
+        get => _ropeExtraCnt;
+        set
+        {
+            if (_ropeExtraCnt != value)
+            {
+                _ropeExtraCnt = value;
+                _changedFields.Add(nameof(ropeExtraCnt));
+            }
+        }
+    }
+
+    public void EnsureRopeItems()
+    {
+        if (_ropeItemsInited != 0)
+            return;
+        _ropeUndoCnt = 3;
+        _ropeHintCnt = 3;
+        _ropeExtraCnt = 3;
+        _ropeItemsInited = 1;
+        _changedFields.Add(nameof(ropeUndoCnt));
+        _changedFields.Add(nameof(ropeHintCnt));
+        _changedFields.Add(nameof(ropeExtraCnt));
     }
 
 
@@ -2440,6 +2497,10 @@ public class GPUserData
         _inGameItemShuffleCnt = 3;
         _inGameItemUndoCnt = 3;
         _inGameItemHighLightCnt = 3;
+        _ropeUndoCnt = 3;
+        _ropeHintCnt = 3;
+        _ropeExtraCnt = 3;
+        _ropeItemsInited = 1;
 
         _bNoAd = false;
         _freeReviveUsedCnt = 0;
@@ -2531,6 +2592,7 @@ public class GPUserData
 
         JsonUtility.FromJsonOverwrite(json, this);
         _changedFields.Clear(); // 加载后清除变更标记
+        EnsureRopeItems();
 
         // 构造函数默认未锁定=-1；老存档缺字段时 FromJsonOverwrite 会留下 -1，必须改回 5。
         if (!jsonHasMaxFreeRevive)
@@ -2623,6 +2685,9 @@ public class GPUserData
         _changedFields.Add(nameof(inGameItemShuffleCnt));
         _changedFields.Add(nameof(inGameItemUndoCnt));
         _changedFields.Add(nameof(inGameItemHighLightCnt));
+        _changedFields.Add(nameof(ropeUndoCnt));
+        _changedFields.Add(nameof(ropeHintCnt));
+        _changedFields.Add(nameof(ropeExtraCnt));
         _changedFields.Add(nameof(levelPlayRecord));
         _changedFields.Add(nameof(levelTileBaseRecord));
         _changedFields.Add(nameof(knownTileBaseIds));
@@ -2679,6 +2744,10 @@ public class GPUserData
         _inGameItemShuffleCnt = 3;
         _inGameItemUndoCnt = 3;
         _inGameItemHighLightCnt = 3;
+        _ropeUndoCnt = 3;
+        _ropeHintCnt = 3;
+        _ropeExtraCnt = 3;
+        _ropeItemsInited = 1;
 
         _bNoAd = false;
         _freeReviveUsedCnt = 0;

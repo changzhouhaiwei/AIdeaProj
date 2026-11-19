@@ -219,6 +219,9 @@ namespace FishTilePlay
                 return;
             }
             
+            if (GameDirector.levelController == null)
+                return;
+
             var levelIndex = GameDirector.levelController.GetLoadedLevelIndex();
             var cfg = LevelDynamicConfigProvider.GetLevelConfig(levelIndex + 1);
 
@@ -552,7 +555,8 @@ namespace FishTilePlay
 
                 GameBAData.ExcuteMainStage(2); //失败统一记录为2
                 GPUserDataManager.Instance.IncrementFailCount();
-                GameData.GoldTreeActData.MarkGoldenTreeLevelFailed(GameDirector.levelController.GetLoadedLevelIndex());
+                if (GameDirector.levelController != null)
+                    GameData.GoldTreeActData.MarkGoldenTreeLevelFailed(GameDirector.levelController.GetLoadedLevelIndex());
             }
 
             AudioController.PlaySound(AudioController.AudioClips.buttonSound);

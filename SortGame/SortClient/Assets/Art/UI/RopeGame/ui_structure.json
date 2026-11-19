@@ -1,0 +1,17 @@
+{
+  "screenId": "RopeGame",
+  "canvas": { "width": 720, "height": 1560 },
+  "nodes": [
+    { "id": "root", "type": "Root", "parent": "" },
+    { "id": "playfield", "type": "Panel", "parent": "root", "hint": { "x": 8, "y": 170, "w": 704, "h": 1160 } },
+    { "id": "safe_area", "type": "Panel", "parent": "root", "hint": { "x": 0, "y": 0, "w": 720, "h": 1560 } },
+    { "id": "coin", "type": "Image", "parent": "safe_area", "spriteHint": "pill.png", "hint": { "x": 24, "y": 24, "w": 168, "h": 64 } },
+    { "id": "level", "type": "Text", "parent": "safe_area", "text": "第1关", "hint": { "x": 250, "y": 20, "w": 220, "h": 70 } },
+    { "id": "progress", "type": "Image", "parent": "safe_area", "spriteHint": "pill.png", "hint": { "x": 546, "y": 24, "w": 150, "h": 64 } },
+    { "id": "settings", "type": "Button", "parent": "safe_area", "spriteHint": "gear.png", "hint": { "x": 624, "y": 24, "w": 72, "h": 72 } },
+    { "id": "bottom_bar", "type": "Panel", "parent": "root", "hint": { "x": 0, "y": 1350, "w": 720, "h": 210 } },
+    { "id": "btn_undo", "type": "Button", "parent": "bottom_bar", "spriteHint": "btn_undo.png", "hint": { "x": 80, "y": 24, "w": 132, "h": 132 } },
+    { "id": "btn_hint", "type": "Button", "parent": "bottom_bar", "spriteHint": "btn_hint.png", "hint": { "x": 294, "y": 24, "w": 132, "h": 132 } },
+    { "id": "btn_rope", "type": "Button", "parent": "bottom_bar", "spriteHint": "btn_rope.png", "hint": { "x": 508, "y": 24, "w": 132, "h": 132 } }
+  ]
+}

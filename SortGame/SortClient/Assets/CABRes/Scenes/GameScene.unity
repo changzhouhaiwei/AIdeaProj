@@ -558,6 +558,9 @@ RectTransform:
   m_Children:
   - {fileID: 3962967672951719357}
   - {fileID: 4756381618353047150}
+  - {fileID: 8123456789012345002}
+  - {fileID: 8123456789012345102}
+  - {fileID: 8123456789012345202}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1587,6 +1590,88 @@ MonoBehaviour:
     safePanels: []
     conformX: 0
     conformY: 1
+--- !u!1001 &8123456789012345001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5178066047858781992}
+    m_Modifications:
+    - target: {fileID: 400000, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+      propertyPath: m_Name
+      value: UI Rope Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 400001, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400001, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400001, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400001, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+--- !u!224 &8123456789012345002 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 400001, guid: c4e8a1b27d9f4c6e8a0b3d5f1e7c9a24, type: 3}
+  m_PrefabInstance: {fileID: 8123456789012345001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8123456789012345101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5178066047858781992}
+    m_Modifications:
+    - target: {fileID: 3896966791538023620, guid: 1582c4aaa5a0e3541bd669f9af9b2f90, type: 3}
+      propertyPath: m_Name
+      value: UI Complete
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1582c4aaa5a0e3541bd669f9af9b2f90, type: 3}
+--- !u!224 &8123456789012345102 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3896966791538023619, guid: 1582c4aaa5a0e3541bd669f9af9b2f90, type: 3}
+  m_PrefabInstance: {fileID: 8123456789012345101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8123456789012345201
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5178066047858781992}
+    m_Modifications:
+    - target: {fileID: 5409101143848345216, guid: 8d03459103882dd4d97ac0242d87f2ab, type: 3}
+      propertyPath: m_Name
+      value: UI Game Over
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d03459103882dd4d97ac0242d87f2ab, type: 3}
+--- !u!224 &8123456789012345202 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5409101143848345227, guid: 8d03459103882dd4d97ac0242d87f2ab, type: 3}
+  m_PrefabInstance: {fileID: 8123456789012345201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
