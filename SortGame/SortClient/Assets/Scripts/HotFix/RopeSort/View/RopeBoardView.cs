@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Game.GamePlay.ColorSort;
 using TMPro;
 using UnityEngine;
@@ -35,8 +37,10 @@ namespace RopeSort
         readonly Material fontMaterial;
         readonly List<RectTransform> columns = new List<RectTransform>();
         readonly List<RopeBeadInput> beads = new List<RopeBeadInput>();
+        readonly List<Sequence> motions = new List<Sequence>();
 
         int hintSrc = -1;
+        int motionGen;
         int hintCut = -1;
         int hintDst = -1;
 
@@ -68,8 +72,13 @@ namespace RopeSort
 
         public void Rebuild(ColorSortState state, ColorSortLevel level)
         {
+            StopMotion();
             for (int i = root.childCount - 1; i >= 0; i--)
-                Object.Destroy(root.GetChild(i).gameObject);
+            {
+                GameObject child = root.GetChild(i).gameObject;
+                child.SetActive(false);
+                UnityEngine.Object.Destroy(child);
+            }
             columns.Clear();
             beads.Clear();
             if (state == null || level == null)
@@ -192,6 +201,263 @@ namespace RopeSort
         public Color FlowerTint(int type)
         {
             return Palette[Mathf.Abs(type) % Palette.Length];
+        }
+
+        public void StopMotion()
+        {
+            motionGen++;
+            Sequence[] running = motions.ToArray();
+            motions.Clear();
+            for (int i = 0; i < running.Length; i++)
+            {
+                if (running[i] != null && running[i].IsActive())
+                    running[i].Kill(false);
+            }
+        }
+
+        public void PlayLevelEnter(Action onComplete)
+        {
+            var ids = new List<int>(columns.Count);
+            for (int i = 0; i < columns.Count; i++)
+            {
+                if (TryColumnId(columns[i], out int id))
+                    ids.Add(id);
+            }
+            PlayColumns(ids, 0.06f, onComplete);
+        }
+
+        public void PlayArrivals(List<int> newColumns, List<ColorSortSpawnLog> spawns, Action onComplete)
+        {
+            var entering = new List<int>();
+            if (newColumns != null)
+            {
+                for (int i = 0; i < newColumns.Count; i++)
+                {
+                    if (!entering.Contains(newColumns[i]))
+                        entering.Add(newColumns[i]);
+                }
+            }
+
+            var beadCols = new List<int>();
+            var beadCounts = new List<int>();
+            if (spawns != null)
+            {
+                for (int i = 0; i < spawns.Count; i++)
+                {
+                    ColorSortSpawnLog log = spawns[i];
+                    if (log == null || log.Types == null || log.Types.Count == 0 || entering.Contains(log.Col))
+                        continue;
+                    int index = beadCols.IndexOf(log.Col);
+                    if (index < 0)
+                    {
+                        beadCols.Add(log.Col);
+                        beadCounts.Add(log.Types.Count);
+                    }
+                    else
+                    {
+                        beadCounts[index] += log.Types.Count;
+                    }
+                }
+            }
+
+            int gen = ++motionGen;
+            if (entering.Count == 0 && beadCols.Count == 0)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            int pending = entering.Count + beadCols.Count;
+            Action done = () =>
+            {
+                if (gen != motionGen)
+                    return;
+                pending--;
+                if (pending <= 0)
+                    onComplete?.Invoke();
+            };
+
+            float stagger = entering.Count > 1 ? 0.08f : 0f;
+            for (int i = 0; i < entering.Count; i++)
+                TweenColumn(ColumnOf(entering[i]), i * stagger, gen, done);
+            for (int i = 0; i < beadCols.Count; i++)
+                TweenNewBeads(ColumnOf(beadCols[i]), beadCounts[i], 0.12f, gen, done);
+        }
+
+        void PlayColumns(List<int> ids, float stagger, Action onComplete)
+        {
+            int gen = ++motionGen;
+            if (ids == null || ids.Count == 0)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            int pending = ids.Count;
+            Action done = () =>
+            {
+                if (gen != motionGen)
+                    return;
+                pending--;
+                if (pending <= 0)
+                    onComplete?.Invoke();
+            };
+            for (int i = 0; i < ids.Count; i++)
+                TweenColumn(ColumnOf(ids[i]), i * stagger, gen, done);
+        }
+
+        void TweenColumn(RectTransform col, float delay, int gen, Action done)
+        {
+            if (col == null)
+            {
+                if (gen == motionGen)
+                    done?.Invoke();
+                return;
+            }
+
+            var heads = new List<RectTransform>();
+            RectTransform ropeRt = null;
+            var beadRts = new List<RectTransform>();
+            var beadImages = new List<Image>();
+            for (int i = 0; i < col.childCount; i++)
+            {
+                var child = (RectTransform)col.GetChild(i);
+                if (child.name == "Ring" || child.name == "Pot")
+                    heads.Add(child);
+                else if (child.name == "Rope")
+                    ropeRt = child;
+                else if (child.name == "Bead")
+                {
+                    beadRts.Add(child);
+                    Image image = child.GetComponent<Image>();
+                    if (image != null)
+                    {
+                        image.raycastTarget = false;
+                        beadImages.Add(image);
+                    }
+                }
+            }
+
+            const float lift = 300f;
+            for (int i = 0; i < heads.Count; i++)
+                heads[i].anchoredPosition += new Vector2(0f, lift);
+            if (ropeRt != null)
+                ropeRt.localScale = new Vector3(1f, 0.02f, 1f);
+            for (int i = 0; i < beadRts.Count; i++)
+                beadRts[i].localScale = Vector3.zero;
+
+            var seq = DOTween.Sequence();
+            motions.Add(seq);
+            seq.AppendInterval(delay);
+            if (heads.Count > 0)
+            {
+                seq.Append(heads[0].DOAnchorPosY(heads[0].anchoredPosition.y - lift, 0.42f).SetEase(Ease.OutBack));
+                for (int i = 1; i < heads.Count; i++)
+                {
+                    float restY = heads[i].anchoredPosition.y - lift;
+                    seq.Join(heads[i].DOAnchorPosY(restY, 0.42f).SetEase(Ease.OutBack));
+                }
+            }
+            else
+            {
+                seq.AppendInterval(0.42f);
+            }
+
+            if (ropeRt != null)
+                seq.Insert(delay + 0.16f, ropeRt.DOScaleY(1f, 0.28f).SetEase(Ease.OutCubic));
+            float beadAt = delay + 0.3f;
+            for (int i = 0; i < beadRts.Count; i++)
+                seq.Insert(beadAt + i * 0.045f, beadRts[i].DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack));
+
+            seq.OnComplete(() =>
+            {
+                motions.Remove(seq);
+                for (int i = 0; i < beadImages.Count; i++)
+                {
+                    if (beadImages[i] != null)
+                        beadImages[i].raycastTarget = true;
+                }
+                if (gen == motionGen)
+                    done?.Invoke();
+            });
+        }
+
+        void TweenNewBeads(RectTransform col, int count, float delay, int gen, Action done)
+        {
+            if (col == null || count <= 0)
+            {
+                if (gen == motionGen)
+                    done?.Invoke();
+                return;
+            }
+
+            var beadRts = new List<RectTransform>();
+            for (int i = 0; i < col.childCount; i++)
+            {
+                var child = (RectTransform)col.GetChild(i);
+                if (child.name == "Bead")
+                    beadRts.Add(child);
+            }
+
+            int start = Mathf.Max(0, beadRts.Count - count);
+            if (start >= beadRts.Count)
+            {
+                if (gen == motionGen)
+                    done?.Invoke();
+                return;
+            }
+
+            var seq = DOTween.Sequence();
+            motions.Add(seq);
+            seq.AppendInterval(delay + (beadRts.Count - start) * 0.05f + 0.28f);
+            for (int i = start; i < beadRts.Count; i++)
+            {
+                RectTransform bead = beadRts[i];
+                Vector2 rest = bead.anchoredPosition;
+                bead.anchoredPosition = rest + new Vector2(0f, 64f);
+                bead.localScale = Vector3.zero;
+                Image image = bead.GetComponent<Image>();
+                if (image != null)
+                    image.raycastTarget = false;
+                float at = delay + (i - start) * 0.05f;
+                int captured = i;
+                seq.Insert(at, bead.DOAnchorPos(rest, 0.28f).SetEase(Ease.OutBack));
+                seq.Insert(at, bead.DOScale(Vector3.one, 0.24f).SetEase(Ease.OutBack)
+                    .OnComplete(() =>
+                    {
+                        if (beadRts[captured] == null)
+                            return;
+                        Image mark = beadRts[captured].GetComponent<Image>();
+                        if (mark != null)
+                            mark.raycastTarget = true;
+                    }));
+            }
+
+            seq.OnComplete(() =>
+            {
+                motions.Remove(seq);
+                if (gen == motionGen)
+                    done?.Invoke();
+            });
+        }
+
+        RectTransform ColumnOf(int index)
+        {
+            for (int i = 0; i < columns.Count; i++)
+            {
+                if (TryColumnId(columns[i], out int id) && id == index)
+                    return columns[i];
+            }
+            return null;
+        }
+
+        static bool TryColumnId(RectTransform column, out int id)
+        {
+            id = -1;
+            if (column == null)
+                return false;
+            string name = column.name;
+            return name.StartsWith("Col") && int.TryParse(name.Substring(3), out id);
         }
 
         RectTransform NewRect(string name, Transform parent)

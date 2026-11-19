@@ -1607,7 +1607,7 @@ namespace FishTilePlay
                 return;
             }
 
-            var levelIndex = GameDirector.levelController.GetLoadedLevelIndex();
+            var levelIndex = GameDirector.CompletedLevelIndex();
             var cfg = LevelDynamicConfigProvider.GetLevelConfig(levelIndex + 1);
 
             var rateStr = cfg != null ? cfg.PassRate : "";

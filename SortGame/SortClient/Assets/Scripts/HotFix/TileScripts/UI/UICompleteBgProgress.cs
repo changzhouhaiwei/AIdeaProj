@@ -82,7 +82,7 @@ namespace FishTilePlay
             }
 
             // 关卡 ID 从 1 开始，与 game_tbgamebgshow.startLevel 对齐
-            int levelId = GameDirector.levelController.GetLoadedLevelIndex() + 1;
+            int levelId = GameDirector.CompletedLevelIndex() + 1;
 
             GameBgCfg currentCfg = null;
             int currentIdx = -1;

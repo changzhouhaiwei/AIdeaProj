@@ -284,7 +284,7 @@ namespace FishTilePlay
 
         LevelPassCfg GetCurLevelPassCfg()
         {
-            int idx = GameDirector.levelController.GetLoadedLevelIndex();
+            int idx = GameDirector.CompletedLevelIndex();
             return GameData.LevelPass.GetCurrentStageLevelCfg(idx);
         }
 
@@ -335,7 +335,7 @@ namespace FishTilePlay
             }
             else
             {
-                int loadedIdx = GameDirector.levelController.GetLoadedLevelIndex();
+                int loadedIdx = GameDirector.CompletedLevelIndex();
                 curCnt = GameData.LevelPass.GetCurrentStagePoint(loadedIdx);
             }
 

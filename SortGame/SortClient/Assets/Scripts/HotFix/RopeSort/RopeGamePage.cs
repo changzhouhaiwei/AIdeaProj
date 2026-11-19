@@ -16,6 +16,7 @@ namespace RopeSort
         [SerializeField] Material fontMaterial;
 
         RectTransform playfield;
+        CanvasGroup playfieldGroup;
         RectTransform safeArea;
         RectTransform bottomBar;
         TextMeshProUGUI coinText;
@@ -29,7 +30,10 @@ namespace RopeSort
         Button hintButton;
         Button ropeButton;
         RopeBoardView board;
-        GameObject settlementRoot;
+        GameObject settingsRoot;
+        Image musicToggle;
+        Image soundToggle;
+        Image vibrationToggle;
         Sprite[] flowers;
         Sprite hiddenFlower;
         Sprite potSprite;
@@ -58,6 +62,7 @@ namespace RopeSort
         int hintCut = -1;
         int hintDst = -1;
         bool outcomeSent;
+        bool presenting;
 
         public override void Init()
         {
@@ -71,32 +76,55 @@ namespace RopeSort
             if (state == null)
                 Prepare(RopeGameController.DisplayedLevelIndex);
             ApplyChromeLayout();
-            Canvas.ForceUpdateCanvases();
-            Rebuild();
+            if (playfieldGroup != null)
+                playfieldGroup.alpha = 0f;
+            presenting = true;
             if (isActiveAndEnabled)
-                StartCoroutine(RebuildAfterLayout());
+                StartCoroutine(EnterAfterLayout());
         }
 
-        IEnumerator RebuildAfterLayout()
+        IEnumerator EnterAfterLayout()
         {
             yield return null;
             ApplyChromeLayout();
             Canvas.ForceUpdateCanvases();
             Rebuild();
+            if (board == null || state == null)
+            {
+                if (playfieldGroup != null)
+                    playfieldGroup.alpha = 1f;
+                presenting = false;
+                yield break;
+            }
+
+            board.PlayLevelEnter(() => presenting = false);
+            if (playfieldGroup != null)
+                playfieldGroup.alpha = 1f;
         }
 
         public override void PlayHideAnimation()
         {
+            StopAllCoroutines();
+            presenting = false;
             CancelDrag();
+            board?.StopMotion();
             canvas.enabled = false;
             isPageDisplayed = false;
             UIController.OnPageClosed(this);
+        }
+
+        public void ReleaseForSettlement()
+        {
+            StopAllCoroutines();
+            presenting = false;
+            CancelDrag();
         }
 
         public void Prepare(int levelIndex)
         {
             BuildIfNeeded();
             outcomeSent = false;
+            presenting = false;
             history.Clear();
             hintSrc = hintCut = hintDst = -1;
             PullItems();
@@ -118,33 +146,15 @@ namespace RopeSort
 
             state = ColorSortRules.MakeState(level);
             statusText.text = "";
-            if (settlementRoot != null)
-                settlementRoot.SetActive(false);
             if (levelText != null)
                 levelText.text = "第" + (levelIndex + 1) + "关";
             RefreshHud();
             Rebuild();
         }
 
-        public void ShowWinSettlement()
-        {
-            BuildIfNeeded();
-            outcomeSent = true;
-            CancelDrag();
-            settlementRoot.SetActive(true);
-            settlementRoot.transform.SetAsLastSibling();
-        }
-
-        void OnNextLevel()
-        {
-            if (settlementRoot != null)
-                settlementRoot.SetActive(false);
-            GameDirector.LoadNextLevel();
-        }
-
         public void BeginDrag(int column, int index, PointerEventData eventData)
         {
-            if (state == null || outcomeSent || dragging)
+            if (state == null || outcomeSent || presenting || dragging)
                 return;
             if (ColorSortRules.IsLocked(state, column))
                 return;
@@ -203,6 +213,8 @@ namespace RopeSort
 
         void TryMove(int source, int cut, int destination)
         {
+            if (presenting)
+                return;
             ColorSortReject reason = ColorSortRules.RejectReason(state, source, cut, destination);
             if (reason != ColorSortReject.None)
             {
@@ -211,15 +223,32 @@ namespace RopeSort
             }
 
             history.Push(Snap());
-            ColorSortRules.ApplyMove(state, level, source, cut, destination);
+            ColorSortMoveRecord record = ColorSortRules.ApplyMove(state, level, source, cut, destination);
             hintSrc = hintCut = hintDst = -1;
             statusText.text = "";
-            AfterAction();
+            List<int> born = null;
+            List<ColorSortSpawnLog> spawns = null;
+            if (record != null && record.Deposits.Count > 0)
+            {
+                born = new List<int>();
+                spawns = new List<ColorSortSpawnLog>();
+                for (int i = 0; i < record.Deposits.Count; i++)
+                {
+                    ColorSortDepositLog deposit = record.Deposits[i];
+                    if (deposit == null)
+                        continue;
+                    if (deposit.Keep)
+                        born.Add(deposit.Col);
+                    if (deposit.Spawns != null && deposit.Spawns.Count > 0)
+                        spawns.AddRange(deposit.Spawns);
+                }
+            }
+            AfterAction(born, spawns);
         }
 
         void OnUndo()
         {
-            if (state == null || outcomeSent || history.Count == 0 || undoCount <= 0)
+            if (state == null || outcomeSent || presenting || history.Count == 0 || undoCount <= 0)
                 return;
             undoCount--;
             Hist hist = history.Pop();
@@ -229,12 +258,12 @@ namespace RopeSort
             hintSrc = hintCut = hintDst = -1;
             statusText.text = "";
             PushItems();
-            AfterAction();
+            AfterAction(null, null);
         }
 
         void OnHint()
         {
-            if (state == null || outcomeSent || hintCount <= 0)
+            if (state == null || outcomeSent || presenting || hintCount <= 0)
                 return;
             var moves = new List<ColorSortHintMove>();
             ColorSortRules.CollectUsefulMoves(state, moves);
@@ -251,15 +280,16 @@ namespace RopeSort
             hintDst = move.Dst;
             statusText.text = "高亮的是建议的一步";
             PushItems();
-            Rebuild();
+            AfterAction(null, null);
         }
 
         void OnExtraRope()
         {
-            if (state == null || outcomeSent || ropeCount <= 0 || state.ExtraRopeUsed)
+            if (state == null || outcomeSent || presenting || ropeCount <= 0 || state.ExtraRopeUsed)
                 return;
             Hist hist = Snap();
-            if (ColorSortRules.AddRope(state, level.Capacity) < 0)
+            int added = ColorSortRules.AddRope(state, level.Capacity);
+            if (added < 0)
             {
                 statusText.text = "这局不能再加绳";
                 return;
@@ -270,33 +300,143 @@ namespace RopeSort
             hintSrc = hintCut = hintDst = -1;
             statusText.text = "";
             PushItems();
-            AfterAction();
+            AfterAction(new List<int> { added }, null);
         }
 
         void OnSettings()
         {
-            UIController.ShowPage<UISettings>();
+            BuildIfNeeded();
+            settingsRoot.SetActive(true);
+            settingsRoot.transform.SetAsLastSibling();
+            RefreshSettingToggles();
         }
 
-        void AfterAction()
+        void HideSettings()
+        {
+            if (settingsRoot != null)
+                settingsRoot.SetActive(false);
+        }
+
+        void OnRestartLevel()
+        {
+            HideSettings();
+            GameDirector.ReplayLevel();
+        }
+
+        void OnReturnHome()
+        {
+            HideSettings();
+            GameDirector.ReturnToMenu();
+        }
+
+        void ToggleMusic()
+        {
+            SetAudio(AudioType.Music, !AudioOn(AudioType.Music));
+            RefreshSettingToggles();
+        }
+
+        void ToggleSound()
+        {
+            SetAudio(AudioType.Sound, !AudioOn(AudioType.Sound));
+            RefreshSettingToggles();
+        }
+
+        void ToggleVibration()
+        {
+            if (!Haptic.IsInitialized)
+                Haptic.Init();
+            Haptic.IsActive = !Haptic.IsActive;
+            RefreshSettingToggles();
+        }
+
+        static bool AudioOn(AudioType type)
+        {
+            try
+            {
+                return AudioController.GetVolume(type) > 0.01f;
+            }
+            catch (System.NullReferenceException)
+            {
+                return true;
+            }
+        }
+
+        static void SetAudio(AudioType type, bool on)
+        {
+            AudioController.SetVolume(type, on ? 1f : 0f);
+        }
+
+        void RefreshSettingToggles()
+        {
+            PaintToggle(musicToggle, AudioOn(AudioType.Music));
+            PaintToggle(soundToggle, AudioOn(AudioType.Sound));
+            bool vibration = true;
+            if (!Haptic.IsInitialized)
+                Haptic.Init();
+            vibration = Haptic.IsActive;
+            PaintToggle(vibrationToggle, vibration);
+        }
+
+        static void PaintToggle(Image image, bool on)
+        {
+            if (image == null)
+                return;
+            image.color = on ? new Color(0.29f, 0.73f, 0.46f) : new Color(0.72f, 0.72f, 0.72f);
+        }
+
+        void AfterAction(List<int> born, List<ColorSortSpawnLog> spawns)
         {
             RefreshHud();
-            Rebuild();
-            if (outcomeSent || level == null || state == null)
-                return;
-            if (ColorSortRules.IsWin(state, level))
+            if (level == null || state == null)
             {
-                outcomeSent = true;
-                statusText.text = "过关";
-                RopeGameController.NotifyWin();
+                Rebuild();
                 return;
             }
 
-            if (ColorSortRules.IsDead(state, level))
-            {
+            bool win = !outcomeSent && ColorSortRules.IsWin(state, level);
+            bool dead = !win && !outcomeSent && ColorSortRules.IsDead(state, level);
+            if (win || dead)
                 outcomeSent = true;
-                RopeGameController.NotifyFail();
+
+            Rebuild();
+            if (HasArrival(born, spawns) && board != null)
+            {
+                presenting = true;
+                RefreshHud();
+                board.PlayArrivals(born, spawns, () =>
+                {
+                    presenting = false;
+                    RefreshHud();
+                    if (win)
+                        RopeGameController.NotifyWin();
+                    else if (dead)
+                        RopeGameController.NotifyFail();
+                });
+                return;
             }
+
+            if (win)
+                RopeGameController.NotifyWin();
+            else if (dead)
+                RopeGameController.NotifyFail();
+        }
+
+        static bool HasArrival(List<int> born, List<ColorSortSpawnLog> spawns)
+        {
+            if (born != null && born.Count > 0)
+                return true;
+            if (spawns == null)
+                return false;
+            for (int i = 0; i < spawns.Count; i++)
+            {
+                ColorSortSpawnLog log = spawns[i];
+                if (log == null || log.Types == null || log.Types.Count == 0)
+                    continue;
+                if (born != null && born.Contains(log.Col))
+                    continue;
+                return true;
+            }
+            return false;
         }
 
         void Rebuild()
@@ -325,11 +465,11 @@ namespace RopeSort
             if (ropeCountText != null)
                 ropeCountText.text = ropeCount.ToString();
             if (undoButton != null)
-                undoButton.interactable = undoCount > 0 && history.Count > 0 && !outcomeSent;
+                undoButton.interactable = undoCount > 0 && history.Count > 0 && !outcomeSent && !presenting;
             if (hintButton != null)
-                hintButton.interactable = hintCount > 0 && !outcomeSent;
+                hintButton.interactable = hintCount > 0 && !outcomeSent && !presenting;
             if (ropeButton != null)
-                ropeButton.interactable = ropeCount > 0 && state != null && !state.ExtraRopeUsed && state.Cols.Count < 9 && !outcomeSent;
+                ropeButton.interactable = ropeCount > 0 && state != null && !state.ExtraRopeUsed && state.Cols.Count < 9 && !outcomeSent && !presenting;
         }
 
         void PullItems()
@@ -401,6 +541,8 @@ namespace RopeSort
 
             playfield = CreateRect("Playfield", root);
             Stretch(playfield);
+            playfield.gameObject.AddComponent<RectMask2D>();
+            playfieldGroup = playfield.gameObject.AddComponent<CanvasGroup>();
 
             safeArea = CreateRect("SafeArea", root);
             Stretch(safeArea);
@@ -462,49 +604,123 @@ namespace RopeSort
             if (ropeSprite != null && ropeSprite.texture != null)
                 ropeSprite.texture.wrapMode = TextureWrapMode.Repeat;
             board = new RopeBoardView(this, playfield, flowers, hiddenFlower, potSprite, ringSprite, ropeSprite, LoadSprite("lock"), fontAsset, fontMaterial);
-            BuildSettlement();
+            BuildInGameSettings();
         }
 
-        void BuildSettlement()
+        void BuildInGameSettings()
         {
-            var root = CreateRect("WinSettlement", transform);
+            var root = CreateRect("InGameSettings", transform);
             Stretch(root);
-            settlementRoot = root.gameObject;
-            Image dim = CreateImage("Dim", root, null, new Color(0.15f, 0.1f, 0.08f, 0.55f));
+            settingsRoot = root.gameObject;
+            Image dim = CreateImage("Dim", root, null, new Color(0f, 0f, 0f, 0.45f));
             Stretch(dim.rectTransform);
             dim.raycastTarget = true;
 
             var card = CreateRect("Card", root);
             card.anchorMin = card.anchorMax = new Vector2(0.5f, 0.5f);
-            card.sizeDelta = new Vector2(460f, 320f);
+            card.sizeDelta = new Vector2(520f, 560f);
             Image cardImage = card.gameObject.AddComponent<Image>();
-            cardImage.sprite = LoadSprite("pill");
-            cardImage.color = new Color(1f, 0.97f, 0.93f);
+            cardImage.color = new Color(1f, 0.96f, 0.9f);
             cardImage.raycastTarget = true;
 
-            TextMeshProUGUI title = CreateLabel(card, "Title", "过关", 52, TextAlignmentOptions.Center);
-            var titleRect = title.rectTransform;
-            titleRect.anchorMin = titleRect.anchorMax = new Vector2(0.5f, 1f);
-            titleRect.pivot = new Vector2(0.5f, 1f);
-            titleRect.sizeDelta = new Vector2(400f, 90f);
-            titleRect.anchoredPosition = new Vector2(0f, -36f);
+            var tab = CreateRect("Tab", card);
+            tab.anchorMin = tab.anchorMax = new Vector2(0.5f, 1f);
+            tab.pivot = new Vector2(0.5f, 0.5f);
+            tab.sizeDelta = new Vector2(220f, 72f);
+            tab.anchoredPosition = new Vector2(0f, 8f);
+            Image tabImage = tab.gameObject.AddComponent<Image>();
+            tabImage.sprite = LoadSprite("pill");
+            tabImage.color = new Color(0.96f, 0.62f, 0.28f);
+            tabImage.raycastTarget = false;
+            TextMeshProUGUI title = CreateLabel(tab, "Title", "设置", 36, TextAlignmentOptions.Center);
+            title.color = new Color(0.55f, 0.28f, 0.1f);
+            Stretch(title.rectTransform);
 
-            var next = CreateRect("Next", card);
-            next.anchorMin = next.anchorMax = new Vector2(0.5f, 0f);
-            next.pivot = new Vector2(0.5f, 0f);
-            next.sizeDelta = new Vector2(280f, 88f);
-            next.anchoredPosition = new Vector2(0f, 36f);
-            Image nextImage = next.gameObject.AddComponent<Image>();
-            nextImage.sprite = LoadSprite("btn_hint");
-            nextImage.color = new Color(1f, 0.78f, 0.28f);
-            nextImage.preserveAspect = false;
-            var nextButton = next.gameObject.AddComponent<Button>();
-            nextButton.targetGraphic = nextImage;
-            nextButton.onClick.AddListener(OnNextLevel);
-            TextMeshProUGUI nextLabel = CreateLabel(next, "Label", "下一关", 32, TextAlignmentOptions.Center);
-            nextLabel.color = new Color(0.35f, 0.2f, 0.08f);
-            Stretch(nextLabel.rectTransform);
-            settlementRoot.SetActive(false);
+            Button close = CreateIconButton(card, "Close", CircleSprite(), new Vector2(1f, 1f), new Vector2(-18f, -18f), new Vector2(64f, 64f));
+            var closeImage = close.targetGraphic as Image;
+            if (closeImage != null)
+                closeImage.color = new Color(0.96f, 0.62f, 0.28f);
+            close.GetComponent<RectTransform>().pivot = new Vector2(1f, 1f);
+            close.onClick.AddListener(HideSettings);
+            TextMeshProUGUI closeMark = CreateLabel(close.transform, "X", "×", 40, TextAlignmentOptions.Center);
+            closeMark.color = Color.white;
+            Stretch(closeMark.rectTransform);
+
+            var toggles = CreateRect("Toggles", card);
+            toggles.anchorMin = toggles.anchorMax = new Vector2(0.5f, 1f);
+            toggles.pivot = new Vector2(0.5f, 1f);
+            toggles.sizeDelta = new Vector2(420f, 140f);
+            toggles.anchoredPosition = new Vector2(0f, -110f);
+            musicToggle = CreateSettingToggle(toggles, "Music", LoadSprite("icon_music"), -140f, ToggleMusic);
+            soundToggle = CreateSettingToggle(toggles, "Sound", LoadSprite("icon_sound"), 0f, ToggleSound);
+            vibrationToggle = CreateSettingToggle(toggles, "Vibration", LoadSprite("icon_vibrate"), 140f, ToggleVibration);
+
+            CreateMenuButton(card, "Restart", "重新开始", new Color(0.86f, 0.34f, 0.3f), -250f, OnRestartLevel);
+            CreateMenuButton(card, "Home", "返回主页", new Color(0.95f, 0.62f, 0.22f), -360f, OnReturnHome);
+            settingsRoot.SetActive(false);
+        }
+
+        Image CreateSettingToggle(Transform parent, string name, Sprite icon, float x, UnityEngine.Events.UnityAction onClick)
+        {
+            var node = CreateRect(name, parent);
+            node.anchorMin = node.anchorMax = new Vector2(0.5f, 0.5f);
+            node.sizeDelta = new Vector2(108f, 108f);
+            node.anchoredPosition = new Vector2(x, 0f);
+            Image bg = node.gameObject.AddComponent<Image>();
+            bg.sprite = CircleSprite();
+            bg.color = new Color(0.29f, 0.73f, 0.46f);
+            var button = node.gameObject.AddComponent<Button>();
+            button.targetGraphic = bg;
+            button.onClick.AddListener(onClick);
+            if (icon != null)
+            {
+                Image mark = CreateImage("Icon", node, icon, Color.white);
+                mark.preserveAspect = true;
+                mark.rectTransform.anchorMin = mark.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                mark.rectTransform.sizeDelta = new Vector2(64f, 64f);
+            }
+            return bg;
+        }
+
+        void CreateMenuButton(Transform parent, string name, string label, Color color, float y, UnityEngine.Events.UnityAction onClick)
+        {
+            var node = CreateRect(name, parent);
+            node.anchorMin = node.anchorMax = new Vector2(0.5f, 1f);
+            node.pivot = new Vector2(0.5f, 1f);
+            node.sizeDelta = new Vector2(400f, 88f);
+            node.anchoredPosition = new Vector2(0f, y);
+            Image image = node.gameObject.AddComponent<Image>();
+            image.sprite = LoadSprite("pill");
+            image.color = color;
+            image.type = Image.Type.Simple;
+            var button = node.gameObject.AddComponent<Button>();
+            button.targetGraphic = image;
+            button.onClick.AddListener(onClick);
+            TextMeshProUGUI text = CreateLabel(node, "Label", label, 34, TextAlignmentOptions.Center);
+            text.color = Color.white;
+            Stretch(text.rectTransform);
+        }
+
+        static Sprite circleSprite;
+        static Sprite CircleSprite()
+        {
+            if (circleSprite != null)
+                return circleSprite;
+            const int size = 64;
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            float radius = size * 0.5f - 0.5f;
+            var center = new Vector2(radius, radius);
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float dist = Vector2.Distance(new Vector2(x, y), center);
+                    tex.SetPixel(x, y, dist <= radius ? Color.white : Color.clear);
+                }
+            }
+            tex.Apply();
+            circleSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
+            return circleSprite;
         }
 
         void ApplyChromeLayout()

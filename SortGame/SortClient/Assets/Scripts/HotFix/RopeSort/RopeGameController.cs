@@ -1,3 +1,4 @@
+using FishFramework;
 using FishTilePlay;
 using TileGameCore;
 using UnityEngine;
@@ -7,6 +8,23 @@ namespace RopeSort
     public static class RopeGameController
     {
         public static int DisplayedLevelIndex { get; private set; }
+
+        public static void JumpTo(int index)
+        {
+            index = Mathf.Clamp(index, 0, RopeLevelCatalog.Last);
+            if (GPUserDataManager.HasInit())
+            {
+                GPUserDataManager.Instance.SetLevelNum(index);
+                GPUserDataManager.Instance.SetInfinitLevelNum(0);
+                GPUserDataManager.Instance.SaveData();
+                PlayerPrefs.Save();
+            }
+
+            UIController.DisablePage<UIComplete>();
+            UIController.DisablePage<UIGameOver>();
+            UIController.DisablePage<UISettings>();
+            GameDirector.LoadLevel(index);
+        }
 
         public static void Enter(int index)
         {
@@ -30,10 +48,9 @@ namespace RopeSort
             if (GameData.BFromStartScene && GPUserDataManager.HasInit())
             {
                 if (GPUserDataManager.Instance.GetLevelNum() < RopeLevelCatalog.Last)
-                {
                     GPUserDataManager.Instance.InceaseLevelNum();
-                    GPUserDataManager.Instance.SaveData();
-                }
+                GPUserDataManager.Instance.IncrementWinCount();
+                GPUserDataManager.Instance.SaveData();
             }
             else if (DisplayedLevelIndex < RopeLevelCatalog.Last)
             {
@@ -42,7 +59,16 @@ namespace RopeSort
 
             RopeGamePage page = UIController.GetPage<RopeGamePage>();
             if (page != null)
-                page.ShowWinSettlement();
+                page.ReleaseForSettlement();
+
+            UIController.HidePage<RopeGamePage>(() =>
+            {
+                AdsPlayStrategy.TryPlayOnWin();
+                Utility.DGDelayedCall(1f / 33f, () =>
+                {
+                    UIController.ShowSettlementPage<UIComplete>();
+                });
+            });
         }
 
         public static void NotifyFail()

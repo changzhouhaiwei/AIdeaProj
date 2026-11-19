@@ -35,6 +35,14 @@ namespace FishTilePlay
         [SerializeField] CaptureToSprite captureNode;
 
         public static LevelDirector levelController;
+
+        /// <summary>结算正在展示的已通关关卡。没有 Tile 棋盘时用绳子当前关。</summary>
+        public static int CompletedLevelIndex()
+        {
+            if (levelController != null)
+                return levelController.GetLoadedLevelIndex();
+            return RopeSort.RopeGameController.DisplayedLevelIndex;
+        }
         private static ParticlesDirector particlesController;
         private static FloatingTextDirector floatingTextController;
         private static PUDirector powerUpController;
@@ -658,6 +666,14 @@ namespace FishTilePlay
 
         public static void ReturnToMenu()
         {
+            if (levelController == null)
+            {
+                isGameActive = false;
+                PlayMenuMusic();
+                UIController.HidePage<RopeSort.RopeGamePage>(() => UIController.ShowPage<UIMainMenu>());
+                return;
+            }
+
             if (GPUserDataManager.HasInit())
                 GPUserDataManager.Instance.TryCaptureSdkCountryCode("回主页");
 
@@ -866,6 +882,9 @@ namespace FishTilePlay
         void Update()
         {
             GameDirector.CheckShowPlayHint();
+            // 绳子关没有棋盘射线，tile2 的 F1 挂在 RaycastController 上，这里进不到。
+            if (levelController == null)
+                RopeSort.RopeGmPanel.Tick();
         }
 
         public CaptureToSprite GetCaptureToSprite()

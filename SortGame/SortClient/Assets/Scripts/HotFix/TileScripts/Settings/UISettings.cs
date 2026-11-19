@@ -81,6 +81,7 @@ namespace FishTilePlay
 
         public override void PlayShowAnimation()
         {
+            BringAboveGame();
             gameObject.SetActive(true);
             ApplyShowData();
 
@@ -143,7 +144,8 @@ namespace FishTilePlay
             if (autoCompleteButton == null)
                 return;
 
-            autoCompleteButton.gameObject.SetActive(AutoCompleteSettings.IsFeatureUnlocked());
+            // 自动完成是三消清盘，绳子玩法不带这行。
+            autoCompleteButton.gameObject.SetActive(false);
         }
 
         static bool ShouldShowRestoreButton()
@@ -164,6 +166,19 @@ namespace FishTilePlay
 #else
             rateusButton.SetActiveEx(PlayerPrefs.GetInt(UIRatesDlg.RateUsStateKey, 0) != UIRatesDlg.RateUsStateCompleted);
 #endif
+        }
+
+        void BringAboveGame()
+        {
+            // 绳子页在设置页后面，后画的会盖住设置。打开时拉到主画布之上。
+            transform.SetAsLastSibling();
+            if (canvas == null)
+                return;
+
+            Canvas root = canvas.rootCanvas;
+            int order = root != null ? root.sortingOrder + 20 : 520;
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = order;
         }
 
         void SetPageVisible(bool visible)
@@ -232,12 +247,6 @@ namespace FishTilePlay
         public override void PlayHideAnimation()
         {
             GetComponent<UILanguageDlg>()?.SaveScrollPositionBeforeSettingsHide();
-            if (AutoCompleteSettings.IsFeatureUnlocked())
-            {
-                AutoCompleteSettings.IsEnabled = pendingAutoCompleteEnabled;
-                if (pendingAutoCompleteEnabled)
-                    DockActor.TryCheckQuickFinishLevel(0.3f);
-            }
 
             isPageDisplayed = false;
             s_openingFromRateDialogReopen = false;
@@ -300,7 +309,10 @@ namespace FishTilePlay
             {
                 m_gmClickCnt = 0;
                 UIController.HidePage<UISettings>();
-                FishFramework.GameModule.UI.OpenPanel<GMLevelChooseUI>();
+                if (GameDirector.levelController == null)
+                    RopeSort.RopeGmPanel.Open();
+                else
+                    FishFramework.GameModule.UI.OpenPanel<GMLevelChooseUI>();
             }
         }
 
