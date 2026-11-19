@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using EwingSoft.GameSDK;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 
 /// <summary>
 /// 游戏玩法用户数据管理器
@@ -94,7 +94,7 @@ public class GPUserDataManager : MonoBehaviour
     private Coroutine _autoSaveCoroutine;
 
     // 本地存储键名
-    private const string LOCAL_STORAGE_KEY = "TileData007";
+    private const string LOCAL_STORAGE_KEY = "XSortData007";
 
     public GPUserData UserData => _userData;
 
@@ -216,10 +216,10 @@ public class GPUserDataManager : MonoBehaviour
         if (_userData.levelNum >= cap)
         {
             int completedFiniteLevel = cap;
-            int finiteTileBase = _userData.GetLevelTileBaseId(completedFiniteLevel);
-            if (finiteTileBase >= 0)
+            int finiteXSortBase = _userData.GetLevelXSortBaseId(completedFiniteLevel);
+            if (finiteXSortBase >= 0)
             {
-                _userData.SetTileBaseExcludeForNextInfinite(finiteTileBase);
+                _userData.SetXSortBaseExcludeForNextInfinite(finiteXSortBase);
             }
 
             _userData.levelNum = cap;
@@ -889,23 +889,6 @@ public class GPUserDataManager : MonoBehaviour
         return _userData.GetLevelPlayCount(levelId);
     }
 
-    public bool IsGoldenTreeLevelFailed(int levelId)
-    {
-        return _userData.IsGoldenTreeLevelFailed(levelId);
-    }
-
-    public void MarkGoldenTreeLevelFailed(int levelId)
-    {
-        _userData.MarkGoldenTreeLevelFailed(levelId);
-        OnDataChanged?.Invoke(nameof(GPUserData.goldenTreeFailedLevelIds));
-    }
-
-    public void ClearGoldenTreeFailedLevels()
-    {
-        _userData.ClearGoldenTreeFailedLevels();
-        OnDataChanged?.Invoke(nameof(GPUserData.goldenTreeFailedLevelIds));
-    }
-
     /// <summary>
     /// 获取所有关卡记录
     /// </summary>
@@ -1075,7 +1058,7 @@ public class GPUserDataManager : MonoBehaviour
         SetPendingDailyVictorySettlementDlg(false);
         SetHadWinYesterdayBeforeTodayFirstWin(false);
         // 数据被重置，棋子背景会话状态需重新初始化
-        FishTilePlay.TileBaseThemeResolver.ResetSession();
+        FishXSortPlay.XSortBaseThemeResolver.ResetSession();
         // 狗狗大冒险独立 PlayerPrefs + 静态缓存；DeleteAll 清磁盘后仍需清内存，否则倒计时会被写回
         PuppyAdventureFlow.ClearPending();
         PuppyAdventureDemoState.ResetAll();
@@ -1095,7 +1078,7 @@ public class GPUserDataManager : MonoBehaviour
     {
         _userData = new GPUserData();
         // 数据实例被替换，棋子背景会话状态需重新初始化
-        FishTilePlay.TileBaseThemeResolver.ResetSession();
+        FishXSortPlay.XSortBaseThemeResolver.ResetSession();
         SaveData();
         SyncToolLeft();
         Debug.Log("Default data initialized and saved to PlayerPrefs");
@@ -1105,7 +1088,7 @@ public class GPUserDataManager : MonoBehaviour
     {
         _userData = svrData;
         // 数据实例被替换（云同步/换号），棋子背景会话状态需重新初始化
-        FishTilePlay.TileBaseThemeResolver.ResetSession();
+        FishXSortPlay.XSortBaseThemeResolver.ResetSession();
         SaveData();
         SyncToolLeft();
     }

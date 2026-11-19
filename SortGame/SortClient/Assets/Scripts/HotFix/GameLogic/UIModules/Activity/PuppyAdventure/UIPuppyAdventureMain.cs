@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using FishFramework;
 using Spine.Unity;
-using TileGamePlay;
+using XSortGamePlay;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -890,7 +890,7 @@ public class UIPuppyAdventureMain : UIPuppyAdventureMainBase
             float power = JumpPower * Random.Range(0.86f, 1.16f);
             Sequence jump = PuppyAdventureAnim.JumpTo(
                 jumper, dest, power, HomeScaleOf(jumper), !IsEndTrailNode(node),
-                () => PlayJungleClip(TileGameCore.AudioController.AudioClips?.jungle_forward));
+                () => PlayJungleClip(XSortGameCore.AudioController.AudioClips?.jungle_forward));
             float jumpDur = jump.Duration(false);
             jump.SetDelay(delay);
             jump.OnComplete(() =>
@@ -1407,9 +1407,9 @@ public class UIPuppyAdventureMain : UIPuppyAdventureMainBase
 
     static void PlayButtonClick()
     {
-        if (TileGameCore.AudioController.AudioClips != null
-            && TileGameCore.AudioController.AudioClips.buttonSound != null)
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.buttonSound);
+        if (XSortGameCore.AudioController.AudioClips != null
+            && XSortGameCore.AudioController.AudioClips.buttonSound != null)
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.buttonSound);
     }
 
     void BindHotkeys()
@@ -1889,8 +1889,8 @@ public class UIPuppyAdventureMain : UIPuppyAdventureMainBase
             {
                 // 机器人落水 jungle_down；玩家落水改播 jungle_fail（去掉原开场 fail 音）
                 PlayJungleClip(isPlayer
-                    ? TileGameCore.AudioController.AudioClips?.jungle_fail
-                    : TileGameCore.AudioController.AudioClips?.jungle_down);
+                    ? XSortGameCore.AudioController.AudioClips?.jungle_fail
+                    : XSortGameCore.AudioController.AudioClips?.jungle_down);
                 if (straightDown)
                 {
                     LiftPlayerAboveGroup();
@@ -2029,7 +2029,7 @@ public class UIPuppyAdventureMain : UIPuppyAdventureMainBase
     {
         if (clip == null)
             return;
-        TileGameCore.AudioController.PlaySound(clip);
+        XSortGameCore.AudioController.PlaySound(clip);
     }
 
     protected override void OnDestroying()

@@ -88,9 +88,9 @@ public class PayData : BaseData
 
     public string GetNoAdsGId()
     {
-        string key = "soeasytile.noadstile";
+        string key = "soeasyXSort.noadsXSort";
 #if UNITY_ANDROID
-        key = "soeasytile.noadstile";
+        key = "soeasyXSort.noadsXSort";
 #endif
         return key;
     }

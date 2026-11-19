@@ -3437,7 +3437,7 @@
         </member>
         <member name="F:Sirenix.OdinInspector.ProgressBarAttribute.Segmented">
             <summary>
-            If <c>true</c> then the progress bar will be drawn in tiles.
+            If <c>true</c> then the progress bar will be drawn in XSorts.
             </summary>
         </member>
         <member name="P:Sirenix.OdinInspector.ProgressBarAttribute.CustomValueStringMember">

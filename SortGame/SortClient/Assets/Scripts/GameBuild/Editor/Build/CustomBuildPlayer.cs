@@ -201,7 +201,7 @@ public static class CustomBuildPlayer
     {
         var unityProjectPath = Directory.GetParent(Application.dataPath)?.FullName;
         var repoPath = Directory.GetParent(unityProjectPath ?? Application.dataPath)?.FullName ?? Application.dataPath;
-        return Path.Combine(repoPath, "Tile2Android");
+        return Path.Combine(repoPath, "SortAndroid");
     }
 
     private static void KeepAndroidGradleWrapper()

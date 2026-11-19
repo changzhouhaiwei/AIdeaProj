@@ -407,29 +407,8 @@ public static class PuppyAdventureDemoState
     static int[] BuildVisualRobotIcons()
     {
         var icons = new int[VisualRobotSlots];
-        int filled = 0;
-        string myUid = null;
-        if (GPUserDataManager.HasInit() && GPUserDataManager.Instance != null)
-            myUid = GPUserDataManager.Instance.GetUID();
-
-        var list = GameData.Rank != null ? GameData.Rank.GetRankList() : null;
-        if (list != null)
-        {
-            for (int i = 0; i < list.Count && filled < VisualRobotSlots; i++)
-            {
-                RankData.OneUserData user = list[i];
-                if (user == null)
-                    continue;
-                if (!string.IsNullOrEmpty(myUid) && user.playerId == myUid)
-                    continue;
-                if (!int.TryParse(user.pictureUrl, out int id) || id <= 0)
-                    id = UnityEngine.Random.Range(1, 9);
-                icons[filled++] = id;
-            }
-        }
-
-        while (filled < VisualRobotSlots)
-            icons[filled++] = UnityEngine.Random.Range(1, 9);
+        for (int i = 0; i < VisualRobotSlots; i++)
+            icons[i] = UnityEngine.Random.Range(1, 9);
         return icons;
     }
 
@@ -803,7 +782,7 @@ public static class PuppyAdventureDemoState
             DebugReset(new PuppyAdventureSaveData { hasShownLifetimeStartPopup = true });
             Check("stage5 start for hud", StartChallenge());
             Check("hud curWin0 is 1/5", HudWin == 1 && WinTarget == 5);
-            Check("stage5 0!=1 tiles", TrailNodeIndex(0, 5, 6) != TrailNodeIndex(1, 5, 6));
+            Check("stage5 0!=1 XSorts", TrailNodeIndex(0, 5, 6) != TrailNodeIndex(1, 5, 6));
             Check("record first stage5 win", RecordLevelWin());
             ResolveHomeProgress(out homeFrom, out homeTo);
             Check("stage5 first 0→1", homeFrom == 0 && homeTo == 1 && CurWin == 1);

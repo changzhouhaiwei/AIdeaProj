@@ -612,7 +612,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3998862673000341252}
-        m_TargetAssemblyTypeName: TileGamePlay.UICompletePerNode, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UICompletePerNode, HotUpdate
         m_MethodName: HandleAwardButtonTap
         m_Mode: 1
         m_Arguments:
@@ -9121,7 +9121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3110011964425101229}
-        m_TargetAssemblyTypeName: TileGamePlay.UICompletePerNode, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UICompletePerNode, HotUpdate
         m_MethodName: HidePreviewDlg
         m_Mode: 1
         m_Arguments:
@@ -9893,7 +9893,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3110011964425101229}
-        m_TargetAssemblyTypeName: TileGamePlay.UICompletePerNode, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UICompletePerNode, HotUpdate
         m_MethodName: HandleAwardButtonTap
         m_Mode: 1
         m_Arguments:

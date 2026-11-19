@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using FishTilePlay;
+using FishXSortPlay;
 using UnityEngine;
 using FishFramework;
 using EwingSoft.GameSDK;
@@ -29,7 +29,7 @@ public static partial class GameBAData
     private static BAPaymentResultData BAPaymentResult = new();
     private static BAAdLoadData BAAdLoad = new();
     private static BAPolicyData BAPolicyData = new();//隐私弹窗
-    private static BACommentData BACommentData = new();//评分（Tile2 评弹窗仍上报）
+    private static BACommentData BACommentData = new();//评分（XSort2 评弹窗仍上报）
     private static BASignData BASignData = new();//火花连胜签到页
     private static BAMainStageRewardData BAMainStageReward = new();//结算额外奖励
     private static BARankCloseData BARankCloseData = new();
@@ -163,11 +163,11 @@ public static partial class GameBAData
         BAMainStage.stage_form_id = LevelDirector.LevelGenService.GetDynamicCfgStr(); //"1";
         FillPlayType(BAMainStage.playtype);
         BAMainStage.is_nonet = NetDetectController.GetIsLoseNet();
-        BAMainStage.tilebase = LevelDirector.LoadedLevelTheme.ToString();
-        int tileBaseStyle = LevelDirector.LoadedTileBaseStyle;
-        BAMainStage.tilebase2 = tileBaseStyle < 0
+        BAMainStage.XSortbase = LevelDirector.LoadedLevelTheme.ToString();
+        int XSortBaseStyle = LevelDirector.LoadedXSortBaseStyle;
+        BAMainStage.XSortbase2 = XSortBaseStyle < 0
             ? "theme"
-            : (TileBaseStyleTable.NameAt(tileBaseStyle) ?? "");
+            : (XSortBaseStyleTable.NameAt(XSortBaseStyle) ?? "");
         BAMainStage.round = GPUserDataManager.Instance.GetLevelPlayCount(levelIndex);//第多少次进入关卡
 
         //进入关卡时连胜连败计数
@@ -190,11 +190,11 @@ public static partial class GameBAData
         //开局棋子类型数
         BAMainStage.type = dynamicData.number;
         //总棋子数
-        BAMainStage.tile = LevelDirector.Level.GetAmountOfFilledCells();
+        BAMainStage.XSort = LevelDirector.Level.GetAmountOfFilledCells();
         //总层数
         BAMainStage.layer = LevelDirector.Level.AmountOfLayers;
-        //tileLeft
-        BAMainStage.tile_left = LevelDirector.LevelGenService.GetRestTileCount();
+        //XSortLeft
+        BAMainStage.XSort_left = LevelDirector.LevelGenService.GetRestXSortCount();
         //剩余层数
         BAMainStage.layer_left = LevelDirector.LevelGenService.GetRestLayerCount();
         //暂存区棋子数
@@ -207,29 +207,11 @@ public static partial class GameBAData
 
         BAMainStage.is_skip = false;
         BAMainStage.status = status;
-
-        if (LevelDirector.BInGoldenActivity)
-        {
-            var userData = GPUserDataManager.GPUserData;
-            var my = GameData.Rank?.GetMyRankData();
-            BAMainStage.rank = my != null ? my.rank.ToString() : "";
-            BAMainStage.rank2 = GoldTreeLeagueRankFlagHelper.NormalizeLeagueTier(userData != null ? userData.goldenTreeLeagueTier : 0).ToString();
-            BAMainStage.challenge_score_cur = userData != null ? userData.goldenTreeActPoint.ToString() : "";
-            BAMainStage.challenge_score = LevelDirector.GoldenTreeData != null
-                ? LevelDirector.GoldenTreeData.CurrentGoldenTreeScore.ToString()
-                : "";
-            BAMainStage.unique_id = GameData.GoldTreeActData != null
-                ? GameData.GoldTreeActData.GetActivityUniqueId()
-                : "";
-        }
-        else
-        {
-            BAMainStage.rank = "";
-            BAMainStage.rank2 = "";
-            BAMainStage.challenge_score_cur = "";
-            BAMainStage.challenge_score = "";
-            BAMainStage.unique_id = "";
-        }
+        BAMainStage.rank = "";
+        BAMainStage.rank2 = "";
+        BAMainStage.challenge_score_cur = "";
+        BAMainStage.challenge_score = "";
+        BAMainStage.unique_id = "";
 
         foreach (var item in m_toolUseDic)
         {
@@ -303,35 +285,35 @@ public static partial class GameBAData
         if (dock == null || gen == null)
             return;
 
-        var dockTiles = new List<TileActor>();
-        dock.CopyOccupiedTilesLeftToRight(dockTiles);
-        if (dockTiles.Count == 0)
+        var dockXSorts = new List<XSortActor>();
+        dock.CopyOccupiedXSortsLeftToRight(dockXSorts);
+        if (dockXSorts.Count == 0)
             return;
 
         var typeCounts = new Dictionary<int, int>();
-        for (int i = 0; i < dockTiles.Count; i++)
+        for (int i = 0; i < dockXSorts.Count; i++)
         {
-            int typeId = dockTiles[i].MatchTypeId;
+            int typeId = dockXSorts[i].MatchTypeId;
             typeCounts.TryGetValue(typeId, out int n);
             typeCounts[typeId] = n + 1;
         }
 
-        List<TileActor> actTiles = gen.ActTiles;
+        List<XSortActor> actXSorts = gen.ActXSorts;
         var costByType = new Dictionary<int, int>();
         foreach (var pair in typeCounts)
         {
             int shortage = Mathf.Max(0, 3 - pair.Value);
             int buriedNeed = shortage;
-            if (shortage > 0 && actTiles != null)
+            if (shortage > 0 && actXSorts != null)
             {
                 int clickable = 0;
-                for (int i = 0; i < actTiles.Count; i++)
+                for (int i = 0; i < actXSorts.Count; i++)
                 {
-                    TileActor tile = actTiles[i];
-                    if (tile != null
-                        && tile.TileModel != null
-                        && tile.MatchTypeId == pair.Key
-                        && PlayBotClickCost.CanPlayerClick(tile))
+                    XSortActor XSort = actXSorts[i];
+                    if (XSort != null
+                        && XSort.XSortModel != null
+                        && XSort.MatchTypeId == pair.Key
+                        && PlayBotClickCost.CanPlayerClick(XSort))
                         clickable++;
                 }
                 buriedNeed = Mathf.Max(0, shortage - clickable);
@@ -339,18 +321,18 @@ public static partial class GameBAData
 
             int extra = 0;
             if (buriedNeed > 0
-                && actTiles != null
-                && PlayBotClickCost.TryGetUncover(pair.Key, buriedNeed, actTiles, out int uncover))
+                && actXSorts != null
+                && PlayBotClickCost.TryGetUncover(pair.Key, buriedNeed, actXSorts, out int uncover))
                 extra = uncover;
 
             costByType[pair.Key] = shortage + extra;
         }
 
-        for (int i = 0; i < dockTiles.Count; i++)
+        for (int i = 0; i < dockXSorts.Count; i++)
         {
-            TileActor tile = dockTiles[i];
-            BAMainStage.chess_list_fail.Add(tile.TileModel.TileIndex);
-            BAMainStage.chess_cost_fail.Add(costByType[tile.MatchTypeId]);
+            XSortActor XSort = dockXSorts[i];
+            BAMainStage.chess_list_fail.Add(XSort.XSortModel.XSortIndex);
+            BAMainStage.chess_cost_fail.Add(costByType[XSort.MatchTypeId]);
         }
     }
 
@@ -365,7 +347,7 @@ public static partial class GameBAData
         BAStageEvent.stage_form_id = LevelDirector.LevelGenService.GetDynamicCfgStr();
         FillPlayType(BAStageEvent.playtype);
         BAStageEvent.is_nonet = NetDetectController.GetIsLoseNet();
-        BAStageEvent.tilebase = LevelDirector.LoadedLevelTheme.ToString();
+        BAStageEvent.XSortbase = LevelDirector.LoadedLevelTheme.ToString();
 
         BAStageEvent.round = GPUserDataManager.Instance.GetLevelPlayCount(levelIndex);//第多少次进入关卡
         //连胜连败数据
@@ -384,11 +366,11 @@ public static partial class GameBAData
         var dynamicData = LevelDirector.LevelGenService.GetDynamicData();
         //开局棋子类型数
         BAStageEvent.type = dynamicData.number;
-        BAStageEvent.tile = LevelDirector.Level.GetAmountOfFilledCells();
+        BAStageEvent.XSort = LevelDirector.Level.GetAmountOfFilledCells();
         //总层数
         BAStageEvent.layer = LevelDirector.Level.AmountOfLayers;
-        //tileLeft
-        BAStageEvent.tile_left = LevelDirector.LevelGenService.GetRestTileCount();
+        //XSortLeft
+        BAStageEvent.XSort_left = LevelDirector.LevelGenService.GetRestXSortCount();
         //剩余层数
         BAStageEvent.layer_left = LevelDirector.LevelGenService.GetRestLayerCount();
         //暂存区棋子数
@@ -402,7 +384,7 @@ public static partial class GameBAData
 
 
 #if UNITY_EDITOR
-        int total = BAStageEvent.temp + BAStageEvent.tile_left;
+        int total = BAStageEvent.temp + BAStageEvent.XSort_left;
         if (total % 3 != 0)
         {
             Debug.LogError("出现异常=-=");
@@ -748,7 +730,7 @@ public static partial class GameBAData
         ThinkingDataSdk.LogEvent("policy", BAPolicyData.ToJson());
     }
 
-    /// <summary>Tile2 评星弹窗埋点（Mahjong 侧已注释，此处保留接口）。</summary>
+    /// <summary>XSort2 评星弹窗埋点（Mahjong 侧已注释，此处保留接口）。</summary>
     public static void ExcuteCommentEvent(int status, int star = -1)
     {
         BACommentData.status = status;
@@ -773,49 +755,6 @@ public static partial class GameBAData
         BASignData.day = day;
         BASignData.type = type;
         GPSDKMgr.Instance.TrackEvent(BASignData.key, BASignData.ToJson());
-    }
-
-    public static void ExcuteRankClose(int rank, int num, int leaderboard, int totalLevel)
-    {
-        BARankCloseData.ClearData();
-        BARankCloseData.Rank = rank;
-        BARankCloseData.num = num;
-        BARankCloseData.leaderboard = leaderboard;
-        BARankCloseData.total_level = totalLevel;
-        GPSDKMgr.Instance.TrackEvent("Rank_close", BARankCloseData.ToJson());
-    }
-
-    /// <summary>
-    /// 活动参与埋点 activity。
-    /// status: 0开启 1结束(排位=倒计时结束；小狗=胜负结算) 2领奖 3进度变化 9点开启弹窗X(排位仍开启；小狗=拒绝开启)。
-    /// activity_id: 1=rank 2=puppyadventure 3=piggybank。排位缺省参数从黄金树数据读取。
-    /// </summary>
-    public static void ExcuteActivity(int status, int rank = -1, int rank2 = -1, string uniqueId = null, int key = -1)
-    {
-        BAActivityData.ClearData();
-        BAActivityData.activity_id = 1;
-        BAActivityData.activity_name = "rank";
-        BAActivityData.status = status;
-
-        var userData = GPUserDataManager.GPUserData;
-        if (rank < 0)
-        {
-            var my = GameData.Rank?.GetMyRankData();
-            rank = my != null ? (int)my.rank : 0;
-        }
-        if (rank2 < 0)
-            rank2 = GoldTreeLeagueRankFlagHelper.NormalizeLeagueTier(userData != null ? userData.goldenTreeLeagueTier : 0);
-        if (string.IsNullOrEmpty(uniqueId))
-            uniqueId = GameData.GoldTreeActData != null ? GameData.GoldTreeActData.GetActivityUniqueId() : "";
-        if (key < 0)
-            key = userData != null ? userData.goldenTreeActPoint : 0;
-
-        BAActivityData.rank = rank;
-        BAActivityData.rank2 = rank2;
-        BAActivityData.unique_id = uniqueId ?? "";
-        BAActivityData.key = key;
-        BAActivityData.reward_id = 0;
-        GPSDKMgr.Instance.TrackEvent("activity", BAActivityData.ToJson());
     }
 
     /// <summary>

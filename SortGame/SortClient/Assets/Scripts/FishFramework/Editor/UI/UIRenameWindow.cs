@@ -14,8 +14,6 @@ namespace FishFramework
     /// </summary>
     public class UIRenameWindow : EditorWindow
     {
-        private const string kMenuPath = "FishFramework/UI/Rename Prefab";
-
         private GameObject m_PrefabAsset;
         private string m_OldName = "";
         private string m_NewName = "";
@@ -33,7 +31,6 @@ namespace FishFramework
         private string m_StatusMessage = "";
         private MessageType m_StatusType = MessageType.None;
 
-        [MenuItem(kMenuPath)]
         public static void Open()
         {
             var window = GetWindow<UIRenameWindow>();

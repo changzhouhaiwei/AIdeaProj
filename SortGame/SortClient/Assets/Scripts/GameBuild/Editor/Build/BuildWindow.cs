@@ -91,7 +91,7 @@ public class BuildWindow : OdinMenuEditorWindow
         [OnInspectorInit]
         private void SyncAndroidVersionDefaults()
         {
-            if (!TryReadTile2AndroidVersion(out var versionName, out var buildNumber))
+            if (!TryReadSortAndroidVersion(out var versionName, out var buildNumber))
             {
                 return;
             }
@@ -222,8 +222,8 @@ public class BuildWindow : OdinMenuEditorWindow
                 AssetDatabase.SaveAssets();
             }
 
-            UpdateLauncherGradleVersionDefaults(GetRepoPath("Tile2Android/launcher/build.gradle"), versionName, buildNumber);
-            UpdateLauncherGradleVersionDefaults(GetRepoPath("Tile2Client/Assets/Editor/AndroidKeepFiles/launcher/build.gradle"), versionName, buildNumber);
+            UpdateLauncherGradleVersionDefaults(GetRepoPath("SortAndroid/launcher/build.gradle"), versionName, buildNumber);
+            UpdateLauncherGradleVersionDefaults(GetRepoPath("SortClient/Assets/Editor/AndroidKeepFiles/launcher/build.gradle"), versionName, buildNumber);
             AssetDatabase.Refresh();
 
             if (log)
@@ -259,12 +259,12 @@ public class BuildWindow : OdinMenuEditorWindow
             File.WriteAllText(launcherGradlePath, content);
         }
 
-        private static bool TryReadTile2AndroidVersion(out string versionName, out int buildNumber)
+        private static bool TryReadSortAndroidVersion(out string versionName, out int buildNumber)
         {
             versionName = PlayerSettings.bundleVersion;
             buildNumber = PlayerSettings.Android.bundleVersionCode > 0 ? PlayerSettings.Android.bundleVersionCode : 1;
 
-            var launcherGradle = GetRepoPath("Tile2Android/launcher/build.gradle");
+            var launcherGradle = GetRepoPath("SortAndroid/launcher/build.gradle");
             if (!File.Exists(launcherGradle))
             {
                 return false;

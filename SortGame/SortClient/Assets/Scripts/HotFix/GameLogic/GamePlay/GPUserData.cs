@@ -27,7 +27,7 @@ public class LevelPlayRecord
 }
 
 [Serializable]
-public class TileBaseStyleBag
+public class XSortBaseStyleBag
 {
     public List<string> knownNames = new List<string>();
     public List<string> remaining = new List<string>();
@@ -38,7 +38,7 @@ public class TileBaseStyleBag
 public class LevelStyleRecord
 {
     [SerializeField] public int levelNum;
-    /// <summary>-1 用关卡主题底板，&gt;=0 为 TileBaseStyle 下标。</summary>
+    /// <summary>-1 用关卡主题底板，&gt;=0 为 XSortBaseStyle 下标。</summary>
     [SerializeField] public int styleId = -1;
     [SerializeField] public bool pendingReroll;
 
@@ -53,17 +53,17 @@ public class LevelStyleRecord
 }
 
 [Serializable]
-public class LevelTileBaseRecord
+public class LevelXSortBaseRecord
 {
     [SerializeField] public int levelNum;
-    [SerializeField] public int tilebaseId;
+    [SerializeField] public int XSortbaseId;
 
-    public LevelTileBaseRecord() { }
+    public LevelXSortBaseRecord() { }
 
-    public LevelTileBaseRecord(int levelNum, int tilebaseId)
+    public LevelXSortBaseRecord(int levelNum, int XSortbaseId)
     {
         this.levelNum = levelNum;
-        this.tilebaseId = tilebaseId;
+        this.XSortbaseId = XSortbaseId;
     }
 }
 
@@ -141,31 +141,31 @@ public class GPUserData
     [SerializeField] private List<LevelPlayRecord> _levelPlayRecord;
 
     //关卡棋子底板记录（一旦确定不可更改，无视重开）
-    [SerializeField] private List<LevelTileBaseRecord> _levelTileBaseRecord;
+    [SerializeField] private List<LevelXSortBaseRecord> _levelXSortBaseRecord;
 
     //上次会话已知的棋子底板 id 集合（用于检测新增背景）
-    [SerializeField] private List<int> _knownTileBaseIds;
+    [SerializeField] private List<int> _knownXSortBaseIds;
 
     //待优先插入的新增背景 id 队列（逐关消费）
-    [SerializeField] private List<int> _pendingPriorityTileBaseIds;
+    [SerializeField] private List<int> _pendingPriorityXSortBaseIds;
 
     // 无限关棋子底板记录（关号 = 无限关展示序号 1..N，与有限关独立）
-    [SerializeField] private List<LevelTileBaseRecord> _infinitLevelTileBaseRecord;
+    [SerializeField] private List<LevelXSortBaseRecord> _infinitLevelXSortBaseRecord;
 
     // 无限关：上次会话已知的底板 id 集合 / 待优先插入的新增背景队列
-    [SerializeField] private List<int> _knownInfinitTileBaseIds;
-    [SerializeField] private List<int> _pendingPriorityInfinitTileBaseIds;
+    [SerializeField] private List<int> _knownInfinitXSortBaseIds;
+    [SerializeField] private List<int> _pendingPriorityInfinitXSortBaseIds;
 
-    // 经典底板 TileBaseStyle。有限关 / 无限关分开记。
+    // 经典底板 XSortBaseStyle。有限关 / 无限关分开记。
     [SerializeField] private List<LevelStyleRecord> _levelStyleRecord;
     [SerializeField] private List<LevelStyleRecord> _infinitLevelStyleRecord;
-    [SerializeField] private TileBaseStyleBag _tileBaseStyleBag;
-    [SerializeField] private TileBaseStyleBag _infinitTileBaseStyleBag;
+    [SerializeField] private XSortBaseStyleBag _XSortBaseStyleBag;
+    [SerializeField] private XSortBaseStyleBag _infinitXSortBaseStyleBag;
 
     // 模式切换时一次性排除：有限最后一关→下一无限关 / 无限→扩关后首关有限关
-    [SerializeField] private int _tileBaseExcludeIdForNextInfinite = -1;
-    [SerializeField] private int _tileBaseExcludeIdForNextFinite = -1;
-    [SerializeField] private int _tileBaseExcludeFiniteLevel = -1;
+    [SerializeField] private int _XSortBaseExcludeIdForNextInfinite = -1;
+    [SerializeField] private int _XSortBaseExcludeIdForNextFinite = -1;
+    [SerializeField] private int _XSortBaseExcludeFiniteLevel = -1;
 
     //轮盘数据存储 隔天五点刷新时间
     [SerializeField] private List<int> _circleAwardCntList;
@@ -189,90 +189,13 @@ public class GPUserData
     [SerializeField] private long _dailyVictorySnapshotLastWinTicks;
     [SerializeField] private bool _dailyVictoryPendingSettlementDlg;
     [SerializeField] private bool _dailyVictoryHadWinYesterdayBeforeTodayFirstWin;
-
-    //黄金树活动
-    [SerializeField] private int _goldenTreeActPoint;
-    [SerializeField] private int _goldenTreeTodayWinCnt;
-    [SerializeField] private int _goldenTreeTodayWinBoardId = -1;
-    [SerializeField] private int _goldenTreeActWinCnt;
-    [SerializeField] private bool _goldenTreeActOpen;
-    [SerializeField] private int _goldenTreeBoardId = -1;
-    [SerializeField] private int _goldenTreeLastRank = -1;
-    [SerializeField] private string _goldenTreeGroupId = "";
-    [SerializeField] private int _goldenTreeOpenCnt;
-    [SerializeField] private int _goldenTreeRobotScoreBoardId = -1;
-    [SerializeField] private string _goldenTreeRobotScoreJson = "";
-    [SerializeField] private long _goldenTreeRobotLastSettleTime;
-    [SerializeField] private int _goldenTreeLastSeasonBoardId = -1;
-    [SerializeField] private string _goldenTreeLastSeasonBoardJson = "";
-    [SerializeField] private int _goldenTreeLastSeasonSnapshotLeagueTier;
-    [SerializeField] private bool _goldenTreeLastSeasonPendingReward;
-    [SerializeField] private int _goldenTreeSettlementRewardGrantedBoardId = -1;
-    [SerializeField] private int _goldenTreeLeagueTier;
-    [SerializeField] private int _goldenTreeLastSeasonLeagueTier;
-    [SerializeField] private int _goldenTreeSettlementLeagueTier;
-    [SerializeField] private int _goldenTreeSettlementTierAppliedBoardId = -1;
-    [SerializeField] private bool _goldenTreeFirstTipsShown;
     /// <summary>当天 TipsDlg 打开记录。格式 yyyyMMdd|levelKey:count，跨日整段丢弃。</summary>
     [SerializeField] private string _tipsDlgDailyOpen = "";
-    [SerializeField] private List<int> _goldenTreeFailedLevelIds = new();
 
-    public void ClearAllGoldTreeData()
+    public string tipsDlgDailyOpen
     {
-        _goldenTreeActPoint = 0;
-        _goldenTreeActWinCnt = 0;
-        _goldenTreeActOpen = false;
-        _goldenTreeBoardId = -1;
-        _goldenTreeGroupId = "";
-        _goldenTreeLastRank = -1;
-        _goldenTreeRobotScoreBoardId = -1;
-        _goldenTreeRobotScoreJson = "";
-        _goldenTreeRobotLastSettleTime = 0;
-        _goldenTreeLastSeasonBoardId = -1;
-        _goldenTreeLastSeasonBoardJson = "";
-        _goldenTreeLastSeasonSnapshotLeagueTier = 0;
-        _goldenTreeLastSeasonPendingReward = false;
-        ClearGoldenTreeFailedLevels();
-        // 不重置 _goldenTreeSettlementRewardGrantedBoardId：防止结算弹窗重复打开时二次发奖
-        // 不重置 _goldenTreeLeagueTier / _goldenTreeSettlementTierAppliedBoardId：段位跨日榜保留
-        // 不重置 _goldenTreeLastSeasonLeagueTier / _goldenTreeSettlementLeagueTier：供联赛结束展示
-        // 不重置 _goldenTreeFirstTipsShown：账号生命周期内仅弹一次，仅 GM ResetData / 删档重装可重置
-        // 不重置 _goldenTreeOpenCnt：账号内第几次开启活动，跨日结算不清
-    }
-
-    public bool IsGoldenTreeLevelFailed(int levelId)
-    {
-        if (_goldenTreeFailedLevelIds == null || _goldenTreeFailedLevelIds.Count == 0)
-            return false;
-
-        for (int i = 0; i < _goldenTreeFailedLevelIds.Count; i++)
-        {
-            if (_goldenTreeFailedLevelIds[i] == levelId)
-                return true;
-        }
-
-        return false;
-    }
-
-    public void MarkGoldenTreeLevelFailed(int levelId)
-    {
-        if (_goldenTreeFailedLevelIds == null)
-            _goldenTreeFailedLevelIds = new List<int>();
-
-        if (IsGoldenTreeLevelFailed(levelId))
-            return;
-
-        _goldenTreeFailedLevelIds.Add(levelId);
-        _changedFields.Add(nameof(goldenTreeFailedLevelIds));
-    }
-
-    public void ClearGoldenTreeFailedLevels()
-    {
-        if (_goldenTreeFailedLevelIds == null || _goldenTreeFailedLevelIds.Count == 0)
-            return;
-
-        _goldenTreeFailedLevelIds.Clear();
-        _changedFields.Add(nameof(goldenTreeFailedLevelIds));
+        get => _tipsDlgDailyOpen ?? "";
+        set => _tipsDlgDailyOpen = value ?? "";
     }
 
     public void ClearAllDailyVictoryData()
@@ -936,35 +859,35 @@ public class GPUserData
     }
 
     // 关卡棋子底板记录属性访问器
-    public List<LevelTileBaseRecord> levelTileBaseRecord
+    public List<LevelXSortBaseRecord> levelXSortBaseRecord
     {
         get
         {
-            _levelTileBaseRecord ??= new List<LevelTileBaseRecord>();
-            return _levelTileBaseRecord;
+            _levelXSortBaseRecord ??= new List<LevelXSortBaseRecord>();
+            return _levelXSortBaseRecord;
         }
         set
         {
-            _levelTileBaseRecord = value;
-            _changedFields.Add(nameof(levelTileBaseRecord));
+            _levelXSortBaseRecord = value;
+            _changedFields.Add(nameof(levelXSortBaseRecord));
         }
     }
 
     /// <summary>
     /// 获取指定关卡已确定的棋子底板 id；未确定返回 -1。
     /// </summary>
-    public int GetLevelTileBaseId(int levelNum)
+    public int GetLevelXSortBaseId(int levelNum)
     {
-        if (_levelTileBaseRecord == null)
+        if (_levelXSortBaseRecord == null)
         {
             return -1;
         }
 
-        for (int i = 0; i < _levelTileBaseRecord.Count; i++)
+        for (int i = 0; i < _levelXSortBaseRecord.Count; i++)
         {
-            if (_levelTileBaseRecord[i].levelNum == levelNum)
+            if (_levelXSortBaseRecord[i].levelNum == levelNum)
             {
-                return _levelTileBaseRecord[i].tilebaseId;
+                return _levelXSortBaseRecord[i].XSortbaseId;
             }
         }
 
@@ -974,24 +897,24 @@ public class GPUserData
     /// <summary>
     /// 记录指定关卡的棋子底板 id（一旦确定不可更改，无视重开）。
     /// </summary>
-    public void SetLevelTileBaseId(int levelNum, int tilebaseId)
+    public void SetLevelXSortBaseId(int levelNum, int XSortbaseId)
     {
-        _levelTileBaseRecord ??= new List<LevelTileBaseRecord>();
+        _levelXSortBaseRecord ??= new List<LevelXSortBaseRecord>();
 
-        for (int i = 0; i < _levelTileBaseRecord.Count; i++)
+        for (int i = 0; i < _levelXSortBaseRecord.Count; i++)
         {
-            if (_levelTileBaseRecord[i].levelNum == levelNum)
+            if (_levelXSortBaseRecord[i].levelNum == levelNum)
             {
                 // 已确定则不覆盖
                 return;
             }
         }
 
-        _levelTileBaseRecord.Add(new LevelTileBaseRecord(levelNum, tilebaseId));
-        _changedFields.Add(nameof(levelTileBaseRecord));
+        _levelXSortBaseRecord.Add(new LevelXSortBaseRecord(levelNum, XSortbaseId));
+        _changedFields.Add(nameof(levelXSortBaseRecord));
     }
 
-    public bool TryGetTileBaseStyle(int levelNum, bool infinite, out int styleId, out bool pendingReroll)
+    public bool TryGetXSortBaseStyle(int levelNum, bool infinite, out int styleId, out bool pendingReroll)
     {
         styleId = -1;
         pendingReroll = false;
@@ -1016,7 +939,7 @@ public class GPUserData
         return false;
     }
 
-    public void SetTileBaseStyle(int levelNum, bool infinite, int styleId, bool pendingReroll)
+    public void SetXSortBaseStyle(int levelNum, bool infinite, int styleId, bool pendingReroll)
     {
         List<LevelStyleRecord> list = StyleList(infinite);
         for (int i = 0; i < list.Count; i++)
@@ -1036,14 +959,14 @@ public class GPUserData
         MarkStyleList(infinite);
     }
 
-    public void MarkTileBaseStyleReroll(int levelNum, bool infinite)
+    public void MarkXSortBaseStyleReroll(int levelNum, bool infinite)
     {
-        if (!TryGetTileBaseStyle(levelNum, infinite, out int styleId, out _))
+        if (!TryGetXSortBaseStyle(levelNum, infinite, out int styleId, out _))
         {
             styleId = -1;
         }
 
-        SetTileBaseStyle(levelNum, infinite, styleId, true);
+        SetXSortBaseStyle(levelNum, infinite, styleId, true);
     }
 
     List<LevelStyleRecord> StyleList(bool infinite)
@@ -1083,268 +1006,268 @@ public class GPUserData
         }
     }
 
-    public TileBaseStyleBag TileBaseBag(bool infinite)
+    public XSortBaseStyleBag XSortBaseBag(bool infinite)
     {
         if (infinite)
         {
-            _infinitTileBaseStyleBag ??= new TileBaseStyleBag();
-            _infinitTileBaseStyleBag.knownNames ??= new List<string>();
-            _infinitTileBaseStyleBag.remaining ??= new List<string>();
-            return _infinitTileBaseStyleBag;
+            _infinitXSortBaseStyleBag ??= new XSortBaseStyleBag();
+            _infinitXSortBaseStyleBag.knownNames ??= new List<string>();
+            _infinitXSortBaseStyleBag.remaining ??= new List<string>();
+            return _infinitXSortBaseStyleBag;
         }
 
-        _tileBaseStyleBag ??= new TileBaseStyleBag();
-        _tileBaseStyleBag.knownNames ??= new List<string>();
-        _tileBaseStyleBag.remaining ??= new List<string>();
-        return _tileBaseStyleBag;
+        _XSortBaseStyleBag ??= new XSortBaseStyleBag();
+        _XSortBaseStyleBag.knownNames ??= new List<string>();
+        _XSortBaseStyleBag.remaining ??= new List<string>();
+        return _XSortBaseStyleBag;
     }
 
-    public void TouchTileBaseStyleBag(bool infinite)
+    public void TouchXSortBaseStyleBag(bool infinite)
     {
-        _changedFields.Add(infinite ? nameof(infinitTileBaseStyleBag) : nameof(tileBaseStyleBag));
+        _changedFields.Add(infinite ? nameof(infinitXSortBaseStyleBag) : nameof(xSortBaseStyleBag));
     }
 
-    public TileBaseStyleBag tileBaseStyleBag
+    public XSortBaseStyleBag xSortBaseStyleBag
     {
-        get => TileBaseBag(false);
+        get => XSortBaseBag(false);
         set
         {
-            _tileBaseStyleBag = value ?? new TileBaseStyleBag();
-            _changedFields.Add(nameof(tileBaseStyleBag));
+            _XSortBaseStyleBag = value ?? new XSortBaseStyleBag();
+            _changedFields.Add(nameof(xSortBaseStyleBag));
         }
     }
 
-    public TileBaseStyleBag infinitTileBaseStyleBag
+    public XSortBaseStyleBag infinitXSortBaseStyleBag
     {
-        get => TileBaseBag(true);
+        get => XSortBaseBag(true);
         set
         {
-            _infinitTileBaseStyleBag = value ?? new TileBaseStyleBag();
-            _changedFields.Add(nameof(infinitTileBaseStyleBag));
+            _infinitXSortBaseStyleBag = value ?? new XSortBaseStyleBag();
+            _changedFields.Add(nameof(infinitXSortBaseStyleBag));
         }
     }
 
     /// <summary>
     /// 删除关号大于 level 的棋子底板记录（用于旧存档迁移到逐关模型）。
     /// </summary>
-    public void RemoveLevelTileBaseRecordsAbove(int level)
+    public void RemoveLevelXSortBaseRecordsAbove(int level)
     {
-        if (_levelTileBaseRecord == null || _levelTileBaseRecord.Count == 0)
+        if (_levelXSortBaseRecord == null || _levelXSortBaseRecord.Count == 0)
         {
             return;
         }
 
-        int removed = _levelTileBaseRecord.RemoveAll(record => record.levelNum > level);
+        int removed = _levelXSortBaseRecord.RemoveAll(record => record.levelNum > level);
         if (removed > 0)
         {
-            _changedFields.Add(nameof(levelTileBaseRecord));
+            _changedFields.Add(nameof(levelXSortBaseRecord));
         }
     }
 
     /// <summary>
     /// 删除关号小于 level 的棋子底板记录（裁剪历史，仅保留当前轮附近，封顶存档体积）。
     /// </summary>
-    public void RemoveLevelTileBaseRecordsBelow(int level)
+    public void RemoveLevelXSortBaseRecordsBelow(int level)
     {
-        if (_levelTileBaseRecord == null || _levelTileBaseRecord.Count == 0)
+        if (_levelXSortBaseRecord == null || _levelXSortBaseRecord.Count == 0)
         {
             return;
         }
 
-        int removed = _levelTileBaseRecord.RemoveAll(record => record.levelNum < level);
+        int removed = _levelXSortBaseRecord.RemoveAll(record => record.levelNum < level);
         if (removed > 0)
         {
-            _changedFields.Add(nameof(levelTileBaseRecord));
+            _changedFields.Add(nameof(levelXSortBaseRecord));
         }
     }
 
     // 上次会话已知的棋子底板 id 集合
-    public List<int> knownTileBaseIds
+    public List<int> knownXSortBaseIds
     {
         get
         {
-            _knownTileBaseIds ??= new List<int>();
-            return _knownTileBaseIds;
+            _knownXSortBaseIds ??= new List<int>();
+            return _knownXSortBaseIds;
         }
         set
         {
-            _knownTileBaseIds = value ?? new List<int>();
-            _changedFields.Add(nameof(knownTileBaseIds));
+            _knownXSortBaseIds = value ?? new List<int>();
+            _changedFields.Add(nameof(knownXSortBaseIds));
         }
     }
 
     // 待优先插入的新增背景 id 队列
-    public List<int> pendingPriorityTileBaseIds
+    public List<int> pendingPriorityXSortBaseIds
     {
         get
         {
-            _pendingPriorityTileBaseIds ??= new List<int>();
-            return _pendingPriorityTileBaseIds;
+            _pendingPriorityXSortBaseIds ??= new List<int>();
+            return _pendingPriorityXSortBaseIds;
         }
         set
         {
-            _pendingPriorityTileBaseIds = value ?? new List<int>();
-            _changedFields.Add(nameof(pendingPriorityTileBaseIds));
+            _pendingPriorityXSortBaseIds = value ?? new List<int>();
+            _changedFields.Add(nameof(pendingPriorityXSortBaseIds));
         }
     }
 
     /// <summary>标记棋子底板会话状态（known/pending）已变更，便于落盘。</summary>
-    public void MarkTileBaseSessionStateChanged()
+    public void MarkXSortBaseSessionStateChanged()
     {
-        _changedFields.Add(nameof(knownTileBaseIds));
-        _changedFields.Add(nameof(pendingPriorityTileBaseIds));
-        _changedFields.Add(nameof(knownInfinitTileBaseIds));
-        _changedFields.Add(nameof(pendingPriorityInfinitTileBaseIds));
+        _changedFields.Add(nameof(knownXSortBaseIds));
+        _changedFields.Add(nameof(pendingPriorityXSortBaseIds));
+        _changedFields.Add(nameof(knownInfinitXSortBaseIds));
+        _changedFields.Add(nameof(pendingPriorityInfinitXSortBaseIds));
     }
 
-    public List<LevelTileBaseRecord> infinitLevelTileBaseRecord
+    public List<LevelXSortBaseRecord> infinitLevelXSortBaseRecord
     {
         get
         {
-            _infinitLevelTileBaseRecord ??= new List<LevelTileBaseRecord>();
-            return _infinitLevelTileBaseRecord;
+            _infinitLevelXSortBaseRecord ??= new List<LevelXSortBaseRecord>();
+            return _infinitLevelXSortBaseRecord;
         }
         set
         {
-            _infinitLevelTileBaseRecord = value;
-            _changedFields.Add(nameof(infinitLevelTileBaseRecord));
+            _infinitLevelXSortBaseRecord = value;
+            _changedFields.Add(nameof(infinitLevelXSortBaseRecord));
         }
     }
 
-    public int GetInfinitLevelTileBaseId(int infiniteLevelNum)
+    public int GetInfinitLevelXSortBaseId(int infiniteLevelNum)
     {
-        if (_infinitLevelTileBaseRecord == null)
+        if (_infinitLevelXSortBaseRecord == null)
         {
             return -1;
         }
 
-        for (int i = 0; i < _infinitLevelTileBaseRecord.Count; i++)
+        for (int i = 0; i < _infinitLevelXSortBaseRecord.Count; i++)
         {
-            if (_infinitLevelTileBaseRecord[i].levelNum == infiniteLevelNum)
+            if (_infinitLevelXSortBaseRecord[i].levelNum == infiniteLevelNum)
             {
-                return _infinitLevelTileBaseRecord[i].tilebaseId;
+                return _infinitLevelXSortBaseRecord[i].XSortbaseId;
             }
         }
 
         return -1;
     }
 
-    public void SetInfinitLevelTileBaseId(int infiniteLevelNum, int tilebaseId)
+    public void SetInfinitLevelXSortBaseId(int infiniteLevelNum, int XSortbaseId)
     {
-        _infinitLevelTileBaseRecord ??= new List<LevelTileBaseRecord>();
+        _infinitLevelXSortBaseRecord ??= new List<LevelXSortBaseRecord>();
 
-        for (int i = 0; i < _infinitLevelTileBaseRecord.Count; i++)
+        for (int i = 0; i < _infinitLevelXSortBaseRecord.Count; i++)
         {
-            if (_infinitLevelTileBaseRecord[i].levelNum == infiniteLevelNum)
+            if (_infinitLevelXSortBaseRecord[i].levelNum == infiniteLevelNum)
             {
                 return;
             }
         }
 
-        _infinitLevelTileBaseRecord.Add(new LevelTileBaseRecord(infiniteLevelNum, tilebaseId));
-        _changedFields.Add(nameof(infinitLevelTileBaseRecord));
+        _infinitLevelXSortBaseRecord.Add(new LevelXSortBaseRecord(infiniteLevelNum, XSortbaseId));
+        _changedFields.Add(nameof(infinitLevelXSortBaseRecord));
     }
 
-    public void RemoveInfinitLevelTileBaseRecordsAbove(int level)
+    public void RemoveInfinitLevelXSortBaseRecordsAbove(int level)
     {
-        if (_infinitLevelTileBaseRecord == null || _infinitLevelTileBaseRecord.Count == 0)
+        if (_infinitLevelXSortBaseRecord == null || _infinitLevelXSortBaseRecord.Count == 0)
         {
             return;
         }
 
-        int removed = _infinitLevelTileBaseRecord.RemoveAll(record => record.levelNum > level);
+        int removed = _infinitLevelXSortBaseRecord.RemoveAll(record => record.levelNum > level);
         if (removed > 0)
         {
-            _changedFields.Add(nameof(infinitLevelTileBaseRecord));
+            _changedFields.Add(nameof(infinitLevelXSortBaseRecord));
         }
     }
 
-    public void RemoveInfinitLevelTileBaseRecordsBelow(int level)
+    public void RemoveInfinitLevelXSortBaseRecordsBelow(int level)
     {
-        if (_infinitLevelTileBaseRecord == null || _infinitLevelTileBaseRecord.Count == 0)
+        if (_infinitLevelXSortBaseRecord == null || _infinitLevelXSortBaseRecord.Count == 0)
         {
             return;
         }
 
-        int removed = _infinitLevelTileBaseRecord.RemoveAll(record => record.levelNum < level);
+        int removed = _infinitLevelXSortBaseRecord.RemoveAll(record => record.levelNum < level);
         if (removed > 0)
         {
-            _changedFields.Add(nameof(infinitLevelTileBaseRecord));
+            _changedFields.Add(nameof(infinitLevelXSortBaseRecord));
         }
     }
 
-    public List<int> knownInfinitTileBaseIds
+    public List<int> knownInfinitXSortBaseIds
     {
         get
         {
-            _knownInfinitTileBaseIds ??= new List<int>();
-            return _knownInfinitTileBaseIds;
+            _knownInfinitXSortBaseIds ??= new List<int>();
+            return _knownInfinitXSortBaseIds;
         }
         set
         {
-            _knownInfinitTileBaseIds = value ?? new List<int>();
-            _changedFields.Add(nameof(knownInfinitTileBaseIds));
+            _knownInfinitXSortBaseIds = value ?? new List<int>();
+            _changedFields.Add(nameof(knownInfinitXSortBaseIds));
         }
     }
 
-    public List<int> pendingPriorityInfinitTileBaseIds
+    public List<int> pendingPriorityInfinitXSortBaseIds
     {
         get
         {
-            _pendingPriorityInfinitTileBaseIds ??= new List<int>();
-            return _pendingPriorityInfinitTileBaseIds;
+            _pendingPriorityInfinitXSortBaseIds ??= new List<int>();
+            return _pendingPriorityInfinitXSortBaseIds;
         }
         set
         {
-            _pendingPriorityInfinitTileBaseIds = value ?? new List<int>();
-            _changedFields.Add(nameof(pendingPriorityInfinitTileBaseIds));
+            _pendingPriorityInfinitXSortBaseIds = value ?? new List<int>();
+            _changedFields.Add(nameof(pendingPriorityInfinitXSortBaseIds));
         }
     }
 
-    public void SetTileBaseExcludeForNextInfinite(int tilebaseId)
+    public void SetXSortBaseExcludeForNextInfinite(int XSortbaseId)
     {
-        _tileBaseExcludeIdForNextInfinite = tilebaseId;
-        _changedFields.Add(nameof(tileBaseExcludeIdForNextInfinite));
+        _XSortBaseExcludeIdForNextInfinite = XSortbaseId;
+        _changedFields.Add(nameof(XSortBaseExcludeIdForNextInfinite));
     }
 
-    public int ConsumeTileBaseExcludeForNextInfinite()
+    public int ConsumeXSortBaseExcludeForNextInfinite()
     {
-        int id = _tileBaseExcludeIdForNextInfinite;
+        int id = _XSortBaseExcludeIdForNextInfinite;
         if (id >= 0)
         {
-            _tileBaseExcludeIdForNextInfinite = -1;
-            _changedFields.Add(nameof(tileBaseExcludeIdForNextInfinite));
+            _XSortBaseExcludeIdForNextInfinite = -1;
+            _changedFields.Add(nameof(XSortBaseExcludeIdForNextInfinite));
         }
 
         return id;
     }
 
-    public void SetTileBaseExcludeForNextFinite(int tilebaseId, int finiteLevel)
+    public void SetXSortBaseExcludeForNextFinite(int XSortbaseId, int finiteLevel)
     {
-        _tileBaseExcludeIdForNextFinite = tilebaseId;
-        _tileBaseExcludeFiniteLevel = finiteLevel;
-        _changedFields.Add(nameof(tileBaseExcludeIdForNextFinite));
-        _changedFields.Add(nameof(tileBaseExcludeFiniteLevel));
+        _XSortBaseExcludeIdForNextFinite = XSortbaseId;
+        _XSortBaseExcludeFiniteLevel = finiteLevel;
+        _changedFields.Add(nameof(XSortBaseExcludeIdForNextFinite));
+        _changedFields.Add(nameof(XSortBaseExcludeFiniteLevel));
     }
 
-    public int ConsumeTileBaseExcludeForFiniteLevel(int finiteLevel)
+    public int ConsumeXSortBaseExcludeForFiniteLevel(int finiteLevel)
     {
-        if (_tileBaseExcludeIdForNextFinite < 0 || _tileBaseExcludeFiniteLevel != finiteLevel)
+        if (_XSortBaseExcludeIdForNextFinite < 0 || _XSortBaseExcludeFiniteLevel != finiteLevel)
         {
             return -1;
         }
 
-        int id = _tileBaseExcludeIdForNextFinite;
-        _tileBaseExcludeIdForNextFinite = -1;
-        _tileBaseExcludeFiniteLevel = -1;
-        _changedFields.Add(nameof(tileBaseExcludeIdForNextFinite));
-        _changedFields.Add(nameof(tileBaseExcludeFiniteLevel));
+        int id = _XSortBaseExcludeIdForNextFinite;
+        _XSortBaseExcludeIdForNextFinite = -1;
+        _XSortBaseExcludeFiniteLevel = -1;
+        _changedFields.Add(nameof(XSortBaseExcludeIdForNextFinite));
+        _changedFields.Add(nameof(XSortBaseExcludeFiniteLevel));
         return id;
     }
 
-    public int tileBaseExcludeIdForNextInfinite => _tileBaseExcludeIdForNextInfinite;
-    public int tileBaseExcludeIdForNextFinite => _tileBaseExcludeIdForNextFinite;
-    public int tileBaseExcludeFiniteLevel => _tileBaseExcludeFiniteLevel;
+    public int XSortBaseExcludeIdForNextInfinite => _XSortBaseExcludeIdForNextInfinite;
+    public int XSortBaseExcludeIdForNextFinite => _XSortBaseExcludeIdForNextFinite;
+    public int XSortBaseExcludeFiniteLevel => _XSortBaseExcludeFiniteLevel;
 
     // 轮盘计数列表属性访问器
     public List<int> circleAwardCntList
@@ -1573,166 +1496,6 @@ public class GPUserData
                 _changedFields.Add(nameof(dailyVictoryHadWinYesterdayBeforeTodayFirstWin));
             }
         }
-    }
-
-    public int goldenTreeActPoint
-    {
-        get => _goldenTreeActPoint;
-        set => _goldenTreeActPoint = value;
-    }
-
-    public void InCreateGoldenTreePoint()
-    {
-        _goldenTreeActPoint++;
-    }
-
-    public int goldenTreeTodayWinCnt
-    {
-        get => _goldenTreeTodayWinCnt;
-        set => _goldenTreeTodayWinCnt = value;
-    }
-
-    public int goldenTreeTodayWinBoardId
-    {
-        get => _goldenTreeTodayWinBoardId;
-        set => _goldenTreeTodayWinBoardId = value;
-    }
-
-    public int goldenTreeActWinCnt
-    {
-        get => _goldenTreeActWinCnt;
-        set => _goldenTreeActWinCnt = value;
-    }
-
-    public bool goldenTreeActOpen
-    {
-        get => _goldenTreeActOpen;
-        set => _goldenTreeActOpen = value;
-    }
-
-    public bool goldenTreeFirstTipsShown
-    {
-        get => _goldenTreeFirstTipsShown;
-        set => _goldenTreeFirstTipsShown = value;
-    }
-
-    public string tipsDlgDailyOpen
-    {
-        get => _tipsDlgDailyOpen ?? "";
-        set => _tipsDlgDailyOpen = value ?? "";
-    }
-
-    public List<int> goldenTreeFailedLevelIds
-    {
-        get => _goldenTreeFailedLevelIds;
-        set
-        {
-            _goldenTreeFailedLevelIds = value ?? new List<int>();
-            _changedFields.Add(nameof(goldenTreeFailedLevelIds));
-        }
-    }
-
-    public int goldenTreeLastRank
-    {
-        get => math.min(_goldenTreeLastRank, 50);
-        set => _goldenTreeLastRank = math.min(value, 50);
-    }
-
-    public int goldenTreeBoardId
-    {
-        get => _goldenTreeBoardId;
-        set => _goldenTreeBoardId = value;
-    }
-
-    public string goldenTreeGroupId
-    {
-        get => _goldenTreeGroupId ?? "";
-        set => _goldenTreeGroupId = value ?? "";
-    }
-
-    public int goldenTreeOpenCnt
-    {
-        get => _goldenTreeOpenCnt;
-        set => _goldenTreeOpenCnt = value;
-    }
-
-    public int goldenTreeRobotScoreBoardId
-    {
-        get => _goldenTreeRobotScoreBoardId;
-        set => _goldenTreeRobotScoreBoardId = value;
-    }
-
-    public string goldenTreeRobotScoreJson
-    {
-        get => _goldenTreeRobotScoreJson ?? "";
-        set => _goldenTreeRobotScoreJson = value ?? "";
-    }
-
-    /// <summary>机器人涨分上次结算时间（unix 秒）；首次以当日 UTC 04:00 为基准。</summary>
-    public long goldenTreeRobotLastSettleTime
-    {
-        get => _goldenTreeRobotLastSettleTime;
-        set => _goldenTreeRobotLastSettleTime = value;
-    }
-
-    public int goldenTreeLastSeasonBoardId
-    {
-        get => _goldenTreeLastSeasonBoardId;
-        set => _goldenTreeLastSeasonBoardId = value;
-    }
-
-    public string goldenTreeLastSeasonBoardJson
-    {
-        get => _goldenTreeLastSeasonBoardJson ?? "";
-        set => _goldenTreeLastSeasonBoardJson = value ?? "";
-    }
-
-    /// <summary>上赛季日榜快照时的联赛段位，结算升/保/降段以此为准。</summary>
-    public int goldenTreeLastSeasonSnapshotLeagueTier
-    {
-        get => _goldenTreeLastSeasonSnapshotLeagueTier;
-        set => _goldenTreeLastSeasonSnapshotLeagueTier = value;
-    }
-
-    public bool goldenTreeLastSeasonPendingReward
-    {
-        get => _goldenTreeLastSeasonPendingReward;
-        set => _goldenTreeLastSeasonPendingReward = value;
-    }
-
-    /// <summary>已发放结算奖励的赛季 boardId；-1 表示无。不被 ClearAllGoldTreeData 清除。</summary>
-    public int goldenTreeSettlementRewardGrantedBoardId
-    {
-        get => _goldenTreeSettlementRewardGrantedBoardId;
-        set => _goldenTreeSettlementRewardGrantedBoardId = value;
-    }
-
-    /// <summary>联赛段位 id（1 青铜 ~ 8 荣耀）；0 表示未初始化。不被 ClearAllGoldTreeData 清除。</summary>
-    public int goldenTreeLeagueTier
-    {
-        get => _goldenTreeLeagueTier;
-        set => _goldenTreeLeagueTier = value;
-    }
-
-    /// <summary>上一日榜结算前的联赛段位，供段位变化展示。</summary>
-    public int goldenTreeLastSeasonLeagueTier
-    {
-        get => _goldenTreeLastSeasonLeagueTier;
-        set => _goldenTreeLastSeasonLeagueTier = value;
-    }
-
-    /// <summary>上一日榜结算后的联赛段位，供联赛结束展示。</summary>
-    public int goldenTreeSettlementLeagueTier
-    {
-        get => _goldenTreeSettlementLeagueTier;
-        set => _goldenTreeSettlementLeagueTier = value;
-    }
-
-    /// <summary>已应用段位结算的日榜 boardId；-1 表示无。不被 ClearAllGoldTreeData 清除。</summary>
-    public int goldenTreeSettlementTierAppliedBoardId
-    {
-        get => _goldenTreeSettlementTierAppliedBoardId;
-        set => _goldenTreeSettlementTierAppliedBoardId = value;
     }
 
     // 增加关卡进入次数的方法
@@ -2168,10 +1931,6 @@ public class GPUserData
         else
         {
             _dailyVictoryLastWinWindowTicks = 0;
-            _goldenTreeActOpen = false;
-            _goldenTreeTodayWinCnt = 0;
-            _changedFields.Add(nameof(goldenTreeActOpen));
-            _changedFields.Add(nameof(goldenTreeTodayWinCnt));
         }
 
         _changedFields.Add(nameof(dailyVictoryLastWinWindowTicks));
@@ -2182,32 +1941,6 @@ public class GPUserData
         {
             GPUserDataManager.Instance.SyncWinStreakAvatarFrameWithStreak();
         }
-    }
-
-    public void GmSetGoldTreeActPoint(int point)
-    {
-        point = Mathf.Max(0, point);
-        _goldenTreeActPoint = point;
-        _changedFields.Add(nameof(goldenTreeActPoint));
-    }
-
-    public void GmSetGoldTreeLeagueTier(int tier)
-    {
-        tier = GoldTreeLeagueRankFlagHelper.NormalizeLeagueTier(tier);
-        _goldenTreeLeagueTier = tier;
-        _goldenTreeLastSeasonLeagueTier = 0;
-        _goldenTreeSettlementLeagueTier = 0;
-        _goldenTreeLastSeasonSnapshotLeagueTier = 0;
-        _goldenTreeSettlementTierAppliedBoardId = -1;
-        _goldenTreeRobotScoreBoardId = -1;
-        _goldenTreeRobotScoreJson = "";
-        _goldenTreeRobotLastSettleTime = GoldTreeRobotGrowthHelper.GetActivityDayStartUnix();
-
-        _changedFields.Add(nameof(goldenTreeLeagueTier));
-        _changedFields.Add(nameof(goldenTreeLastSeasonLeagueTier));
-        _changedFields.Add(nameof(goldenTreeSettlementLeagueTier));
-        _changedFields.Add(nameof(goldenTreeLastSeasonSnapshotLeagueTier));
-        _changedFields.Add(nameof(goldenTreeSettlementTierAppliedBoardId));
     }
 
     public bool HasDailyVictoryWinToday()
@@ -2516,41 +2249,22 @@ public class GPUserData
         _interADGroupV5 = "";
         _interADCooldownUnixV4 = 0;
         _levelPlayRecord = new List<LevelPlayRecord>();
-        _levelTileBaseRecord = new List<LevelTileBaseRecord>();
-        _knownTileBaseIds = new List<int>();
-        _pendingPriorityTileBaseIds = new List<int>();
-        _infinitLevelTileBaseRecord = new List<LevelTileBaseRecord>();
-        _knownInfinitTileBaseIds = new List<int>();
-        _pendingPriorityInfinitTileBaseIds = new List<int>();
+        _levelXSortBaseRecord = new List<LevelXSortBaseRecord>();
+        _knownXSortBaseIds = new List<int>();
+        _pendingPriorityXSortBaseIds = new List<int>();
+        _infinitLevelXSortBaseRecord = new List<LevelXSortBaseRecord>();
+        _knownInfinitXSortBaseIds = new List<int>();
+        _pendingPriorityInfinitXSortBaseIds = new List<int>();
         _levelStyleRecord = new List<LevelStyleRecord>();
         _infinitLevelStyleRecord = new List<LevelStyleRecord>();
-        _tileBaseStyleBag = new TileBaseStyleBag();
-        _infinitTileBaseStyleBag = new TileBaseStyleBag();
-        _tileBaseExcludeIdForNextInfinite = -1;
-        _tileBaseExcludeIdForNextFinite = -1;
-        _tileBaseExcludeFiniteLevel = -1;
+        _XSortBaseStyleBag = new XSortBaseStyleBag();
+        _infinitXSortBaseStyleBag = new XSortBaseStyleBag();
+        _XSortBaseExcludeIdForNextInfinite = -1;
+        _XSortBaseExcludeIdForNextFinite = -1;
+        _XSortBaseExcludeFiniteLevel = -1;
         _circleAwardCntList = new List<int>(6) { 0, 0, 0, 0, 0, 0 };
         _circleAwardLastResetTicks = DateTime.UtcNow.Ticks;
         ClearAllDailyVictoryData();
-        _goldenTreeActPoint = 0;
-        _goldenTreeTodayWinCnt = 0;
-        _goldenTreeActWinCnt = 0;
-        _goldenTreeActOpen = false;
-        _goldenTreeBoardId = -1;
-        _goldenTreeLastRank = -1;
-        _goldenTreeGroupId = "";
-        _goldenTreeOpenCnt = 0;
-        _goldenTreeRobotScoreBoardId = -1;
-        _goldenTreeRobotScoreJson = "";
-        _goldenTreeRobotLastSettleTime = 0;
-        _goldenTreeLastSeasonBoardId = -1;
-        _goldenTreeLastSeasonBoardJson = "";
-        _goldenTreeLastSeasonPendingReward = false;
-        _goldenTreeSettlementRewardGrantedBoardId = -1;
-        _goldenTreeLeagueTier = 0;
-        _goldenTreeLastSeasonLeagueTier = 0;
-        _goldenTreeSettlementLeagueTier = 0;
-        _goldenTreeSettlementTierAppliedBoardId = -1;
 
         shouldCheckNewUser = true;
         _videoPlayCntFirstDay = 0;
@@ -2689,19 +2403,19 @@ public class GPUserData
         _changedFields.Add(nameof(ropeHintCnt));
         _changedFields.Add(nameof(ropeExtraCnt));
         _changedFields.Add(nameof(levelPlayRecord));
-        _changedFields.Add(nameof(levelTileBaseRecord));
-        _changedFields.Add(nameof(knownTileBaseIds));
-        _changedFields.Add(nameof(pendingPriorityTileBaseIds));
-        _changedFields.Add(nameof(infinitLevelTileBaseRecord));
-        _changedFields.Add(nameof(knownInfinitTileBaseIds));
-        _changedFields.Add(nameof(pendingPriorityInfinitTileBaseIds));
-        _changedFields.Add(nameof(tileBaseExcludeIdForNextInfinite));
-        _changedFields.Add(nameof(tileBaseExcludeIdForNextFinite));
-        _changedFields.Add(nameof(tileBaseExcludeFiniteLevel));
+        _changedFields.Add(nameof(levelXSortBaseRecord));
+        _changedFields.Add(nameof(knownXSortBaseIds));
+        _changedFields.Add(nameof(pendingPriorityXSortBaseIds));
+        _changedFields.Add(nameof(infinitLevelXSortBaseRecord));
+        _changedFields.Add(nameof(knownInfinitXSortBaseIds));
+        _changedFields.Add(nameof(pendingPriorityInfinitXSortBaseIds));
+        _changedFields.Add(nameof(XSortBaseExcludeIdForNextInfinite));
+        _changedFields.Add(nameof(XSortBaseExcludeIdForNextFinite));
+        _changedFields.Add(nameof(XSortBaseExcludeFiniteLevel));
         _changedFields.Add(nameof(levelStyleRecord));
         _changedFields.Add(nameof(infinitLevelStyleRecord));
-        _changedFields.Add(nameof(tileBaseStyleBag));
-        _changedFields.Add(nameof(infinitTileBaseStyleBag));
+        _changedFields.Add(nameof(xSortBaseStyleBag));
+        _changedFields.Add(nameof(infinitXSortBaseStyleBag));
         _changedFields.Add(nameof(noAd));
         _changedFields.Add(nameof(freeReviveUsedCnt));
         _changedFields.Add(nameof(maxFreeReviveCount));
@@ -2763,33 +2477,33 @@ public class GPUserData
         _interADGroupV5 = "";
         _interADCooldownUnixV4 = 0;
         _levelPlayRecord.Clear();
-        if (_levelTileBaseRecord == null)
-            _levelTileBaseRecord = new List<LevelTileBaseRecord>();
+        if (_levelXSortBaseRecord == null)
+            _levelXSortBaseRecord = new List<LevelXSortBaseRecord>();
         else
-            _levelTileBaseRecord.Clear();
-        if (_knownTileBaseIds == null)
-            _knownTileBaseIds = new List<int>();
+            _levelXSortBaseRecord.Clear();
+        if (_knownXSortBaseIds == null)
+            _knownXSortBaseIds = new List<int>();
         else
-            _knownTileBaseIds.Clear();
-        if (_pendingPriorityTileBaseIds == null)
-            _pendingPriorityTileBaseIds = new List<int>();
+            _knownXSortBaseIds.Clear();
+        if (_pendingPriorityXSortBaseIds == null)
+            _pendingPriorityXSortBaseIds = new List<int>();
         else
-            _pendingPriorityTileBaseIds.Clear();
-        if (_infinitLevelTileBaseRecord == null)
-            _infinitLevelTileBaseRecord = new List<LevelTileBaseRecord>();
+            _pendingPriorityXSortBaseIds.Clear();
+        if (_infinitLevelXSortBaseRecord == null)
+            _infinitLevelXSortBaseRecord = new List<LevelXSortBaseRecord>();
         else
-            _infinitLevelTileBaseRecord.Clear();
-        if (_knownInfinitTileBaseIds == null)
-            _knownInfinitTileBaseIds = new List<int>();
+            _infinitLevelXSortBaseRecord.Clear();
+        if (_knownInfinitXSortBaseIds == null)
+            _knownInfinitXSortBaseIds = new List<int>();
         else
-            _knownInfinitTileBaseIds.Clear();
-        if (_pendingPriorityInfinitTileBaseIds == null)
-            _pendingPriorityInfinitTileBaseIds = new List<int>();
+            _knownInfinitXSortBaseIds.Clear();
+        if (_pendingPriorityInfinitXSortBaseIds == null)
+            _pendingPriorityInfinitXSortBaseIds = new List<int>();
         else
-            _pendingPriorityInfinitTileBaseIds.Clear();
-        _tileBaseExcludeIdForNextInfinite = -1;
-        _tileBaseExcludeIdForNextFinite = -1;
-        _tileBaseExcludeFiniteLevel = -1;
+            _pendingPriorityInfinitXSortBaseIds.Clear();
+        _XSortBaseExcludeIdForNextInfinite = -1;
+        _XSortBaseExcludeIdForNextFinite = -1;
+        _XSortBaseExcludeFiniteLevel = -1;
         if (_levelStyleRecord == null)
             _levelStyleRecord = new List<LevelStyleRecord>();
         else
@@ -2798,33 +2512,12 @@ public class GPUserData
             _infinitLevelStyleRecord = new List<LevelStyleRecord>();
         else
             _infinitLevelStyleRecord.Clear();
-        _tileBaseStyleBag = new TileBaseStyleBag();
-        _infinitTileBaseStyleBag = new TileBaseStyleBag();
+        _XSortBaseStyleBag = new XSortBaseStyleBag();
+        _infinitXSortBaseStyleBag = new XSortBaseStyleBag();
         _circleAwardCntList = new List<int>(6) { 0, 0, 0, 0, 0, 0 };
         _circleAwardLastResetTicks = DateTime.UtcNow.Ticks;
         ClearAllDailyVictoryData();
-        _goldenTreeActPoint = 0;
-        _goldenTreeTodayWinCnt = 0;
-        _goldenTreeActWinCnt = 0;
-        _goldenTreeActOpen = false;
-        _goldenTreeBoardId = -1;
-        _goldenTreeLastRank = -1;
-        _goldenTreeGroupId = "";
-        _goldenTreeOpenCnt = 0;
-        _goldenTreeRobotScoreBoardId = -1;
-        _goldenTreeRobotScoreJson = "";
-        _goldenTreeRobotLastSettleTime = 0;
-        _goldenTreeSettlementRewardGrantedBoardId = -1;
-        _goldenTreeLeagueTier = 0;
-        _goldenTreeLastSeasonLeagueTier = 0;
-        _goldenTreeSettlementLeagueTier = 0;
-        _goldenTreeSettlementTierAppliedBoardId = -1;
-        _goldenTreeFirstTipsShown = false;
         _tipsDlgDailyOpen = "";
-        if (_goldenTreeFailedLevelIds == null)
-            _goldenTreeFailedLevelIds = new List<int>();
-        else
-            _goldenTreeFailedLevelIds.Clear();
         _videoPlayCntFirstDay = 0;
         _firstDayWindowStartUtcTicks = DateTime.Now.Date.ToUniversalTime().Ticks;
         _firstDayLocalDate = GetTodayLocalDateInt();

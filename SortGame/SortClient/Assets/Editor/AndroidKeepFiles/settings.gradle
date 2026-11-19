@@ -17,12 +17,18 @@ dependencyResolutionManagement {
         mavenCentral()
 
         maven { url 'https://maven.aliyun.com/repository/public' }
-        maven {
-            credentials {
-                username '68b54c3beed4a5bfee80b1fb'
-                password ']mo([alLjj)S'
+        // GameSDK 私有仓库。账号密码放本机环境变量，不要写进工程。
+        // ZZXZ_MAVEN_USER / ZZXZ_MAVEN_PASSWORD
+        def zzxzUser = System.getenv('ZZXZ_MAVEN_USER')
+        def zzxzPassword = System.getenv('ZZXZ_MAVEN_PASSWORD')
+        if (zzxzUser && zzxzPassword) {
+            maven {
+                credentials {
+                    username zzxzUser
+                    password zzxzPassword
+                }
+                url 'https://packages.aliyun.com/maven/repository/2098332-release-EeT20f'
             }
-            url 'https://packages.aliyun.com/maven/repository/2098332-release-EeT20f'
         }
         maven { url 'https://artifact.bytedance.com/repository/pangle/' }
         maven { url 'https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea' }

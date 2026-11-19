@@ -47,7 +47,7 @@ public class UnityPlayerActivity extends Activity implements IUnityPlayerLifecyc
         setContentView(mUnityPlayer);
         mUnityPlayer.requestFocus();
 
-        Log.i("Tile2Init", "new UnityPlayer: " + (sAfterUnityPlayerCtorElapsedRealtimeMs - tUnityPlayerStart) + " ms");
+        Log.i("XSort2Init", "new UnityPlayer: " + (sAfterUnityPlayerCtorElapsedRealtimeMs - tUnityPlayerStart) + " ms");
 
         showSplashScreen();
     }

@@ -1,6 +1,6 @@
 using DG.Tweening;
 using FishFramework;
-using TileGamePlay;
+using XSortGamePlay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -181,8 +181,8 @@ public class UIPuppyAdventureMatch : UIPuppyAdventureMatchBase
 
     void ScheduleMatchAvatarSounds()
     {
-        AudioClip clip = TileGameCore.AudioController.AudioClips != null
-            ? TileGameCore.AudioController.AudioClips.jungle_match
+        AudioClip clip = XSortGameCore.AudioController.AudioClips != null
+            ? XSortGameCore.AudioController.AudioClips.jungle_match
             : null;
         if (clip == null)
             return;
@@ -192,7 +192,7 @@ public class UIPuppyAdventureMatch : UIPuppyAdventureMatchBase
         for (int i = 0; i < AvatarAppearTimes.Length; i++)
         {
             float at = AvatarAppearTimes[i];
-            matchSoundSeq.InsertCallback(at, () => TileGameCore.AudioController.PlaySound(clip));
+            matchSoundSeq.InsertCallback(at, () => XSortGameCore.AudioController.PlaySound(clip));
         }
     }
 
@@ -386,10 +386,10 @@ public class UIPuppyAdventureMatch : UIPuppyAdventureMatchBase
 
     static void StopMatchSounds()
     {
-        AudioClip clip = TileGameCore.AudioController.AudioClips != null
-            ? TileGameCore.AudioController.AudioClips.jungle_match
+        AudioClip clip = XSortGameCore.AudioController.AudioClips != null
+            ? XSortGameCore.AudioController.AudioClips.jungle_match
             : null;
         if (clip != null)
-            TileGameCore.AudioController.StopSound(clip);
+            XSortGameCore.AudioController.StopSound(clip);
     }
 }

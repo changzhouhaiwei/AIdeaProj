@@ -22,7 +22,7 @@ public static class ConfigHelper
     }
 
     /// <summary>
-    /// Level Editor Test Level skips GameApp — ensure tile skin configs exist before LoadLevel.
+    /// Level Editor Test Level skips GameApp — ensure XSort skin configs exist before LoadLevel.
     /// </summary>
     public static void EnsureInitialized()
     {

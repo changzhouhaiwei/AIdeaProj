@@ -5,9 +5,9 @@ public class BAMainStageData : BaseAnaData
     public readonly string key = "main_stage";
     public string stage_id;
     public string stage_form_id;
-    public string tilebase;
-    // 主题底板固定 "theme"；TileBaseStyleCatalog 的随机底板上传 styleName。
-    public string tilebase2;
+    public string XSortbase;
+    // 主题底板固定 "theme"；XSortBaseStyleCatalog 的随机底板上传 styleName。
+    public string XSortbase2;
     // 0普通 1boxcover 2彩蛋 3IQ 4颜色挑战。多个同时存在就报多个，例如 ["1","4"]
     public List<string> playtype = new();
     //第N次进入本关
@@ -17,9 +17,9 @@ public class BAMainStageData : BaseAnaData
     public int straight_win;
 
     public int type; //开局棋子种类数
-    public int tile;//总棋子数
+    public int XSort;//总棋子数
     public int layer;//总层数
-    public int tile_left;//剩余棋子数
+    public int XSort_left;//剩余棋子数
     public int layer_left;//剩余层数
     public int temp;//暂存区棋子数
     public List<int> chess_list_fail = new();//失败时暂存区棋子id，从左到右。status=2/6

@@ -38,6 +38,7 @@ namespace RopeSort
         readonly List<RectTransform> columns = new List<RectTransform>();
         readonly List<RopeBeadInput> beads = new List<RopeBeadInput>();
         readonly List<Sequence> motions = new List<Sequence>();
+        readonly List<GameObject> flying = new List<GameObject>();
 
         int hintSrc = -1;
         int motionGen;
@@ -72,7 +73,303 @@ namespace RopeSort
 
         public void Rebuild(ColorSortState state, ColorSortLevel level)
         {
+            Rebuild(state, level, null, null);
+        }
+
+        public void Rebuild(ColorSortState state, ColorSortLevel level, List<int> order, List<ColorSortDepositLog> hold)
+        {
             StopMotion();
+            ClearColumns();
+            if (state == null || level == null)
+                return;
+
+            List<int> shown = BuildShown(state, order, hold);
+            if (shown.Count == 0)
+                return;
+
+            int cap = Mathf.Max(level.Capacity, 1);
+            BoardMetrics(shown.Count, cap, out float width, out float height, out float colW, out float size);
+            for (int slot = 0; slot < shown.Count; slot++)
+            {
+                int c = shown[slot];
+                float x = -width * 0.5f + colW * (slot + 0.5f);
+                CreateColumn(state, c, x, colW, height, size, cap, FindHold(hold, c));
+            }
+        }
+
+        public void ConcealSpawns(List<ColorSortSpawnLog> spawns, List<ColorSortDepositLog> deposits)
+        {
+            var skip = new HashSet<int>();
+            if (deposits != null)
+            {
+                for (int i = 0; i < deposits.Count; i++)
+                {
+                    if (deposits[i] != null)
+                        skip.Add(deposits[i].Col);
+                }
+            }
+
+            GatherSpawnCounts(spawns, skip, out List<int> cols, out List<int> counts);
+            for (int i = 0; i < cols.Count; i++)
+                ConcealTrailing(ColumnOf(cols[i]), counts[i]);
+        }
+
+        public void PlayCollect(List<ColorSortDepositLog> deposits, RectTransform progressIcon, Action<ColorSortDepositLog> onFlowers, Action onComplete)
+        {
+            int gen = ++motionGen;
+            int pending = 0;
+            if (deposits != null)
+            {
+                for (int i = 0; i < deposits.Count; i++)
+                {
+                    if (deposits[i] != null)
+                        pending++;
+                }
+            }
+            if (pending == 0)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            var grouped = new List<List<ColorSortDepositLog>>();
+            var seen = new List<int>();
+            for (int i = 0; i < deposits.Count; i++)
+            {
+                ColorSortDepositLog deposit = deposits[i];
+                if (deposit == null)
+                    continue;
+                int index = seen.IndexOf(deposit.Col);
+                if (index < 0)
+                {
+                    seen.Add(deposit.Col);
+                    grouped.Add(new List<ColorSortDepositLog>());
+                    index = grouped.Count - 1;
+                }
+                grouped[index].Add(deposit);
+            }
+
+            pending = grouped.Count;
+            Action done = () =>
+            {
+                if (gen != motionGen)
+                    return;
+                pending--;
+                if (pending <= 0)
+                    onComplete?.Invoke();
+            };
+
+            for (int i = 0; i < grouped.Count; i++)
+            {
+                List<ColorSortDepositLog> batch = grouped[i];
+                PlayOneCollect(batch[0], progressIcon, 0.1f + i * 0.08f, gen, _ =>
+                {
+                    for (int k = 0; k < batch.Count; k++)
+                        onFlowers?.Invoke(batch[k]);
+                }, done);
+            }
+        }
+
+        public void PlayShiftAndArrive(List<int> order, List<int> arriving, List<ColorSortSpawnLog> spawns, ColorSortState state, ColorSortLevel level, Action onComplete)
+        {
+            int gen = ++motionGen;
+            if (state == null || level == null)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            if (arriving != null)
+            {
+                for (int i = 0; i < arriving.Count; i++)
+                {
+                    RectTransform stale = ColumnOf(arriving[i]);
+                    if (stale != null)
+                        ReleaseColumn(stale);
+                }
+            }
+
+            int visible = 0;
+            if (order != null)
+            {
+                for (int i = 0; i < order.Count; i++)
+                {
+                    int id = order[i];
+                    if (id >= 0 && id < state.Cols.Count && !state.Gone[id])
+                        visible++;
+                }
+            }
+            if (visible <= 0)
+            {
+                onComplete?.Invoke();
+                return;
+            }
+
+            int cap = Mathf.Max(level.Capacity, 1);
+            BoardMetrics(visible, cap, out float width, out float height, out float colW, out float size);
+            float beadSize = SampleBeadSize();
+            if (beadSize > 8f)
+                size = beadSize;
+
+            var moving = new List<RectTransform>();
+            var targets = new List<float>();
+            var spawnIds = new List<int>();
+            var spawnX = new List<float>();
+            int slot = 0;
+            for (int i = 0; order != null && i < order.Count; i++)
+            {
+                int id = order[i];
+                if (id < 0 || id >= state.Cols.Count || state.Gone[id])
+                    continue;
+                float x = -width * 0.5f + colW * (slot + 0.5f);
+                slot++;
+                if (ContainsId(arriving, id))
+                {
+                    spawnIds.Add(id);
+                    spawnX.Add(x);
+                    continue;
+                }
+
+                RectTransform col = ColumnOf(id);
+                if (col == null)
+                    continue;
+                col.sizeDelta = new Vector2(colW, height);
+                moving.Add(col);
+                targets.Add(x);
+            }
+
+            void Finish()
+            {
+                if (gen != motionGen)
+                    return;
+                for (int i = 0; i < spawnIds.Count; i++)
+                    CreateColumn(state, spawnIds[i], spawnX[i], colW, height, size, cap, null);
+                PlayArrivals(spawnIds, spawns, onComplete);
+            }
+
+            bool needsMove = false;
+            for (int i = 0; i < moving.Count; i++)
+            {
+                if (Mathf.Abs(moving[i].anchoredPosition.x - targets[i]) > 0.5f)
+                {
+                    needsMove = true;
+                    break;
+                }
+            }
+            if (moving.Count == 0 || !needsMove)
+            {
+                Finish();
+                return;
+            }
+
+            int pending = moving.Count;
+            for (int i = 0; i < moving.Count; i++)
+            {
+                RectTransform col = moving[i];
+                float x = targets[i];
+                var seq = DOTween.Sequence();
+                motions.Add(seq);
+                seq.Append(col.DOAnchorPosX(x, 0.32f).SetEase(Ease.OutCubic));
+                seq.OnComplete(() =>
+                {
+                    motions.Remove(seq);
+                    if (gen != motionGen)
+                        return;
+                    pending--;
+                    if (pending <= 0)
+                        Finish();
+                });
+            }
+        }
+
+        void PlayOneCollect(ColorSortDepositLog deposit, RectTransform progressIcon, float delay, int gen, Action<ColorSortDepositLog> onFlowers, Action onDone)
+        {
+            RectTransform col = ColumnOf(deposit.Col);
+            if (col == null)
+            {
+                if (gen == motionGen)
+                {
+                    onFlowers?.Invoke(deposit);
+                    onDone?.Invoke();
+                }
+                return;
+            }
+
+            List<RectTransform> beadsOnRope = BeadsOf(col);
+            var ordered = new List<RectTransform>();
+            for (int i = beadsOnRope.Count - 1; i >= 0; i--)
+                ordered.Add(beadsOnRope[i]);
+            if (ordered.Count == 0)
+            {
+                if (gen == motionGen)
+                    onFlowers?.Invoke(deposit);
+                RiseColumn(col, gen, onDone);
+                return;
+            }
+
+            Vector3 target = progressIcon != null
+                ? progressIcon.TransformPoint(progressIcon.rect.center)
+                : col.position + new Vector3(0f, 320f, 0f);
+            const float stagger = 0.05f;
+            const float fly = 0.34f;
+            var seq = DOTween.Sequence();
+            motions.Add(seq);
+            for (int i = 0; i < ordered.Count; i++)
+            {
+                RectTransform bead = ordered[i];
+                bead.SetParent(page.transform, true);
+                bead.SetAsLastSibling();
+                bead.gameObject.layer = page.gameObject.layer;
+                flying.Add(bead.gameObject);
+                Image image = bead.GetComponent<Image>();
+                if (image != null)
+                    image.raycastTarget = false;
+                float at = delay + i * stagger;
+                seq.Insert(at, bead.DOMove(target, fly).SetEase(Ease.InCubic));
+                seq.Insert(at, bead.DOScale(0.12f, fly).SetEase(Ease.InQuad));
+            }
+
+            seq.OnComplete(() =>
+            {
+                motions.Remove(seq);
+                ClearFlown(ordered);
+                if (gen != motionGen)
+                    return;
+                onFlowers?.Invoke(deposit);
+                RiseColumn(col, gen, onDone);
+            });
+        }
+
+        void RiseColumn(RectTransform col, int gen, Action onDone)
+        {
+            if (col == null)
+            {
+                if (gen == motionGen)
+                    onDone?.Invoke();
+                return;
+            }
+
+            CanvasGroup group = col.GetComponent<CanvasGroup>();
+            if (group == null)
+                group = col.gameObject.AddComponent<CanvasGroup>();
+            group.blocksRaycasts = false;
+            float distance = Mathf.Max(col.rect.height, 480f);
+            float y = col.anchoredPosition.y + distance;
+            var seq = DOTween.Sequence();
+            motions.Add(seq);
+            seq.Append(col.DOAnchorPosY(y, 0.42f).SetEase(Ease.InCubic));
+            seq.Join(group.DOFade(0f, 0.34f));
+            seq.OnComplete(() =>
+            {
+                motions.Remove(seq);
+                ReleaseColumn(col);
+                if (gen == motionGen)
+                    onDone?.Invoke();
+            });
+        }
+
+        void ClearColumns()
+        {
             for (int i = root.childCount - 1; i >= 0; i--)
             {
                 GameObject child = root.GetChild(i).gameObject;
@@ -81,99 +378,259 @@ namespace RopeSort
             }
             columns.Clear();
             beads.Clear();
-            if (state == null || level == null)
-                return;
+        }
 
+        List<int> BuildShown(ColorSortState state, List<int> order, List<ColorSortDepositLog> hold)
+        {
             int count = state.Cols.Count;
-            float width = root.rect.width;
-            float height = root.rect.height;
+            var shown = new List<int>();
+            if (order != null && order.Count > 0)
+            {
+                for (int i = 0; i < order.Count; i++)
+                {
+                    int id = order[i];
+                    if (id < 0 || id >= count || ContainsId(shown, id))
+                        continue;
+                    if (!state.Gone[id] || FindHold(hold, id) != null)
+                        shown.Add(id);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (!state.Gone[i] || FindHold(hold, i) != null)
+                        shown.Add(i);
+                }
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                if (!state.Gone[i] && !ContainsId(shown, i))
+                    shown.Add(i);
+            }
+
+            if (hold != null)
+            {
+                for (int i = 0; i < hold.Count; i++)
+                {
+                    ColorSortDepositLog log = hold[i];
+                    if (log == null || log.Col < 0 || log.Col >= count || ContainsId(shown, log.Col))
+                        continue;
+                    shown.Add(log.Col);
+                }
+            }
+            return shown;
+        }
+
+        RectTransform CreateColumn(ColorSortState state, int index, float x, float colW, float height, float size, int cap, ColorSortDepositLog pose)
+        {
+            IList<int> beadValues;
+            int jar;
+            bool locked;
+            if (pose != null)
+            {
+                var posed = new List<int>(Mathf.Max(0, pose.Q));
+                for (int i = 0; i < pose.Q; i++)
+                    posed.Add(pose.BeadType);
+                beadValues = posed;
+                jar = pose.BeadType;
+                locked = false;
+            }
+            else
+            {
+                beadValues = state.Cols[index];
+                jar = state.Jars[index];
+                locked = ColorSortRules.IsLocked(state, index);
+            }
+
+            var col = NewRect("Col" + index, root);
+            col.anchorMin = col.anchorMax = new Vector2(0.5f, 0.5f);
+            col.pivot = new Vector2(0.5f, 1f);
+            col.sizeDelta = new Vector2(colW, height);
+            col.anchoredPosition = new Vector2(x, height * 0.5f);
+            columns.Add(col);
+
+            float y = -size * 0.05f;
+            Image ringImage = NewImage("Ring", col, ring, Color.white);
+            Place(ringImage.rectTransform, 0f, y, size * 0.42f, size * 0.42f);
+            y -= size * 0.55f;
+
+            Color potColor = jar < 0 ? new Color(0.78f, 0.76f, 0.72f) : Palette[Mathf.Abs(jar) % Palette.Length];
+            if (pose == null && index == hintDst)
+                potColor = Color.Lerp(potColor, Color.white, 0.45f);
+            Image potImage = NewImage("Pot", col, pot, potColor);
+            Place(potImage.rectTransform, 0f, y, size * 0.92f, size * 0.72f);
+            if (locked && lockIcon != null)
+            {
+                Image lockImage = NewImage("Lock", potImage.rectTransform, lockIcon, Color.white);
+                Place(lockImage.rectTransform, size * 0.28f, size * 0.16f, size * 0.34f, size * 0.34f);
+            }
+
+            y -= size * 0.78f;
+            int beadCount = beadValues.Count;
+            float ropeLen = size * 0.92f * Mathf.Max(cap, beadCount);
+            if (rope != null && ropeLen > 4f)
+            {
+                Image ropeImage = NewImage("Rope", col, rope, Color.white);
+                ropeImage.preserveAspect = false;
+                ropeImage.rectTransform.anchorMin = ropeImage.rectTransform.anchorMax = new Vector2(0.5f, 1f);
+                ropeImage.rectTransform.pivot = new Vector2(0.5f, 1f);
+                ropeImage.rectTransform.sizeDelta = new Vector2(size * 0.16f, ropeLen);
+                ropeImage.rectTransform.anchoredPosition = new Vector2(0f, y + size * 0.2f);
+                ropeImage.transform.SetAsFirstSibling();
+            }
+
+            for (int j = 0; j < beadCount; j++)
+            {
+                int value = beadValues[j];
+                bool mystery = ColorSortLevel.IsHidden(value);
+                int type = ColorSortLevel.TrueType(value);
+                Sprite sprite = mystery ? hidden : FlowerSprite(type);
+                Color tint = Color.white;
+                bool hinted = pose == null && index == hintSrc && j >= hintCut && hintCut >= 0;
+                if (hinted)
+                    tint = new Color(1f, 0.95f, 0.55f);
+                Image bead = NewImage("Bead", col, sprite, tint);
+                Place(bead.rectTransform, 0f, y, size * 0.9f, size * 0.9f);
+                if (mystery)
+                    MakeText("?", bead.rectTransform, size * 0.42f, FontStyles.Bold);
+                var input = bead.gameObject.AddComponent<RopeBeadInput>();
+                input.Column = index;
+                input.Index = j;
+                input.Page = page;
+                input.Locked = locked || pose != null;
+                if (pose != null)
+                    bead.raycastTarget = false;
+                beads.Add(input);
+                y -= size * 0.92f;
+            }
+            return col;
+        }
+
+        void BoardMetrics(int visible, int cap, out float width, out float height, out float colW, out float size)
+        {
+            width = root.rect.width;
+            height = root.rect.height;
             if (width < 2f)
                 width = 704f;
             if (height < 2f)
                 height = 1100f;
-            int visible = 0;
-            for (int i = 0; i < count; i++)
-            {
-                if (!state.Gone[i])
-                    visible++;
-            }
-            if (visible <= 0)
-                return;
-
-            float colW = width / visible;
-            int cap = Mathf.Max(level.Capacity, 1);
-            float size = Mathf.Min(colW * 0.82f, height / (cap + 2.6f));
+            int count = Mathf.Max(visible, 1);
+            colW = width / count;
+            size = Mathf.Min(colW * 0.82f, height / (cap + 2.6f));
             size = Mathf.Max(36f, size);
-            int drawn = 0;
-            for (int c = 0; c < count; c++)
+        }
+
+        float SampleBeadSize()
+        {
+            for (int i = 0; i < columns.Count; i++)
             {
-                if (state.Gone[c])
+                List<RectTransform> found = BeadsOf(columns[i]);
+                if (found.Count > 0 && found[0] != null)
+                    return found[0].sizeDelta.x / 0.9f;
+            }
+            return 0f;
+        }
+
+        static List<RectTransform> BeadsOf(RectTransform col)
+        {
+            var list = new List<RectTransform>();
+            if (col == null)
+                return list;
+            for (int i = 0; i < col.childCount; i++)
+            {
+                var child = (RectTransform)col.GetChild(i);
+                if (child.name == "Bead")
+                    list.Add(child);
+            }
+            return list;
+        }
+
+        void ConcealTrailing(RectTransform col, int count)
+        {
+            if (col == null || count <= 0)
+                return;
+            List<RectTransform> found = BeadsOf(col);
+            int start = Mathf.Max(0, found.Count - count);
+            for (int i = start; i < found.Count; i++)
+            {
+                found[i].localScale = Vector3.zero;
+                Image image = found[i].GetComponent<Image>();
+                if (image != null)
+                    image.raycastTarget = false;
+            }
+        }
+
+        static void GatherSpawnCounts(List<ColorSortSpawnLog> spawns, HashSet<int> skip, out List<int> cols, out List<int> counts)
+        {
+            cols = new List<int>();
+            counts = new List<int>();
+            if (spawns == null)
+                return;
+            for (int i = 0; i < spawns.Count; i++)
+            {
+                ColorSortSpawnLog log = spawns[i];
+                if (log == null || log.Types == null || log.Types.Count == 0)
                     continue;
-
-                float x = -width * 0.5f + colW * (drawn + 0.5f);
-                drawn++;
-                var col = NewRect("Col" + c, root);
-                col.anchorMin = col.anchorMax = new Vector2(0.5f, 0.5f);
-                col.pivot = new Vector2(0.5f, 1f);
-                col.sizeDelta = new Vector2(colW, height);
-                col.anchoredPosition = new Vector2(x, height * 0.5f);
-                columns.Add(col);
-
-                float y = -size * 0.05f;
-                Image ringImage = NewImage("Ring", col, ring, Color.white);
-                Place(ringImage.rectTransform, 0f, y, size * 0.42f, size * 0.42f);
-                y -= size * 0.55f;
-
-                bool locked = ColorSortRules.IsLocked(state, c);
-                int jar = state.Jars[c];
-                Color potColor = jar < 0 ? new Color(0.78f, 0.76f, 0.72f) : Palette[Mathf.Abs(jar) % Palette.Length];
-                if (c == hintDst)
-                    potColor = Color.Lerp(potColor, Color.white, 0.45f);
-                Image potImage = NewImage("Pot", col, pot, potColor);
-                Place(potImage.rectTransform, 0f, y, size * 0.92f, size * 0.72f);
-                if (locked && lockIcon != null)
+                if (skip != null && skip.Contains(log.Col))
+                    continue;
+                int index = cols.IndexOf(log.Col);
+                if (index < 0)
                 {
-                    Image lockImage = NewImage("Lock", potImage.rectTransform, lockIcon, Color.white);
-                    Place(lockImage.rectTransform, size * 0.28f, size * 0.16f, size * 0.34f, size * 0.34f);
+                    cols.Add(log.Col);
+                    counts.Add(log.Types.Count);
                 }
-
-                y -= size * 0.78f;
-                int beadCount = state.Cols[c].Count;
-                float ropeLen = size * 0.92f * Mathf.Max(cap, beadCount);
-                if (rope != null && ropeLen > 4f)
+                else
                 {
-                    Image ropeImage = NewImage("Rope", col, rope, Color.white);
-                    ropeImage.preserveAspect = false;
-                    ropeImage.rectTransform.anchorMin = ropeImage.rectTransform.anchorMax = new Vector2(0.5f, 1f);
-                    ropeImage.rectTransform.pivot = new Vector2(0.5f, 1f);
-                    ropeImage.rectTransform.sizeDelta = new Vector2(size * 0.16f, ropeLen);
-                    ropeImage.rectTransform.anchoredPosition = new Vector2(0f, y + size * 0.2f);
-                    ropeImage.transform.SetAsFirstSibling();
-                }
-
-                for (int j = 0; j < beadCount; j++)
-                {
-                    int value = state.Cols[c][j];
-                    bool mystery = ColorSortLevel.IsHidden(value);
-                    int type = ColorSortLevel.TrueType(value);
-                    Sprite sprite = mystery ? hidden : FlowerSprite(type);
-                    Color tint = Color.white;
-                    bool hinted = c == hintSrc && j >= hintCut && hintCut >= 0;
-                    if (hinted)
-                        tint = new Color(1f, 0.95f, 0.55f);
-                    Image bead = NewImage("Bead", col, sprite, tint);
-                    Place(bead.rectTransform, 0f, y, size * 0.9f, size * 0.9f);
-                    if (mystery)
-                        MakeText("?", bead.rectTransform, size * 0.42f, FontStyles.Bold);
-                    var input = bead.gameObject.AddComponent<RopeBeadInput>();
-                    input.Column = c;
-                    input.Index = j;
-                    input.Page = page;
-                    input.Locked = locked;
-                    beads.Add(input);
-                    y -= size * 0.92f;
+                    counts[index] += log.Types.Count;
                 }
             }
+        }
+
+        void ClearFlown(List<RectTransform> items)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                RectTransform item = items[i];
+                if (item == null)
+                    continue;
+                flying.Remove(item.gameObject);
+                UnityEngine.Object.Destroy(item.gameObject);
+            }
+        }
+
+        void ReleaseColumn(RectTransform col)
+        {
+            if (col == null)
+                return;
+            columns.Remove(col);
+            UnityEngine.Object.Destroy(col.gameObject);
+        }
+
+        static ColorSortDepositLog FindHold(List<ColorSortDepositLog> hold, int col)
+        {
+            if (hold == null)
+                return null;
+            for (int i = 0; i < hold.Count; i++)
+            {
+                ColorSortDepositLog log = hold[i];
+                if (log != null && log.Col == col)
+                    return log;
+            }
+            return null;
+        }
+
+        static bool ContainsId(List<int> ids, int id)
+        {
+            if (ids == null)
+                return false;
+            for (int i = 0; i < ids.Count; i++)
+            {
+                if (ids[i] == id)
+                    return true;
+            }
+            return false;
         }
 
         public int ColumnAt(Vector2 screenPoint, Camera camera)
@@ -213,6 +670,12 @@ namespace RopeSort
                 if (running[i] != null && running[i].IsActive())
                     running[i].Kill(false);
             }
+            for (int i = flying.Count - 1; i >= 0; i--)
+            {
+                if (flying[i] != null)
+                    UnityEngine.Object.Destroy(flying[i]);
+            }
+            flying.Clear();
         }
 
         public void PlayLevelEnter(Action onComplete)

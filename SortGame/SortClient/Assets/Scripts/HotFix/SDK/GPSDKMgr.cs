@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using EwingSoft.GameSDK;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 using Sirenix.Utilities;
-using TileGameCore;
+using XSortGameCore;
 using UnityEngine;
 using System.Collections;
 #if UNITY_IOS
@@ -300,11 +300,11 @@ public class GPSDKMgr : MonoBehaviour
 
 #if UNITY_IOS && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void Tile2_ForceFetchRemoteConfig();
+    private static extern void XSort2_ForceFetchRemoteConfig();
 
     /// <summary>0=idle 1=in_flight 2=success 3=fail</summary>
     [DllImport("__Internal")]
-    private static extern int Tile2_GetForceFetchResult();
+    private static extern int XSort2_GetForceFetchResult();
 
     /// <summary>
     /// iOS：只执行一次。有隐私弹窗时在 OnOpen 调用，强制重拉 RC（不走自动 fetch 轮询）。
@@ -323,8 +323,8 @@ public class GPSDKMgr : MonoBehaviour
         // 允许本次强制拉取覆盖此前结果
         m_remoteConfigResolved = false;
         m_remoteConfigLoadSuccess = false;
-        Debug.Log("[GPSDKMgr][RCDiag] InitFirebaseSDKOnce → Tile2_ForceFetchRemoteConfig");
-        Tile2_ForceFetchRemoteConfig();
+        Debug.Log("[GPSDKMgr][RCDiag] InitFirebaseSDKOnce → XSort2_ForceFetchRemoteConfig");
+        XSort2_ForceFetchRemoteConfig();
     }
 
     void EnsureRemoteConfigEventRegistered()
@@ -348,7 +348,7 @@ public class GPSDKMgr : MonoBehaviour
             return true;
         }
 
-        int result = Tile2_GetForceFetchResult();
+        int result = XSort2_GetForceFetchResult();
         if (result == 2)
         {
             ApplyIosRemoteConfigResult(true, "force_fetch_status");
@@ -687,7 +687,7 @@ public class GPSDKMgr : MonoBehaviour
 #endif
     }
 
-    /// <summary>旧版 Java login；Tile2 使用 PostUserData/RemoteDataSdk。</summary>
+    /// <summary>旧版 Java login；XSort2 使用 PostUserData/RemoteDataSdk。</summary>
     public void LoginSDK()
     {
     }
@@ -1040,8 +1040,8 @@ public class GPSDKMgr : MonoBehaviour
         }
 
 #if UNITY_IOS && !UNITY_EDITOR
-        // PauseGame 只停 FishFramework BGM；关卡 BGM 走 TileGameCore.MusicEmitter，iOS 广告需单独暂停
-        PauseTileGameMusicForAd();
+        // PauseGame 只停 FishFramework BGM；关卡 BGM 走 XSortGameCore.MusicEmitter，iOS 广告需单独暂停
+        PauseXSortGameMusicForAd();
 #endif
     }
 
@@ -1062,7 +1062,7 @@ public class GPSDKMgr : MonoBehaviour
         m_currentAdPlaybackType = AdPlaybackType.None;
 
 #if UNITY_IOS && !UNITY_EDITOR
-        ResumeTileGameMusicAfterAd();
+        ResumeXSortGameMusicAfterAd();
 #endif
 
         if (GameModule.Setting != null)
@@ -1125,11 +1125,11 @@ public class GPSDKMgr : MonoBehaviour
     }
 
 #if UNITY_IOS && !UNITY_EDITOR
-    private bool m_tileMusicPausedForAd;
+    private bool m_XSortMusicPausedForAd;
 
-    void PauseTileGameMusicForAd()
+    void PauseXSortGameMusicForAd()
     {
-        m_tileMusicPausedForAd = false;
+        m_XSortMusicPausedForAd = false;
         var music = MusicEmitter.ActiveMusicSource;
         if (music == null || music.AudioSource == null || !music.AudioSource.isPlaying)
         {
@@ -1137,17 +1137,17 @@ public class GPSDKMgr : MonoBehaviour
         }
 
         music.AudioSource.Pause();
-        m_tileMusicPausedForAd = true;
+        m_XSortMusicPausedForAd = true;
     }
 
-    void ResumeTileGameMusicAfterAd()
+    void ResumeXSortGameMusicAfterAd()
     {
-        if (!m_tileMusicPausedForAd)
+        if (!m_XSortMusicPausedForAd)
         {
             return;
         }
 
-        m_tileMusicPausedForAd = false;
+        m_XSortMusicPausedForAd = false;
         var music = MusicEmitter.ActiveMusicSource;
         if (music == null || music.AudioSource == null)
         {
@@ -1331,7 +1331,7 @@ public class GPSDKMgr : MonoBehaviour
         ApplyIosRemoteConfigResult(param, param ? "native_callback_ok" : "native_callback_fail");
 #else
         MilestoneSdk.NotifyRemoteConfigLoaded(param);
-        TileAppUpdate.NotifyRemoteConfigLoaded(param);
+        XSortAppUpdate.NotifyRemoteConfigLoaded(param);
 #endif
         InterADABTestConfig.MarkRemoteConfigReady();
         if (InterADABTestConfig.TryAssignGroup() && GPUserDataManager.HasInit())
@@ -1400,7 +1400,7 @@ public class GPSDKMgr : MonoBehaviour
         TryApplyForceFetchNativeStatus();
         Debug.Log(
             $"[GPSDKMgr][RCDiag] WAIT begin timeout={RemoteConfigWaitTimeoutSeconds}s " +
-            $"alreadyResolved={m_remoteConfigResolved} forceFetchResult={Tile2_GetForceFetchResult()} " +
+            $"alreadyResolved={m_remoteConfigResolved} forceFetchResult={XSort2_GetForceFetchResult()} " +
             $"net={FormatInternetReachability()}");
 
         float elapsed = 0f;
@@ -1418,7 +1418,7 @@ public class GPSDKMgr : MonoBehaviour
                 Debug.Log(
                     $"[GPSDKMgr][RCDiag] WAIT heartbeat elapsed={elapsed:F1}s/{RemoteConfigWaitTimeoutSeconds}s " +
                     $"net={FormatInternetReachability()} resolved={m_remoteConfigResolved} " +
-                    $"forceFetchResult={Tile2_GetForceFetchResult()}");
+                    $"forceFetchResult={XSort2_GetForceFetchResult()}");
                 nextHeartbeat += 2f;
             }
 
@@ -1530,7 +1530,7 @@ public class GPSDKMgr : MonoBehaviour
         return false;
     }
     /// <summary>
-    /// 是否显示TotalWin（与 TileClient 保持一致）
+    /// 是否显示TotalWin（与 XSortClient 保持一致）
     /// </summary>
     public bool GetBShowTotalWin()
     {
@@ -1634,13 +1634,13 @@ public class GPSDKMgr : MonoBehaviour
 
 #if UNITY_IOS && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void Tile2HideSplash();
+    private static extern void XSort2HideSplash();
 #endif
 
     public void HideSplashScreen()
     {
 #if UNITY_IOS && !UNITY_EDITOR
-        Tile2HideSplash();
+        XSort2HideSplash();
 #elif UNITY_ANDROID && !UNITY_EDITOR
         CallPlatformFunc("hideSplashScreen");
 #endif

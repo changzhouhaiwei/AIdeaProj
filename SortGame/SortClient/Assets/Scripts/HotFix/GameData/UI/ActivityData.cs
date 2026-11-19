@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using cfg;
 using Core.Tools.MethodExtension;
 using FishFramework;
-using TileGameCore;
+using XSortGameCore;
 using UnityEngine;
 
 public class ActivityData : BaseData
@@ -38,10 +38,10 @@ public class ActivityData : BaseData
     }
 
     /// <summary>关卡主题是否启用。</summary>
-    public static bool IsRandomTileBaseThemeEnabled() => ActivityBuildFlags.RandomTileBaseThemeEnabled;
+    public static bool IsRandomXSortBaseThemeEnabled() => ActivityBuildFlags.RandomXSortBaseThemeEnabled;
 
-    /// <summary>经典随机底板（TileBaseStyle）是否启用。只换棋子底板、Unknown 和破碎材质。</summary>
-    public static bool IsClassicRandomTileBaseEnabled() => ActivityBuildFlags.ClassicRandomTileBaseEnabled;
+    /// <summary>经典随机底板（XSortBaseStyle）是否启用。只换棋子底板、Unknown 和破碎材质。</summary>
+    public static bool IsClassicRandomXSortBaseEnabled() => ActivityBuildFlags.ClassicRandomXSortBaseEnabled;
 
     /// <summary>金币关卡是否启用。</summary>
     public static bool IsCoinRewardLevelEnabled() => ActivityBuildFlags.CoinRewardLevelEnabled;

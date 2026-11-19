@@ -1,6 +1,6 @@
 
 using System.Collections.Generic;
-using FishTilePlay;
+using FishXSortPlay;
 using UnityEngine;
 
 public class RecoverLevelData
@@ -10,15 +10,15 @@ public class RecoverLevelData
     //进入关卡后,保存所有数据,每次移除变换数据.
     //ondestroy保存数据.
     [System.Serializable]
-    public struct RLATileData
+    public struct RLAXSortData
     {
         public int layer;
         public int x;
         public int y;
-        public int tileIndex; //LevelDataBase中的Index
-        public string tileSkinName; //TilesNew资源名，旧存档为空时按tileIndex恢复
+        public int XSortIndex; //LevelDataBase中的Index
+        public string XSortSkinName; //XSortsNew资源名，旧存档为空时按XSortIndex恢复
         public int dockIndex;//恢复dock上的数据
-        public TileEffectType effectType; // 效果类型
+        public XSortEffectType effectType; // 效果类型
         public string effectData; // 效果状态数据（JSON格式）
         public bool isFission;
 
@@ -39,8 +39,8 @@ public class RecoverLevelData
 
     public int costTime;
 
-    public List<RLATileData> AllTileDataList = new();
-    public List<RLATileData> DockTileIndices = new();
+    public List<RLAXSortData> AllXSortDataList = new();
+    public List<RLAXSortData> DockXSortIndices = new();
     public List<RLBoxCoverData> BoxCoverStates = new();
     public int boxCoverCollectedCount;
     public int boxCoverTotalCount;
@@ -49,22 +49,18 @@ public class RecoverLevelData
     [System.Serializable]
     public struct RLAwardColorEggCoverData
     {
-        public FishTilePlay.AwardColorEggCoverPlacement placement;
+        public FishXSortPlay.AwardColorEggCoverPlacement placement;
         public bool collected;
     }
 
     public List<RLAwardColorEggCoverData> AwardColorEggCoverStates = new();
     public int awardColorEggCoverCollectedCount;
 
-    public int goldTreeCol;
-    public int goldTreeMaxCol;
-    public int goldTreeScore;
-
     /// <summary>玩家是否对棋盘做过操作（提交/消除/道具等）；仅初始布局快照时为 false。</summary>
     public bool hasUserProgress;
 
     /// <summary>进关时的棋子总数，用于自动完成剩余比例计算。</summary>
-    public int initialTileCount;
+    public int initialXSortCount;
 
     /// <summary>金币关生成的金币棋子总数，恢复关卡后用于结算展示。</summary>
     public int coinRewardTotalCount;
@@ -73,8 +69,8 @@ public class RecoverLevelData
     public bool highLightActive;
 
     /// <summary>本局棋子底板。空名字表示用主题底板。有操作后续关时沿用，不重新抽。</summary>
-    public bool tileBaseStyleSet;
-    public string tileBaseStyleName;
+    public bool XSortBaseStyleSet;
+    public string XSortBaseStyleName;
 
     ///转换成json字符串
     public string ToJson()
@@ -126,72 +122,69 @@ public class RecoverLevelData
     {
         if (!ignoreGameActive && !GameDirector.IsGameActive) return;
 
-        var actTiles = LevelDirector.LevelGenService.ActTiles;
+        var actXSorts = LevelDirector.LevelGenService.ActXSorts;
         var oneCls = new RecoverLevelData();
 
         oneCls.LevelIndex = LevelDirector.LoadedLevelIndex;
 
         oneCls.dynamicStr = LevelDirector.LevelGenService.GetDynamicCfgStr();
 
-        foreach (var oneTile in actTiles)
+        foreach (var oneXSort in actXSorts)
         {
-            RLATileData oneTileData = new();
-            oneTileData.layer = oneTile.ElementPosition.LayerId;
-            oneTileData.x = oneTile.ElementPosition.X;
-            oneTileData.y = oneTile.ElementPosition.Y;
-            oneTileData.tileIndex = oneTile.TileModel.TileIndex;
-            oneTileData.tileSkinName = oneTile.RuntimeSkinName;
-            oneTileData.isFission = oneTile.IsFission;
+            RLAXSortData oneXSortData = new();
+            oneXSortData.layer = oneXSort.ElementPosition.LayerId;
+            oneXSortData.x = oneXSort.ElementPosition.X;
+            oneXSortData.y = oneXSort.ElementPosition.Y;
+            oneXSortData.XSortIndex = oneXSort.XSortModel.XSortIndex;
+            oneXSortData.XSortSkinName = oneXSort.RuntimeSkinName;
+            oneXSortData.isFission = oneXSort.IsFission;
 
             // 保存效果信息
-            if (oneTile.Effect != null)
+            if (oneXSort.Effect != null)
             {
-                oneTileData.effectType = oneTile.Effect.EffectType;
-                oneTileData.effectData = oneTile.Effect.GetEffectData();
+                oneXSortData.effectType = oneXSort.Effect.EffectType;
+                oneXSortData.effectData = oneXSort.Effect.GetEffectData();
             }
             else
             {
-                oneTileData.effectType = TileEffectType.None;
-                oneTileData.effectData = "";
+                oneXSortData.effectType = XSortEffectType.None;
+                oneXSortData.effectData = "";
             }
 
-            oneCls.AllTileDataList.Add(oneTileData);
+            oneCls.AllXSortDataList.Add(oneXSortData);
         }
 
         // 保存dock中的棋子
-        oneCls.DockTileIndices.Clear();
+        oneCls.DockXSortIndices.Clear();
         var dock = LevelDirector.Dock;
         if (dock != null)
         {
-            var dockIndices = dock.GetOccupiedTileIndices();
+            var dockIndices = dock.GetOccupiedXSortIndices();
             if (dockIndices != null && dockIndices.Count > 0)
             {
-                foreach (var item in dockIndices) //这个只是存的tileIndex
+                foreach (var item in dockIndices) //这个只是存的XSortIndex
                 {
-                    RLATileData oneTileData = new();
-                    oneTileData.x = item.ElementPosition.X;
-                    oneTileData.y = item.ElementPosition.Y;
-                    oneTileData.tileIndex = item.TileModel.TileIndex;
-                    oneTileData.tileSkinName = item.RuntimeSkinName;
-                    oneTileData.layer = item.ElementPosition.LayerId;
-                    oneTileData.isFission = item.IsFission;
+                    RLAXSortData oneXSortData = new();
+                    oneXSortData.x = item.ElementPosition.X;
+                    oneXSortData.y = item.ElementPosition.Y;
+                    oneXSortData.XSortIndex = item.XSortModel.XSortIndex;
+                    oneXSortData.XSortSkinName = item.RuntimeSkinName;
+                    oneXSortData.layer = item.ElementPosition.LayerId;
+                    oneXSortData.isFission = item.IsFission;
 
-                    oneCls.DockTileIndices.Add(oneTileData);
+                    oneCls.DockXSortIndices.Add(oneXSortData);
                 }
             }
         }
 
         oneCls.costTime = GameBAData.GetCurrentCostTime();
 
-        oneCls.goldTreeCol = LevelDirector.GoldenTreeData.CurrentGoldenTreeCnt;
-        oneCls.goldTreeMaxCol = LevelDirector.GoldenTreeData.MaxGoldenTreeCnt;
-        oneCls.goldTreeScore = LevelDirector.GoldenTreeData.CurrentGoldenTreeScore;
-        oneCls.initialTileCount = LevelDirector.LevelGenService.InitialTileCount;
-        oneCls.coinRewardTotalCount = LevelDirector.CoinRewardTileTotalCount;
+        oneCls.initialXSortCount = LevelDirector.LevelGenService.InitialXSortCount;
+        oneCls.coinRewardTotalCount = LevelDirector.CoinRewardXSortTotalCount;
         oneCls.highLightActive = PUHighLightBehavior.IsActive;
-        oneCls.tileBaseStyleSet = true;
-        oneCls.tileBaseStyleName = LevelDirector.LoadedTileBaseStyle >= 0
-            ? TileBaseStyleTable.NameAt(LevelDirector.LoadedTileBaseStyle)
+        oneCls.XSortBaseStyleSet = true;
+        oneCls.XSortBaseStyleName = LevelDirector.LoadedXSortBaseStyle >= 0
+            ? XSortBaseStyleTable.NameAt(LevelDirector.LoadedXSortBaseStyle)
             : "";
         BoxCoverManager.WriteRecoveryData(oneCls);
         AwardColorEggCoverManager.WriteRecoveryData(oneCls);
@@ -203,8 +196,8 @@ public class RecoverLevelData
         if (lastSavedLayout != null
             && lastSavedLayout.hasUserProgress == oneCls.hasUserProgress
             && lastSavedLayout.highLightActive == oneCls.highLightActive
-            && lastSavedLayout.tileBaseStyleSet == oneCls.tileBaseStyleSet
-            && lastSavedLayout.tileBaseStyleName == oneCls.tileBaseStyleName
+            && lastSavedLayout.XSortBaseStyleSet == oneCls.XSortBaseStyleSet
+            && lastSavedLayout.XSortBaseStyleName == oneCls.XSortBaseStyleName
             && IsSameLayout(oneCls, lastSavedLayout))
         {
             return;
@@ -234,9 +227,8 @@ public class RecoverLevelData
     {
         if (data == null) return false;
         if (data.hasUserProgress) return true;
-        // 兼容旧存档：dock 有棋子或金树已有进度，也视为玩家操作过
-        if (data.DockTileIndices != null && data.DockTileIndices.Count > 0) return true;
-        if (data.goldTreeCol > 0 || data.goldTreeScore > 0) return true;
+        // 兼容旧存档：dock 有棋子，也视为玩家操作过
+        if (data.DockXSortIndices != null && data.DockXSortIndices.Count > 0) return true;
         if (data.highLightActive) return true;
         return false;
     }
@@ -253,15 +245,12 @@ public class RecoverLevelData
             LevelIndex = source.LevelIndex,
             dynamicStr = source.dynamicStr,
             costTime = source.costTime,
-            goldTreeCol = source.goldTreeCol,
-            goldTreeMaxCol = source.goldTreeMaxCol,
-            goldTreeScore = source.goldTreeScore,
             hasUserProgress = source.hasUserProgress,
-            initialTileCount = source.initialTileCount,
+            initialXSortCount = source.initialXSortCount,
             coinRewardTotalCount = source.coinRewardTotalCount,
             highLightActive = source.highLightActive,
-            tileBaseStyleSet = source.tileBaseStyleSet,
-            tileBaseStyleName = source.tileBaseStyleName,
+            XSortBaseStyleSet = source.XSortBaseStyleSet,
+            XSortBaseStyleName = source.XSortBaseStyleName,
             boxCoverCollectedCount = source.boxCoverCollectedCount,
             boxCoverTotalCount = source.boxCoverTotalCount,
             iqChallengeClearedCount = source.iqChallengeClearedCount,
@@ -269,12 +258,12 @@ public class RecoverLevelData
             AwardColorEggCoverStates = source.AwardColorEggCoverStates != null
                 ? new List<RLAwardColorEggCoverData>(source.AwardColorEggCoverStates)
                 : new List<RLAwardColorEggCoverData>(),
-            AllTileDataList = source.AllTileDataList != null
-                ? new List<RLATileData>(source.AllTileDataList)
-                : new List<RLATileData>(),
-            DockTileIndices = source.DockTileIndices != null
-                ? new List<RLATileData>(source.DockTileIndices)
-                : new List<RLATileData>(),
+            AllXSortDataList = source.AllXSortDataList != null
+                ? new List<RLAXSortData>(source.AllXSortDataList)
+                : new List<RLAXSortData>(),
+            DockXSortIndices = source.DockXSortIndices != null
+                ? new List<RLAXSortData>(source.DockXSortIndices)
+                : new List<RLAXSortData>(),
             BoxCoverStates = source.BoxCoverStates != null
                 ? new List<RLBoxCoverData>(source.BoxCoverStates)
                 : new List<RLBoxCoverData>(),
@@ -296,8 +285,8 @@ public class RecoverLevelData
         if (current.iqChallengeClearedCount != other.iqChallengeClearedCount) return false;
         if (current.awardColorEggCoverCollectedCount != other.awardColorEggCoverCollectedCount) return false;
         if (!IsSameEggList(current.AwardColorEggCoverStates, other.AwardColorEggCoverStates)) return false;
-        if (!IsSameTileList(current.AllTileDataList, other.AllTileDataList)) return false;
-        if (!IsSameTileList(current.DockTileIndices, other.DockTileIndices)) return false;
+        if (!IsSameXSortList(current.AllXSortDataList, other.AllXSortDataList)) return false;
+        if (!IsSameXSortList(current.DockXSortIndices, other.DockXSortIndices)) return false;
         if (!IsSameBoxCoverList(current.BoxCoverStates, other.BoxCoverStates)) return false;
         return true;
     }
@@ -339,24 +328,24 @@ public class RecoverLevelData
         return true;
     }
 
-    private static bool IsSameTileList(List<RLATileData> a, List<RLATileData> b)
+    private static bool IsSameXSortList(List<RLAXSortData> a, List<RLAXSortData> b)
     {
         if (a == null || b == null) return a == b;
         if (a.Count != b.Count) return false;
         for (int i = 0; i < a.Count; i++)
         {
-            if (!IsSameTile(a[i], b[i])) return false;
+            if (!IsSameXSort(a[i], b[i])) return false;
         }
         return true;
     }
 
-    private static bool IsSameTile(RLATileData a, RLATileData b)
+    private static bool IsSameXSort(RLAXSortData a, RLAXSortData b)
     {
         return a.layer == b.layer
             && a.x == b.x
             && a.y == b.y
-            && a.tileIndex == b.tileIndex
-            && a.tileSkinName == b.tileSkinName
+            && a.XSortIndex == b.XSortIndex
+            && a.XSortSkinName == b.XSortSkinName
             && a.effectType == b.effectType
             && a.effectData == b.effectData
             && a.isFission == b.isFission;
@@ -380,7 +369,7 @@ public class RecoverLevelData
     //是否合法 
     public bool IsValid()
     {
-        int cnt = AllTileDataList.Count + DockTileIndices.Count;
-        return AllTileDataList.Count > 0 && cnt % 3 == 0;
+        int cnt = AllXSortDataList.Count + DockXSortIndices.Count;
+        return AllXSortDataList.Count > 0 && cnt % 3 == 0;
     }
 }

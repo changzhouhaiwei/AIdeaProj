@@ -4,11 +4,11 @@ using System.Collections;
 using Core.Tools.MethodExtension;
 using DG.Tweening;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 using Spine;
 using Spine.Unity;
-using TileGameCore;
-using TileGamePlay;
+using XSortGameCore;
+using XSortGamePlay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -205,11 +205,6 @@ public class UIDailyWinRewardDlg : UIDailyWinRewardDlgBase, IUIOpen<DailyWinRewa
             var onContinue = mOpenParam.OnContinue;
             CloseSelf();
             onContinue?.Invoke();
-            return;
-        }
-
-        if (GameData.BFromStartScene && GameData.GoldTreeActData.CheckCanShowAwardDlg())
-        {
             return;
         }
 

@@ -16,7 +16,7 @@ dependencies {
     implementation "com.zzxz.gamesdk:gamesdk-data-remote"
     implementation 'com.zzxz.gamesdk:gamesdk-thinkingdataadapter'
 
-    // 广告源版本对齐 GameSdk BoM 5.8.1 / GMA 25.2.0（同步自 Tile Mahjong）
+    // 广告源版本对齐 GameSdk BoM 5.8.1 / GMA 25.2.0（同步自 XSort Mahjong）
     implementation 'com.google.ads.mediation:facebook:6.21.0.3'     // Facebook
     implementation 'com.unity3d.ads:unity-ads:4.18.0'               // Unity
     implementation 'com.google.ads.mediation:unity:4.18.0.0'        // Unity

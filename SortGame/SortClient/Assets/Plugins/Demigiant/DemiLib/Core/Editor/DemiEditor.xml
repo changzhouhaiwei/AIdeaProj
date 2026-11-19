@@ -1869,8 +1869,8 @@
         <member name="M:DG.DemiEditor.DeGUI.DrawColoredSquare(UnityEngine.Rect,UnityEngine.Color)">
             <summary>Draws a colored square</summary>
         </member>
-        <member name="M:DG.DemiEditor.DeGUI.DrawTiledTexture(UnityEngine.Rect,UnityEngine.Texture2D,System.Single,System.Nullable{UnityEngine.Color})">
-            <summary>Draws the given texture tiled within the given rect</summary>
+        <member name="M:DG.DemiEditor.DeGUI.DrawXSortdTexture(UnityEngine.Rect,UnityEngine.Texture2D,System.Single,System.Nullable{UnityEngine.Color})">
+            <summary>Draws the given texture XSortd within the given rect</summary>
             <param name="rect">Rect</param>
             <param name="texture">Texture</param>
             <param name="scale">Eventual scale to apply</param>

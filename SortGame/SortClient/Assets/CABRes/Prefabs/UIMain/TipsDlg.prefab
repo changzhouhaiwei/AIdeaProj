@@ -1276,7 +1276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Boom Moment! Puppy brought some Coin Tiles. Go wild collecting them!
+  m_text: Boom Moment! Puppy brought some Coin XSorts. Go wild collecting them!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be77c9c1e7cdfd44ebf6de73932766c5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: f8589a2e3d4291b48b375324ea5c8d2e, type: 2}

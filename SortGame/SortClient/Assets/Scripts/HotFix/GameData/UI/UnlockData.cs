@@ -1,12 +1,11 @@
 
-using TileGameCore;
+using XSortGameCore;
 using Unity.VisualScripting;
 using FishFramework;
 
 public class UnlockData : BaseData
 {
     private readonly int completeAdExtraAwardUnlockLv = 9; //结算额外激励：第八关结束开启
-    private readonly int goldTreeUnlockLv = 14; //黄金树：通关第13关后（GetLevelNum+1 >= 14）
     private readonly int circleDailyAwardUnlockLv = 14; //转盘活动
     private readonly int freeShopCoinUnlockLv = 3; //免费金币
     private readonly int dailyVictoryUnlockLv = 4; // 火花连胜：通关第3关后
@@ -36,16 +35,6 @@ public class UnlockData : BaseData
             compLevelIdx = GPUserDataManager.Instance.GetLevelNum();
         }
         return (compLevelIdx + 1) >= completeAdExtraAwardUnlockLv;
-    }
-
-    public bool GetGoldTreeUnlock(int levelIdx = -1)
-    {
-        int compLevelIdx = levelIdx;
-        if (levelIdx == -1)
-        {
-            compLevelIdx = GPUserDataManager.Instance.GetLevelNum();
-        }
-        return (compLevelIdx + 1) >= goldTreeUnlockLv;
     }
 
     public bool GetCircleDailyAwardUnlock(int levelIdx = -1)

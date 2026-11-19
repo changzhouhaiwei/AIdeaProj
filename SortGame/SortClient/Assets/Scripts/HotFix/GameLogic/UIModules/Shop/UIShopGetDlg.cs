@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Tools.MethodExtension;
-using FishTilePlay;
+using FishXSortPlay;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -84,7 +84,7 @@ public class UIShopGetDlg : UIShopGetDlgBase
             }
         }
 
-        TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.rewardGet);
+        XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.rewardGet);
     }
 
     public void ShowAwards(IList<string> awards, Action onConfirm)
@@ -113,7 +113,7 @@ public class UIShopGetDlg : UIShopGetDlgBase
             }
         }
 
-        TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.rewardGet);
+        XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.rewardGet);
     }
 
 

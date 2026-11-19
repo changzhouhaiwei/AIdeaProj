@@ -12,7 +12,7 @@ public static class PuppyAdventurePrefabBuilder
     const string PrefabFolder = "Assets/CABRes/Prefabs/UIActivity/PuppyAdventure";
     const string WidgetFolder = "Assets/CABRes/Prefabs/UIMain/Widgets";
     const string FontPath = "Assets/CABRes/Fonts/Arial-Unicode-Bold-RSDF.asset";
-    const string ClosePath = "Assets/CABRes/SpriteAtlas/GPCommon/tile_btn_close.png";
+    const string ClosePath = "Assets/CABRes/SpriteAtlas/GPCommon/XSort_btn_close.png";
 
     [MenuItem("Tools/Puppy Adventure/Rebuild Prefabs")]
     public static void Rebuild()

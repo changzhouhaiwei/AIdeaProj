@@ -23,9 +23,6 @@ public static class ActivityBuildFlags
         return settings;
     }
 
-    /// <summary>黄金树 / 段位活动。改为 false 可关闭（不弹窗、不显示按钮、关卡内不生效、x2 不生效）。</summary>
-    public static bool GoldTreeActEnabled => LoadSettings()?.goldTreeActEnabled ?? false;
-
     /// <summary>全局七日连胜（WinStreak）。改为 false 可关闭（不显示按钮、不弹窗、不记录连胜）。</summary>
     public static bool DailyVictoryActEnabled => LoadSettings()?.dailyVictoryActEnabled ?? false;
 
@@ -35,11 +32,11 @@ public static class ActivityBuildFlags
     /// <summary>狗狗大冒险。关闭后入口、弹窗、进度、结算接入和复活提醒全部关闭。</summary>
     public static bool PuppyAdventureEnabled => LoadSettings()?.puppyAdventureEnabled ?? true;
 
-    /// <summary>关卡主题（背景、按钮、结算）。false 时 tilebaseId=0；true 时只跟关卡表里写死的单个主题，不随机。</summary>
-    public static bool RandomTileBaseThemeEnabled => LoadSettings()?.randomTileBaseThemeEnabled ?? false;
+    /// <summary>关卡主题（背景、按钮、结算）。false 时 XSortbaseId=0；true 时只跟关卡表里写死的单个主题，不随机。</summary>
+    public static bool RandomXSortBaseThemeEnabled => LoadSettings()?.randomXSortBaseThemeEnabled ?? false;
 
-    /// <summary>经典随机底板，读 TileBaseStyle。false 时棋子底板仍跟关卡主题。</summary>
-    public static bool ClassicRandomTileBaseEnabled => LoadSettings()?.classicRandomTileBaseEnabled ?? false;
+    /// <summary>经典随机底板，读 XSortBaseStyle。false 时棋子底板仍跟关卡主题。</summary>
+    public static bool ClassicRandomXSortBaseEnabled => LoadSettings()?.classicRandomXSortBaseEnabled ?? false;
 
     /// <summary>金币关卡。改为 false 可关闭（配置 coinlevel=1 的关卡也不生成金币棋子、不弹 Coin Collect）。</summary>
     public static bool CoinRewardLevelEnabled => LoadSettings()?.coinRewardLevelEnabled ?? false;

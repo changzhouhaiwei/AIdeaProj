@@ -2121,7 +2121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4286580776912710847}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGameOver, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGameOver, Assembly-CSharp
         m_MethodName: ContinueButton
         m_Mode: 1
         m_Arguments:
@@ -2397,7 +2397,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4286580776912710847}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGameOver, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGameOver, Assembly-CSharp
         m_MethodName: NoThanksButton
         m_Mode: 1
         m_Arguments:

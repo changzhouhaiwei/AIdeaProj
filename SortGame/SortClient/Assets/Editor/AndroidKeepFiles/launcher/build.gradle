@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
+// 放入 launcher/google-services.json 后再打开。Sort 工程里没有 XSort 的 Firebase 配置。
+if (file('google-services.json').exists()) {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
+}
 
 dependencies {
     implementation project(':unityLibrary')
@@ -15,7 +18,7 @@ configurations.configureEach {
 }
 
 android {
-    namespace "com.sofish.soeasytile.gp"
+    namespace "com.sort.game"
     ndkPath "C:/Program Files/Unity/Hub/Editor/2022.3.62f3/Editor/Data/PlaybackEngines/AndroidPlayer/NDK"
 
     compileSdk 36
@@ -29,13 +32,13 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 36
-        applicationId 'com.sofish.soeasytile.gp'
+        applicationId 'com.sort.game'
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
 
-        versionCode = ((project.findProperty('VERSION_CODE') ?: '39') as String).toInteger()
-        versionName = (project.findProperty('VERSION_NAME') ?: '1.0.38') as String
+        versionCode = ((project.findProperty('VERSION_CODE') ?: '31') as String).toInteger()
+        versionName = (project.findProperty('VERSION_NAME') ?: '1.0.30') as String
     }
 
     aaptOptions {
@@ -47,11 +50,13 @@ android {
         abortOnError false
     }
 
-    def releaseStoreFile = project.findProperty('RELEASE_STORE_FILE') as String
-    def releaseStorePassword = project.findProperty('RELEASE_STORE_PASSWORD') as String
-    def releaseKeyAlias = project.findProperty('RELEASE_KEY_ALIAS') as String
-    def releaseKeyPassword = project.findProperty('RELEASE_KEY_PASSWORD') as String
-    def useReleaseSigning = ((project.findProperty('USE_RELEASE_SIGNING') ?: 'false') as String).toBoolean()
+    // 未传参数时用 APK 专用证书。AAB 由打包脚本传入 Tools/sofishmatch.jks。
+    def fixedStoreFile = rootProject.file("../Tools/sort-apk.jks").absolutePath
+    def releaseStoreFile = (project.findProperty('RELEASE_STORE_FILE') ?: fixedStoreFile) as String
+    def releaseStorePassword = (project.findProperty('RELEASE_STORE_PASSWORD') ?: '123456') as String
+    def releaseKeyAlias = (project.findProperty('RELEASE_KEY_ALIAS') ?: 'sortapk') as String
+    def releaseKeyPassword = (project.findProperty('RELEASE_KEY_PASSWORD') ?: '123456') as String
+    def useReleaseSigning = ((project.findProperty('USE_RELEASE_SIGNING') ?: 'true') as String).toBoolean()
     def uploadCrashlyticsMapping = ((project.findProperty('UPLOAD_CRASHLYTICS_MAPPING') ?: 'false') as String).toBoolean()
     def hasReleaseSigning = releaseStoreFile && releaseStorePassword && releaseKeyAlias && releaseKeyPassword && file(releaseStoreFile).exists()
 

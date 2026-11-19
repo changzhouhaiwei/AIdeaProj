@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Core.Tools.MethodExtension;
-using FishTilePlay;
+using FishXSortPlay;
 using FishFramework;
-using TileGameCore;
+using XSortGameCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,9 +63,6 @@ public class GMLevelChooseUI : GPLevelChooseDlgBase
         {
             GPUserDataManager.Instance.ResetData();
             InterADABTestConfig.TryAssignGroup();
-            RefreshGoldTreeInput();
-            RefreshLeagueInput();
-            RefreshGoldTreeLeagueRelatedData();
             RefreshUidAndAbInfo();
             RefreshPuppyInput();
             RefreshPiggyInput();
@@ -77,14 +74,6 @@ public class GMLevelChooseUI : GPLevelChooseDlgBase
         else if (_button == puppyBtn)
         {
             ApplyPuppyProgressFromInput();
-        }
-        else if (_button == goldTreeBtn)
-        {
-            ApplyGoldTreeActPointFromInput();
-        }
-        else if (_button == leagueBtn)
-        {
-            ApplyGoldTreeLeagueTierFromInput();
         }
         else if (_button == addCoinBtn)
         {
@@ -141,85 +130,6 @@ public class GMLevelChooseUI : GPLevelChooseDlgBase
         {
             winStreakInputField.text = GPUserDataManager.GPUserData.dailyVictoryTotalWinDays.ToString();
         }
-    }
-
-    private void RefreshGoldTreeInput()
-    {
-        if (goldtreeNumInputField != null)
-        {
-            goldtreeNumInputField.text = GPUserDataManager.GPUserData.goldenTreeActPoint.ToString();
-        }
-    }
-
-    private void RefreshLeagueInput()
-    {
-        if (leagueInputField != null)
-        {
-            int tier = GPUserDataManager.GPUserData.goldenTreeLeagueTier;
-            leagueInputField.text = tier > 0 ? tier.ToString() : GoldTreeRobotRankRewardHelper.MinTierId.ToString();
-        }
-    }
-
-    private void ApplyGoldTreeActPointFromInput()
-    {
-        if (goldtreeNumInputField == null)
-        {
-            return;
-        }
-
-        if (GameData.GoldTreeActData == null || !GameData.GoldTreeActData.GetBActOpen())
-        {
-            Debug.LogWarning("[GMLevelChooseUI] Gold tree activity is not open, cannot set act point.");
-            RefreshGoldTreeInput();
-            return;
-        }
-
-        int point = goldtreeNumInputField.text.ToInt();
-        GPUserDataManager.GPUserData.GmSetGoldTreeActPoint(point);
-        GPUserDataManager.Instance.SaveData();
-        RefreshGoldTreeInput();
-    }
-
-    private void ApplyGoldTreeLeagueTierFromInput()
-    {
-        if (leagueInputField == null)
-        {
-            return;
-        }
-
-        int tier = leagueInputField.text.ToInt();
-        if (!GoldTreeRobotRankRewardHelper.IsValidTierId(tier))
-        {
-            Debug.LogWarning($"[GMLevelChooseUI] Invalid league tier: {leagueInputField.text}. Valid range: {GoldTreeRobotRankRewardHelper.MinTierId}-{GoldTreeRobotRankRewardHelper.MaxTierId}.");
-            RefreshLeagueInput();
-            return;
-        }
-
-        GPUserDataManager.GPUserData.GmSetGoldTreeLeagueTier(tier);
-        GPUserDataManager.Instance.SaveData();
-        RefreshLeagueInput();
-        RefreshGoldTreeLeagueRelatedData();
-    }
-
-    private void RefreshGoldTreeLeagueRelatedData()
-    {
-        if (GameData.Rank != null)
-        {
-            GameData.Rank.InvalidateRobotRankCacheForLeagueTierChange();
-            GameData.Rank.GetRankList();
-        }
-
-        if (UIRankView.Instance != null)
-        {
-            UIRankView.Instance.RefreshAfterLeagueTierChanged();
-        }
-
-        if (UIRankChangeDlg.Instance != null)
-        {
-            UIRankChangeDlg.Instance.RefreshAfterLeagueTierChanged();
-        }
-
-        UIController.GetPage<UIMainMenu>()?.RefreshGoldTreeIcon();
     }
 
     private void RefreshCurDateTime()
@@ -670,8 +580,6 @@ public class GMLevelChooseUI : GPLevelChooseDlgBase
         UIController.GetPage<UIGame>()?.RefreshGmDebugUI();
         UITestDynamicLevel.RefreshActive();
         RefreshWinStreakInput();
-        RefreshGoldTreeInput();
-        RefreshLeagueInput();
         RefreshUidAndAbInfo();
         EnsurePuppyGmControls();
         RefreshPuppyInput();

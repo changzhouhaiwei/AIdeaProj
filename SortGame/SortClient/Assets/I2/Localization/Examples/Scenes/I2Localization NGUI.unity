@@ -100,7 +100,7 @@ GameObject:
   - 4: {fileID: 47460366}
   - 114: {fileID: 47460367}
   m_Layer: 8
-  m_Name: TiledSprite (Wooden Background)
+  m_Name: XSortdSprite (Wooden Background)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

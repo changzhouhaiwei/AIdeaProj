@@ -78,11 +78,6 @@ namespace FishFramework
         public int build;
 
         [TitleGroup("活动开关", boldTitle: true, horizontalLine: true)]
-        [LabelText("黄金树 / 段位活动")]
-        [Tooltip("关闭后：不弹窗、不显示按钮、关卡内不生效、x2 不生效")]
-        public bool goldTreeActEnabled;
-
-        [TitleGroup("活动开关")]
         [LabelText("全局七日连胜")]
         [Tooltip("关闭后：不显示按钮、不弹窗、不记录连胜")]
         public bool dailyVictoryActEnabled;
@@ -100,12 +95,12 @@ namespace FishFramework
         [TitleGroup("活动开关")]
         [LabelText("关卡主题")]
         [Tooltip("关闭后不读关卡表 Theme，界面固定原皮。不关经典随机底板。")]
-        public bool randomTileBaseThemeEnabled;
+        public bool randomXSortBaseThemeEnabled;
 
         [TitleGroup("活动开关")]
         [LabelText("经典随机底板")]
         [Tooltip("棋子底板。有限关 1–20 用 default，21 关起随机不放回。关卡主题关掉时，不看关卡表 Theme。")]
-        public bool classicRandomTileBaseEnabled;
+        public bool classicRandomXSortBaseEnabled;
 
         [TitleGroup("活动开关")]
         [LabelText("金币关卡")]

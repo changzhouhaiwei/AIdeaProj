@@ -838,7 +838,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, HotUpdate
         m_MethodName: OnClickCustomerBtn
         m_Mode: 1
         m_Arguments:

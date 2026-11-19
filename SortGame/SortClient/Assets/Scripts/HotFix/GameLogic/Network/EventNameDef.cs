@@ -31,7 +31,7 @@ public enum EventNameDef
     PassFightRemainHp,
     MathchSpecificPiech,
 
-    //FishTilePlay
+    //FishXSortPlay
     SubmitOver,
     EncouragePlayEffectsHide,
 
@@ -67,10 +67,6 @@ public enum EventNameDef
     //进场动画结束
     LoadLevelAnimFinish,
     LoadSaveLevelAnimFinish,
-    //黄金树收集到的通知.
-    GoldTreeCollected,
-    GoldTreeRewardedFinish,//奖励领取完成.
-    GoldTreeActOpened,//活动开启.
 
     //增加第七格子
     ADAddSlot7Suc,

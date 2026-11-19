@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using FishFramework;
-using TileGamePlay;
+using XSortGamePlay;
 
 public class RewardShowDlg : GPViewBase
 {

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using FishTilePlay;
+using FishXSortPlay;
 using UnityEngine;
 
 namespace FishFramework
@@ -75,7 +75,7 @@ namespace FishFramework
             }
 
             _lowMemoryReleased = true;
-            TileSkinCatalog.ReleaseCachedAssets();
+            XSortSkinCatalog.ReleaseCachedAssets();
             ThemeUiApplier.ReleaseCachedPacks();
             ResourceModule.ReleaseAllReleasableMemory();
         }

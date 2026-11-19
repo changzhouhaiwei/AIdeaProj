@@ -1,0 +1,11 @@
+{
+  "screenId": "RopeDeadLock",
+  "canvas": { "width": 720, "height": 1560 },
+  "nodes": [
+    { "id": "root", "type": "Panel", "parent": "" },
+    { "id": "Card", "type": "Image", "parent": "root", "spriteHint": "card.png", "hint": { "x": 28, "y": 1155, "w": 665, "h": 157 } },
+    { "id": "Close", "type": "Button", "parent": "Card", "spriteHint": "btn_close.png", "hint": { "x": 46, "y": 1191, "w": 85, "h": 85 } },
+    { "id": "Message", "type": "Text", "parent": "Card", "text": "不好，卡关啦！使用道具继续，或者重新开始！", "hint": { "x": 140, "y": 1170, "w": 520, "h": 128 } },
+    { "id": "Restart", "type": "Button", "parent": "Card", "hint": { "x": 250, "y": 1234, "w": 400, "h": 64 } }
+  ]
+}

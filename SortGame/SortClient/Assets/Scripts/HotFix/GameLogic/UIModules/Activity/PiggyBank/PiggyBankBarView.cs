@@ -484,9 +484,9 @@ public sealed class PiggyBankBarView : MonoBehaviour
     {
         if (tipsRoot == null)
             return;
-        var clips = TileGameCore.AudioController.AudioClips;
+        var clips = XSortGameCore.AudioController.AudioClips;
         if (clips != null && clips.buttonSound != null)
-            TileGameCore.AudioController.PlaySound(clips.buttonSound);
+            XSortGameCore.AudioController.PlaySound(clips.buttonSound);
         if (tipsRoot.activeSelf)
             CloseTips(TipsCloseDuration);
         else

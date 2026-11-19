@@ -2,7 +2,7 @@ using FishFramework;
 using UnityEngine;
 
 /// <summary>
-/// 与 Mahjong 分文件一致；TrackEvent 在 Mahjong 为空实现，Tile2 走 GPSDKMgr 以保证加载步骤可上报。
+/// 与 Mahjong 分文件一致；TrackEvent 在 Mahjong 为空实现，XSort2 走 GPSDKMgr 以保证加载步骤可上报。
 /// </summary>
 public static partial class GameBAData
 {

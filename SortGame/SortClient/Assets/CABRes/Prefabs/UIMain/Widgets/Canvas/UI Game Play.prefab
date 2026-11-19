@@ -707,7 +707,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, Assembly-CSharp
         m_MethodName: GotoPrevLevelDev
         m_Mode: 1
         m_Arguments:
@@ -1398,7 +1398,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, Assembly-CSharp
         m_MethodName: FinishLevelDev
         m_Mode: 1
         m_Arguments:
@@ -3510,7 +3510,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: FishTilePlay.UIGame, HotUpdate
+        m_TargetAssemblyTypeName: FishXSortPlay.UIGame, HotUpdate
         m_MethodName: GuideButtonCallback
         m_Mode: 1
         m_Arguments:
@@ -4357,7 +4357,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, Assembly-CSharp
         m_MethodName: OnDevLevelFieldChanged
         m_Mode: 0
         m_Arguments:
@@ -7635,7 +7635,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, Assembly-CSharp
         m_MethodName: GotoNextLevelDev
         m_Mode: 1
         m_Arguments:
@@ -8450,7 +8450,7 @@ GameObject:
   - component: {fileID: 9083162349165782218}
   - component: {fileID: 1606127283569410387}
   m_Layer: 6
-  m_Name: TileHintEff
+  m_Name: XSortHintEff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8610,7 +8610,7 @@ MonoBehaviour:
   adEffectNode: {fileID: 2202266216852210719}
   adEffectBar: {fileID: 4826617100986734707}
   spine12: {fileID: 7757740718617231941}
-  tileHintNode: {fileID: 1606127283569410387}
+  XSortHintNode: {fileID: 1606127283569410387}
   guideHintObj: {fileID: 9184494952418340968}
   goldTreeGameUI: {fileID: 1345581078963642699}
   coinCollect: {fileID: 4222653542508313775}
@@ -8829,7 +8829,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, Assembly-CSharp
         m_MethodName: RestartLevelDev
         m_Mode: 1
         m_Arguments:
@@ -8938,7 +8938,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8109136083484033349}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, HotUpdate
         m_MethodName: ShowUISettings
         m_Mode: 1
         m_Arguments:

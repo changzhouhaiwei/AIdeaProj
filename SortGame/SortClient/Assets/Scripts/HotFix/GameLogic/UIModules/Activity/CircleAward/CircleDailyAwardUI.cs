@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 
 
 public class CircleDailyAwardUI : CricleDailyAwardUIBase
@@ -74,7 +74,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         InitSpinItems();
         RefreshAwards();
         PlayWheelIdle();
-        TileGameCore.AudioController.VolumeChanged += OnAudioVolumeChanged;
+        XSortGameCore.AudioController.VolumeChanged += OnAudioVolumeChanged;
         PlaySpinBg();
         DuckMainCityBgm();
         Interval(1f, UpdateTime);
@@ -88,7 +88,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         base.OnDestroying();
         KillSpinSeq();
         KillAllUpSetTweens();
-        TileGameCore.AudioController.VolumeChanged -= OnAudioVolumeChanged;
+        XSortGameCore.AudioController.VolumeChanged -= OnAudioVolumeChanged;
         StopSpinBg();
         RestoreMainCityBgm();
         GameEvent.RemoveEventListener((int)EventNameDef.ADCircleDailyGetAward, CbAdSuc);
@@ -154,23 +154,23 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
 
     static void PlaySpinBg()
     {
-        var clip = TileGameCore.AudioController.AudioClips?.spin_bg;
+        var clip = XSortGameCore.AudioController.AudioClips?.spin_bg;
         if (clip == null)
             return;
-        TileGameCore.AudioController.PlayLoopSound(clip, 1f, TileGameCore.AudioType.Music);
+        XSortGameCore.AudioController.PlayLoopSound(clip, 1f, XSortGameCore.AudioType.Music);
     }
 
     static void StopSpinBg()
     {
-        var clip = TileGameCore.AudioController.AudioClips?.spin_bg;
+        var clip = XSortGameCore.AudioController.AudioClips?.spin_bg;
         if (clip == null)
             return;
-        TileGameCore.AudioController.StopSound(clip);
+        XSortGameCore.AudioController.StopSound(clip);
     }
 
-    void OnAudioVolumeChanged(TileGameCore.AudioType audioType, float volume)
+    void OnAudioVolumeChanged(XSortGameCore.AudioType audioType, float volume)
     {
-        if (audioType != TileGameCore.AudioType.Music)
+        if (audioType != XSortGameCore.AudioType.Music)
             return;
         if (volume > 0f)
             PlaySpinBg();
@@ -185,7 +185,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         if (mDuckedMainCityBgm)
             return;
 
-        var music = TileGameCore.MusicEmitter.ActiveMusicSource;
+        var music = XSortGameCore.MusicEmitter.ActiveMusicSource;
         if (music == null || music.AudioSource == null)
             return;
 
@@ -199,7 +199,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
             return;
 
         mDuckedMainCityBgm = false;
-        var music = TileGameCore.MusicEmitter.ActiveMusicSource;
+        var music = XSortGameCore.MusicEmitter.ActiveMusicSource;
         if (music != null && music.AudioSource != null)
             music.SetVolume(1f);
     }
@@ -484,7 +484,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
                 return;
             }
 
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.buttonSoundSpread);
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.buttonSoundSpread);
 
             ReqCircleAward();
         }
@@ -536,7 +536,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         }
 
 #if !UNITY_EDITOR
-        TileGameCore.UIController.ShowPage<UIAdsLoading>();
+        XSortGameCore.UIController.ShowPage<UIAdsLoading>();
         GPSDKMgr.Instance.PlayRewardedAd(dailyAdKey, 6);
 #else
         PlaySpinAnim();
@@ -675,7 +675,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         mHighlightIndex = index;
         mTrailAge++;
         RefreshHighlightTrail(index);
-        TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.circleRotation);
+        XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.circleRotation);
     }
 
     void RefreshHighlightTrail(int index, int trailCount = -1)
@@ -753,12 +753,12 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         }
 
         KillUpSetTween(view);
-        var doubleClip = TileGameCore.AudioController.AudioClips?.spin_double;
+        var doubleClip = XSortGameCore.AudioController.AudioClips?.spin_double;
         if (doubleClip != null)
-            TileGameCore.AudioController.PlaySound(doubleClip);
+            XSortGameCore.AudioController.PlaySound(doubleClip);
         view.UpSet.SetActiveEx(true);
 
-        // 与 GoldTree 粒子播放一致：先确保子节点激活再 Play
+        // 先确保子节点激活再 Play
         var root = view.UpSet.transform;
         for (int i = 0; i < root.childCount; i++)
         {
@@ -1018,7 +1018,7 @@ public class CircleDailyAwardUI : CricleDailyAwardUIBase
         }).SetUpdate(true).SetLink(gameObject);
         DOVirtual.DelayedCall(1.0f, () =>
         {
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.coinAdd);
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.coinAdd);
         }).SetUpdate(true).SetLink(gameObject);
     }
 

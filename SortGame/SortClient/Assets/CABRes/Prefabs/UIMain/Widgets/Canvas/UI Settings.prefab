@@ -646,7 +646,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 946751245461142873}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, Assembly-CSharp
         m_MethodName: OnRestoreClickBtn
         m_Mode: 1
         m_Arguments:
@@ -7632,7 +7632,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 946751245461142873}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, Assembly-CSharp
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, Assembly-CSharp
         m_MethodName: OnClickCmpBtn
         m_Mode: 1
         m_Arguments:
@@ -8675,7 +8675,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 946751245461142873}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, HotUpdate
         m_MethodName: OnClickPrivacyBtn
         m_Mode: 1
         m_Arguments:
@@ -11088,7 +11088,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 946751245461142873}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, HotUpdate
         m_MethodName: OnClickCustomerBtn
         m_Mode: 1
         m_Arguments:
@@ -13001,7 +13001,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 946751245461142873}
-        m_TargetAssemblyTypeName: TileGamePlay.UISettings, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UISettings, HotUpdate
         m_MethodName: OnClickServiceBtn
         m_Mode: 1
         m_Arguments:

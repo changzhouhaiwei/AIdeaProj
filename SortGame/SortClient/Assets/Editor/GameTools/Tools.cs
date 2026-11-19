@@ -17,7 +17,7 @@ public class Tools : MonoBehaviour
     // {
     //     if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
     //     {
-    //         EditorSceneManager.OpenScene("Assets/TileExplorer/Game/Scenes/Init.unity");
+    //         EditorSceneManager.OpenScene("Assets/XSortExplorer/Game/Scenes/Init.unity");
     //     }
     // }
 
@@ -40,16 +40,6 @@ public class Tools : MonoBehaviour
             EditorSceneManager.OpenScene("Assets/CABRes/ScenesInBuild/StartScene.unity");
         }
     }
-
-    [MenuItem("GoToScene/GameSceneOri(Deprecated)", false, 4)]
-    public static void GoToGameScene()
-    {
-        if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-        {
-            EditorSceneManager.OpenScene("Assets/TileExplorer/Game/Scenes/GameSceneOri.unity");
-        }
-    }
-
 
     // [MenuItem("GoToScene/FightScene", false, 500)]
     // private static void GoToFightScene()

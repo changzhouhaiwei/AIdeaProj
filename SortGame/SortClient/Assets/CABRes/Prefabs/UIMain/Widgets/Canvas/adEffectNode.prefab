@@ -324,7 +324,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TileGamePlay.UIGame, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.UIGame, HotUpdate
         m_MethodName: HandleAdButtonTap
         m_Mode: 1
         m_Arguments:

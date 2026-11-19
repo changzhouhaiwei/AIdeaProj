@@ -10,15 +10,15 @@ public class BAStageEventDta : BaseAnaData
 
     public string stage_id;
     public string stage_form_id;
-    public string tilebase;
+    public string XSortbase;
     // 0普通 1boxcover 2彩蛋 3IQ 4颜色挑战。多个同时存在就报多个，例如 ["1","4"]
     public List<string> playtype = new();
     public int round;
     public int straight_win;
     public int type;
-    public int tile;//总棋子数
+    public int XSort;//总棋子数
     public int layer;//总层数
-    public int tile_left;//剩余棋子数
+    public int XSort_left;//剩余棋子数
     public int layer_left;//剩余层数
     public int temp;//暂存区棋子数
     public int count;//操作次数

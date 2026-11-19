@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 212fe9b33c54bfb459f427926b948b7e, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  tilebaseId: 2
+  XSortbaseId: 2
   theme: wood
-  tileBase: {fileID: 21300000, guid: bc9c25617b86d9a4797d9b445e228950, type: 3}
+  XSortBase: {fileID: 21300000, guid: bc9c25617b86d9a4797d9b445e228950, type: 3}
   unknown: {fileID: 21300000, guid: b25a77d0deeb8904aa6c22dd9e5f2087, type: 3}
   collectSound: {fileID: 8300000, guid: d4bbc3188eb2da94586f9038a1b5debd, type: 3}
   trail: {fileID: 6299939010940368805, guid: 45de7c7de87ad52458f57b2f3b5348a9, type: 3}

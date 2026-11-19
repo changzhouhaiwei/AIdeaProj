@@ -1,8 +1,8 @@
 
 
 using System;
-using FishTilePlay;
-using TileGameCore;
+using FishXSortPlay;
+using XSortGameCore;
 using UnityEngine;
 using FishFramework;
 
@@ -101,53 +101,6 @@ public static class UIGameFunc
         });
         panel.Open();
         return true;
-    }
-
-    public static UIRankView OpenRankView()
-    {
-        GameData.Rank?.TryApplyRobotIdleGrowth();
-        UIRankView rankview = UIRankView.Instance;
-        if (rankview == null || !GameModule.UI.ExistPanel<UIRankView>())
-        {
-            UIRankView.Instance = null;
-            rankview = GameModule.UI.OpenPanel<UIRankView>();
-        }
-
-        rankview.ShowMe();
-        return rankview;
-    }
-
-    public static UIRankChangeDlg OpenRankChangeDlg()
-    {
-        UIRankChangeDlg rankChangeDlg = UIRankChangeDlg.Instance;
-        if (rankChangeDlg == null || !GameModule.UI.ExistPanel<UIRankChangeDlg>())
-        {
-            UIRankChangeDlg.Instance = null;
-            rankChangeDlg = GameModule.UI.OpenPanel<UIRankChangeDlg>();
-        }
-        else
-        {
-            rankChangeDlg.ShowMe();
-        }
-        return rankChangeDlg;
-    }
-
-    public static UIGoldTreeHelp OpenGoldTreeHelp()
-    {
-        if (GameModule.UI.ExistPanel<UIGoldTreeHelp>())
-        {
-            var panel = GameModule.UI.GetPanel<UIGoldTreeHelp>();
-            panel.Open();
-            return panel;
-        }
-
-        return GameModule.UI.OpenPanel<UIGoldTreeHelp>();
-    }
-
-    public static void OpenGoldTreeStart(Action clickAction = null)
-    {
-        var node = GameModule.UI.OpenPanel<UIGoldTreeStart>();
-        node.ClickAction = clickAction;
     }
 
     public static void OpenFeedbackDlg(Action onClosed = null)

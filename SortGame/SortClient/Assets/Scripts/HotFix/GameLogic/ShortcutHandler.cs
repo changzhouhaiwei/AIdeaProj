@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 
 /// <summary>
 /// App Shortcut：若在游戏中则回主菜单，否则进入当前进度关卡。

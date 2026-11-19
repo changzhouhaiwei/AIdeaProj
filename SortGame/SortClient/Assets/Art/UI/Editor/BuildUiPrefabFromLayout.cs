@@ -246,6 +246,12 @@ namespace Art.UI.Editor
             var partsDir = screenDir + "/Parts";
             var prefabDir = screenDir + "/Prefabs";
             var prefabPath = prefabDir + "/UI_" + screenId + ".prefab";
+            var keepPath = Path.Combine(Path.GetDirectoryName(absLayout) ?? "", "keep_prefab.txt");
+            if (File.Exists(keepPath))
+            {
+                Debug.Log("[UI] keep_prefab.txt, left existing prefab: " + prefabPath);
+                return AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            }
 
             EnsureFolder(prefabDir);
             EnsureFolder(CommonPartsDir);

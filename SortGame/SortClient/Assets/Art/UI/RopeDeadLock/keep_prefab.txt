@@ -1,0 +1,1 @@
+这套预制体带死局脚本和多语言，布局重建会冲掉接线，请保留现有 Prefabs/UI_RopeDeadLock.prefab。

@@ -31,7 +31,7 @@ using System;
 
 namespace Spine {
 	/// <summary>
-	/// An attachment which is a single point and a rotation. This can be used to spawn projectiles, particles, etc. A bone can be
+	/// An attachment which is a single point and a rotation. This can be used to spawn projecXSorts, particles, etc. A bone can be
 	/// used in similar ways, but a PointAttachment is slightly less expensive to compute and can be hidden, shown, and placed in a
 	/// skin.
 	/// <p>

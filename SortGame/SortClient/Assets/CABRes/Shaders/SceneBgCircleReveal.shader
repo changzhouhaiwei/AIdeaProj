@@ -1,4 +1,4 @@
-Shader "FishTile/SceneBgCircleReveal"
+Shader "FishXSort/SceneBgCircleReveal"
 {
     Properties
     {

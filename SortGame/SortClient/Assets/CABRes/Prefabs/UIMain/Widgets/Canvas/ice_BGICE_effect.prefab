@@ -92,7 +92,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5123984716230984716}
-        m_TargetAssemblyTypeName: FishTilePlay.ThemeFailEffect, Assembly-CSharp
+        m_TargetAssemblyTypeName: FishXSortPlay.ThemeFailEffect, Assembly-CSharp
         m_MethodName: PlayIce
         m_Mode: 1
         m_Arguments:

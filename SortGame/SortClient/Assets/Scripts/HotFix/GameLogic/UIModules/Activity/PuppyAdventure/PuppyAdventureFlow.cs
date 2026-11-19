@@ -143,7 +143,7 @@ public static class PuppyAdventureFlow
             GameModule.UI.DestroyPanel<UIPuppyAdventureMatch>();
         if (GameModule.UI.ExistPanel<UIPuppyAdventureMain>())
             GameModule.UI.DestroyPanel<UIPuppyAdventureMain>();
-        FishTilePlay.UIGameOver gameOver = UnityEngine.Object.FindObjectOfType<FishTilePlay.UIGameOver>(true);
+        FishXSortPlay.UIGameOver gameOver = UnityEngine.Object.FindObjectOfType<FishXSortPlay.UIGameOver>(true);
         if (gameOver != null)
         {
             gameOver.RefreshStageOverTips();

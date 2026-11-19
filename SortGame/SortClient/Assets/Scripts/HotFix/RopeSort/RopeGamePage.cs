@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using FishTilePlay;
+using DG.Tweening;
+using FishXSortPlay;
 using Game.GamePlay.ColorSort;
-using TileGameCore;
+using XSortGameCore;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,8 @@ namespace RopeSort
         TextMeshProUGUI coinText;
         TextMeshProUGUI levelText;
         TextMeshProUGUI progressText;
+        Image progressIcon;
+        RectTransform progressRoot;
         TextMeshProUGUI statusText;
         TextMeshProUGUI undoCountText;
         TextMeshProUGUI hintCountText;
@@ -30,10 +33,6 @@ namespace RopeSort
         Button hintButton;
         Button ropeButton;
         RopeBoardView board;
-        GameObject settingsRoot;
-        Image musicToggle;
-        Image soundToggle;
-        Image vibrationToggle;
         Sprite[] flowers;
         Sprite hiddenFlower;
         Sprite potSprite;
@@ -49,7 +48,10 @@ namespace RopeSort
             public ColorSortState State;
             public int Hint;
             public int Rope;
+            public List<int> Order;
         }
+        readonly List<int> columnOrder = new List<int>();
+        int progressShown = -1;
         int undoCount = 3;
         int hintCount = 3;
         int ropeCount = 3;
@@ -94,10 +96,16 @@ namespace RopeSort
                 if (playfieldGroup != null)
                     playfieldGroup.alpha = 1f;
                 presenting = false;
+                ShowDeadlockIfNeeded();
                 yield break;
             }
 
-            board.PlayLevelEnter(() => presenting = false);
+            board.PlayLevelEnter(() =>
+            {
+                presenting = false;
+                RefreshHud();
+                ShowDeadlockIfNeeded();
+            });
             if (playfieldGroup != null)
                 playfieldGroup.alpha = 1f;
         }
@@ -123,9 +131,13 @@ namespace RopeSort
         public void Prepare(int levelIndex)
         {
             BuildIfNeeded();
+            GetComponentInChildren<RopeInGameSettings>(true)?.Close();
+            GetComponentInChildren<RopeDeadLockTip>(true)?.Close();
             outcomeSent = false;
             presenting = false;
             history.Clear();
+            columnOrder.Clear();
+            progressShown = -1;
             hintSrc = hintCut = hintDst = -1;
             PullItems();
             string raw = RopeLevelCatalog.GetRaw(levelIndex);
@@ -228,8 +240,10 @@ namespace RopeSort
             statusText.text = "";
             List<int> born = null;
             List<ColorSortSpawnLog> spawns = null;
+            List<ColorSortDepositLog> deposits = null;
             if (record != null && record.Deposits.Count > 0)
             {
+                deposits = record.Deposits;
                 born = new List<int>();
                 spawns = new List<ColorSortSpawnLog>();
                 for (int i = 0; i < record.Deposits.Count; i++)
@@ -243,7 +257,7 @@ namespace RopeSort
                         spawns.AddRange(deposit.Spawns);
                 }
             }
-            AfterAction(born, spawns);
+            AfterAction(born, spawns, deposits);
         }
 
         void OnUndo()
@@ -255,6 +269,10 @@ namespace RopeSort
             ColorSortRules.Restore(state, hist.State);
             hintCount = hist.Hint;
             ropeCount = hist.Rope;
+            columnOrder.Clear();
+            if (hist.Order != null)
+                columnOrder.AddRange(hist.Order);
+            progressShown = -1;
             hintSrc = hintCut = hintDst = -1;
             statusText.text = "";
             PushItems();
@@ -305,87 +323,30 @@ namespace RopeSort
 
         void OnSettings()
         {
-            BuildIfNeeded();
-            settingsRoot.SetActive(true);
-            settingsRoot.transform.SetAsLastSibling();
-            RefreshSettingToggles();
-        }
-
-        void HideSettings()
-        {
-            if (settingsRoot != null)
-                settingsRoot.SetActive(false);
-        }
-
-        void OnRestartLevel()
-        {
-            HideSettings();
-            GameDirector.ReplayLevel();
-        }
-
-        void OnReturnHome()
-        {
-            HideSettings();
-            GameDirector.ReturnToMenu();
-        }
-
-        void ToggleMusic()
-        {
-            SetAudio(AudioType.Music, !AudioOn(AudioType.Music));
-            RefreshSettingToggles();
-        }
-
-        void ToggleSound()
-        {
-            SetAudio(AudioType.Sound, !AudioOn(AudioType.Sound));
-            RefreshSettingToggles();
-        }
-
-        void ToggleVibration()
-        {
-            if (!Haptic.IsInitialized)
-                Haptic.Init();
-            Haptic.IsActive = !Haptic.IsActive;
-            RefreshSettingToggles();
-        }
-
-        static bool AudioOn(AudioType type)
-        {
-            try
-            {
-                return AudioController.GetVolume(type) > 0.01f;
-            }
-            catch (System.NullReferenceException)
-            {
-                return true;
-            }
-        }
-
-        static void SetAudio(AudioType type, bool on)
-        {
-            AudioController.SetVolume(type, on ? 1f : 0f);
-        }
-
-        void RefreshSettingToggles()
-        {
-            PaintToggle(musicToggle, AudioOn(AudioType.Music));
-            PaintToggle(soundToggle, AudioOn(AudioType.Sound));
-            bool vibration = true;
-            if (!Haptic.IsInitialized)
-                Haptic.Init();
-            vibration = Haptic.IsActive;
-            PaintToggle(vibrationToggle, vibration);
-        }
-
-        static void PaintToggle(Image image, bool on)
-        {
-            if (image == null)
+            RopeInGameSettings panel = GetComponentInChildren<RopeInGameSettings>(true);
+            if (panel == null)
                 return;
-            image.color = on ? new Color(0.29f, 0.73f, 0.46f) : new Color(0.72f, 0.72f, 0.72f);
+            panel.Open();
         }
 
-        void AfterAction(List<int> born, List<ColorSortSpawnLog> spawns)
+        void AfterAction(List<int> born, List<ColorSortSpawnLog> spawns, List<ColorSortDepositLog> deposits = null)
         {
+            bool collect = deposits != null && deposits.Count > 0 && board != null && state != null && level != null;
+            if (collect)
+            {
+                int count = 0;
+                for (int i = 0; i < deposits.Count; i++)
+                {
+                    if (deposits[i] != null)
+                        count++;
+                }
+                progressShown = Mathf.Max(0, state.Done - count);
+            }
+            else
+            {
+                progressShown = -1;
+            }
+
             RefreshHud();
             if (level == null || state == null)
             {
@@ -394,9 +355,33 @@ namespace RopeSort
             }
 
             bool win = !outcomeSent && ColorSortRules.IsWin(state, level);
-            bool dead = !win && !outcomeSent && ColorSortRules.IsDead(state, level);
-            if (win || dead)
+            if (win)
                 outcomeSent = true;
+
+            if (collect)
+            {
+                presenting = true;
+                RefreshHud();
+                board.SetHint(-1, -1, -1);
+                board.Rebuild(state, level, columnOrder, deposits);
+                board.ConcealSpawns(spawns, deposits);
+                RectTransform anchor = progressIcon != null ? progressIcon.rectTransform : progressRoot;
+                board.PlayCollect(deposits, anchor, OnRopeFlowers, () =>
+                {
+                    CommitCollectOrder(deposits);
+                    board.PlayShiftAndArrive(columnOrder, born, spawns, state, level, () =>
+                    {
+                        progressShown = -1;
+                        presenting = false;
+                        Rebuild();
+                        if (win)
+                            RopeGameController.NotifyWin();
+                        else
+                            ShowDeadlockIfNeeded();
+                    });
+                });
+                return;
+            }
 
             Rebuild();
             if (HasArrival(born, spawns) && board != null)
@@ -409,16 +394,78 @@ namespace RopeSort
                     RefreshHud();
                     if (win)
                         RopeGameController.NotifyWin();
-                    else if (dead)
-                        RopeGameController.NotifyFail();
+                    else
+                        ShowDeadlockIfNeeded();
                 });
                 return;
             }
 
             if (win)
                 RopeGameController.NotifyWin();
-            else if (dead)
-                RopeGameController.NotifyFail();
+            else
+                ShowDeadlockIfNeeded();
+        }
+
+        public void RestartFromDeadlock()
+        {
+            StopAllCoroutines();
+            CancelDrag();
+            Prepare(RopeGameController.DisplayedLevelIndex);
+            if (!isActiveAndEnabled || state == null)
+                return;
+            presenting = true;
+            StartCoroutine(EnterAfterLayout());
+        }
+
+        void ShowDeadlockIfNeeded()
+        {
+            RopeDeadLockTip tip = GetComponentInChildren<RopeDeadLockTip>(true);
+            if (tip == null)
+                return;
+            bool dead = !presenting && !outcomeSent && state != null && level != null
+                && !ColorSortRules.IsWin(state, level)
+                && ColorSortRules.IsDead(state, level);
+            if (dead)
+                tip.Open();
+            else
+                tip.Close();
+        }
+
+        void OnRopeFlowers(ColorSortDepositLog deposit)
+        {
+            if (deposit == null || state == null)
+                return;
+            progressShown = Mathf.Min(state.Done, progressShown + 1);
+            if (progressIcon != null && board != null)
+            {
+                Sprite sprite = board.FlowerSprite(deposit.BeadType);
+                if (sprite != null)
+                    progressIcon.sprite = sprite;
+                RectTransform rect = progressIcon.rectTransform;
+                rect.DOKill(false);
+                rect.localScale = Vector3.one;
+                rect.DOPunchScale(new Vector3(0.25f, 0.25f, 0f), 0.22f, 6, 0.55f);
+            }
+            RefreshHud();
+        }
+
+        void CommitCollectOrder(List<ColorSortDepositLog> deposits)
+        {
+            if (deposits == null)
+                return;
+            for (int i = 0; i < deposits.Count; i++)
+            {
+                ColorSortDepositLog deposit = deposits[i];
+                if (deposit == null)
+                    continue;
+                columnOrder.Remove(deposit.Col);
+            }
+            for (int i = 0; i < deposits.Count; i++)
+            {
+                ColorSortDepositLog deposit = deposits[i];
+                if (deposit != null && deposit.Keep && !columnOrder.Contains(deposit.Col))
+                    columnOrder.Add(deposit.Col);
+            }
         }
 
         static bool HasArrival(List<int> born, List<ColorSortSpawnLog> spawns)
@@ -443,9 +490,39 @@ namespace RopeSort
         {
             if (board == null)
                 return;
+            SyncOrder();
             board.SetHint(hintSrc, hintCut, hintDst);
-            board.Rebuild(state, level);
+            board.Rebuild(state, level, columnOrder, null);
             RefreshHud();
+        }
+
+        void SyncOrder()
+        {
+            if (state == null)
+            {
+                columnOrder.Clear();
+                return;
+            }
+            if (columnOrder.Count == 0)
+            {
+                for (int i = 0; i < state.Cols.Count; i++)
+                {
+                    if (!state.Gone[i])
+                        columnOrder.Add(i);
+                }
+                return;
+            }
+            for (int i = columnOrder.Count - 1; i >= 0; i--)
+            {
+                int id = columnOrder[i];
+                if (id < 0 || id >= state.Gone.Count || state.Gone[id])
+                    columnOrder.RemoveAt(i);
+            }
+            for (int i = 0; i < state.Cols.Count; i++)
+            {
+                if (!state.Gone[i] && !columnOrder.Contains(i))
+                    columnOrder.Add(i);
+            }
         }
 
         void RefreshHud()
@@ -457,7 +534,10 @@ namespace RopeSort
             }
 
             if (progressText != null && state != null && level != null)
-                progressText.text = state.Done + "/" + level.GroupsTotal;
+            {
+                int done = progressShown >= 0 ? progressShown : state.Done;
+                progressText.text = done + "/" + level.GroupsTotal;
+            }
             if (undoCountText != null)
                 undoCountText.text = undoCount.ToString();
             if (hintCountText != null)
@@ -490,7 +570,8 @@ namespace RopeSort
             {
                 State = ColorSortRules.Snapshot(state),
                 Hint = hintCount,
-                Rope = ropeCount
+                Rope = ropeCount,
+                Order = new List<int>(columnOrder)
             };
         }
 
@@ -562,7 +643,10 @@ namespace RopeSort
             levelRect.anchorMin = levelRect.anchorMax = new Vector2(0.5f, 0.5f);
             levelRect.sizeDelta = new Vector2(220f, 70f);
             levelRect.anchoredPosition = new Vector2(0f, -20f);
-            CreateHudChip(top, "Progress", pill, flowers != null && flowers.Length > 0 ? flowers[0] : null, new Vector2(1f, 0.5f), new Vector2(1f, 0.5f), new Vector2(-196f, -24f), new Vector2(150f, 64f), out progressText);
+            flowers = new Sprite[RopeBoardView.FlowerCount];
+            for (int i = 0; i < flowers.Length; i++)
+                flowers[i] = LoadSprite("flower_" + i);
+            CreateHudChip(top, "Progress", pill, flowers.Length > 0 ? flowers[0] : null, new Vector2(1f, 0.5f), new Vector2(1f, 0.5f), new Vector2(-196f, -24f), new Vector2(150f, 64f), out progressText);
             Button settings = CreateIconButton(top, "Settings", gear, new Vector2(1f, 0.5f), new Vector2(-24f, -24f), new Vector2(72f, 72f));
             settings.onClick.AddListener(OnSettings);
 
@@ -594,9 +678,6 @@ namespace RopeSort
             hintButton.onClick.AddListener(OnHint);
             ropeButton.onClick.AddListener(OnExtraRope);
 
-            flowers = new Sprite[RopeBoardView.FlowerCount];
-            for (int i = 0; i < flowers.Length; i++)
-                flowers[i] = LoadSprite("flower_" + i);
             hiddenFlower = LoadSprite("flower_hidden");
             potSprite = LoadSprite("pot");
             ringSprite = LoadSprite("ring");
@@ -604,123 +685,6 @@ namespace RopeSort
             if (ropeSprite != null && ropeSprite.texture != null)
                 ropeSprite.texture.wrapMode = TextureWrapMode.Repeat;
             board = new RopeBoardView(this, playfield, flowers, hiddenFlower, potSprite, ringSprite, ropeSprite, LoadSprite("lock"), fontAsset, fontMaterial);
-            BuildInGameSettings();
-        }
-
-        void BuildInGameSettings()
-        {
-            var root = CreateRect("InGameSettings", transform);
-            Stretch(root);
-            settingsRoot = root.gameObject;
-            Image dim = CreateImage("Dim", root, null, new Color(0f, 0f, 0f, 0.45f));
-            Stretch(dim.rectTransform);
-            dim.raycastTarget = true;
-
-            var card = CreateRect("Card", root);
-            card.anchorMin = card.anchorMax = new Vector2(0.5f, 0.5f);
-            card.sizeDelta = new Vector2(520f, 560f);
-            Image cardImage = card.gameObject.AddComponent<Image>();
-            cardImage.color = new Color(1f, 0.96f, 0.9f);
-            cardImage.raycastTarget = true;
-
-            var tab = CreateRect("Tab", card);
-            tab.anchorMin = tab.anchorMax = new Vector2(0.5f, 1f);
-            tab.pivot = new Vector2(0.5f, 0.5f);
-            tab.sizeDelta = new Vector2(220f, 72f);
-            tab.anchoredPosition = new Vector2(0f, 8f);
-            Image tabImage = tab.gameObject.AddComponent<Image>();
-            tabImage.sprite = LoadSprite("pill");
-            tabImage.color = new Color(0.96f, 0.62f, 0.28f);
-            tabImage.raycastTarget = false;
-            TextMeshProUGUI title = CreateLabel(tab, "Title", "设置", 36, TextAlignmentOptions.Center);
-            title.color = new Color(0.55f, 0.28f, 0.1f);
-            Stretch(title.rectTransform);
-
-            Button close = CreateIconButton(card, "Close", CircleSprite(), new Vector2(1f, 1f), new Vector2(-18f, -18f), new Vector2(64f, 64f));
-            var closeImage = close.targetGraphic as Image;
-            if (closeImage != null)
-                closeImage.color = new Color(0.96f, 0.62f, 0.28f);
-            close.GetComponent<RectTransform>().pivot = new Vector2(1f, 1f);
-            close.onClick.AddListener(HideSettings);
-            TextMeshProUGUI closeMark = CreateLabel(close.transform, "X", "×", 40, TextAlignmentOptions.Center);
-            closeMark.color = Color.white;
-            Stretch(closeMark.rectTransform);
-
-            var toggles = CreateRect("Toggles", card);
-            toggles.anchorMin = toggles.anchorMax = new Vector2(0.5f, 1f);
-            toggles.pivot = new Vector2(0.5f, 1f);
-            toggles.sizeDelta = new Vector2(420f, 140f);
-            toggles.anchoredPosition = new Vector2(0f, -110f);
-            musicToggle = CreateSettingToggle(toggles, "Music", LoadSprite("icon_music"), -140f, ToggleMusic);
-            soundToggle = CreateSettingToggle(toggles, "Sound", LoadSprite("icon_sound"), 0f, ToggleSound);
-            vibrationToggle = CreateSettingToggle(toggles, "Vibration", LoadSprite("icon_vibrate"), 140f, ToggleVibration);
-
-            CreateMenuButton(card, "Restart", "重新开始", new Color(0.86f, 0.34f, 0.3f), -250f, OnRestartLevel);
-            CreateMenuButton(card, "Home", "返回主页", new Color(0.95f, 0.62f, 0.22f), -360f, OnReturnHome);
-            settingsRoot.SetActive(false);
-        }
-
-        Image CreateSettingToggle(Transform parent, string name, Sprite icon, float x, UnityEngine.Events.UnityAction onClick)
-        {
-            var node = CreateRect(name, parent);
-            node.anchorMin = node.anchorMax = new Vector2(0.5f, 0.5f);
-            node.sizeDelta = new Vector2(108f, 108f);
-            node.anchoredPosition = new Vector2(x, 0f);
-            Image bg = node.gameObject.AddComponent<Image>();
-            bg.sprite = CircleSprite();
-            bg.color = new Color(0.29f, 0.73f, 0.46f);
-            var button = node.gameObject.AddComponent<Button>();
-            button.targetGraphic = bg;
-            button.onClick.AddListener(onClick);
-            if (icon != null)
-            {
-                Image mark = CreateImage("Icon", node, icon, Color.white);
-                mark.preserveAspect = true;
-                mark.rectTransform.anchorMin = mark.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                mark.rectTransform.sizeDelta = new Vector2(64f, 64f);
-            }
-            return bg;
-        }
-
-        void CreateMenuButton(Transform parent, string name, string label, Color color, float y, UnityEngine.Events.UnityAction onClick)
-        {
-            var node = CreateRect(name, parent);
-            node.anchorMin = node.anchorMax = new Vector2(0.5f, 1f);
-            node.pivot = new Vector2(0.5f, 1f);
-            node.sizeDelta = new Vector2(400f, 88f);
-            node.anchoredPosition = new Vector2(0f, y);
-            Image image = node.gameObject.AddComponent<Image>();
-            image.sprite = LoadSprite("pill");
-            image.color = color;
-            image.type = Image.Type.Simple;
-            var button = node.gameObject.AddComponent<Button>();
-            button.targetGraphic = image;
-            button.onClick.AddListener(onClick);
-            TextMeshProUGUI text = CreateLabel(node, "Label", label, 34, TextAlignmentOptions.Center);
-            text.color = Color.white;
-            Stretch(text.rectTransform);
-        }
-
-        static Sprite circleSprite;
-        static Sprite CircleSprite()
-        {
-            if (circleSprite != null)
-                return circleSprite;
-            const int size = 64;
-            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
-            float radius = size * 0.5f - 0.5f;
-            var center = new Vector2(radius, radius);
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
-                {
-                    float dist = Vector2.Distance(new Vector2(x, y), center);
-                    tex.SetPixel(x, y, dist <= radius ? Color.white : Color.clear);
-                }
-            }
-            tex.Apply();
-            circleSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
-            return circleSprite;
         }
 
         void ApplyChromeLayout()
@@ -812,19 +776,29 @@ namespace RopeSort
             root.pivot = new Vector2(anchorMin.x, 0.5f);
             root.sizeDelta = size;
             root.anchoredPosition = pos;
+            if (name == "Progress")
+            {
+                progressRoot = root;
+                progressIcon = null;
+            }
             if (back != null)
             {
                 Image plate = CreateImage("Plate", root, back, Color.white);
                 Stretch(plate.rectTransform);
             }
-            if (icon != null)
+            if (icon != null || name == "Progress")
             {
                 Image mark = CreateImage("Icon", root, icon, Color.white);
                 mark.preserveAspect = true;
+                bool progress = name == "Progress";
                 mark.rectTransform.anchorMin = mark.rectTransform.anchorMax = new Vector2(0f, 0.5f);
-                mark.rectTransform.pivot = new Vector2(0f, 0.5f);
+                mark.rectTransform.pivot = progress ? new Vector2(0.5f, 0.5f) : new Vector2(0f, 0.5f);
                 mark.rectTransform.sizeDelta = new Vector2(size.y * 0.72f, size.y * 0.72f);
-                mark.rectTransform.anchoredPosition = new Vector2(8f, 0f);
+                mark.rectTransform.anchoredPosition = progress
+                    ? new Vector2(8f + size.y * 0.36f, 0f)
+                    : new Vector2(8f, 0f);
+                if (progress)
+                    progressIcon = mark;
             }
             label = CreateLabel(root, "Value", "0", 28, TextAlignmentOptions.MidlineRight);
             var rect = label.rectTransform;

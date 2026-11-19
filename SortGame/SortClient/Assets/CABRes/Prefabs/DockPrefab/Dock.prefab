@@ -340,11 +340,11 @@ MonoBehaviour:
   boxCoverBoardClearance: 0.25
   boxCoverDockUpOffset: 0.25
   iqPandaRoot: {fileID: 0}
-  quickFinishTileInterval: 0.33
+  quickFinishXSortInterval: 0.33
   impackEffectPool: {fileID: 0}
   happyTextEffect: {fileID: 42048772246767024}
   comboTextEffect: {fileID: 42048772246767029}
-  comboEffectMiddleTileOffset: {x: 1.2, y: 0, z: 0}
+  comboEffectMiddleXSortOffset: {x: 1.2, y: 0, z: 0}
   comboEffectViewportXRange: {x: 0.08, y: 0.72}
   comboEffectRightViewportPosition: {x: 0.8, y: 0.64}
 --- !u!95 &5654839676087119309
@@ -460,7 +460,7 @@ SpriteRenderer:
   m_DrawMode: 1
   m_Size: {x: 8.08, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteXSortMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -15945,7 +15945,7 @@ SpriteRenderer:
   m_DrawMode: 1
   m_Size: {x: 8.08, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteXSortMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -16513,7 +16513,7 @@ PrefabInstance:
     - target: {fileID: 8004581192343816346, guid: 24f9fa732e7e5f04ea8c154e705c0981,
         type: 3}
       propertyPath: m_Name
-      value: TileLongPressHintEff
+      value: XSortLongPressHintEff
       objectReference: {fileID: 0}
     - target: {fileID: 8004581192343816346, guid: 24f9fa732e7e5f04ea8c154e705c0981,
         type: 3}

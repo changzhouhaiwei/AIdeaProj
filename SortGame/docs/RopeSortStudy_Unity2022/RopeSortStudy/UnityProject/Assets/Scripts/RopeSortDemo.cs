@@ -109,8 +109,8 @@ public sealed class RopeSortDemo : MonoBehaviour
     void DrawBead(Rect rect,int value)
     {
         bool hidden=ColorSortLevel.IsHidden(value);
-        Rect tile = hidden ? new Rect(.535f,.035f,.43f,.44f) : new Rect(.018f,.524f,.468f,.452f);
-        DrawPiece(rect,tile,hidden?Color.white:Tint(value));
+        Rect XSort = hidden ? new Rect(.535f,.035f,.43f,.44f) : new Rect(.018f,.524f,.468f,.452f);
+        DrawPiece(rect,XSort,hidden?Color.white:Tint(value));
         DrawMark(rect,hidden?"?":value.ToString());
     }
     Texture2D flowerAtlas;

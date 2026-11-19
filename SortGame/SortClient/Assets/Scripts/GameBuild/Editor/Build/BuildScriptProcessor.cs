@@ -47,8 +47,8 @@ public class BuildBundlesProcessor : IPreprocessBuildWithReport, IPostprocessBui
 
         Debug.LogFormat(
             "[BuildBundlesProcessor] 关卡打包过滤已启用：max={0}，ChunkSize={1}，Target={2}",
-            FishTilePlay.LevelPlatformResolver.GetConfiguredMaxLevelNum(),
-            FishTilePlay.LevelChunkLoader.ChunkSize,
+            FishXSortPlay.LevelPlatformResolver.GetConfiguredMaxLevelNum(),
+            FishXSortPlay.LevelChunkLoader.ChunkSize,
             EditorUserBuildSettings.activeBuildTarget);
     }
 

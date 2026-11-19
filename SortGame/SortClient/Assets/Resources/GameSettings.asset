@@ -25,11 +25,10 @@ MonoBehaviour:
   major: 0
   minor: 0
   build: 110
-  goldTreeActEnabled: 1
   dailyVictoryActEnabled: 1
   circleAwardEnabled: 1
   puppyAdventureEnabled: 1
-  randomTileBaseThemeEnabled: 1
-  classicRandomTileBaseEnabled: 1
+  randomXSortBaseThemeEnabled: 1
+  classicRandomXSortBaseEnabled: 1
   coinRewardLevelEnabled: 1
   colorChallengeEnabled: 1

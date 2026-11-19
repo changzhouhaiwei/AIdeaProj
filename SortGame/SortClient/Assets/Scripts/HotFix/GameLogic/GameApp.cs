@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 using DG.Tweening;
 public class GameApp : Singleton<GameApp>
 {

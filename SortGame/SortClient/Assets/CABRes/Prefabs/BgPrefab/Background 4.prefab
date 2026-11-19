@@ -81,7 +81,7 @@ SpriteRenderer:
   m_DrawMode: 0
   m_Size: {x: 15.6, y: 15.6}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteXSortMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -105,5 +105,5 @@ MonoBehaviour:
   edgeSoftness: 0.04
   spreadDuration: 2.25
   softnessFadeDuration: 0.75
-  levelTilesLoadDelay: 2.25
+  levelXSortsLoadDelay: 2.25
   bgChangeSoundDelay: 0.3

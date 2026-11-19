@@ -11,7 +11,7 @@ offsets:3,3,133,135
 lashou
 bounds:135,152,21,46
 offsets:1,1,23,48
-tile_btn_purple 拷贝 4
+XSort_btn_purple 拷贝 4
 bounds:4,32,90,32
 offsets:1,1,92,34
 wenhao

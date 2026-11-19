@@ -38,14 +38,5 @@ namespace FishFramework
                 return sm_Instance;
             }
         }
-
-#if UNITY_EDITOR
-        [MenuItem("FishFramework/EditorSetting", false, 999)]
-        public static void Select()
-        {
-            Debug.Log("Application.dataPath: " + Application.dataPath);
-            Selection.activeObject = Instance;
-        }
-#endif
     }
 }

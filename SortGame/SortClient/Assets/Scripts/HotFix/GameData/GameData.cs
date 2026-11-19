@@ -13,14 +13,12 @@ public static partial class GameData
     public static LevelPassData LevelPass { get; private set; }
     public static ShopData Shop { get; private set; }
     public static ActivityData Activity { get; private set; }
-    public static RankData Rank { get; private set; }
-    public static GoldTreeActData GoldTreeActData { get; private set; }
     public static HotFixData HotFix { get; private set; }
     public static UnlockData UnlockData { get; private set; }
 
     public static string PrivacyUrl = "https://www.sofish.com/privacy-policy.html";
     public static string ServiceUrl = "https://www.sofish.com/terms-of-service.html";
-    public static string AppUrl = "https://play.google.com/store/apps/details?id=com.sofish.soeasytile.gp";
+    public static string AppUrl = "https://play.google.com/store/apps/details?id=com.sofish.soeasyXSort.gp";
 
     private static bool _bFromStartScene;
     public static bool BFromStartScene
@@ -44,8 +42,6 @@ public static partial class GameData
         LevelPass = AddData(new LevelPassData()) as LevelPassData;
         Shop = AddData(new ShopData()) as ShopData;
         Activity = AddData(new ActivityData()) as ActivityData;
-        Rank = AddData(new RankData()) as RankData;
-        GoldTreeActData = AddData(new GoldTreeActData()) as GoldTreeActData;
         UnlockData = AddData(new UnlockData()) as UnlockData;
 
         HotFix = new HotFixData();
@@ -63,8 +59,6 @@ public static partial class GameData
         LevelPass = null;
         Shop = null;
         Activity = null;
-        Rank = null;
-        GoldTreeActData = null;
         HotFix = null;
         UnlockData = null;
 

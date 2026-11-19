@@ -129,7 +129,7 @@ public class ShopData : BaseData
             return null;
         }
 
-        // 支持直接传商店商品ID（如 soeasytile.super）。
+        // 支持直接传商店商品ID（如 soeasyXSort.super）。
         if (!int.TryParse(payId, out int payDicId))
         {
             return GetCfgBuyGID(payId);

@@ -18,7 +18,7 @@ public class UIShopCellSpreadWidget : ShopCellSpreadBase, IShopCell
     protected override void OnClicked(Button button)
     {
         base.OnClicked(button);
-        TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.buttonSoundSpread);
+        XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.buttonSoundSpread);
         
         if (button == spreadBtn)
         {

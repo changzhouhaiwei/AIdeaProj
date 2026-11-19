@@ -1,5 +1,5 @@
 using System;
-using FishTilePlay;
+using FishXSortPlay;
 using UnityEngine;
 using UnityEngine.UI;
 using FishFramework;
@@ -80,7 +80,7 @@ public class UIShopFreeCoinDlg : ShopFreeCoinDlgBase
 
 #else
             // 广告加载成功，开始播放广告
-            TileGameCore.UIController.ShowPage<UIAdsLoading>();
+            XSortGameCore.UIController.ShowPage<UIAdsLoading>();
             GPSDKMgr.Instance.PlayRewardedAd(shopFreeAdKey, 5);
 #endif
 
@@ -123,7 +123,7 @@ public class UIShopFreeCoinDlg : ShopFreeCoinDlgBase
     {
         Utility.DGDelayedCall(0.7f, () =>
         {
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.coinAdd);
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.coinAdd);
         });
 
         MarkAdWatched();

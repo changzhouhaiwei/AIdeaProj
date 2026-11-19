@@ -126,8 +126,7 @@ MonoBehaviour:
   materialHashCode: 1548450275
   m_Version: 1.1.0
   m_SourceFontFileGUID: a9e019875f18f6b48beb0f10661b0992
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a9e019875f18f6b48beb0f10661b0992,
-    type: 3}
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a9e019875f18f6b48beb0f10661b0992, type: 3}
   m_SourceFontFile: {fileID: 12800000, guid: a9e019875f18f6b48beb0f10661b0992, type: 3}
   m_AtlasPopulationMode: 1
   m_FaceInfo:
@@ -35643,6 +35642,96 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
+  - m_Index: 13994
+    m_Metrics:
+      m_Width: 39.609375
+      m_Height: 44.75
+      m_HorizontalBearingX: 2.015625
+      m_HorizontalBearingY: 40.8125
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2174
+      m_Y: 133
+      m_Width: 40
+      m_Height: 45
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 13545
+    m_Metrics:
+      m_Width: 43.5
+      m_Height: 43.015625
+      m_HorizontalBearingX: 2.203125
+      m_HorizontalBearingY: 40.453125
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2231
+      m_Y: 133
+      m_Width: 44
+      m_Height: 44
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 8886
+    m_Metrics:
+      m_Width: 42.609375
+      m_Height: 42.140625
+      m_HorizontalBearingX: 2.796875
+      m_HorizontalBearingY: 40.21875
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2541
+      m_Y: 71
+      m_Width: 44
+      m_Height: 43
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 10756
+    m_Metrics:
+      m_Width: 42.046875
+      m_Height: 43.578125
+      m_HorizontalBearingX: 3.75
+      m_HorizontalBearingY: 40.453125
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2114
+      m_Y: 192
+      m_Width: 43
+      m_Height: 45
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 24105
+    m_Metrics:
+      m_Width: 42.1875
+      m_Height: 43.25
+      m_HorizontalBearingX: 2.984375
+      m_HorizontalBearingY: 40.125
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2602
+      m_Y: 71
+      m_Width: 44
+      m_Height: 45
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+  - m_Index: 48465
+    m_Metrics:
+      m_Width: 41
+      m_Height: 43.859375
+      m_HorizontalBearingX: 3.609375
+      m_HorizontalBearingY: 40.40625
+      m_HorizontalAdvance: 48
+    m_GlyphRect:
+      m_X: 2541
+      m_Y: 131
+      m_Width: 42
+      m_Height: 45
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 32
@@ -45108,6 +45197,30 @@ MonoBehaviour:
     m_Unicode: 26087
     m_GlyphIndex: 14928
     m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 25143
+    m_GlyphIndex: 13994
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 24687
+    m_GlyphIndex: 13545
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 19971
+    m_GlyphIndex: 8886
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 21862
+    m_GlyphIndex: 10756
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 35440
+    m_GlyphIndex: 24105
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 54804
+    m_GlyphIndex: 48465
+    m_Scale: 1
   m_AtlasTextures:
   - {fileID: 2800000, guid: 3d592f4da2ed44ffb8f4cdc7af69419f, type: 3}
   m_AtlasTextureIndex: 0
@@ -54570,6 +54683,30 @@ MonoBehaviour:
     m_Y: 122
     m_Width: 55
     m_Height: 62
+  - m_X: 2165
+    m_Y: 124
+    m_Width: 57
+    m_Height: 62
+  - m_X: 2222
+    m_Y: 124
+    m_Width: 61
+    m_Height: 61
+  - m_X: 2532
+    m_Y: 62
+    m_Width: 61
+    m_Height: 60
+  - m_X: 2105
+    m_Y: 183
+    m_Width: 60
+    m_Height: 62
+  - m_X: 2593
+    m_Y: 62
+    m_Width: 61
+    m_Height: 62
+  - m_X: 2532
+    m_Y: 122
+    m_Width: 59
+    m_Height: 62
   m_FreeGlyphRects:
   - m_X: 1665
     m_Y: 60
@@ -59079,18 +59216,6 @@ MonoBehaviour:
     m_Y: 121
     m_Width: 4
     m_Height: 1
-  - m_X: 2165
-    m_Y: 122
-    m_Width: 7
-    m_Height: 3973
-  - m_X: 2048
-    m_Y: 243
-    m_Width: 2047
-    m_Height: 3852
-  - m_X: 2105
-    m_Y: 182
-    m_Width: 1
-    m_Height: 3913
   - m_X: 2954
     m_Y: 60
     m_Width: 1141
@@ -59111,22 +59236,10 @@ MonoBehaviour:
     m_Y: 59
     m_Width: 56
     m_Height: 3
-  - m_X: 2532
-    m_Y: 62
-    m_Width: 179
-    m_Height: 4033
-  - m_X: 2532
-    m_Y: 123
-    m_Width: 1563
-    m_Height: 3972
   - m_X: 2356
     m_Y: 60
     m_Width: 51
     m_Height: 61
-  - m_X: 2417
-    m_Y: 124
-    m_Width: 1678
-    m_Height: 3971
   - m_X: 2417
     m_Y: 121
     m_Width: 52
@@ -59135,25 +59248,65 @@ MonoBehaviour:
     m_Y: 62
     m_Width: 1
     m_Height: 60
-  - m_X: 2105
-    m_Y: 184
-    m_Width: 1990
-    m_Height: 3911
-  - m_X: 2105
-    m_Y: 183
-    m_Width: 191
-    m_Height: 3912
-  - m_X: 2351
-    m_Y: 183
-    m_Width: 1744
-    m_Height: 3912
-  - m_X: 2165
-    m_Y: 124
-    m_Width: 131
-    m_Height: 3971
   - m_X: 2351
     m_Y: 122
     m_Width: 5
+    m_Height: 3973
+  - m_X: 2165
+    m_Y: 122
+    m_Width: 7
+    m_Height: 2
+  - m_X: 2222
+    m_Y: 185
+    m_Width: 1873
+    m_Height: 3910
+  - m_X: 2283
+    m_Y: 184
+    m_Width: 1812
+    m_Height: 3911
+  - m_X: 2283
+    m_Y: 124
+    m_Width: 13
+    m_Height: 3971
+  - m_X: 2048
+    m_Y: 245
+    m_Width: 2047
+    m_Height: 3850
+  - m_X: 2048
+    m_Y: 243
+    m_Width: 57
+    m_Height: 3852
+  - m_X: 2105
+    m_Y: 182
+    m_Width: 1
+    m_Height: 1
+  - m_X: 2165
+    m_Y: 186
+    m_Width: 1930
+    m_Height: 3909
+  - m_X: 2654
+    m_Y: 123
+    m_Width: 1441
+    m_Height: 3972
+  - m_X: 2654
+    m_Y: 62
+    m_Width: 57
+    m_Height: 4033
+  - m_X: 2417
+    m_Y: 124
+    m_Width: 115
+    m_Height: 3971
+  - m_X: 2591
+    m_Y: 124
+    m_Width: 1504
+    m_Height: 3971
+  - m_X: 2351
+    m_Y: 183
+    m_Width: 181
+    m_Height: 3912
+  - m_X: 2591
+    m_Y: 122
+    m_Width: 2
     m_Height: 3973
   m_fontInfo:
     Name: 
@@ -59254,7 +59407,7 @@ MonoBehaviour:
       \u0440\u044F\u0434\u043E\u043C!,Nicht weit weg!,Pas loin !,\xC7ok Yak\u0131n!,\u4E0D\u8FDC\u4E86\uFF01,Tidak
       jauh lagi!,\u4E0D\u9060\u4E86\uFF01,Non lontano!,\u3082\u3046\u3059\u3050\uFF01,\uBA40\uC9C0
       \uC54A\uC558\uC5B4\uC694!,\u0412\u0436\u0435 \u0431\u043B\u0438\u0437\u044C\u043A\u043E!,,\r\nRevive,Text,,Revive,REVIVIR,REVIVER,\u0412\u043E\u0437\u0440\u043E\u0434\u0438\u0442\u044C\u0441\u044F,Wiederbeleben,Revivre,Canlan,\u590D\u6D3B,Bangkit,\u5FA9\u6D3B,Rianima,\u5FA9\u6D3B,\uBD80\uD65C,\u0412\u0456\u0434\u0440\u043E\u0434\u0438\u0442\u0438\u0441\u044C,,\r\nSettings,Text,,Settings,AJUSTES,CONFIGURA\xC7\xD5ES,\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438,Einstellungen,Param\xE8tres,Ayarlar,\u8BBE\u7F6E,Pengaturan,\u8A2D\u5B9A,Impostazioni,\u8A2D\u5B9A,\uC124\uC815,\u041D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F,,\r\nSound,Text,,Sound,SONIDO,SOM,\u0417\u0432\u0443\u043A,Sound,Son,Ses,\u97F3\u6548,Suara,\u97F3\u6548,Suono,\u30B5\u30A6\u30F3\u30C9,\uC0AC\uC6B4\uB4DC,\u0417\u0432\u0443\u043A,,\r\nUndoItem1,Text,,No
-      tile to undo,NO HAY FICHA PARA DESHACER,N\xC3O H\xC1 PE\xC7A PARA DESFAZER,\u041D\u0435\u0442
+      XSort to undo,NO HAY FICHA PARA DESHACER,N\xC3O H\xC1 PE\xC7A PARA DESFAZER,\u041D\u0435\u0442
       \u043F\u043B\u0438\u0442\u043A\u0438 \u0434\u043B\u044F \u043E\u0442\u043C\u0435\u043D\u044B,Keine
       Kachel zum R\xFCckg\xE4ngig machen,Plus de coup \xE0 annuler,Geri al\u0131nacak
       hamle yok,\u6CA1\u6709\u53EF\u64A4\u9500\u7684\u65B9\u5757,Tidak ada ubin untuk
@@ -59874,12 +60027,12 @@ MonoBehaviour:
       Non riempire tutti gli slot!,\u6C17\u3092\u3064\u3051\u3066\uFF01\u30B9\u30ED\u30C3\u30C8\u3092\u5168\u90E8\u57CB\u3081\u306A\u3044\u3067\uFF01,\uC870\uC2EC\uD574!
       \uBAA8\uB4E0 \uC2AC\uB86F\uC744 \uB2E4 \uCC44\uC6B0\uC9C0 \uB9C8!,\u041E\u0431\u0435\u0440\u0435\u0436\u043D\u043E!
       \u041D\u0435 \u0437\u0430\u043F\u043E\u0432\u043D\u044E\u0439 \u0443\u0441\u0456
-      \u0441\u043B\u043E\u0442\u0438!,,\r\n1017,Text,,,,,,,,,,,,,,,,,\r\nUI_JungleChallenge_Title,Text,,Tile
+      \u0441\u043B\u043E\u0442\u0438!,,\r\n1017,Text,,,,,,,,,,,,,,,,,\r\nUI_JungleChallenge_Title,Text,,XSort
       League,Liga de Baldosas,Liga de Blocos,\u041B\u0438\u0433\u0430 \u041F\u043B\u0438\u0442\u043E\u043A,Kachel-Liga,Ligue
       des Tuiles,Fayans Ligi,\u65B9\u5757\u8054\u8D5B,Liga Ubin,\u65B9\u584A\u806F\u8CFD,Lega
       delle Piastrelle,\u30BF\u30A4\u30EB\u30EA\u30FC\u30B0,\uD0C0\uC77C \uB9AC\uADF8,\u041B\u0456\u0433\u0430
       \u041F\u043B\u0438\u0442\u043E\u043A,,\r\nUI_JungleChallenge_OpenPanelDes,Text,,You
-      have joined the Tile League! Collect Golden Tiles to climb the rankings and
+      have joined the XSort League! Collect Golden XSorts to climb the rankings and
       earn great rewards!,\xA1Te has unido a la Liga de Baldosas! \xA1Recoge m\xE1s
       para subir en la clasificaci\xF3n y ganar grandes recompensas!,Voc\xEA entrou
       na Liga de Blocos! Colete mais para subir no ranking e ganhar \xF3timas recompensas!,\"\u0422\u044B
@@ -59916,10 +60069,11 @@ MonoBehaviour:
       \uC0C1\uC2B9! \uB300\uB2E8\uD55C \uBC1C\uC804\uC774\uC57C!,\u0422\u0438 \u043F\u0456\u0434\u043D\u044F\u0432\u0441\u044F
       \u043D\u0430 {0} \u043F\u043E\u0437\u0438\u0446\u0456\u0439! \u0427\u0443\u0434\u043E\u0432\u0438\u0439
       \u043F\u0440\u043E\u0433\u0440\u0435\u0441!,,\r\nUI_JungleChallenge_HelpPanelDes1,Text,,Collect
-      the Golden Tile!,\xA1Recolecta la Ficha Dorada!,Colete o Azulejo Dourado!,\u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435
+      the Golden XSort!,\xA1Recolecta la Ficha Dorada!,Colete o Azulejo Dourado!,\u0421\u043E\u0431\u0435\u0440\u0438\u0442\u0435
       \u0417\u043E\u043B\u043E\u0442\u0443\u044E \u041F\u043B\u0438\u0442\u043A\u0443!,Sammle
-      den Goldenen Tile!,Collectez la Tuile d'Or !,Alt\u0131n Kareyi Topla!,\u6536\u96C6\u91D1\u8272\u65B9\u5757\uFF01,Kumpulkan
-      Golden Tile!,\u6536\u96C6\u91D1\u8272\u65B9\u584A\uFF01,Raccogli il Tile Dorato!,\u30B4\u30FC\u30EB\u30C7\u30F3\u30BF\u30A4\u30EB\u3092\u96C6\u3081\u3088\u3046\uFF01,\uACE8\uB4E0
+      den Goldenen XSort!,Collectez la Tuile d'Or !,Alt\u0131n Kareyi Topla!,\u6536\u96C6\u91D1\u8272\u65B9\u5757\uFF01,Kumpulkan
+      Golden XSort!,\u6536\u96C6\u91D1\u8272\u65B9\u584A\uFF01,Raccogli il XSort
+      Dorato!,\u30B4\u30FC\u30EB\u30C7\u30F3\u30BF\u30A4\u30EB\u3092\u96C6\u3081\u3088\u3046\uFF01,\uACE8\uB4E0
       \uD0C0\uC77C\uC744 \uBAA8\uC73C\uC138\uC694!,\u0417\u0456\u0431\u0440\u0430\u0442\u0438
       \u0417\u043E\u043B\u043E\u0442\u0443 \u041F\u043B\u0438\u0442\u043A\u0443!,,\r\nUI_JungleChallenge_HelpPanelDes2,Text,,Top
       the Leaderboard!,\xA1Lidera la Tabla de Clasificaci\xF3n!,Seja o Primeiro da
@@ -60304,14 +60458,15 @@ MonoBehaviour:
       ich super,Ador\xE9,\xC7ok be\u011Fendim,\u975E\u5E38\u559C\u6B22,Sangat suka,\u975E\u5E38\u559C\u6B61,L\u2019ho
       adorato,\u5927\u597D\u304D,\uC815\uB9D0 \uC88B\uC544\uC694,\u0414\u0443\u0436\u0435
       \u0441\u043F\u043E\u0434\u043E\u0431\u0430\u043B\u043E\u0441\u044C,,\r\nUI_EvaluatePanel_Title,,,Do
-      you like So Easy Tile?,\xBFTe gusta So Easy Tile?,Voc\xEA gosta de So Easy
-      Tile?,\u0412\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F So
-      Easy Tile?,Gef\xE4llt dir So Easy Tile?,Aimez-vous So Easy Tile ?,So Easy Tile\u2019i
-      seviyor musun?,\u4F60\u559C\u6B22 So Easy Tile \u5417\uFF1F,Apakah kamu suka
-      So Easy Tile?,\u4F60\u559C\u6B61 So Easy Tile \u55CE\uFF1F,Ti piace So Easy
-      Tile?,So Easy Tile\u306F\u597D\u304D\u3067\u3059\u304B\uFF1F,So Easy Tile\uC774
-      \uB9C8\uC74C\uC5D0 \uB4DC\uC2DC\uB098\uC694?,\u0412\u0430\u043C \u043F\u043E\u0434\u043E\u0431\u0430\u0454\u0442\u044C\u0441\u044F
-      So Easy Tile?,,\r\nUI_EvaluatePanel_Button1,,,Maybe later,Tal vez m\xE1s tarde,Talvez
+      you like So Easy XSort?,\xBFTe gusta So Easy XSort?,Voc\xEA gosta de So Easy
+      XSort?,\u0412\u0430\u043C \u043D\u0440\u0430\u0432\u0438\u0442\u0441\u044F
+      So Easy XSort?,Gef\xE4llt dir So Easy XSort?,Aimez-vous So Easy XSort ?,So
+      Easy XSort\u2019i seviyor musun?,\u4F60\u559C\u6B22 So Easy XSort \u5417\uFF1F,Apakah
+      kamu suka So Easy XSort?,\u4F60\u559C\u6B61 So Easy XSort \u55CE\uFF1F,Ti piace
+      So Easy XSort?,So Easy XSort\u306F\u597D\u304D\u3067\u3059\u304B\uFF1F,So Easy
+      XSort\uC774 \uB9C8\uC74C\uC5D0 \uB4DC\uC2DC\uB098\uC694?,\u0412\u0430\u043C
+      \u043F\u043E\u0434\u043E\u0431\u0430\u0454\u0442\u044C\u0441\u044F So Easy
+      XSort?,,\r\nUI_EvaluatePanel_Button1,,,Maybe later,Tal vez m\xE1s tarde,Talvez
       mais tarde,\u041C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u043F\u043E\u0437\u0436\u0435,Vielleicht
       sp\xE4ter,Peut-\xEAtre plus tard,Belki sonra,\u7A0D\u540E\u518D\u8BF4,Mungkin
       nanti,\u4E4B\u5F8C\u518D\u8AAA,Forse pi\xF9 tardi,\u5F8C\u3067,\uB098\uC911\uC5D0
@@ -62428,11 +62583,11 @@ MonoBehaviour:
       Dorado!,Trof\xE9u Dourado!,\u0417\u043E\u043B\u043E\u0442\u043E\u0439 \u0442\u0440\u043E\u0444\u0435\u0439!,Goldene
       Troph\xE4e!,Troph\xE9e Dor\xE9 !,Alt\u0131n Kupa!,\u91D1\u8272\u5956\u676F\uFF01,Piala
       Emas!,\u91D1\u8272\u734E\u76C3\uFF01,Trofeo Dorato!,\u91D1\u8272\u30C8\u30ED\u30D5\u30A3\u30FC\uFF01,\uD669\uAE08
-      \uD2B8\uB85C\uD53C!,\u0417\u043E\u043B\u043E\u0442\u0438\u0439 \u0442\u0440\u043E\u0444\u0435\u0439!,,\r\nUI_RankGoldenTiles,,,New
+      \uD2B8\uB85C\uD53C!,\u0417\u043E\u043B\u043E\u0442\u0438\u0439 \u0442\u0440\u043E\u0444\u0435\u0439!,,\r\nUI_RankGoldenXSorts,,,New
       Item,Nuevo Objeto,Novo Item,\u041D\u043E\u0432\u044B\u0439 \u041F\u0440\u0435\u0434\u043C\u0435\u0442,Neuer
       Gegenstand,Nouvel Objet,Yeni E\u015Fya,\u65B0\u68CB\u5B50,Item Baru,\u65B0\u68CB\u5B50,Nuovo
       Oggetto,\u65B0\u30A2\u30A4\u30C6\u30E0,\uC0C8 \uC544\uC774\uD15C,\u041D\u043E\u0432\u0438\u0439
-      \u041F\u0440\u0435\u0434\u043C\u0435\u0442,,\r\nUI_RankGoldenTilesText,,,\"Collect
+      \u041F\u0440\u0435\u0434\u043C\u0435\u0442,,\r\nUI_RankGoldenXSortsText,,,\"Collect
       the Golden Trophies , climb the ranks in the  <color=#E89B2F>Puppy League</color>,
       and win awesome rewards!\",\"\xA1Re\xFAne trofeos dorados en las partidas,
       sube posiciones en la Liga de Cachorros y gana recompensas incre\xEDbles!\",\"Colete
@@ -62649,7 +62804,7 @@ MonoBehaviour:
       Intento,Primeira Tentativa,\u041F\u0435\u0440\u0432\u0430\u044F \u043F\u043E\u043F\u044B\u0442\u043A\u0430,Erster
       Versuch,Premier Essai,\u0130lk Deneme,\u9996\u80DC,Percobaan Pertama,\u9996\u52DD,Primo
       Tentativo,\u521D\u52DD\u5229,\uCCAB \uC2B9,\u041F\u0435\u0440\u0448\u0430 \u0441\u043F\u0440\u043E\u0431\u0430,,\r\nUI_coinleveltitle,,,Boom
-      Moment! Puppy brought some Coin Tiles. Go wild collecting them!,\xA1Momento
+      Moment! Puppy brought some Coin XSorts. Go wild collecting them!,\xA1Momento
       Boom! Cachorro trajo algunas fichas de moneda. \xA1Disfruta recogi\xE9ndolas
       sin l\xEDmite!,Momento Boom! Filhote trouxe algumas fichas de moeda. Divirta-se
       coletando \xE0 vontade!,\"\u0411\u0443\u043C-\u043C\u043E\u043C\u0435\u043D\u0442!
@@ -62765,28 +62920,28 @@ MonoBehaviour:
       \u0437\u0430 \u0444\u0435\u0454\u0440\u0432\u0435\u0440\u043A, \u0434\u043E\u0441\u044F\u0433\u043D\u0443\u0432\u0448\u0438
       \u043F\u0440\u0438\u0433\u043E\u043B\u043E\u043C\u0448\u043B\u0438\u0432\u0438\u0445
       <color #FDA3FF>{0} \u043A\u043E\u043C\u0431\u043E</color>!\",,\r\nUI_unknown_title,,,Unknown
-      Tile,Ficha Desconocida,Pe\xE7a Desconhecida,\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F
+      XSort,Ficha Desconocida,Pe\xE7a Desconhecida,\u041D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u0430\u044F
       \u043F\u043B\u0438\u0442\u043A\u0430,Unbekanntes Pl\xE4ttchen,Tuile Inconnue,Bilinmeyen
       Karo,\u672A\u77E5\u68CB\u5B50,Ubin Tidak Diketahui,\u672A\u77E5\u68CB\u5B50,Tessera
       Sconosciuta,\u672A\u77E5\u306E\u99D2,\uBBF8\uC9C0\uC758 \uB9D0,\u041D\u0435\u0432\u0456\u0434\u043E\u043C\u0430
       \u043F\u043B\u0438\u0442\u043A\u0430,,\r\nUI_unknown_text,,,\"Only after being
-      collected will you know what this Tile is. Try carefully, verify boldly!\",\"Solo
-      despu\xE9s de ser recolectada sabr\xE1s qu\xE9 Tile es. \xA1Prueba con cuidado,
-      verifica con audacia!\",\"S\xF3 depois de coletada voc\xEA saber\xE1 qual Tile
+      collected will you know what this XSort is. Try carefully, verify boldly!\",\"Solo
+      despu\xE9s de ser recolectada sabr\xE1s qu\xE9 XSort es. \xA1Prueba con cuidado,
+      verifica con audacia!\",\"S\xF3 depois de coletada voc\xEA saber\xE1 qual XSort
       \xE9. Tente com cuidado, verifique com ousadia!\",\"\u0422\u043E\u043B\u044C\u043A\u043E
       \u043F\u043E\u0441\u043B\u0435 \u0441\u0431\u043E\u0440\u0430 \u0442\u044B
       \u0443\u0437\u043D\u0430\u0435\u0448\u044C, \u0447\u0442\u043E \u044D\u0442\u043E
       \u0437\u0430 \u0422\u0430\u0439\u043B. \u041F\u0440\u043E\u0431\u0443\u0439
       \u043E\u0441\u0442\u043E\u0440\u043E\u0436\u043D\u043E, \u043F\u0440\u043E\u0432\u0435\u0440\u044F\u0439
       \u0441\u043C\u0435\u043B\u043E!\",\"Erst nach dem Einsammeln erf\xE4hrst du,
-      um welches Tile es sich handelt. Vorsichtig probieren, mutig best\xE4tigen!\",\"Ce
+      um welches XSort es sich handelt. Vorsichtig probieren, mutig best\xE4tigen!\",\"Ce
       n\u2019est qu\u2019apr\xE8s avoir \xE9t\xE9 collect\xE9e que tu sauras ce qu\u2019est
       cette Tuile. Essaie prudemment, v\xE9rifie courageusement !\",\"Ancak topland\u0131ktan
-      sonra bu Tile'\u0131n ne oldu\u011Funu bileceksin. Dikkatlice dene, cesurca
+      sonra bu XSort'\u0131n ne oldu\u011Funu bileceksin. Dikkatlice dene, cesurca
       do\u011Frula!\",\u53EA\u6709\u88AB\u6536\u96C6\u540E\uFF0C\u624D\u4F1A\u77E5\u9053\u8FD9\u4E2A\u65B9\u5757\u662F\u4EC0\u4E48\u3002\u5C0F\u5FC3\u5C1D\u8BD5\uFF0C\u5927\u80C6\u9A8C\u8BC1\uFF01,\"Hanya
-      setelah dikumpulkan kamu akan tahu Tile apa ini. Coba dengan hati-hati, verifikasi
+      setelah dikumpulkan kamu akan tahu XSort apa ini. Coba dengan hati-hati, verifikasi
       dengan berani!\",\u53EA\u6709\u88AB\u6536\u96C6\u5F8C\uFF0C\u624D\u6703\u77E5\u9053\u9019\u500B\u65B9\u584A\u662F\u4EC0\u9EBC\u3002\u5C0F\u5FC3\u5617\u8A66\uFF0C\u5927\u81BD\u9A57\u8B49\uFF01,\"Solo
-      dopo essere stata raccolta saprai che Tile \xE8. Prova con cautela, verifica
+      dopo essere stata raccolta saprai che XSort \xE8. Prova con cautela, verifica
       con coraggio!\",\u53CE\u96C6\u3055\u308C\u305F\u5F8C\u306B\u306E\u307F\u3001\u3053\u306E\u30BF\u30A4\u30EB\u304C\u4F55\u3067\u3042\u308B\u304B\u304C\u308F\u304B\u308A\u307E\u3059\u3002\u614E\u91CD\u306B\u8A66\u3057\u3066\u3001\u5927\u80C6\u306B\u78BA\u304B\u3081\u3088\u3046\uFF01,\"\uC218\uC9D1\uB41C
       \uD6C4\uC5D0\uC57C \uC774 \uD0C0\uC77C\uC774 \uBB34\uC5C7\uC778\uC9C0 \uC54C
       \uC218 \uC788\uC2B5\uB2C8\uB2E4. \uC870\uC2EC\uD788 \uC2DC\uB3C4\uD558\uACE0,

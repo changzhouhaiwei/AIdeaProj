@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using FishFramework;
-using FishTilePlay;
+using FishXSortPlay;
 
 /// <summary>
 /// 编辑器启动时确保 Runtime Catalog 存在（levels 为空，仅 tiles/effects）。
@@ -115,15 +115,6 @@ public static class RuntimeLevelDatabaseBootstrap
                 }
             }
         }
-    }
-
-    [MenuItem("Tools/Level Editor/Ensure Runtime Level Databases", false, 50)]
-    static void MenuEnsure()
-    {
-        BuildUtility.EnsureRuntimeLevelDatabase(LevelPlatform.Android, forceRefresh: true);
-        BuildUtility.EnsureRuntimeLevelDatabase(LevelPlatform.IOS, forceRefresh: true);
-        BuildUtility.ApplyGameSceneLevelDatabaseForBuild();
-        Debug.Log("[RuntimeLevelDatabaseBootstrap] Runtime Catalog 已刷新并挂到 GameScene。");
     }
 }
 #endif

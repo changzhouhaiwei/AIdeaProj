@@ -1,7 +1,7 @@
 using DG.Tweening;
 using FishFramework;
-using FishTilePlay;
-using TileGamePlay;
+using FishXSortPlay;
+using XSortGamePlay;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,9 +38,9 @@ public class UIPuppyAdventureReward : UIPuppyAdventureRewardBase
         if (coin != null)
             coin.gameObject.SetActive(true);
 
-        if (TileGameCore.AudioController.AudioClips != null
-            && TileGameCore.AudioController.AudioClips.jungle_reward != null)
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.jungle_reward);
+        if (XSortGameCore.AudioController.AudioClips != null
+            && XSortGameCore.AudioController.AudioClips.jungle_reward != null)
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.jungle_reward);
 
         // 固定文案：预制体 I2 Localize（titleTex/shareTex/PaiziText/Label）
         // 动态文案：仅 nextTex（含 {0}）与 coinNum 在代码里设
@@ -318,9 +318,9 @@ public class UIPuppyAdventureReward : UIPuppyAdventureRewardBase
             startFrom = startGo.transform;
         }
 
-        if (TileGameCore.AudioController.AudioClips != null
-            && TileGameCore.AudioController.AudioClips.coinAdd != null)
-            TileGameCore.AudioController.PlaySound(TileGameCore.AudioController.AudioClips.coinAdd);
+        if (XSortGameCore.AudioController.AudioClips != null
+            && XSortGameCore.AudioController.AudioClips.coinAdd != null)
+            XSortGameCore.AudioController.PlaySound(XSortGameCore.AudioController.AudioClips.coinAdd);
 
         coinPanel.PlayCoinGainBatched(coins, batch =>
         {
@@ -379,11 +379,11 @@ public class UIPuppyAdventureReward : UIPuppyAdventureRewardBase
         return null;
     }
 
-    static CoinPanelView FindCoinPanelOnPage<T>() where T : TileGameCore.UIPage
+    static CoinPanelView FindCoinPanelOnPage<T>() where T : XSortGameCore.UIPage
     {
-        if (!TileGameCore.UIController.IsDisplayed<T>())
+        if (!XSortGameCore.UIController.IsDisplayed<T>())
             return null;
-        T page = TileGameCore.UIController.GetPage<T>();
+        T page = XSortGameCore.UIController.GetPage<T>();
         if (page == null || page.gameObject == null || !page.gameObject.activeInHierarchy)
             return null;
         CoinPanelView panel = page.GetComponentInChildren<CoinPanelView>(true);

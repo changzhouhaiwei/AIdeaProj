@@ -124,7 +124,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2536676875376682525}
-        m_TargetAssemblyTypeName: TileGamePlay.CoinPanelBehaviour, HotUpdate
+        m_TargetAssemblyTypeName: XSortGamePlay.CoinPanelBehaviour, HotUpdate
         m_MethodName: OpenShop
         m_Mode: 1
         m_Arguments:
