@@ -1,7 +1,0 @@
-fukong.png
-size:128,128
-filter:Linear,Linear
-pma:true
-eff_pubLight_new
-bounds:2,2,109,109
-offsets:14,18,136,143

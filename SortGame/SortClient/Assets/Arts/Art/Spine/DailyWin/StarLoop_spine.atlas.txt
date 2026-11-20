@@ -1,7 +1,0 @@
-StarLoop_spine.png
-size:512,512
-filter:Linear,Linear
-pma:true
-Eff_Star04
-bounds:2,61,472,413
-offsets:34,48,512,512

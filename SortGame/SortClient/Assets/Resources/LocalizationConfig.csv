@@ -1,8 +1,0 @@
-﻿Key,Type,Desc,English,Spanish (Mexico),Portuguese (Brazil),Russian,German,French,Turkish,Simplified Chinese,Indonesian,Traditional Chinese,Italian,Japanese,Korean,Ukrainian
-Settings,Text,,Settings,,,,,,,设置,,,,,,
-UserInfo,Text,,Profile,,,,,,,用户信息,,,,,,
-WinStreak,Text,,Win Streak,,,,,,,连胜,,,,,,
-SevenDaySign,Text,,7-Day Sign-in,,,,,,,七日签到,,,,,,
-RopeRestart,Text,,Restart,Reiniciar,Recomeçar,Заново,Neustart,Recommencer,Yeniden Başlat,重新开始,Mulai Ulang,重新開始,Ricomincia,もう一度,다시 시작,Спочатку
-RopeReturnHome,Text,,Home,Inicio,Início,На главную,Zur Startseite,Accueil,Ana Sayfa,返回主页,Beranda,返回主頁,Home,ホーム,홈,На головну
-RopeDeadLock,Text,,"Oops, stuck! Use a booster to keep going,\nor <color=#E4572E>restart</color>!","¡Uy, atascado! Usa un potenciador para seguir,\no <color=#E4572E>reinicia</color>!","Ops, travou! Use um item para continuar,\nou <color=#E4572E>recomece</color>!","Ой, тупик! Используйте предмет, чтобы продолжить,\nили <color=#E4572E>начните заново</color>!","Oh, festgefahren! Nutze einen Gegenstand,\noder <color=#E4572E>starte neu</color>!","Oups, bloqué ! Utilisez un objet pour continuer,\nou <color=#E4572E>recommencez</color> !","Olamaz, tıkandın! Devam etmek için öğe kullan,\nya da <color=#E4572E>yeniden başla</color>!",不好，卡关啦！使用道具继续，\n或者<color=#E4572E>重新开始</color>！,"Aduh, macet! Pakai item untuk lanjut,\natau <color=#E4572E>mulai ulang</color>!",不好，卡關啦！使用道具繼續，\n或者<color=#E4572E>重新開始</color>！,"Oh no, bloccato! Usa un oggetto per continuare,\noppure <color=#E4572E>ricomincia</color>!",しまった、手詰まり！アイテムで続けるか、\n<color=#E4572E>もう一度</color>！,"이런, 막혔어요! 아이템으로 계속하거나\n<color=#E4572E>다시 시작</color>하세요!","Ой, глухий кут! Скористайтеся предметом,\nабо <color=#E4572E>почніть спочатку</color>!"

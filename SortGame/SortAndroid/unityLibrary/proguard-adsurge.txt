@@ -1,4 +1,0 @@
-# AdMob 按类名反射加载自定义广告源，Release minify 时必须保留
--keep class com.google.ads.mediation.adsurge.** { *; }
--keep class com.adsurge.adn.** { *; }
--keep interface com.adsurge.adn.** { *; }

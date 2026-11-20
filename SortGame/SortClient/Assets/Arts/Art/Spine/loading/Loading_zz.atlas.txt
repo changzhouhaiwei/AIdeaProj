@@ -1,6 +1,0 @@
-Loading_zz.png
-size:64,64
-filter:Linear,Linear
-pma:true
-loading_z
-bounds:2,2,48,56
